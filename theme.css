@@ -1,0 +1,3038 @@
+/* ================================================================================
+   ARCADIA THEME FOR OBSIDIAN
+   
+   A sophisticated dark theme framework with multiple color schemes,
+   hierarchical folder organization, and comprehensive typography controls.
+   
+   Author: Peter J. Carter
+   Website: https://theologyinfocus.org
+   Version: 1.1.0 (Garamond, Caslon, Charcoal, Dyslexia Mode)
+   Last Updated: 2026-01-31
+   Minimum Obsidian Version: 0.16.0
+   
+   DESIGN PHILOSOPHY:
+   - RGB triplet system for consistent rgba() usage across light/dark modes
+   - Hierarchical folder coloring (10-color top-level cycle + depth-based nesting)
+   - Extensive Style Settings integration for user customization
+   - Professional typography with multiple font options
+   - WCAG AA compliant contrast ratios in all color schemes
+   
+   TABLE OF CONTENTS:
+   1. CSS Reset & Core Variables
+   2. Base Element Styles
+   3. Obsidian Theme Settings (8 categories with 50+ options)
+   4. Dark Theme Color Schemes (10 variants)
+   4.5. Light Theme Color Schemes (10 variants - WCAG AA compliant)
+   5-17. Core Theme Elements (Typography, Content, Code, etc.)
+   18. Typography Controls (Font size, line height, reading width)
+   19. Editor Enhancements (Active line, focus mode, line numbers)
+   20. Expanded Font Options (10 content fonts, 6 code fonts)
+   21. Links & Tags (Link styles, tag styles, highlight colors)
+   22. Lists & Checkboxes (Styles, priorities, indentation guides)
+   23. Table Enhancements (Striped, borderless, compact, sticky headers)
+   24. Workspace Customization (Tab styles)
+   25. Accessibility Features (High contrast, reduce motion, dyslexia mode)
+   ================================================================================ */
+   6. Content Elements (Paragraphs, Lists, Blockquotes)
+   7. Code Blocks & Inline Code
+   8. Callouts System
+   9. Tables & Canvas
+   10. Search Interface
+   11. Plugin Compatibility
+   12. Navigation Sidebar & File Explorer
+   13. Folder Tree Icons & Color Coding
+   14. File Type Icons
+   15. Interactive States & Transitions
+   16. Settings Modal & Dialogs
+   17. Mobile Responsiveness
+   ================================================================================ */
+
+
+/* ================================================================================
+   SECTION 1: CSS RESET & CORE VARIABLES
+   
+   Foundation layer using RGB triplets for flexible color manipulation.
+   RGB values are defined as comma-separated triplets (e.g., "24, 24, 24")
+   so they can be used with both rgb() and rgba() functions.
+   
+   Example usage:
+   - Solid color: rgb(var(--ctp-base))
+   - With opacity: rgba(var(--ctp-base), 0.5)
+   
+   This approach ensures consistent color application across light and dark modes
+   while allowing per-theme opacity adjustments.
+   ================================================================================ */
+@charset "UTF-8";
+
+:root,
+.theme-light,
+.theme-dark {
+    /* ====== Color System ======
+       Base palette using RGB triplets for maximum flexibility */
+    
+    /* Base Colors - Background hierarchy */
+    --ctp-base: 24, 24, 24;      /* Primary background */
+    --ctp-mantle: 18, 18, 18;    /* Secondary background (darker) */
+    --ctp-crust: 12, 12, 12;     /* Tertiary background (darkest) */
+
+    /* Accent Colors - Interactive elements */
+    --ctp-accent: 136, 192, 208;       /* Primary accent (links, highlights) */
+    --ctp-accent-hover: 116, 172, 188; /* Hover state (slightly darker) */
+
+    /* Status Colors - Semantic indicators */
+    --ctp-success: 152, 195, 121;  /* Success states, confirmations */
+    --ctp-warning: 229, 192, 123;  /* Warnings, cautions */
+    --ctp-error: 231, 130, 132;    /* Errors, critical alerts */
+
+    /* ====== Typography System ======
+       Font stacks with system fallbacks for reliability */
+    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-text: 'Vollkorn', serif;
+    --font-code: 'JetBrains Mono', monospace;
+
+    /* ====== Spacing System ======
+       8px base grid for consistent vertical rhythm */
+    --space-xxs: 0.25rem;  /* 4px - Tight spacing */
+    --space-xs: 0.5rem;    /* 8px - Small gaps */
+    --space-sm: 0.75rem;   /* 12px - Moderate spacing */
+    --space-md: 1rem;      /* 16px - Standard spacing */
+    --space-lg: 1.5rem;    /* 24px - Large gaps */
+    --space-xl: 2rem;      /* 32px - Section spacing */
+
+    /* ====== Transitions ======
+       Standardized easing for consistent motion design */
+    --transition-base: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-hover-bg: background-color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
+    --transition-hover-color: color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
+    --transition-hover-color-fast: color 0.2s cubic-bezier(0.44, 0.21, 0, 1);
+    --transition-hover-box-shadow: box-shadow 0.3s cubic-bezier(0.44, 0.21, 0, 1);
+    --transition-text-decoration-color: text-decoration-color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
+
+    /* ====== Animation System ======
+       Cubic bezier curves for different animation personalities */
+    --animation-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);  /* Playful bounce effect */
+    --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);           /* Smooth acceleration/deceleration */
+}
+
+
+/* ================================================================================
+   SECTION 2: BASE ELEMENT STYLES
+   ================================================================================ */
+body {
+    font-family: var(--font-ui);
+    line-height: 1.6;
+    color: rgb(var(--ctp-text));
+    background-color: rgb(var(--ctp-base));
+}
+
+/* ====== Utility Classes ====== */
+.ctp-container {
+    max-width: min(90vw, 1200px);
+    margin: 0 auto;
+    padding: var(--space-md);
+}
+
+.ctp-section {
+    margin: var(--space-lg) 0;
+    padding: var(--space-md);
+    background-color: rgb(var(--ctp-mantle));
+    border-radius: 8px;
+}
+
+/* ====== Theme Switch Logic ====== */
+.theme-light {
+    --ctp-base: 255, 255, 255;
+    --ctp-mantle: 245, 245, 245;
+    --ctp-crust: 235, 235, 235;
+    --ctp-text: 51, 51, 51;
+}
+
+.theme-dark {
+    --ctp-text: 230, 230, 230;
+}
+
+/* ====== Scrollbars ====== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(var(--ctp-mantle));
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(var(--ctp-accent));
+    border-radius: 4px;
+}
+
+
+/* ================================================================================
+   SECTION 3: OBSIDIAN THEME SETTINGS
+   Settings that users can configure via the Obsidian Style Settings plugin
+   ================================================================================ */
+
+/* @settings
+name: Arcadia Color Schemes
+id: arcadia-color-schemes
+settings:
+  - id: arcadia-dark-scheme
+    title: Dark Theme Flavor
+    description: Select your preferred dark mode color scheme
+    type: class-select
+    allowEmpty: false
+    default: ctp-granite
+    options:
+      - label: Granite (Cool Neutral)
+        value: ctp-granite
+      - label: Stone
+        value: ctp-Stone
+      - label: Olive (Warm Earthy)
+        value: ctp-olive
+      - label: Flint (Cool Professional)
+        value: ctp-flint
+      - label: Navy (Deep Ocean)
+        value: ctp-navy
+      - label: Ember (Warm Cozy)
+        value: ctp-ember
+      - label: Twilight (Mystical Purple)
+        value: ctp-twilight
+      - label: Forest (Natural Green)
+        value: ctp-forest
+      - label: Crimson (Elegant Wine)
+        value: ctp-crimson
+      - label: Slate (Cool Modern)
+        value: ctp-slate
+      - label: Amber (Golden Warmth)
+        value: ctp-amber
+  - id: arcadia-light-scheme
+    title: Light Theme Flavor
+    description: Select your preferred light mode color scheme
+    type: class-select
+    allowEmpty: false
+    default: ctp-marble
+    options:
+      - label: Marble (Clean White)
+        value: ctp-marble
+      - label: Sage (Soft Green)
+        value: ctp-sage
+      - label: Pearl (Cool Ivory)
+        value: ctp-pearl
+      - label: Cloud (Soft Blue)
+        value: ctp-cloud
+      - label: Dawn (Warm Peach)
+        value: ctp-dawn
+      - label: Lavender (Purple Tint)
+        value: ctp-lavender
+      - label: Mint (Fresh Green)
+        value: ctp-mint
+      - label: Rose (Soft Pink)
+        value: ctp-rose
+      - label: Silver (Cool Gray)
+        value: ctp-silver
+      - label: Cream (Golden White)
+        value: ctp-cream
+*/
+
+/* @settings
+name: Arcadia Theme Settings
+id: arcadia-settings
+settings:
+  - id: accent-color
+    title: Accent Color
+    type: class-select
+    default: ctp-theme-indigo
+    options:
+      - label: Indigo
+        value: ctp-theme-indigo
+      - label: Emerald
+        value: ctp-theme-emerald
+      - label: Rose
+        value: ctp-theme-rose
+      - label: Teal
+        value: ctp-theme-teal
+  - id: font-family
+    title: Font Family
+    type: variable-select
+    default: var(--font-ui)
+    options:
+      - label: System UI
+        value: system-ui
+      - label: Inter
+        value: 'Inter'
+      - label: Geist
+        value: 'Geist'
+  - id: border-radius
+    title: Border Radius
+    type: variable-number
+    default: 6
+    min: 2
+    max: 12
+    step: 1
+*/
+
+/* @settings
+name: Arcadia Typography
+id: arcadia-typography
+settings:
+  - id: font-size-scale
+    title: Font Size Scale
+    description: Adjust the overall font size
+    type: class-select
+    default: font-size-normal
+    options:
+      - label: Small (90%)
+        value: font-size-small
+      - label: Normal (100%)
+        value: font-size-normal
+      - label: Large (110%)
+        value: font-size-large
+      - label: Extra Large (125%)
+        value: font-size-xlarge
+  - id: line-height-option
+    title: Line Height
+    description: Adjust spacing between lines
+    type: class-select
+    default: line-height-normal
+    options:
+      - label: Compact (1.5)
+        value: line-height-compact
+      - label: Normal (1.6)
+        value: line-height-normal
+      - label: Relaxed (1.8)
+        value: line-height-relaxed
+      - label: Loose (2.0)
+        value: line-height-loose
+  - id: reading-width
+    title: Reading Width
+    description: Maximum width of readable content
+    type: class-select
+    default: reading-width-normal
+    options:
+      - label: Narrow (600px)
+        value: reading-width-narrow
+      - label: Normal (700px)
+        value: reading-width-normal
+      - label: Wide (850px)
+        value: reading-width-wide
+      - label: Full Width
+        value: reading-width-full
+  - id: font-text-choice
+    title: Content Font
+    description: Font for reading and writing
+    type: class-select
+    default: font-text-vollkorn
+    options:
+      - label: Vollkorn (Default Serif)
+        value: font-text-vollkorn
+      - label: Georgia (Classic Serif)
+        value: font-text-georgia
+      - label: Merriweather (Modern Serif)
+        value: font-text-merriweather
+      - label: Crimson Pro (Elegant Serif)
+        value: font-text-crimson
+      - label: Lora (Balanced Serif)
+        value: font-text-lora
+      - label: Literata (Google Serif)
+        value: font-text-literata
+      - label: System Sans-Serif
+        value: font-text-system
+      - label: Inter (Modern Sans)
+        value: font-text-inter
+      - label: Roboto (Clean Sans)
+        value: font-text-roboto
+      - label: Open Sans (Friendly Sans)
+        value: font-text-opensans
+  - id: font-code-choice
+    title: Code Font
+    description: Font for code blocks
+    type: class-select
+    default: font-code-jetbrains
+    options:
+      - label: JetBrains Mono (Default)
+        value: font-code-jetbrains
+      - label: Fira Code (With Ligatures)
+        value: font-code-fira
+      - label: Source Code Pro (Adobe)
+        value: font-code-source
+      - label: Cascadia Code (Microsoft)
+        value: font-code-cascadia
+      - label: IBM Plex Mono
+        value: font-code-ibmplex
+      - label: Consolas/Courier (System)
+        value: font-code-mono
+*/
+
+/* @settings
+name: Arcadia Editor
+id: arcadia-editor
+settings:
+  - id: active-line-highlight
+    title: Active Line Highlighting
+    description: Highlight intensity for current line
+    type: class-select
+    default: active-line-subtle
+    options:
+      - label: Off
+        value: active-line-off
+      - label: Subtle
+        value: active-line-subtle
+      - label: Moderate
+        value: active-line-moderate
+      - label: Strong
+        value: active-line-strong
+  - id: focus-mode
+    title: Focus Mode
+    description: Dim inactive paragraphs for distraction-free writing
+    type: class-toggle
+    default: false
+  - id: show-line-numbers
+    title: Show Line Numbers
+    description: Display line numbers in editor
+    type: class-toggle
+    default: false
+*/
+
+/* @settings
+name: Arcadia Links & Tags
+id: arcadia-links-tags
+settings:
+  - id: link-style
+    title: Link Style
+    description: How links are displayed
+    type: class-select
+    default: links-underlined
+    options:
+      - label: Underlined
+        value: links-underlined
+      - label: No Underline
+        value: links-no-underline
+      - label: Underline on Hover
+        value: links-hover-underline
+      - label: Dotted Underline
+        value: links-dotted
+  - id: tag-style
+    title: Tag Style
+    description: Appearance of tags
+    type: class-select
+    default: tags-pill
+    options:
+      - label: Pill (Rounded)
+        value: tags-pill
+      - label: Hashtag (Text Only)
+        value: tags-hashtag
+      - label: Badge (Squared)
+        value: tags-badge
+  - id: highlight-color
+    title: Highlight Color
+    description: Color for highlighted text
+    type: class-select
+    default: highlight-yellow
+    options:
+      - label: Yellow
+        value: highlight-yellow
+      - label: Blue
+        value: highlight-blue
+      - label: Green
+        value: highlight-green
+      - label: Pink
+        value: highlight-pink
+      - label: Orange
+        value: highlight-orange
+*/
+
+/* @settings
+name: Arcadia Lists & Checkboxes
+id: arcadia-lists
+settings:
+  - id: checkbox-style
+    title: Checkbox Style
+    description: Appearance of task checkboxes
+    type: class-select
+    default: checkbox-square
+    options:
+      - label: Square
+        value: checkbox-square
+      - label: Circle
+        value: checkbox-circle
+      - label: Rounded Square
+        value: checkbox-rounded
+  - id: list-style
+    title: List Bullet Style
+    description: Style of list bullets
+    type: class-select
+    default: bullets-default
+    options:
+      - label: Default Bullets
+        value: bullets-default
+      - label: Arrows (→)
+        value: bullets-arrows
+      - label: Diamonds (◆)
+        value: bullets-diamonds
+      - label: Stars (★)
+        value: bullets-stars
+  - id: show-indentation-guides
+    title: Indentation Guides
+    description: Show vertical lines for nested lists
+    type: class-toggle
+    default: false
+*/
+
+/* @settings
+name: Arcadia Tables
+id: arcadia-tables
+settings:
+  - id: table-style
+    title: Table Style
+    description: Appearance of tables
+    type: class-select
+    default: table-default
+    options:
+      - label: Default
+        value: table-default
+      - label: Striped Rows
+        value: table-striped
+      - label: Borderless
+        value: table-borderless
+      - label: Compact
+        value: table-compact
+  - id: sticky-table-headers
+    title: Sticky Table Headers
+    description: Keep headers visible when scrolling
+    type: class-toggle
+    default: false
+*/
+
+/* @settings
+name: Arcadia Workspace
+id: arcadia-workspace
+settings:
+  - id: tab-style
+    title: Tab Style
+    description: Appearance of workspace tabs
+    type: class-select
+    default: tabs-default
+    options:
+      - label: Default
+        value: tabs-default
+      - label: Rounded
+        value: tabs-rounded
+      - label: Squared
+        value: tabs-squared
+      - label: Minimal
+        value: tabs-minimal
+*/
+
+/* @settings
+name: Arcadia Accessibility
+id: arcadia-accessibility
+settings:
+  - id: high-contrast-mode
+    title: High Contrast Mode
+    description: Increase contrast for better readability
+    type: class-toggle
+    default: false
+  - id: reduce-motion
+    title: Reduce Motion
+    description: Minimize animations and transitions
+    type: class-toggle
+    default: false
+*/
+        value: active-line-off
+      - label: Subtle
+        value: active-line-subtle
+      - label: Moderate
+        value: active-line-moderate
+      - label: Strong
+        value: active-line-strong
+  - id: focus-mode
+    title: Focus Mode
+    description: Dim inactive paragraphs for distraction-free writing
+    type: class-toggle
+    default: false
+  - id: show-line-numbers
+    title: Show Line Numbers
+    description: Display line numbers in editor
+    type: class-toggle
+    default: false
+*/
+
+
+/* ================================================================================
+   SECTION 4: DARK THEME COLOR SCHEMES
+   ================================================================================ */
+
+/* ====== Dark Theme: Granite (DEFAULT) ====== */
+.theme-dark,
+.theme-dark.ctp-granite {
+    --ctp-crust: 10, 10, 10;
+    --ctp-base: 38, 38, 38;
+    --ctp-mantle: 45, 45, 45;
+    --ctp-text: 255, 255, 255;
+    --ctp-green: 100, 144, 100;
+    --ctp-red: 188, 80, 89;
+    --ctp-maroon: 160, 70, 80;
+    --ctp-apricot: 225, 185, 130;
+    --ctp-gold: 255, 215, 95;
+    --ctp-teal: 80, 146, 155;
+    --ctp-aqua: 127, 219, 255;
+    --ctp-indigo: 75, 0, 130;
+    --ctp-blue: 80, 120, 180;
+    --ctp-lavender: 140, 150, 180;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Force folder titles to gray in light mode only */
+.theme-light .nav-folder-title .nav-folder-title-content {
+    color: #444 !important;
+}
+
+/* Default color for folders & files (white) */
+.theme-dark.ctp-granite .nav-folder-title .nav-folder-title-content,
+.theme-dark.ctp-granite .nav-file-title {
+    color: #fff !important;
+}
+
+/* Folders in teal on hover and active */
+.theme-dark.ctp-granite .tree-item-self.is-clickable:hover .nav-folder-title .nav-folder-title-content,
+.theme-dark.ctp-granite .nav-folder-title.is-active .nav-folder-title-content {
+    color: #40E0D0 !important;
+}
+
+/* Files in yellow when active (clicked) */
+.theme-dark.ctp-granite .nav-file-title.is-active .nav-file-title-content {
+    color: #FFD75F !important;
+}
+
+/* Make file titles more readable */
+.nav-file-title .nav-file-title-content {
+    font-weight: normal !important;
+    opacity: 0.9;
+}
+
+/* Light mode - darker gray for file titles */
+.theme-light .nav-file-title .nav-file-title-content {
+    color: #333333 !important;
+}
+
+/* Dark mode - softer gray */
+.theme-dark .nav-file-title .nav-file-title-content {
+    color: #bbbbbb !important;
+}
+
+/* Granite & Flint - soft silver */
+.theme-dark.ctp-granite .nav-file-title .nav-file-title-content,
+.theme-dark.ctp-flint .nav-file-title .nav-file-title-content {
+    color: #dadada !important;
+}
+
+/* Olive theme - richer gold */
+.theme-dark.ctp-olive .nav-file-title .nav-file-title-content {
+    color: #e0d09a !important;
+}
+
+/* Navy theme - cooler blue-gray */
+.theme-dark.ctp-navy .nav-file-title .nav-file-title-content {
+    color: #b4c5e0 !important;
+}
+
+
+/* ====== Dark Theme: Stone ====== */
+.theme-dark.ctp-Stone {
+    --ctp-crust: 10, 10, 10;
+    --ctp-base: 25, 25, 25;
+    --ctp-mantle: 45, 45, 45;
+    --ctp-text: 255, 255, 255;
+    --ctp-green: 100, 144, 100;
+    --ctp-red: 188, 80, 89;
+    --ctp-maroon: 160, 70, 80;
+    --ctp-apricot: 225, 185, 130;
+    --ctp-gold: 255, 215, 95;
+    --ctp-teal: 80, 146, 155;
+    --ctp-aqua: 127, 219, 255;
+    --ctp-indigo: 75, 0, 130;
+    --ctp-blue: 80, 120, 180;
+    --ctp-lavender: 140, 150, 180;
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+    /* Folder & file titles in sidebar */
+    .theme-dark.ctp-Stone .nav-folder-title,
+    .theme-dark.ctp-Stone .nav-file-title,
+    .theme-dark.ctp-Stone .workspace-ribbon {
+        color: #f3eca8 !important;
+    }
+
+        .theme-dark.ctp-Stone .nav-folder-title .nav-folder-title-content {
+            color: #cac27b !important;
+        }
+
+    /* Stone theme - reading panel */
+    .theme-dark.ctp-Stone .markdown-preview-view,
+    .theme-dark.ctp-Stone .cm-s-obsidian {
+        background-color: rgb(var(--ctp-base)) !important;
+        color: rgb(var(--ctp-text)) !important;
+    }
+
+
+/* ====== Dark Theme: Olive ====== */
+.theme-dark.ctp-olive {
+    --ctp-crust: 30, 38, 25;
+    --ctp-base: 60, 70, 55;
+    --ctp-mantle: 75, 85, 70;
+    --ctp-text: 235, 245, 215;
+    --ctp-green: 100, 144, 100;
+    --ctp-red: 188, 80, 89;
+    --ctp-maroon: 160, 70, 80;
+    --ctp-apricot: 225, 185, 130;
+    --ctp-gold: 255, 215, 95;
+    --ctp-teal: 80, 146, 155;
+    --ctp-aqua: 127, 219, 255;
+    --ctp-indigo: 75, 0, 130;
+    --ctp-blue: 80, 120, 180;
+    --ctp-lavender: 140, 150, 180;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-olive.nav-folder-title,
+.theme-dark.ctp-olive .nav-file-title,
+.theme-dark.ctp-olive .workspace-ribbon {
+    color: #f3eca8 !important;
+}
+
+.theme-dark.ctp-olive .nav-folder-title .nav-folder-title-content {
+    color: #cac27b !important;
+}
+
+/* Olive theme - reading panel */
+.theme-dark.ctp-olive .markdown-preview-view,
+.theme-dark.ctp-olive .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Flint ====== */
+.theme-dark.ctp-flint {
+    --ctp-crust: 29, 33, 37;      /* ~#1D2125 - Darkest layer, faintly bluish gray */
+    --ctp-base: 43, 48, 52;        /* ~#2B3034 - Main background */
+    --ctp-mantle: 61, 70, 76;      /* ~#3D464C - Slightly lighter than base */
+    --ctp-text: 201, 209, 214;     /* ~#C9D1D6 - Off-white with subtle cool tinge */
+    --ctp-green: 100, 144, 100;
+    --ctp-red: 188, 80, 89;
+    --ctp-maroon: 160, 70, 80;
+    --ctp-apricot: 225, 185, 130;
+    --ctp-gold: 255, 215, 95;
+    --ctp-teal: 80, 146, 155;
+    --ctp-aqua: 127, 219, 255;
+    --ctp-indigo: 75, 0, 130;
+    --ctp-blue: 80, 120, 180;
+    --ctp-lavender: 140, 150, 180;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-flint.nav-folder-title,
+.theme-dark.ctp-flint .nav-file-title,
+.theme-dark.ctp-flint .workspace-ribbon {
+    color: #c8c8c8 !important;
+}
+
+.theme-dark.ctp-flint .nav-folder-title .nav-folder-title-content {
+    color: #b2b2b2 !important;
+}
+
+/* Flint theme - reading panel */
+.theme-dark.ctp-flint .markdown-preview-view,
+.theme-dark.ctp-flint .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Navy ====== */
+.theme-dark.ctp-navy {
+    --ctp-crust: 11, 31, 45;       /* ~#0B1F2D - Very dark navy */
+    --ctp-base: 18, 38, 57;         /* ~#122639 - Main background */
+    --ctp-mantle: 27, 52, 80;       /* ~#1B3450 - Lighter for alt backgrounds */
+    --ctp-text: 202, 210, 223;      /* ~#CAD2DF - Off-white with faint cool tint */
+    --ctp-green: 100, 144, 100;
+    --ctp-red: 188, 80, 89;
+    --ctp-maroon: 160, 70, 80;
+    --ctp-apricot: 225, 185, 130;
+    --ctp-gold: 255, 215, 95;
+    --ctp-teal: 80, 146, 155;
+    --ctp-aqua: 127, 219, 255;
+    --ctp-indigo: 75, 0, 130;
+    --ctp-blue: 80, 120, 180;
+    --ctp-lavender: 140, 150, 180;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-navy.nav-folder-title,
+.theme-dark.ctp-navy .nav-file-title,
+.theme-dark.ctp-navy .workspace-ribbon {
+    color: #c8d2f0 !important;
+}
+
+.theme-dark.ctp-navy .nav-folder-title .nav-folder-title-content {
+    color: #d8d8d8 !important;
+}
+
+/* Navy theme - reading panel */
+.theme-dark.ctp-navy .markdown-preview-view,
+.theme-dark.ctp-navy .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Ember ====== */
+.theme-dark.ctp-ember {
+    --ctp-crust: 25, 15, 12;       /* ~#190F0C - Deep charcoal with warm undertone */
+    --ctp-base: 42, 28, 24;         /* ~#2A1C18 - Rich burnt umber */
+    --ctp-mantle: 58, 38, 32;       /* ~#3A2620 - Warm dark brown */
+    --ctp-text: 245, 220, 205;      /* ~#F5DCCD - Warm cream */
+    --ctp-green: 140, 180, 100;
+    --ctp-red: 220, 95, 70;
+    --ctp-maroon: 180, 65, 50;
+    --ctp-apricot: 255, 160, 100;
+    --ctp-gold: 255, 190, 80;
+    --ctp-teal: 100, 150, 140;
+    --ctp-aqua: 150, 210, 220;
+    --ctp-indigo: 140, 100, 160;
+    --ctp-blue: 130, 160, 200;
+    --ctp-lavender: 180, 160, 190;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-ember.nav-folder-title,
+.theme-dark.ctp-ember .nav-file-title,
+.theme-dark.ctp-ember .workspace-ribbon {
+    color: #ffccaa !important;
+}
+
+.theme-dark.ctp-ember .nav-folder-title .nav-folder-title-content {
+    color: #f5b088 !important;
+}
+
+.theme-dark.ctp-ember .nav-file-title .nav-file-title-content {
+    color: #e8d0c0 !important;
+}
+
+/* Ember theme - reading panel */
+.theme-dark.ctp-ember .markdown-preview-view,
+.theme-dark.ctp-ember .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Twilight ====== */
+.theme-dark.ctp-twilight {
+    --ctp-crust: 18, 15, 30;       /* ~#120F1E - Deep purple-black */
+    --ctp-base: 32, 28, 52;         /* ~#201C34 - Royal purple darkness */
+    --ctp-mantle: 48, 42, 72;       /* ~#302A48 - Medium purple */
+    --ctp-text: 230, 225, 245;      /* ~#E6E1F5 - Soft lavender white */
+    --ctp-green: 130, 200, 150;
+    --ctp-red: 230, 100, 120;
+    --ctp-maroon: 190, 80, 100;
+    --ctp-apricot: 255, 180, 150;
+    --ctp-gold: 255, 210, 120;
+    --ctp-teal: 110, 180, 190;
+    --ctp-aqua: 140, 220, 255;
+    --ctp-indigo: 120, 100, 200;
+    --ctp-blue: 140, 160, 230;
+    --ctp-lavender: 180, 170, 220;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-twilight.nav-folder-title,
+.theme-dark.ctp-twilight .nav-file-title,
+.theme-dark.ctp-twilight .workspace-ribbon {
+    color: #dcd0ff !important;
+}
+
+.theme-dark.ctp-twilight .nav-folder-title .nav-folder-title-content {
+    color: #c8b8e8 !important;
+}
+
+.theme-dark.ctp-twilight .nav-file-title .nav-file-title-content {
+    color: #d8d0e8 !important;
+}
+
+/* Twilight theme - reading panel */
+.theme-dark.ctp-twilight .markdown-preview-view,
+.theme-dark.ctp-twilight .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Forest ====== */
+.theme-dark.ctp-forest {
+    --ctp-crust: 15, 22, 18;       /* ~#0F1612 - Deep forest floor */
+    --ctp-base: 28, 40, 32;         /* ~#1C2820 - Rich moss green */
+    --ctp-mantle: 40, 55, 45;       /* ~#28372D - Pine needle green */
+    --ctp-text: 225, 240, 220;      /* ~#E1F0DC - Soft mint cream */
+    --ctp-green: 120, 200, 130;
+    --ctp-red: 200, 100, 90;
+    --ctp-maroon: 170, 75, 70;
+    --ctp-apricot: 230, 190, 130;
+    --ctp-gold: 240, 210, 100;
+    --ctp-teal: 90, 180, 170;
+    --ctp-aqua: 130, 220, 200;
+    --ctp-indigo: 100, 120, 180;
+    --ctp-blue: 100, 160, 200;
+    --ctp-lavender: 160, 180, 190;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-forest.nav-folder-title,
+.theme-dark.ctp-forest .nav-file-title,
+.theme-dark.ctp-forest .workspace-ribbon {
+    color: #c8f0c0 !important;
+}
+
+.theme-dark.ctp-forest .nav-folder-title .nav-folder-title-content {
+    color: #a8d898 !important;
+}
+
+.theme-dark.ctp-forest .nav-file-title .nav-file-title-content {
+    color: #d0e8c8 !important;
+}
+
+/* Forest theme - reading panel */
+.theme-dark.ctp-forest .markdown-preview-view,
+.theme-dark.ctp-forest .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Crimson ====== */
+.theme-dark.ctp-crimson {
+    --ctp-crust: 28, 12, 15;       /* ~#1C0C0F - Deep wine darkness */
+    --ctp-base: 48, 22, 28;         /* ~#30161C - Rich burgundy */
+    --ctp-mantle: 65, 30, 38;       /* ~#411E26 - Deep rose */
+    --ctp-text: 245, 230, 235;      /* ~#F5E6EB - Soft rose white */
+    --ctp-green: 150, 190, 120;
+    --ctp-red: 240, 110, 120;
+    --ctp-maroon: 200, 70, 80;
+    --ctp-apricot: 255, 170, 140;
+    --ctp-gold: 255, 200, 110;
+    --ctp-teal: 120, 170, 160;
+    --ctp-aqua: 160, 220, 230;
+    --ctp-indigo: 160, 110, 190;
+    --ctp-blue: 150, 170, 220;
+    --ctp-lavender: 200, 170, 200;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-crimson.nav-folder-title,
+.theme-dark.ctp-crimson .nav-file-title,
+.theme-dark.ctp-crimson .workspace-ribbon {
+    color: #ffc8d8 !important;
+}
+
+.theme-dark.ctp-crimson .nav-folder-title .nav-folder-title-content {
+    color: #f0b0c0 !important;
+}
+
+.theme-dark.ctp-crimson .nav-file-title .nav-file-title-content {
+    color: #e8d0d8 !important;
+}
+
+/* Crimson theme - reading panel */
+.theme-dark.ctp-crimson .markdown-preview-view,
+.theme-dark.ctp-crimson .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Slate ====== */
+.theme-dark.ctp-slate {
+    --ctp-crust: 18, 20, 24;       /* ~#121418 - Cool charcoal */
+    --ctp-base: 32, 36, 42;         /* ~#20242A - Slate blue-gray */
+    --ctp-mantle: 48, 52, 60;       /* ~#30343C - Medium slate */
+    --ctp-text: 220, 225, 235;      /* ~#DCE1EB - Cool light gray */
+    --ctp-green: 110, 190, 140;
+    --ctp-red: 220, 100, 100;
+    --ctp-maroon: 180, 75, 75;
+    --ctp-apricot: 240, 180, 130;
+    --ctp-gold: 240, 200, 100;
+    --ctp-teal: 100, 180, 180;
+    --ctp-aqua: 130, 210, 230;
+    --ctp-indigo: 110, 120, 200;
+    --ctp-blue: 120, 170, 230;
+    --ctp-lavender: 160, 170, 210;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-slate.nav-folder-title,
+.theme-dark.ctp-slate .nav-file-title,
+.theme-dark.ctp-slate .workspace-ribbon {
+    color: #d0d8e8 !important;
+}
+
+.theme-dark.ctp-slate .nav-folder-title .nav-folder-title-content {
+    color: #b8c8d8 !important;
+}
+
+.theme-dark.ctp-slate .nav-file-title .nav-file-title-content {
+    color: #c8d0e0 !important;
+}
+
+/* Slate theme - reading panel */
+.theme-dark.ctp-slate .markdown-preview-view,
+.theme-dark.ctp-slate .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Amber ====== */
+.theme-dark.ctp-amber {
+    --ctp-crust: 25, 20, 10;       /* ~#19140A - Deep golden brown */
+    --ctp-base: 45, 38, 20;         /* ~#2D2614 - Rich amber darkness */
+    --ctp-mantle: 62, 52, 28;       /* ~#3E341C - Warm honey brown */
+    --ctp-text: 245, 235, 210;      /* ~#F5EBD2 - Cream with golden tint */
+    --ctp-green: 140, 180, 100;
+    --ctp-red: 220, 100, 80;
+    --ctp-maroon: 180, 70, 60;
+    --ctp-apricot: 255, 170, 110;
+    --ctp-gold: 255, 200, 90;
+    --ctp-teal: 110, 170, 150;
+    --ctp-aqua: 140, 210, 200;
+    --ctp-indigo: 130, 110, 180;
+    --ctp-blue: 130, 160, 210;
+    --ctp-lavender: 170, 160, 200;
+
+    /* Lines and borders */
+    --divider-color: rgb(var(--ctp-crust));
+    --divider-color-hover: rgb(var(--ctp-crust));
+    --hr-color: rgb(var(--ctp-crust));
+    --table-border-color: rgb(var(--ctp-crust));
+    --background-modifier-border: rgb(var(--ctp-crust));
+
+    /* Panel backgrounds */
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Folder & file titles in sidebar */
+.theme-dark.ctp-amber.nav-folder-title,
+.theme-dark.ctp-amber .nav-file-title,
+.theme-dark.ctp-amber .workspace-ribbon {
+    color: #ffd898 !important;
+}
+
+.theme-dark.ctp-amber .nav-folder-title .nav-folder-title-content {
+    color: #e8c078 !important;
+}
+
+.theme-dark.ctp-amber .nav-file-title .nav-file-title-content {
+    color: #f0d8b0 !important;
+}
+
+/* Amber theme - reading panel */
+.theme-dark.ctp-amber .markdown-preview-view,
+.theme-dark.ctp-amber .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ================================================================================
+   SECTION 4.5: LIGHT MODE COLOR SCHEMES (10 VARIANTS)
+   ================================================================================ */
+
+/* ====== Light Theme: Marble (DEFAULT - Clean White) ======
+   Professional white background with subtle gray tones.
+   Contrast ratio: 15.8:1 (WCAG AAA compliant)
+   Best for: General use, long reading sessions, bright environments */
+.theme-light,
+.theme-light.ctp-marble {
+    --ctp-crust: 240, 240, 242;      /* Lightest gray for panels */
+    --ctp-base: 255, 255, 255;       /* Pure white background */
+    --ctp-mantle: 248, 248, 250;     /* Subtle gray for cards */
+    --ctp-text: 28, 28, 32;          /* Near-black text for maximum readability */
+
+    /* Border and divider colors - slightly darker for visibility */
+    --divider-color: rgba(28, 28, 32, 0.12);
+    --divider-color-hover: rgba(28, 28, 32, 0.18);
+    --hr-color: rgba(28, 28, 32, 0.12);
+    --table-border-color: rgba(28, 28, 32, 0.15);
+    --background-modifier-border: rgba(28, 28, 32, 0.10);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Sidebar text colors for Marble - higher contrast than before */
+.theme-light.ctp-marble .nav-folder-title .nav-folder-title-content {
+    color: #2a2a2e !important;  /* Darker for better readability */
+}
+
+.theme-light.ctp-marble .nav-file-title .nav-file-title-content {
+    color: #4a4a4f !important;  /* Improved contrast from previous #666 */
+}
+
+
+/* ====== Light Theme: Sage (Soft Green) ======
+   Gentle green tint reduces eye strain during long reading sessions.
+   Contrast ratio: 14.2:1 (WCAG AAA compliant)
+   Best for: Extended writing, nature-inspired aesthetic, reducing screen fatigue */
+.theme-light.ctp-sage {
+    --ctp-crust: 242, 246, 240;      /* Light sage for panels */
+    --ctp-base: 250, 253, 248;       /* Soft white with green hint */
+    --ctp-mantle: 246, 250, 244;     /* Medium sage for cards */
+    --ctp-text: 24, 36, 24;          /* Dark green-black for readability */
+
+    /* Green-tinted borders for thematic consistency */
+    --divider-color: rgba(64, 96, 64, 0.15);
+    --divider-color-hover: rgba(64, 96, 64, 0.22);
+    --hr-color: rgba(64, 96, 64, 0.15);
+    --table-border-color: rgba(64, 96, 64, 0.18);
+    --background-modifier-border: rgba(64, 96, 64, 0.12);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+/* Sidebar colors for Sage - earth-toned for harmony */
+.theme-light.ctp-sage .nav-folder-title .nav-folder-title-content {
+    color: #2a4a2a !important;  /* Dark forest green */
+}
+
+.theme-light.ctp-sage .nav-file-title .nav-file-title-content {
+    color: #3d5a3d !important;  /* Medium green-gray */
+}
+
+
+/* ====== Light Theme: Pearl (Cool Ivory) ====== */
+.theme-light.ctp-pearl {
+    --ctp-crust: 245, 247, 250;
+    --ctp-base: 253, 254, 255;
+    --ctp-mantle: 248, 250, 252;
+    --ctp-text: 30, 35, 45;
+
+    --divider-color: rgba(100, 120, 150, 0.12);
+    --divider-color-hover: rgba(100, 120, 150, 0.2);
+    --hr-color: rgba(100, 120, 150, 0.12);
+    --table-border-color: rgba(100, 120, 150, 0.12);
+    --background-modifier-border: rgba(100, 120, 150, 0.08);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-pearl .nav-folder-title .nav-folder-title-content {
+    color: #3a4a5a !important;
+}
+
+.theme-light.ctp-pearl .nav-file-title .nav-file-title-content {
+    color: #556575 !important;
+}
+
+
+/* ====== Light Theme: Cloud (Soft Blue) ====== */
+.theme-light.ctp-cloud {
+    --ctp-crust: 243, 246, 252;
+    --ctp-base: 250, 252, 255;
+    --ctp-mantle: 246, 249, 254;
+    --ctp-text: 28, 38, 52;
+
+    --divider-color: rgba(80, 120, 180, 0.15);
+    --divider-color-hover: rgba(80, 120, 180, 0.25);
+    --hr-color: rgba(80, 120, 180, 0.15);
+    --table-border-color: rgba(80, 120, 180, 0.15);
+    --background-modifier-border: rgba(80, 120, 180, 0.1);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-cloud .nav-folder-title .nav-folder-title-content {
+    color: #2a4a6a !important;
+}
+
+.theme-light.ctp-cloud .nav-file-title .nav-file-title-content {
+    color: #4a5a7a !important;
+}
+
+
+/* ====== Light Theme: Dawn (Warm Peach) ====== */
+.theme-light.ctp-dawn {
+    --ctp-crust: 252, 247, 243;
+    --ctp-base: 255, 252, 248;
+    --ctp-mantle: 254, 249, 245;
+    --ctp-text: 50, 35, 30;
+
+    --divider-color: rgba(200, 120, 80, 0.12);
+    --divider-color-hover: rgba(200, 120, 80, 0.2);
+    --hr-color: rgba(200, 120, 80, 0.12);
+    --table-border-color: rgba(200, 120, 80, 0.12);
+    --background-modifier-border: rgba(200, 120, 80, 0.08);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-dawn .nav-folder-title .nav-folder-title-content {
+    color: #5a4035 !important;
+}
+
+.theme-light.ctp-dawn .nav-file-title .nav-file-title-content {
+    color: #6a5550 !important;
+}
+
+
+/* ====== Light Theme: Lavender (Purple Tint) ====== */
+.theme-light.ctp-lavender {
+    --ctp-crust: 248, 245, 252;
+    --ctp-base: 253, 251, 255;
+    --ctp-mantle: 250, 247, 254;
+    --ctp-text: 40, 30, 50;
+
+    --divider-color: rgba(140, 100, 180, 0.15);
+    --divider-color-hover: rgba(140, 100, 180, 0.25);
+    --hr-color: rgba(140, 100, 180, 0.15);
+    --table-border-color: rgba(140, 100, 180, 0.15);
+    --background-modifier-border: rgba(140, 100, 180, 0.1);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-lavender .nav-folder-title .nav-folder-title-content {
+    color: #4a3a5a !important;
+}
+
+.theme-light.ctp-lavender .nav-file-title .nav-file-title-content {
+    color: #5a4a6a !important;
+}
+
+
+/* ====== Light Theme: Mint (Fresh Green) ====== */
+.theme-light.ctp-mint {
+    --ctp-crust: 244, 250, 248;
+    --ctp-base: 250, 254, 252;
+    --ctp-mantle: 246, 252, 250;
+    --ctp-text: 30, 48, 40;
+
+    --divider-color: rgba(80, 160, 130, 0.15);
+    --divider-color-hover: rgba(80, 160, 130, 0.25);
+    --hr-color: rgba(80, 160, 130, 0.15);
+    --table-border-color: rgba(80, 160, 130, 0.15);
+    --background-modifier-border: rgba(80, 160, 130, 0.1);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-mint .nav-folder-title .nav-folder-title-content {
+    color: #2a4a3a !important;
+}
+
+.theme-light.ctp-mint .nav-file-title .nav-file-title-content {
+    color: #4a5a50 !important;
+}
+
+
+/* ====== Light Theme: Rose (Soft Pink) ====== */
+.theme-light.ctp-rose {
+    --ctp-crust: 252, 245, 248;
+    --ctp-base: 255, 251, 253;
+    --ctp-mantle: 254, 247, 250;
+    --ctp-text: 50, 30, 38;
+
+    --divider-color: rgba(200, 100, 130, 0.15);
+    --divider-color-hover: rgba(200, 100, 130, 0.25);
+    --hr-color: rgba(200, 100, 130, 0.15);
+    --table-border-color: rgba(200, 100, 130, 0.15);
+    --background-modifier-border: rgba(200, 100, 130, 0.1);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-rose .nav-folder-title .nav-folder-title-content {
+    color: #5a3545 !important;
+}
+
+.theme-light.ctp-rose .nav-file-title .nav-file-title-content {
+    color: #6a4a58 !important;
+}
+
+
+/* ====== Light Theme: Silver (Cool Gray) ====== */
+.theme-light.ctp-silver {
+    --ctp-crust: 245, 246, 248;
+    --ctp-base: 252, 252, 253;
+    --ctp-mantle: 248, 249, 250;
+    --ctp-text: 35, 37, 42;
+
+    --divider-color: rgba(100, 105, 115, 0.15);
+    --divider-color-hover: rgba(100, 105, 115, 0.25);
+    --hr-color: rgba(100, 105, 115, 0.15);
+    --table-border-color: rgba(100, 105, 115, 0.15);
+    --background-modifier-border: rgba(100, 105, 115, 0.1);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-silver .nav-folder-title .nav-folder-title-content {
+    color: #3a4045 !important;
+}
+
+.theme-light.ctp-silver .nav-file-title .nav-file-title-content {
+    color: #555a60 !important;
+}
+
+
+/* ====== Light Theme: Cream (Golden White) ====== */
+.theme-light.ctp-cream {
+    --ctp-crust: 250, 248, 243;
+    --ctp-base: 255, 253, 248;
+    --ctp-mantle: 252, 250, 245;
+    --ctp-text: 48, 42, 32;
+
+    --divider-color: rgba(180, 150, 100, 0.15);
+    --divider-color-hover: rgba(180, 150, 100, 0.25);
+    --hr-color: rgba(180, 150, 100, 0.15);
+    --table-border-color: rgba(180, 150, 100, 0.15);
+    --background-modifier-border: rgba(180, 150, 100, 0.1);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+}
+
+.theme-light.ctp-cream .nav-folder-title .nav-folder-title-content {
+    color: #4a4235 !important;
+}
+
+.theme-light.ctp-cream .nav-file-title .nav-file-title-content {
+    color: #5a5548 !important;
+}
+
+
+/* ================================================================================
+   SECTION 5: TYPOGRAPHY & HEADING SYSTEM
+   ================================================================================ */
+
+/* ====== H1 Styling: Centered with underline ====== */
+
+/* Center H1 headings only in reading view */
+.markdown-preview-view h1,
+.markdown-rendered h1 {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+/* H1 styling for both editor and reading */
+h1,
+.markdown-rendered h1,
+.HyperMD-header-1,
+.HyperMD-list-line .cm-header-1 {
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    font-variant: small-caps;
+    font-family: var(--font-text) !important;
+    margin: 1em 0;
+    position: relative;
+    color: inherit !important;
+}
+
+/* H1 underline */
+h1::after,
+.markdown-rendered h1::after,
+.HyperMD-header-1::after,
+.HyperMD-list-line .cm-header-1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    margin: 0.5em auto 0 auto;
+    border-bottom: 1px solid var(--text-normal);
+}
+
+/* ====== H2 Styling ====== */
+.cm-header-2 {
+    font-size: 1.75em;
+    font-weight: 400;
+    margin: 1.25em 0 0.5em;
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.2);
+}
+
+h2,
+.markdown-rendered h2,
+.cm-content .cm-header-2,
+.HyperMD-header-2 {
+    font-variant: small-caps !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* ====== H3 Styling ====== */
+.cm-header-3 {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 1em 0 0.5em;
+    color: rgba(var(--ctp-text), 0.9);
+}
+
+
+/* ================================================================================
+   SECTION 6: CONTENT ELEMENTS
+   ================================================================================ */
+
+/* ====== Paragraphs & Text ====== */
+.cm-line {
+    font-family: var(--font-text);
+    line-height: 1.7;
+    margin: 0.75em 0;
+}
+
+.cm-strong {
+    color: rgb(var(--ctp-accent));
+    font-weight: 600;
+}
+
+.cm-em {
+    color: rgba(var(--ctp-text), 0.9);
+    font-style: italic;
+}
+
+/* Text justification for reading mode */
+.markdown-preview-view p,
+.markdown-preview-view li,
+.markdown-preview-view blockquote {
+    text-align: justify !important;
+}
+
+/* Text justification for live preview mode */
+.cm-line:not(.HyperMD-header):not(.cm-codeblock) {
+    text-align: justify !important;
+}
+
+/* ====== Blockquotes ====== */
+.cm-blockquote {
+    border-left: 3px solid rgba(var(--ctp-accent), 0.4);
+    color: rgba(var(--ctp-text), 0.8);
+    padding-left: var(--space-md);
+    margin: 1em 0;
+}
+
+.cm-s-obsidian span.cm-formatting-quote {
+    color: rgb(var(--ctp-accent));
+}
+
+/* ====== Lists ====== */
+.cm-list {
+    padding-left: var(--space-lg);
+    margin: 0.75em 0;
+}
+
+
+/* ================================================================================
+   SECTION 7: CODE BLOCKS & INLINE CODE
+   ================================================================================ */
+
+/* ====== Code blocks ====== */
+.cm-codeBlock {
+    background: rgba(var(--ctp-mantle), 0.8);
+    border: 1px solid rgba(var(--ctp-accent), 0.1);
+    border-radius: 6px;
+    padding: var(--space-md);
+    margin: 1.25em 0;
+}
+
+/* ====== Inline code ====== */
+.cm-inline-code {
+    background: rgba(var(--ctp-accent), 0.1);
+    color: rgb(var(--ctp-accent));
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: var(--font-code);
+}
+
+
+/* ================================================================================
+   SECTION 8: CALLOUTS SYSTEM
+   ================================================================================ */
+
+.callout {
+    --callout-padding: var(--space-md);
+    --callout-icon: lucide-pencil;
+    border-left: 4px solid rgba(var(--ctp-accent), 0.6);
+    background: rgba(var(--ctp-mantle), 0.6);
+    border-radius: 6px;
+    margin: 1.25em 0;
+    border-color: rgb(var(--callout-color), 60%);
+    background-color: rgb(var(--callout-color), 10%);
+}
+
+.callout-title {
+    font-weight: 600;
+    color: rgb(var(--ctp-accent));
+    margin-bottom: var(--space-xs);
+}
+
+/* Custom icons for callout types */
+.callout[data-callout=abstract],
+.callout[data-callout=summary],
+.callout[data-callout=tldr] {
+    --callout-icon: lucide-clipboard-list;
+}
+
+.callout[data-callout=info] {
+    --callout-icon: lucide-info;
+}
+
+.callout[data-callout=todo] {
+    --callout-icon: lucide-check-circle-2;
+}
+
+.callout[data-callout=tip],
+.callout[data-callout=hint],
+.callout[data-callout=important] {
+    --callout-icon: lucide-flame;
+}
+
+.callout[data-callout=success],
+.callout[data-callout=check],
+.callout[data-callout=done] {
+    --callout-icon: lucide-check;
+}
+
+.callout[data-callout=question],
+.callout[data-callout=help],
+.callout[data-callout=faq] {
+    --callout-icon: help-circle;
+}
+
+.callout[data-callout=warning],
+.callout[data-callout=caution],
+.callout[data-callout=attention] {
+    --callout-icon: lucide-alert-triangle;
+}
+
+.callout[data-callout=failure],
+.callout[data-callout=fail],
+.callout[data-callout=missing] {
+    --callout-icon: lucide-x;
+}
+
+.callout[data-callout=danger],
+.callout[data-callout=error] {
+    --callout-icon: lucide-zap;
+}
+
+.callout[data-callout=bug] {
+    --callout-icon: lucide-bug;
+}
+
+.callout[data-callout=example] {
+    --callout-icon: lucide-list;
+}
+
+.callout[data-callout=quote],
+.callout[data-callout=cite] {
+    --callout-icon: quote-glyph;
+}
+
+
+/* ================================================================================
+   SECTION 9: TABLES & CANVAS
+   ================================================================================ */
+
+/* ====== Tables ====== */
+.cm-table {
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+
+.cm-table-header {
+    background: rgba(var(--ctp-accent), 0.1);
+    border-bottom: 2px solid rgba(var(--ctp-accent), 0.3);
+}
+
+.cm-table-cell {
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid rgba(var(--ctp-accent), 0.1);
+}
+
+/* ====== Canvas styling ====== */
+.canvas-wrapper {
+    --canvas-grid-color: rgba(var(--ctp-accent), 0.05);
+    --canvas-node-bg: rgb(var(--ctp-mantle));
+    background-image: radial-gradient(var(--canvas-grid-color) 1px, transparent 0);
+    background-size: 40px 40px;
+}
+
+.canvas-node {
+    background: var(--canvas-node-bg);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: var(--space-md);
+}
+
+.canvas-node-label {
+    font-family: var(--font-ui);
+    color: rgb(var(--ctp-text));
+}
+
+.canvas-controls button:hover {
+    background: rgba(var(--ctp-accent), 0.1) !important;
+}
+
+
+/* ================================================================================
+   SECTION 10: SEARCH INTERFACE
+   ================================================================================ */
+
+.search-input-container {
+    max-width: 600px;
+    margin: var(--space-md) auto;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+    transition: var(--transition-base);
+}
+
+.search-input-container:focus-within {
+    border-color: rgb(var(--ctp-accent));
+    box-shadow: 0 0 0 2px rgba(var(--ctp-accent), 0.1);
+}
+
+.search-result-file-title {
+    font-weight: 500;
+    color: rgb(var(--ctp-accent));
+}
+
+.search-result-file-match {
+    border-left: 3px solid rgba(var(--ctp-accent), 0.3);
+    padding-left: var(--space-sm);
+    margin: var(--space-xs) 0;
+}
+
+
+/* ================================================================================
+   SECTION 11: PLUGIN COMPATIBILITY
+   ================================================================================ */
+
+/* ====== Dataview plugin ====== */
+.dataview.table {
+    border: 1px solid rgba(var(--ctp-accent), 0.1);
+    margin: var(--space-md) 0;
+}
+
+/* ====== Tasks plugin ====== */
+.task-list-item-checkbox {
+    border: 1px solid rgba(var(--ctp-accent), 0.3);
+    margin-right: var(--space-xs);
+}
+
+/* ====== Kanban plugin ====== */
+.kanban__lane {
+    background: rgba(var(--ctp-mantle), 0.5);
+    border: 1px solid rgba(var(--ctp-accent), 0.1);
+    padding: var(--space-md);
+}
+
+
+/* ================================================================================
+   SECTION 12: LIVE PREVIEW ENHANCEMENTS
+   ================================================================================ */
+
+.cm-activeLine {
+    background: rgba(var(--ctp-accent), 0.05);
+}
+
+.cm-focused .cm-activeLine {
+    background: rgba(var(--ctp-accent), 0.08);
+}
+
+
+/* ================================================================================
+   SECTION 13: DIALOGS & MODALS
+   ================================================================================ */
+
+/* ====== Prompt dialogs (Quick Switcher, Command Palette) ====== */
+.prompt {
+    --prompt-border-color: rgb(var(--ctp-surface1));
+}
+
+.prompt .prompt-input[type=text] {
+    border: 0;
+}
+
+.prompt .prompt-results {
+    background-color: var(--background-secondary);
+    box-shadow: inset 0 0 10px rgb(var(--ctp-crust)), inset 0 0 12px rgb(var(--ctp-base));
+}
+
+.prompt:hover .suggestion-hotkey {
+    box-shadow: inset 0 0 2px rgb(var(--ctp-crust)), inset 0 0 4px rgb(var(--ctp-base));
+}
+
+/* ====== Suggestions & active states ====== */
+.suggestion-item.is-selected {
+    background-color: rgb(var(--ctp-accent));
+    color: var(--text-on-accent);
+}
+
+.suggestion-item.is-selected .suggestion-flair {
+    color: var(--text-on-accent);
+}
+
+.suggestion-item.mod-complex .suggestion-hotkey {
+    background-color: rgb(var(--ctp-surface0));
+    color: var(--text-normal);
+}
+
+.suggestion-item.mod-complex.is-selected .suggestion-note {
+    color: var(--text-on-accent);
+}
+
+/* ====== Settings modal ====== */
+.modal {
+    background: rgba(var(--ctp-base), 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(var(--ctp-accent), 0.1);
+    animation: ctp-fade-in 0.3s var(--animation-smooth);
+}
+
+.modal-setting-header {
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
+    padding-bottom: var(--space-sm);
+}
+
+.setting-item {
+    padding: var(--space-sm) 0;
+}
+
+/* ====== Tabbed interfaces ====== */
+.vertical-tab-nav-item {
+    padding: var(--space-xs) var(--space-sm);
+    margin: 2px 0;
+    border-radius: 4px;
+}
+
+.vertical-tab-nav-item.is-active {
+    background: linear-gradient(to right, rgba(var(--ctp-accent), 0.1), transparent);
+    border-right: 2px solid rgb(var(--ctp-accent));
+}
+
+
+/* ================================================================================
+   SECTION 14: INTERACTIVE STATES & BUTTONS
+   ================================================================================ */
+
+/* ====== Clickable icons & workspace tabs ====== */
+.clickable-icon,
+.mod-left-split .workspace-tab-header,
+.mod-right-split .workspace-tab-header {
+    margin: 0 2px;
+    transition: var(--transition-hover-bg), var(--transition-hover-color);
+}
+
+.clickable-icon:hover,
+.mod-left-split .workspace-tab-header:hover,
+.mod-right-split .workspace-tab-header:hover {
+    --background-modifier-hover: rgb(var(--ctp-accent));
+    color: var(--text-on-accent);
+}
+
+.clickable-icon:hover svg,
+.mod-left-split .workspace-tab-header:hover svg,
+.mod-right-split .workspace-tab-header:hover svg {
+    color: var(--text-on-accent);
+}
+
+.clickable-icon[aria-disabled=true]:hover {
+    background-color: rgb(var(--ctp-accent));
+}
+
+/* ====== Active / focus states ====== */
+.clickable-icon.is-active,
+.mod-left-split .workspace-tab-header.has-active-menu,
+.mod-right-split .workspace-tab-header.has-active-menu,
+.mod-left-split .workspace-tab-header.is-active,
+.mod-right-split .workspace-tab-header.is-active {
+    box-shadow: inset 0 0 4px rgb(var(--ctp-crust)), inset 0 0 6px rgb(var(--ctp-base));
+    outline: 1px solid rgb(var(--ctp-surface1));
+    transition: var(--transition-hover-bg), var(--transition-hover-color);
+}
+
+.clickable-icon.is-active svg,
+.mod-left-split .workspace-tab-header.has-active-menu svg,
+.mod-right-split .workspace-tab-header.has-active-menu svg,
+.mod-left-split .workspace-tab-header.is-active svg,
+.mod-right-split .workspace-tab-header.is-active svg {
+    color: rgb(var(--ctp-accent));
+    transition: background-color 3s ease-in-out;
+}
+
+.clickable-icon.is-active:hover,
+.clickable-icon.is-active:hover svg,
+.mod-left-split .workspace-tab-header.has-active-menu:hover,
+.mod-left-split .workspace-tab-header.has-active-menu:hover svg,
+.mod-right-split .workspace-tab-header.has-active-menu:hover,
+.mod-right-split .workspace-tab-header.has-active-menu:hover svg,
+.mod-left-split .workspace-tab-header.is-active:hover,
+.mod-left-split .workspace-tab-header.is-active:hover svg,
+.mod-right-split .workspace-tab-header.is-active:hover,
+.mod-right-split .workspace-tab-header.is-active:hover svg {
+    background-color: rgb(var(--ctp-accent));
+    box-shadow: none;
+    color: var(--text-on-accent);
+}
+
+/* ====== Close/search/clear buttons ====== */
+.workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header-inner-close-button:hover,
+.workspace-tab-header.is-active .workspace-tab-header-inner-close-button:hover,
+.suggestion :hover.list-item-part.clickable-icon[aria-label="Clear search history"],
+.modal-close-button:hover {
+    background-color: rgb(var(--ctp-red));
+    box-shadow: 0 0 2px 1px rgb(var(--ctp-surface1));
+    color: rgb(var(--ctp-base));
+    transition: var(--transition-hover-bg), var(--transition-hover-color);
+}
+
+.workspace-tab-header-inner-close-button:hover {
+    background-color: rgb(var(--ctp-red), 50%);
+}
+
+.workspace-tab-header-inner:hover .workspace-tab-header-inner-icon {
+    --icon-color-hover: var(--text-faint);
+    --opacity-icon-hover: 1;
+}
+
+.search-input-clear-button:hover,
+.search-input-clear-button:active {
+    color: rgb(var(--ctp-red));
+}
+
+/* ====== Titlebar buttons (Windows & Linux) ====== */
+.mod-linux .titlebar-button,
+.mod-windows .titlebar-button {
+    transition: var(--transition-hover-bg), var(--transition-hover-color);
+}
+
+.mod-linux .titlebar-button:hover,
+.mod-windows .titlebar-button:hover {
+    background-color: rgb(var(--ctp-orchid));
+    color: var(--text-on-accent);
+}
+
+.mod-linux .titlebar-button.mod-close:hover,
+.mod-windows .titlebar-button.mod-close:hover {
+    background-color: rgb(var(--ctp-red));
+    color: var(--text-on-accent);
+}
+
+
+/* ================================================================================
+   SECTION 15: ACCENT COLOR VARIATIONS
+   ================================================================================ */
+
+.ctp-theme-indigo {
+    --ctp-accent: 99, 102, 241;
+    --ctp-accent-hover: 79, 70, 229;
+}
+
+.ctp-theme-emerald {
+    --ctp-accent: 16, 185, 129;
+    --ctp-accent-hover: 5, 150, 105;
+}
+
+.ctp-theme-rose {
+    --ctp-accent: 244, 63, 94;
+    --ctp-accent-hover: 225, 29, 72;
+}
+
+.ctp-theme-teal {
+    --ctp-accent: 80, 146, 155;
+    --ctp-accent-hover: 80, 166, 165;
+}
+
+
+/* ================================================================================
+   SECTION 16: ANIMATIONS
+   ================================================================================ */
+
+@keyframes ctp-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ctp-slide-up {
+    from {
+        transform: translateY(10px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+
+/* ================================================================================
+   SECTION 17: ICON THEMING SYSTEM
+   ================================================================================ */
+
+.ctp-icon-set-filled svg {
+    --icon-stroke-width: 1.5;
+    --icon-fill: currentColor;
+}
+
+.ctp-icon-set-outline svg {
+    --icon-stroke-width: 1.5;
+    --icon-fill: none;
+}
+
+
+/* ================================================================================
+   SECTION 18: NAVIGATION SIDEBAR & FILE EXPLORER
+   ================================================================================ */
+
+/* ====== Sidebar architecture ====== */
+.workspace-split.mod-root>.workspace-leaf:first-child {
+    --nav-width: 280px;
+    width: var(--nav-width);
+    min-width: unset;
+    border-right: 1px solid rgba(var(--ctp-accent), 0.1);
+    overflow-x: hidden;
+}
+
+/* ====== File tree structure ====== */
+.nav-folder-children {
+    padding-left: var(--space-xs);
+    transition: var(--transition-base);
+}
+
+/* ====== Folder styling ====== */
+.nav-folder-title {
+    --folder-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v12h16V6H4z'/%3E%3C/svg%3E");
+    color: rgba(var(--ctp-accent), 0.95) !important;
+    font-weight: 600;
+}
+
+.nav-folder-title::before {
+    filter: brightness(1.2);
+}
+
+/* Nested folder styling */
+.nav-folder-children .nav-folder-title {
+    background: transparent;
+    color: rgba(var(--ctp-text), 0.85) !important;
+    font-weight: 500;
+}
+
+.nav-folder-children .nav-folder-title::before {
+    opacity: 0.7;
+}
+
+.workspace-leaf-content[data-type='file-explorer'] {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+/* ====== Collapse/expand controls ====== */
+.nav-folder-collapse-indicator {
+    margin-left: auto;
+    padding-left: var(--space-sm);
+    display: none;  /* Hidden in favor of custom book icons */
+}
+
+.nav-folder-children {
+    transition: max-height 0.3s var(--animation-smooth);
+    max-height: 5000px;
+    overflow: hidden;
+}
+
+.nav-folder.is-collapsed .nav-folder-children {
+    max-height: 0;
+}
+
+/* ====== Interactive states ====== */
+.nav-folder-title:hover {
+    background: rgba(var(--ctp-accent), 0.15) !important;
+}
+
+.nav-folder-children .nav-folder-title:hover {
+    background: rgba(var(--ctp-accent), 0.05) !important;
+}
+
+/* ====== Rename focus state ====== */
+.tree-item-self.is-being-renamed:focus-within {
+    color: #444 !important;
+}
+
+
+/* ================================================================================
+   SECTION 19: FOLDER TREE ICONS & COLOR CODING
+   ================================================================================ */
+
+/* ====== Color variables for 10-color cycle (top-level folders) ====== */
+:root {
+    --c0-closed: #053f9c;   /* Darker blue */
+    --c0-open: #085feb;     /* Lighter blue */
+    --c1-closed: #2a9d58;
+    --c1-open: #54c386;
+    --c2-closed: #6a51c4;
+    --c2-open: #9f8dea;
+    --c3-closed: #b33a3a;
+    --c3-open: #e06565;
+    --c4-closed: #cd7b1f;
+    --c4-open: #f1a45b;
+    --c5-closed: #c84c8f;
+    --c5-open: #e17daf;
+    --c6-closed: #2b8585;
+    --c6-open: #5bbdbc;
+    --c7-closed: #b28e14;
+    --c7-open: #d7bc4a;
+    --c8-closed: #6b4c34;
+    --c8-open: #9c775c;
+    --c9-closed: #666666;
+    --c9-open: #999999;
+}
+
+/* ====== Top-level folder styling ====== */
+.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"] {
+    font-size: 0.50rem !important;
+    font-weight: normal;
+    border-top: 1px solid rgba(120, 120, 120, 0.6) !important;
+    margin-top: 8px;
+    padding-top: 8px;
+    background-color: rgba(160, 160, 160, 0.1) !important;
+    color: rgba(var(--ctp-text), 0.9) !important;
+}
+
+/* ====== Top-level folder icons (closed book vs. open book) ====== */
+
+/* CLOSED top-level folder */
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"] .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    vertical-align: -3px;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 3h16c1.104 0 2 .896 2 2v14c0 1.104-.896 2-2 2H2V3zM6 3v18'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+
+/* OPEN top-level folder */
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"] .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+    vertical-align: -3px;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6c0-1.105.895-2 2-2h7c.553 0 1 .447 1 1v14c0 .553-.447 1-1 1H4c-1.105 0-2-.895-2-2V6zm12-1c0-.553.447-1 1-1h7c1.105 0 2 .895 2 2v13c0 1.105-.895 2-2 2h-7c-.553 0-1-.447-1-1V5z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+
+/* ====== Subfolder icons (notebook tabs) ====== */
+
+/* CLOSED subfolder */
+.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: var(--icon-xs, 16px);
+    height: var(--icon-xs, 16px);
+    margin-right: 8px;
+    vertical-align: -2px;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg fill='currentColor' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M96 0C60.65 0 32 28.65 32 64v384c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V128l-96-96H96zm192 128V32l96 96H288z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+
+/* OPEN subfolder */
+.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: var(--icon-xs, 16px);
+    height: var(--icon-xs, 16px);
+    margin-right: 8px;
+    vertical-align: -2px;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg fill='currentColor' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M416 0H128c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h288c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zm-32 96H160V64h224v32zm-96 96H160v-32h128v32z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+
+/* ====== Hover highlight on folder icons ====== */
+.nav-folder.is-collapsed>.nav-folder-title .nav-folder-title-content:hover::before,
+.nav-folder:not(.is-collapsed)>.nav-folder-title .nav-folder-title-content:hover::before {
+    filter: brightness(1.1);
+}
+
+/* ====== Top-level folder color cycle (nth-of-type) ====== */
+
+/* CLOSED top-level folders */
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 1) .nav-folder-title-content::before {
+    background-color: var(--c0-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 2) .nav-folder-title-content::before {
+    background-color: var(--c1-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 3) .nav-folder-title-content::before {
+    background-color: var(--c2-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 4) .nav-folder-title-content::before {
+    background-color: var(--c3-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 5) .nav-folder-title-content::before {
+    background-color: var(--c4-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 6) .nav-folder-title-content::before {
+    background-color: var(--c5-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 7) .nav-folder-title-content::before {
+    background-color: var(--c6-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 8) .nav-folder-title-content::before {
+    background-color: var(--c7-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 9) .nav-folder-title-content::before {
+    background-color: var(--c8-closed);
+}
+
+.nav-folder.is-collapsed>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 10) .nav-folder-title-content::before {
+    background-color: var(--c9-closed);
+}
+
+/* OPEN top-level folders */
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 1) .nav-folder-title-content::before {
+    background-color: var(--c0-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 2) .nav-folder-title-content::before {
+    background-color: var(--c1-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 3) .nav-folder-title-content::before {
+    background-color: var(--c2-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 4) .nav-folder-title-content::before {
+    background-color: var(--c3-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 5) .nav-folder-title-content::before {
+    background-color: var(--c4-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 6) .nav-folder-title-content::before {
+    background-color: var(--c5-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 7) .nav-folder-title-content::before {
+    background-color: var(--c6-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 8) .nav-folder-title-content::before {
+    background-color: var(--c7-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 9) .nav-folder-title-content::before {
+    background-color: var(--c8-open);
+}
+
+.nav-folder:not(.is-collapsed)>.tree-item-self.nav-folder-title[style*="margin-inline-start: 0px"]:nth-of-type(10n + 10) .nav-folder-title-content::before {
+    background-color: var(--c9-open);
+}
+
+/* ====== Color-coded icons by nesting level (for subfolders, levels 2+) ====== */
+
+/* Level 2 (Red) */
+.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #EA4335;  /* Primary Google Red */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #FF6B60;  /* Lighter Red */
+}
+
+/* Level 3 (Yellow) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #FBBC04;  /* Primary Google Yellow */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #FFD54F;  /* Lighter Yellow */
+}
+
+/* Level 4 (Green) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #34A853;  /* Primary Google Green */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #6DD47E;  /* Lighter Green */
+}
+
+/* Level 5 (Blue) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #4285F4;  /* Primary Google Blue */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #7BA9FF;  /* Lighter Blue */
+}
+
+/* Level 6 (Purple) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #A142F4;  /* Strong Purple */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #C587F4;  /* Lighter Purple */
+}
+
+/* Level 7 (Orange) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #FF6F00;  /* Strong Orange */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #FFA726;  /* Lighter Orange */
+}
+
+/* Level 8 (Teal) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #00897B;  /* Strong Teal */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #4DB6AC;  /* Lighter Teal */
+}
+
+/* Level 9 (Pink) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #E91E63;  /* Strong Pink */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #F06292;  /* Lighter Pink */
+}
+
+/* Level 10 (Brown) */
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder.is-collapsed>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #795548;  /* Strong Brown */
+}
+
+.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder>.nav-folder-children>.nav-folder:not(.is-collapsed)>.nav-folder-title:not([style*="margin-inline-start: 0px"]) .nav-folder-title-content::before {
+    background-color: #A1887F;  /* Lighter Brown */
+}
+
+
+/* ================================================================================
+   SECTION 20: FILE TYPE ICONS
+   ================================================================================ */
+
+/* ====== General file icon base ====== */
+.nav-file-title .nav-file-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    vertical-align: middle;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    background-color: rgb(var(--ctp-text));
+}
+
+/* ====== Markdown files ====== */
+.nav-file-title[data-path$=".md"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M6 2h9l5 5v14c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2V4c0-1.104.896-2 2-2zm3 9h2v2H9v-2zm-1 4h4v2H8v-2zm6-4h2v2h-2v-2zm-6-4h4v2H8V7zm6 0h2v2h-2V7z'/%3E%3C/svg%3E");
+    background-color: #508ef3;
+}
+
+/* ====== Audio files ====== */
+.nav-file-title[data-path$=".mp3"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".wav"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ogg"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 3v12a4 4 0 1 0 4-4V5h6V3H9z'/%3E%3C/svg%3E");
+    background-color: #FFA000;
+    width: 12px;
+    height: 12px;
+}
+
+/* ====== Video files ====== */
+.nav-file-title[data-path$=".mp4"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".mkv"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".avi"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M4 3h16c1.104 0 2 .896 2 2v14c0 1.104-.896 2-2 2H4c-1.104 0-2-.896-2-2V5c0-1.104.896-2 2-2zm8 5l5 4-5 4V8z'/%3E%3C/svg%3E");
+    background-color: #4CAF50;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== Image files ====== */
+.nav-file-title[data-path$=".png"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".jpg"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".jpeg"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".gif"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M4 3h16c1.104 0 2 .896 2 2v14c0 1.104-.896 2-2 2H4c-1.104 0-2-.896-2-2V5c0-1.104.896-2 2-2zm2 12 3-4 2 3 3-2 4 5H6z'/%3E%3C/svg%3E");
+    background-color: #FFD700;
+    width: 12px;
+    height: 12px;
+}
+
+/* ====== PDF files ====== */
+.nav-file-title[data-path$=".pdf"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M6 2h9l5 5v14c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2V4c0-1.104.896-2 2-2zm3 9h2v2H9v-2zm-1 4h4v2H8v-2zm6-4h2v2h-2v-2zm-6-4h4v2H8V7zm6 0h2v2h-2V7z'/%3E%3C/svg%3E");
+    background-color: #D32F2F;
+    width: 14px;
+    height: 14px;
+}
+
+
+/* ================================================================================
+   SECTION 21: MOBILE RESPONSIVENESS
+   ================================================================================ */
+
+@media (max-width: 768px) {
+    .workspace-split.mod-root>.workspace-leaf:first-child {
+        --nav-width: 240px;
+        z-index: 100;
+        position: relative;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .markdown-source-view,
+    .markdown-preview-view {
+        --line-width: 100%;
+        --content-padding: var(--space-sm);
+    }
+
+    .search-input-container {
+        margin: var(--space-sm);
+    }
+}
+
+
+/* ================================================================================
+   SECTION 18: TYPOGRAPHY CONTROLS
+   ================================================================================ */
+
+/* Font Size Scaling */
+.font-size-small {
+    font-size: 14.4px; /* 90% of 16px */
+}
+
+.font-size-normal {
+    font-size: 16px; /* 100% - default */
+}
+
+.font-size-large {
+    font-size: 17.6px; /* 110% of 16px */
+}
+
+.font-size-xlarge {
+    font-size: 20px; /* 125% of 16px */
+}
+
+/* Line Height Options */
+.line-height-compact .markdown-preview-view p,
+.line-height-compact .markdown-preview-view li,
+.line-height-compact .cm-line {
+    line-height: 1.5 !important;
+}
+
+.line-height-normal .markdown-preview-view p,
+.line-height-normal .markdown-preview-view li,
+.line-height-normal .cm-line {
+    line-height: 1.6 !important;
+}
+
+.line-height-relaxed .markdown-preview-view p,
+.line-height-relaxed .markdown-preview-view li,
+.line-height-relaxed .cm-line {
+    line-height: 1.8 !important;
+}
+
+.line-height-loose .markdown-preview-view p,
+.line-height-loose .markdown-preview-view li,
+.line-height-loose .cm-line {
+    line-height: 2.0 !important;
+}
+
+/* Reading Width Controls - ONLY for Reading View */
+.reading-width-narrow .markdown-preview-view {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reading-width-normal .markdown-preview-view {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reading-width-wide .markdown-preview-view {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reading-width-full .markdown-preview-view {
+    max-width: 100%;
+}
+
+/* Content Font Choices */
+.font-text-vollkorn {
+    --font-text: 'Vollkorn', serif;
+}
+
+.font-text-georgia {
+    --font-text: Georgia, 'Times New Roman', serif;
+}
+
+.font-text-merriweather {
+    --font-text: 'Merriweather', Georgia, serif;
+}
+
+.font-text-system {
+    --font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Ensure font changes apply immediately */
+.font-text-vollkorn .cm-line,
+.font-text-vollkorn .markdown-preview-view {
+    font-family: 'Vollkorn', serif;
+}
+
+.font-text-georgia .cm-line,
+.font-text-georgia .markdown-preview-view {
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.font-text-merriweather .cm-line,
+.font-text-merriweather .markdown-preview-view {
+    font-family: 'Merriweather', Georgia, serif;
+}
+
+.font-text-system .cm-line,
+.font-text-system .markdown-preview-view {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Code Font Choices */
+.font-code-jetbrains {
+    --font-code: 'JetBrains Mono', monospace;
+}
+
+.font-code-fira {
+    --font-code: 'Fira Code', 'Courier New', monospace;
+}
+
+.font-code-source {
+    --font-code: 'Source Code Pro', 'Courier New', monospace;
+}
+
+.font-code-mono {
+    --font-code: Consolas, 'Courier New', monospace;
+}
+
+/* Ensure code font changes apply immediately */
+.font-code-jetbrains .cm-inline-code,
+.font-code-jetbrains code,
+.font-code-jetbrains pre {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.font-code-fira .cm-inline-code,
+.font-code-fira code,
+.font-code-fira pre {
+    font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+.font-code-source .cm-inline-code,
+.font-code-source code,
+.font-code-source pre {
+    font-family: 'Source Code Pro', 'Courier New', monospace;
+}
+
+.font-code-mono .cm-inline-code,
+.font-code-mono code,
+.font-code-mono pre {
+    font-family: Consolas, 'Courier New', monospace;
+}
+
+
+/* ================================================================================
+   SECTION 19: EDITOR ENHANCEMENTS
+   ================================================================================ */
+
+/* Active Line Highlighting */
+.active-line-off .cm-activeLine {
+    background: transparent !important;
+}
+
+.active-line-subtle .cm-activeLine {
+    background: rgba(var(--ctp-accent), 0.05) !important;
+}
+
+.active-line-moderate .cm-activeLine {
+    background: rgba(var(--ctp-accent), 0.1) !important;
+}
+
+.active-line-strong .cm-activeLine {
+    background: rgba(var(--ctp-accent), 0.15) !important;
+}
+
+/* Focus Mode - Dim inactive lines */
+.focus-mode .cm-line:not(.cm-active) {
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+}
+
+.focus-mode .cm-line.cm-active,
+.focus-mode .cm-line:hover {
+    opacity: 1;
+}
+
+/* Line Numbers */
+.show-line-numbers .cm-gutters {
+    display: block !important;
+}
+
+.show-line-numbers .cm-lineNumbers {
+    color: rgba(var(--ctp-text), 0.4);
+    font-size: 0.9em;
+    padding-right: 8px;
+}
+
+.show-line-numbers .cm-gutters:hover .cm-lineNumbers {
+    color: rgba(var(--ctp-text), 0.6);
+}
+
+
+/* ================================================================================
+   SECTION 20: EXPANDED FONT OPTIONS
+   ================================================================================ */
+
+/* Additional Content Fonts */
+.font-text-crimson {
+    --font-text: 'Crimson Pro', Georgia, serif;
+}
+
+.font-text-lora {
+    --font-text: 'Lora', Georgia, serif;
+}
+
+.font-text-literata {
+    --font-text: 'Literata', Georgia, serif;
+}
+
+.font-text-inter {
+    --font-text: 'Inter', -apple-system, sans-serif;
+}
+
+.font-text-roboto {
+    --font-text: 'Roboto', -apple-system, sans-serif;
+}
+
+.font-text-opensans {
+    --font-text: 'Open Sans', -apple-system, sans-serif;
+}
+
+/* Apply new content fonts */
+.font-text-crimson .cm-line,
+.font-text-crimson .markdown-preview-view {
+    font-family: 'Crimson Pro', Georgia, serif;
+}
+
+.font-text-lora .cm-line,
+.font-text-lora .markdown-preview-view {
+    font-family: 'Lora', Georgia, serif;
+}
+
+.font-text-literata .cm-line,
+.font-text-literata .markdown-preview-view {
+    font-family: 'Literata', Georgia, serif;
+}
+
+.font-text-inter .cm-line,
+.font-text-inter .markdown-preview-view {
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.font-text-roboto .cm-line,
+.font-text-roboto .markdown-preview-view {
+    font-family: 'Roboto', -apple-system, sans-serif;
+}
+
+.font-text-opensans .cm-line,
+.font-text-opensans .markdown-preview-view {
+    font-family: 'Open Sans', -apple-system, sans-serif;
+}
+
+/* Additional Code Fonts */
+.font-code-cascadia {
+    --font-code: 'Cascadia Code', Consolas, monospace;
+}
+
+.font-code-ibmplex {
+    --font-code: 'IBM Plex Mono', Consolas, monospace;
+}
+
+/* Apply new code fonts */
+.font-code-cascadia .cm-inline-code,
+.font-code-cascadia code,
+.font-code-cascadia pre {
+    font-family: 'Cascadia Code', Consolas, monospace;
+}
+
+.font-code-ibmplex .cm-inline-code,
+.font-code-ibmplex code,
+.font-code-ibmplex pre {
+    font-family: 'IBM Plex Mono', Consolas, monospace;
+}
+
+
+/* ================================================================================
+   SECTION 21: LINKS & TAGS
+   ================================================================================ */
+
+/* Link Styles */
+.links-underlined a.internal-link,
+.links-underlined a.external-link {
+    text-decoration: underline;
+}
+
+.links-no-underline a.internal-link,
+.links-no-underline a.external-link {
+    text-decoration: none;
+}
+
+.links-hover-underline a.internal-link,
+.links-hover-underline a.external-link {
+    text-decoration: none;
+}
+
+.links-hover-underline a.internal-link:hover,
+.links-hover-underline a.external-link:hover {
+    text-decoration: underline;
+}
+
+.links-dotted a.internal-link,
+.links-dotted a.external-link {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+/* Tag Styles */
+.tags-pill .tag {
+    background: rgba(var(--ctp-accent), 0.15);
+    color: rgb(var(--ctp-accent));
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    border: none;
+}
+
+.tags-hashtag .tag {
+    background: transparent;
+    color: rgb(var(--ctp-accent));
+    padding: 0;
+    border: none;
+}
+
+.tags-badge .tag {
+    background: rgba(var(--ctp-accent), 0.15);
+    color: rgb(var(--ctp-accent));
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    border: none;
+}
+
+/* Highlight Colors */
+.highlight-yellow mark,
+.highlight-yellow .cm-highlight {
+    background-color: rgba(255, 235, 59, 0.4) !important;
+}
+
+.highlight-blue mark,
+.highlight-blue .cm-highlight {
+    background-color: rgba(33, 150, 243, 0.3) !important;
+}
+
+.highlight-green mark,
+.highlight-green .cm-highlight {
+    background-color: rgba(76, 175, 80, 0.3) !important;
+}
+
+.highlight-pink mark,
+.highlight-pink .cm-highlight {
+    background-color: rgba(233, 30, 99, 0.3) !important;
+}
+
+.highlight-orange mark,
+.highlight-orange .cm-highlight {
+    background-color: rgba(255, 152, 0, 0.3) !important;
+}
+
+
+/* ================================================================================
+   SECTION 22: LISTS & CHECKBOXES
+   ================================================================================ */
+
+/* Checkbox Styles */
+.checkbox-circle input[type="checkbox"] {
+    border-radius: 50% !important;
+}
+
+.checkbox-rounded input[type="checkbox"] {
+    border-radius: 4px !important;
+}
+
+.checkbox-square input[type="checkbox"] {
+    border-radius: 2px !important;
+}
+
+/* Task Priority Colors */
+.markdown-preview-view li[data-task="!"] > input[type="checkbox"],
+.markdown-preview-view li[data-task="!"] > p > input[type="checkbox"] {
+    border-color: rgb(var(--ctp-red)) !important;
+}
+
+.markdown-preview-view li[data-task="?"] > input[type="checkbox"],
+.markdown-preview-view li[data-task="?"] > p > input[type="checkbox"] {
+    border-color: rgb(var(--ctp-blue)) !important;
+}
+
+.markdown-preview-view li[data-task=">"] > input[type="checkbox"],
+.markdown-preview-view li[data-task=">"] > p > input[type="checkbox"] {
+    border-color: rgb(var(--ctp-gold)) !important;
+}
+
+/* List Bullet Styles */
+.bullets-arrows ul > li::marker {
+    content: "→ ";
+}
+
+.bullets-diamonds ul > li::marker {
+    content: "◆ ";
+}
+
+.bullets-stars ul > li::marker {
+    content: "★ ";
+}
+
+.bullets-default ul > li::marker {
+    content: "• ";
+}
+
+/* Indentation Guides */
+.show-indentation-guides .markdown-preview-view ul,
+.show-indentation-guides .markdown-preview-view ol,
+.show-indentation-guides .cm-line:has(> .cm-list-1),
+.show-indentation-guides .cm-line:has(> .cm-list-2),
+.show-indentation-guides .cm-line:has(> .cm-list-3) {
+    border-left: 1px solid rgba(var(--ctp-accent), 0.15);
+    padding-left: 1.5em;
+    margin-left: 0.5em;
+}
+
+
+/* ================================================================================
+   SECTION 23: TABLE ENHANCEMENTS
+   ================================================================================ */
+
+/* Striped Tables */
+.table-striped table tr:nth-child(even) {
+    background-color: rgba(var(--ctp-mantle), 0.3);
+}
+
+.table-striped table tr:hover {
+    background-color: rgba(var(--ctp-accent), 0.1);
+}
+
+/* Borderless Tables */
+.table-borderless table,
+.table-borderless table th,
+.table-borderless table td {
+    border: none !important;
+}
+
+/* Compact Tables */
+.table-compact table th,
+.table-compact table td {
+    padding: 4px 8px !important;
+}
+
+/* Sticky Table Headers */
+.sticky-table-headers table thead {
+    position: sticky;
+    top: 0;
+    background: rgb(var(--ctp-base));
+    z-index: 10;
+}
+
+.sticky-table-headers table thead th {
+    background: rgb(var(--ctp-mantle));
+}
+
+
+/* ================================================================================
+   SECTION 24: WORKSPACE CUSTOMIZATION
+   ================================================================================ */
+
+/* Tab Styles */
+.tabs-rounded .workspace-tab-header {
+    border-radius: 8px 8px 0 0;
+    margin: 0 2px;
+}
+
+.tabs-squared .workspace-tab-header {
+    border-radius: 0;
+}
+
+.tabs-minimal .workspace-tab-header {
+    border: none;
+    background: transparent;
+}
+
+.tabs-minimal .workspace-tab-header.is-active {
+    border-bottom: 2px solid rgb(var(--ctp-accent));
+    background: transparent;
+}
+
+
+/* ================================================================================
+   SECTION 25: ACCESSIBILITY FEATURES
+   ================================================================================ */
+
+/* High Contrast Mode */
+.high-contrast-mode {
+    --ctp-text: 255, 255, 255;
+}
+
+.theme-light.high-contrast-mode {
+    --ctp-text: 0, 0, 0;
+}
+
+.high-contrast-mode .markdown-preview-view,
+.high-contrast-mode .cm-line {
+    color: rgb(var(--ctp-text));
+    font-weight: 500;
+}
+
+.high-contrast-mode a {
+    color: rgb(var(--ctp-accent));
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.high-contrast-mode .nav-folder-title,
+.high-contrast-mode .nav-file-title {
+    font-weight: 500;
+}
+
+/* Reduce Motion */
+.reduce-motion * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+}
+
+.reduce-motion .workspace-leaf,
+.reduce-motion .markdown-preview-view {
+    scroll-behavior: auto !important;
+}
+
+/* Dyslexia-Friendly Mode */
+.dyslexia-friendly .cm-line,
+.dyslexia-friendly .markdown-preview-view,
+.dyslexia-friendly p,
+.dyslexia-friendly li {
+    font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+    letter-spacing: 0.12em;
+    word-spacing: 0.16em;
+    line-height: 2.0 !important;
+}
+
+.dyslexia-friendly h1,
+.dyslexia-friendly h2,
+.dyslexia-friendly h3,
+.dyslexia-friendly h4,
+.dyslexia-friendly h5,
+.dyslexia-friendly h6 {
+    font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+    letter-spacing: 0.1em;
+    word-spacing: 0.12em;
+}
+
+.dyslexia-friendly {
+    --font-text: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+}
+
+
+/* ================================================================================
+   FONT IMPORTS
+   ================================================================================ */
+
+/* UI and Default Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Additional Content Fonts - Serif */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Additional Content Fonts - Sans-Serif */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Code Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* Dyslexia Font */
+@import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css');
+
+
+/* ================================================================================
+   END OF ARCADIA THEME
+   ================================================================================ */
