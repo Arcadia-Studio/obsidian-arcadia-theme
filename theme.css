@@ -172,7 +172,7 @@ settings:
     options:
       - label: Granite (Cool Neutral)
         value: ctp-granite
-      - label: Stone
+      - label: Stone (Cool Slate)
         value: ctp-stone
       - label: Olive (Warm Earthy)
         value: ctp-olive
@@ -620,50 +620,55 @@ settings:
 }
 
 
-/* ====== Dark Theme: Stone ====== */
+/* ====== Dark Theme: Stone (Cool Slate) ======
+   A cool blue-gray stone aesthetic, like polished slate or river rock.
+   Distinct from Granite with its blue undertones. */
 .theme-dark.ctp-stone {
-    --ctp-crust: 10, 10, 10;
-    --ctp-base: 25, 25, 25;
-    --ctp-mantle: 45, 45, 45;
-    --ctp-text: 255, 255, 255;
-    --ctp-green: 100, 144, 100;
-    --ctp-red: 188, 80, 89;
-    --ctp-maroon: 160, 70, 80;
-    --ctp-apricot: 225, 185, 130;
-    --ctp-gold: 255, 215, 95;
-    --ctp-teal: 80, 146, 155;
-    --ctp-aqua: 127, 219, 255;
-    --ctp-indigo: 75, 0, 130;
-    --ctp-blue: 80, 120, 180;
-    --ctp-lavender: 140, 150, 180;
-    /* Lines and borders */
-    --divider-color: rgb(var(--ctp-crust));
-    --divider-color-hover: rgb(var(--ctp-crust));
-    --hr-color: rgb(var(--ctp-crust));
-    --table-border-color: rgb(var(--ctp-crust));
-    --background-modifier-border: rgb(var(--ctp-crust));
+    --ctp-crust: 18, 22, 26;       /* ~#12161A - Deep slate shadow */
+    --ctp-base: 35, 40, 48;        /* ~#232830 - Cool blue-gray stone */
+    --ctp-mantle: 48, 54, 62;      /* ~#30363E - Lighter slate */
+    --ctp-text: 220, 225, 232;     /* ~#DCE1E8 - Soft silver-white */
+    --ctp-green: 130, 180, 140;    /* Sage green */
+    --ctp-red: 200, 100, 110;      /* Soft coral */
+    --ctp-maroon: 175, 90, 100;    /* Dusty rose */
+    --ctp-apricot: 220, 180, 140;  /* Warm sand */
+    --ctp-gold: 230, 200, 120;     /* Muted gold */
+    --ctp-teal: 100, 165, 175;     /* Cool teal */
+    --ctp-aqua: 140, 200, 220;     /* Soft aqua */
+    --ctp-indigo: 120, 110, 180;   /* Soft indigo */
+    --ctp-blue: 110, 150, 200;     /* Steel blue */
+    --ctp-lavender: 160, 165, 195; /* Cool lavender */
+
+    /* Lines and borders - subtle blue-gray */
+    --divider-color: rgba(100, 115, 130, 0.3);
+    --divider-color-hover: rgba(100, 115, 130, 0.5);
+    --hr-color: rgba(100, 115, 130, 0.4);
+    --table-border-color: rgba(100, 115, 130, 0.3);
+    --background-modifier-border: rgba(100, 115, 130, 0.25);
+
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* Steel blue accent for this theme */
+    --ctp-accent: 110, 150, 200;
 }
 
-    /* Folder & file titles in sidebar */
-    .theme-dark.ctp-stone .nav-folder-title,
-    .theme-dark.ctp-stone .nav-file-title,
-    .theme-dark.ctp-stone .workspace-ribbon {
-        color: #f3eca8 !important;
-    }
+/* Stone sidebar - cool silver tones */
+.theme-dark.ctp-stone .nav-folder-title .nav-folder-title-content {
+    color: #c8d0dc !important;
+}
 
-        .theme-dark.ctp-stone .nav-folder-title .nav-folder-title-content {
-            color: #cac27b !important;
-        }
+.theme-dark.ctp-stone .nav-file-title .nav-file-title-content {
+    color: #a8b4c4 !important;
+}
 
-    /* Stone theme - reading panel */
-    .theme-dark.ctp-stone .markdown-preview-view,
-    .theme-dark.ctp-stone .cm-s-obsidian {
-        background-color: rgb(var(--ctp-base)) !important;
-        color: rgb(var(--ctp-text)) !important;
-    }
+/* Stone theme - reading panel */
+.theme-dark.ctp-stone .markdown-preview-view,
+.theme-dark.ctp-stone .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
 
 
 /* ====== Dark Theme: Olive ====== */
@@ -762,44 +767,47 @@ settings:
 }
 
 
-/* ====== Dark Theme: Navy ====== */
+/* ====== Dark Theme: Navy (Deep Ocean) ======
+   A rich, deep navy inspired by midnight ocean waters.
+   Warm gold and coral accents complement the cool depths. */
 .theme-dark.ctp-navy {
-    --ctp-crust: 11, 31, 45;       /* ~#0B1F2D - Very dark navy */
-    --ctp-base: 18, 38, 57;         /* ~#122639 - Main background */
-    --ctp-mantle: 27, 52, 80;       /* ~#1B3450 - Lighter for alt backgrounds */
-    --ctp-text: 202, 210, 223;      /* ~#CAD2DF - Off-white with faint cool tint */
-    --ctp-green: 100, 144, 100;
-    --ctp-red: 188, 80, 89;
-    --ctp-maroon: 160, 70, 80;
-    --ctp-apricot: 225, 185, 130;
-    --ctp-gold: 255, 215, 95;
-    --ctp-teal: 80, 146, 155;
-    --ctp-aqua: 127, 219, 255;
-    --ctp-indigo: 75, 0, 130;
-    --ctp-blue: 80, 120, 180;
-    --ctp-lavender: 140, 150, 180;
+    --ctp-crust: 8, 18, 32;        /* ~#081220 - Midnight depths */
+    --ctp-base: 15, 28, 48;        /* ~#0F1C30 - Deep ocean navy */
+    --ctp-mantle: 22, 40, 65;      /* ~#162841 - Twilight waters */
+    --ctp-text: 230, 235, 245;     /* ~#E6EBF5 - Crisp moonlight white */
+    --ctp-green: 95, 180, 130;     /* Sea foam green */
+    --ctp-red: 235, 120, 110;      /* Coral reef */
+    --ctp-maroon: 200, 95, 105;    /* Deep coral */
+    --ctp-apricot: 255, 195, 140;  /* Sunset peach */
+    --ctp-gold: 255, 210, 100;     /* Bright nautical gold */
+    --ctp-teal: 85, 175, 185;      /* Tropical teal */
+    --ctp-aqua: 120, 210, 255;     /* Caribbean blue */
+    --ctp-indigo: 100, 95, 190;    /* Deep indigo */
+    --ctp-blue: 100, 160, 230;     /* Bright sky blue */
+    --ctp-lavender: 165, 170, 210; /* Twilight lavender */
 
-    /* Lines and borders */
-    --divider-color: rgb(var(--ctp-crust));
-    --divider-color-hover: rgb(var(--ctp-crust));
-    --hr-color: rgb(var(--ctp-crust));
-    --table-border-color: rgb(var(--ctp-crust));
-    --background-modifier-border: rgb(var(--ctp-crust));
+    /* Lines and borders - subtle navy tint */
+    --divider-color: rgba(80, 120, 180, 0.25);
+    --divider-color-hover: rgba(80, 120, 180, 0.4);
+    --hr-color: rgba(80, 120, 180, 0.3);
+    --table-border-color: rgba(80, 120, 180, 0.25);
+    --background-modifier-border: rgba(80, 120, 180, 0.2);
 
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* Gold accent for nautical feel */
+    --ctp-accent: 255, 210, 100;
 }
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-navy.nav-folder-title,
-.theme-dark.ctp-navy .nav-file-title,
-.theme-dark.ctp-navy .workspace-ribbon {
-    color: #c8d2f0 !important;
-}
-
+/* Navy sidebar - bright and clear like moonlight on water */
 .theme-dark.ctp-navy .nav-folder-title .nav-folder-title-content {
-    color: #d8d8d8 !important;
+    color: #e0e8f5 !important;
+}
+
+.theme-dark.ctp-navy .nav-file-title .nav-file-title-content {
+    color: #b0c4e8 !important;
 }
 
 /* Navy theme - reading panel */
