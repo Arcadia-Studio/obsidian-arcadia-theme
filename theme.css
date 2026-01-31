@@ -2536,8 +2536,268 @@ h2,
 
 /* ====== PDF files ====== */
 .nav-file-title[data-path$=".pdf"] .nav-file-title-content::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M6 2h9l5 5v14c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2V4c0-1.104.896-2 2-2zm3 9h2v2H9v-2zm-1 4h4v2H8v-2zm6-4h2v2h-2v-2zm-6-4h4v2H8V7zm6 0h2v2h-2V7z'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm2-8h2v1h1v-1h1v4h-1v-2h-2v2H8v-4zm6 0h2c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1h-2v-4zm1 3h1v-2h-1v2z'/%3E%3C/svg%3E");
     background-color: #D32F2F;
+    width: 14px;
+    height: 14px;
+}
+
+
+/* ================================================================================
+   SECTION 14.5: EXTENDED FILE TYPE ICONS
+   Recognizable icons for all major file formats
+   ================================================================================ */
+
+/* ====== Microsoft Word ====== */
+.nav-file-title[data-path$=".doc"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".docx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 9l-2 6-2-6H7l3 8h2l3-8h-2zm1-4V3.5L18.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #2B579A;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Microsoft Excel ====== */
+.nav-file-title[data-path$=".xls"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".xlsx"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".csv"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-3 16H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V8h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm-1-5V3.5L18.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #217346;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Microsoft PowerPoint ====== */
+.nav-file-title[data-path$=".ppt"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".pptx"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".pps"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ppsx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-4 15H8v-5h2c1.1 0 2 .9 2 2s-.9 2-2 2zm0-3v1h.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H10zm4-5V3.5L18.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #D24726;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== PowerPoint Theme files ====== */
+.nav-file-title[data-path$=".thmx"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".potx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E");
+    background-color: #D24726;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Plain Text files ====== */
+.nav-file-title[data-path$=".txt"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 14H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L17.5 8H13z'/%3E%3C/svg%3E");
+    background-color: #757575;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== RTF files ====== */
+.nav-file-title[data-path$=".rtf"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm0 18H6V4h7v5h5v11zm-2-8H8v-1h4v1zm0 2H8v-1h4v1zm0 2H8v-1h4v1z'/%3E%3C/svg%3E");
+    background-color: #5C6BC0;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Adobe Photoshop ====== */
+.nav-file-title[data-path$=".psd"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9.5 15H8v-4h1.5c.83 0 1.5.67 1.5 1.5v1c0 .83-.67 1.5-1.5 1.5zm4.5 0h-1.5c-.55 0-1-.45-1-1v-2c0-.55.45-1 1-1H14v1h-1.5v2H14v1z'/%3E%3C/svg%3E");
+    background-color: #31A8FF;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Adobe Illustrator ====== */
+.nav-file-title[data-path$=".ai"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 15H8l-.5-1.5h-2L5 15H4l2-6h1l2 6zm5 0h-1v-4h1v4zm0-5h-1V9h1v1z'/%3E%3C/svg%3E");
+    background-color: #FF9A00;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Additional Image formats ====== */
+.nav-file-title[data-path$=".bmp"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tif"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tiff"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".webp"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ico"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".raw"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E");
+    background-color: #FFD700;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== SVG Vector files ====== */
+.nav-file-title[data-path$=".svg"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z'/%3E%3C/svg%3E");
+    background-color: #FFB13B;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== Archive files ====== */
+.nav-file-title[data-path$=".zip"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".rar"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".7z"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tar"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".gz"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10h-2v2h-2v-2H8v-2h2v-2h2v2h2v2z'/%3E%3C/svg%3E");
+    background-color: #FFC107;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== HTML files ====== */
+.nav-file-title[data-path$=".html"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".htm"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 17.56l4.07-1.13.55-6.1H9.38L9.2 8.3h7.6l.2-1.99H7l.56 6.01h6.89l-.23 2.58-2.22.6-2.22-.6-.14-1.66h-2l.29 3.19L12 17.56M4.07 3h15.86L18.5 19.2 12 21l-6.5-1.8L4.07 3z'/%3E%3C/svg%3E");
+    background-color: #E44D26;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== CSS files ====== */
+.nav-file-title[data-path$=".css"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".scss"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".sass"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".less"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.192 3.143h15.615l-1.42 16.034-6.404 1.812-6.369-1.813L4.192 3.143zM16.9 6.424l-9.8-.002.158 1.76 7.292.002-.189 2.148H9.134l.175 1.968h4.628l-.273 2.86-1.685.467-1.671-.467-.107-1.21H8.2l.208 2.388 3.582.996 3.596-.996.461-5.166.094-.986.291-3.262z'/%3E%3C/svg%3E");
+    background-color: #264DE4;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== JavaScript files ====== */
+.nav-file-title[data-path$=".js"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".mjs"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".cjs"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h18v18H3V3zm4.73 15.04c.4.85 1.19 1.55 2.54 1.55 1.5 0 2.53-.8 2.53-2.55v-5.78h-1.7V17c0 .86-.35 1.08-.9 1.08-.58 0-.82-.4-1.09-.87l-1.38.83zm5.98-.18c.5.98 1.51 1.73 3.09 1.73 1.6 0 2.8-.83 2.8-2.36 0-1.41-.81-2.04-2.25-2.66l-.42-.18c-.73-.31-1.04-.52-1.04-1.02 0-.41.31-.73.81-.73.48 0 .8.21 1.09.73l1.31-.87c-.55-.96-1.33-1.33-2.4-1.33-1.51 0-2.48.96-2.48 2.23 0 1.38.81 2.03 2.03 2.55l.42.18c.78.34 1.24.55 1.24 1.13 0 .48-.45.83-1.15.83-.83 0-1.31-.43-1.67-1.03l-1.38.8z'/%3E%3C/svg%3E");
+    background-color: #F7DF1E;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== TypeScript files ====== */
+.nav-file-title[data-path$=".ts"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tsx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h18v18H3V3zm10.71 13.44V18c.39.18.83.32 1.31.38.49.06.99.1 1.5.1.49 0 .95-.05 1.38-.14.43-.1.8-.25 1.1-.47.31-.21.55-.49.72-.83.17-.34.26-.76.26-1.24 0-.35-.05-.66-.15-.92-.1-.26-.25-.5-.44-.7-.19-.21-.42-.39-.69-.55-.27-.16-.57-.31-.9-.45-.24-.1-.45-.2-.64-.3-.18-.1-.34-.2-.46-.32-.13-.11-.22-.24-.29-.38-.07-.14-.1-.3-.1-.48 0-.16.03-.31.1-.44.06-.13.15-.24.27-.33.12-.09.26-.16.43-.21.17-.05.36-.07.57-.07.15 0 .3.01.47.03.17.02.34.05.5.1.17.05.33.11.49.18.16.08.3.17.44.27v-1.5c-.28-.1-.58-.18-.9-.23-.32-.05-.68-.07-1.06-.07-.49 0-.94.05-1.35.16-.41.11-.77.27-1.07.49-.3.22-.54.49-.71.82-.17.33-.26.72-.26 1.17 0 .58.15 1.07.45 1.47.3.4.76.74 1.38 1.02.26.11.5.22.73.33.23.11.42.22.59.35.17.12.3.26.39.42.1.15.14.33.14.54 0 .16-.03.3-.08.44-.05.13-.13.25-.24.34-.11.09-.25.17-.42.22-.17.05-.38.08-.62.08-.38 0-.76-.07-1.14-.21-.38-.14-.73-.35-1.06-.63zm-4.18-4.72H7v7h1.53v-5.47h2v-1.53z'/%3E%3C/svg%3E");
+    background-color: #3178C6;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== JSON files ====== */
+.nav-file-title[data-path$=".json"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h2v2H5v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5h2v2H5c-1.07-.27-2-.9-2-2v-4a2 2 0 0 0-2-2H0v-2h1a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2m14 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2m-7 12a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m8 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1z'/%3E%3C/svg%3E");
+    background-color: #F5A623;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== XML/YAML/Config files ====== */
+.nav-file-title[data-path$=".xml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".yaml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".yml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".toml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ini"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".conf"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.89 3l9.93 9.93c.39.39.39 1.02 0 1.41l-7.07 7.07c-.39.39-1.02.39-1.41 0l-9.93-9.93c-.2-.2-.29-.46-.29-.71V4c0-.55.45-1 1-1h6.77c.27 0 .53.1.71.29l.29.71zM5.5 7A1.5 1.5 0 0 0 7 8.5 1.5 1.5 0 0 0 8.5 7 1.5 1.5 0 0 0 7 5.5 1.5 1.5 0 0 0 5.5 7z'/%3E%3C/svg%3E");
+    background-color: #9C27B0;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== Python files ====== */
+.nav-file-title[data-path$=".py"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".pyw"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19.14 7.5A2.86 2.86 0 0 1 22 10.36v3.78A2.86 2.86 0 0 1 19.14 17H12c0 .39.32.96.71.96H17v1.68a2.86 2.86 0 0 1-2.86 2.86H9.86A2.86 2.86 0 0 1 7 19.64v-3.75a2.85 2.85 0 0 1 2.86-2.85h5.25a2.85 2.85 0 0 0 2.85-2.86V7.5h1.18m-4.28 11.79c-.4 0-.72.3-.72.72 0 .4.32.71.72.71a.71.71 0 0 0 .71-.71c0-.42-.31-.72-.71-.72M11.14 1.5a2.86 2.86 0 0 0-2.86 2.86v3.78a2.86 2.86 0 0 0 2.86 2.86H12c0-.39-.32-.96-.71-.96H7v-1.68A2.86 2.86 0 0 1 9.86 5.5h4.28A2.86 2.86 0 0 1 17 8.36v3.75a2.85 2.85 0 0 1-2.86 2.85H8.89a2.85 2.85 0 0 0-2.85 2.86v2.68h1.1v-2.68a2.86 2.86 0 0 1 2.86-2.86h5.14A2.86 2.86 0 0 0 18 12.11V8.36A2.86 2.86 0 0 0 15.14 5.5h-4m-1.04 2.21c.4 0 .72-.3.72-.71a.71.71 0 0 0-.72-.71.71.71 0 0 0-.71.71c0 .41.31.71.71.71z'/%3E%3C/svg%3E");
+    background-color: #3776AB;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Java files ====== */
+.nav-file-title[data-path$=".java"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".jar"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.889 4.832 0 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.189-7.627M9.734 23.924c4.322.277 10.959-.154 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639'/%3E%3C/svg%3E");
+    background-color: #ED8B00;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Ebook files ====== */
+.nav-file-title[data-path$=".epub"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".mobi"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".azw"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".azw3"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'/%3E%3C/svg%3E");
+    background-color: #4CAF50;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Font files ====== */
+.nav-file-title[data-path$=".ttf"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".otf"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".woff"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".woff2"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.93 13.5h4.14L12 7.98 9.93 13.5zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z'/%3E%3C/svg%3E");
+    background-color: #607D8B;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Executable/Binary files ====== */
+.nav-file-title[data-path$=".exe"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".msi"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".dmg"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".app"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-1-6h-3V8h-2v5H8l4 4 4-4z'/%3E%3C/svg%3E");
+    background-color: #795548;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Shell/Script files ====== */
+.nav-file-title[data-path$=".sh"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".bash"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".zsh"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".bat"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".cmd"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ps1"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 19V7H4v12h16m0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16m-7 14v-2h5v2h-5m-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59l4-4z'/%3E%3C/svg%3E");
+    background-color: #4EAA25;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== SQL/Database files ====== */
+.nav-file-title[data-path$=".sql"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".db"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".sqlite"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.5 6 2s-2.13 2-6 2-6-1.5-6-2 2.13-2 6-2zM6 17v-2.42c1.23.78 3.36 1.32 6 1.32s4.77-.54 6-1.32V17c0 .5-2.13 2-6 2s-6-1.5-6-2zm0-5v-2.42c1.23.78 3.36 1.32 6 1.32s4.77-.54 6-1.32V12c0 .5-2.13 2-6 2s-6-1.5-6-2z'/%3E%3C/svg%3E");
+    background-color: #00758F;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Log files ====== */
+.nav-file-title[data-path$=".log"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 9h-2v2H9v-2H7v-2h2V7h2v2h2v2zm-3 7H6v-2h4v2zm6 0h-4v-2h4v2zm0-4H6v-2h10v2zm1-5V3.5L17.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #9E9E9E;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Markdown variations ====== */
+.nav-file-title[data-path$=".mdx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.56 18H3.44C2.65 18 2 17.37 2 16.59V7.41C2 6.63 2.65 6 3.44 6h17.12c.79 0 1.44.63 1.44 1.41v9.18c0 .78-.65 1.41-1.44 1.41zM6.81 15.19v-3.66l1.92 2.35 1.92-2.35v3.66h1.93V8.81h-1.93l-1.92 2.35-1.92-2.35H4.89v6.38h1.92zM19.69 12h-1.92V8.81h-1.92V12h-1.93l2.89 3.28L19.69 12z'/%3E%3C/svg%3E");
+    background-color: #F9AC00;
     width: 14px;
     height: 14px;
 }
