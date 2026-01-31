@@ -528,6 +528,37 @@ settings:
     description: Minimize animations and transitions
     type: class-toggle
     default: false
+  - id: dyslexia-friendly
+    title: Dyslexia-Friendly Mode
+    description: Use OpenDyslexic font with improved spacing
+    type: class-toggle
+    default: false
+*/
+
+/* @settings
+name: Arcadia Advanced Features
+id: arcadia-advanced
+settings:
+  - id: rainbow-folders
+    title: Rainbow Folders
+    description: Color-code folders automatically by position
+    type: class-toggle
+    default: false
+  - id: cards
+    title: Cards View (Dataview)
+    description: Transform Dataview tables into card layouts
+    type: class-toggle
+    default: false
+  - id: cards-cover
+    title: Cards Cover Images
+    description: Make images fill the card space (requires Cards View)
+    type: class-toggle
+    default: false
+  - id: img-grid
+    title: Image Grid
+    description: Turn consecutive images into column layouts
+    type: class-toggle
+    default: false
 */
 
 
@@ -3636,6 +3667,469 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
 .dyslexia-friendly {
     --font-text: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
 }
+
+
+/* ================================================================================
+   SECTION 26: CARDS VIEW FOR DATAVIEW
+   Transform Dataview tables into beautiful card layouts.
+
+   Usage: Add cssclass: cards to note frontmatter, or use inline class
+   Options:
+   - cards          : Enable card layout
+   - cards-cover    : Images fill the card
+   - cards-cols-1 through cards-cols-8 : Set number of columns
+   - cards-align-bottom : Align content to bottom
+   ================================================================================ */
+
+/* Base cards layout */
+.cards .dataview.table-view-table,
+.cards .markdown-preview-view table:not(.dataview) {
+    display: grid;
+    gap: 1rem;
+    border: none;
+    background: transparent;
+}
+
+.cards .dataview.table-view-table {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* Hide table header in card view */
+.cards .dataview.table-view-table thead,
+.cards .markdown-preview-view table:not(.dataview) thead {
+    display: none;
+}
+
+/* Card styling */
+.cards .dataview.table-view-table tbody tr,
+.cards .markdown-preview-view table:not(.dataview) tbody tr {
+    display: flex;
+    flex-direction: column;
+    background: rgba(var(--ctp-mantle), 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(var(--ctp-accent), 0.1);
+    transition: all 0.2s ease;
+}
+
+.cards .dataview.table-view-table tbody tr:hover,
+.cards .markdown-preview-view table:not(.dataview) tbody tr:hover {
+    border-color: rgba(var(--ctp-accent), 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Card cells */
+.cards .dataview.table-view-table tbody td,
+.cards .markdown-preview-view table:not(.dataview) tbody td {
+    display: block;
+    padding: 0.25rem 0;
+    border: none;
+    background: transparent;
+}
+
+.cards .dataview.table-view-table tbody td:first-child,
+.cards .markdown-preview-view table:not(.dataview) tbody td:first-child {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--ctp-text));
+}
+
+/* Cards with cover images */
+.cards-cover .dataview.table-view-table tbody td img,
+.cards-cover .markdown-preview-view table tbody td img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+}
+
+/* Column count options */
+.cards-cols-1 .dataview.table-view-table { grid-template-columns: 1fr; }
+.cards-cols-2 .dataview.table-view-table { grid-template-columns: repeat(2, 1fr); }
+.cards-cols-3 .dataview.table-view-table { grid-template-columns: repeat(3, 1fr); }
+.cards-cols-4 .dataview.table-view-table { grid-template-columns: repeat(4, 1fr); }
+.cards-cols-5 .dataview.table-view-table { grid-template-columns: repeat(5, 1fr); }
+.cards-cols-6 .dataview.table-view-table { grid-template-columns: repeat(6, 1fr); }
+
+/* Align content to bottom */
+.cards-align-bottom .dataview.table-view-table tbody tr {
+    justify-content: flex-end;
+}
+
+/* Responsive cards */
+@media (max-width: 768px) {
+    .cards .dataview.table-view-table,
+    .cards-cols-2 .dataview.table-view-table,
+    .cards-cols-3 .dataview.table-view-table,
+    .cards-cols-4 .dataview.table-view-table {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cards-cols-4 .dataview.table-view-table,
+    .cards-cols-5 .dataview.table-view-table,
+    .cards-cols-6 .dataview.table-view-table {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* ================================================================================
+   SECTION 27: IMAGE GRID & WIDTH CONTROLS
+   Control image layouts and sizes with CSS classes.
+
+   Usage: Add class to image or use cssclass in frontmatter
+   Width: img-100, img-75, img-50, img-33, img-25
+   Shape: img-circle, img-rounded
+   Layout: img-grid (consecutive images become columns)
+   Filter: img-invert (for dark mode diagrams)
+   ================================================================================ */
+
+/* Image width controls */
+.img-100 img, img[alt*="img-100"] { width: 100% !important; }
+.img-75 img, img[alt*="img-75"] { width: 75% !important; }
+.img-50 img, img[alt*="img-50"] { width: 50% !important; }
+.img-33 img, img[alt*="img-33"] { width: 33% !important; }
+.img-25 img, img[alt*="img-25"] { width: 25% !important; }
+
+/* Centered images */
+.img-center img, img[alt*="img-center"] {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Image shapes */
+.img-circle img, img[alt*="img-circle"] {
+    border-radius: 50% !important;
+}
+
+.img-rounded img, img[alt*="img-rounded"] {
+    border-radius: 12px !important;
+}
+
+/* Image with shadow */
+.img-shadow img, img[alt*="img-shadow"] {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Image with border */
+.img-border img, img[alt*="img-border"] {
+    border: 2px solid rgba(var(--ctp-accent), 0.3) !important;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+/* Invert for dark mode (diagrams, logos) */
+.theme-dark .img-invert img,
+.theme-dark img[alt*="img-invert"] {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Image grid - consecutive images become columns */
+.img-grid .markdown-preview-view p:has(img),
+.img-grid .cm-line:has(img) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.img-grid .markdown-preview-view p img,
+.img-grid .cm-line img {
+    flex: 1 1 200px;
+    max-width: calc(50% - 0.5rem);
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Banner image - full width at top */
+.img-banner img:first-of-type,
+img[alt*="img-banner"] {
+    width: 100% !important;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 0;
+    margin: -20px -20px 20px -20px;
+}
+
+/* Float images */
+.img-float-left img, img[alt*="img-float-left"] {
+    float: left;
+    margin: 0 1rem 1rem 0;
+    max-width: 40%;
+}
+
+.img-float-right img, img[alt*="img-float-right"] {
+    float: right;
+    margin: 0 0 1rem 1rem;
+    max-width: 40%;
+}
+
+/* Clear floats */
+.img-clear, .img-grid {
+    clear: both;
+}
+
+
+/* ================================================================================
+   SECTION 28: CUSTOM CALLOUTS
+   Extended callout styles beyond the defaults.
+
+   Includes: timeline, profile, aside, kanban-style, and more
+   ================================================================================ */
+
+/* ====== Timeline Callout ====== */
+.callout[data-callout="timeline"] {
+    --callout-color: 100, 150, 200;
+    --callout-icon: lucide-git-commit;
+    border-left: 3px solid rgb(var(--callout-color));
+    position: relative;
+    padding-left: 2rem;
+}
+
+.callout[data-callout="timeline"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, rgb(var(--callout-color)), transparent);
+}
+
+.callout[data-callout="timeline"] .callout-title {
+    font-weight: 700;
+    color: rgb(100, 150, 200);
+}
+
+/* ====== Profile/Person Callout ====== */
+.callout[data-callout="profile"],
+.callout[data-callout="person"] {
+    --callout-color: 150, 120, 180;
+    --callout-icon: lucide-user;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.callout[data-callout="profile"] img,
+.callout[data-callout="person"] img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* ====== Aside/Margin Note ====== */
+.callout[data-callout="aside"],
+.callout[data-callout="sidenote"] {
+    --callout-color: 140, 140, 140;
+    --callout-icon: lucide-message-square;
+    font-size: 0.9em;
+    border-left: 2px solid rgba(var(--callout-color), 0.5);
+    background: rgba(var(--ctp-mantle), 0.3);
+    padding: 0.75rem 1rem;
+}
+
+.callout[data-callout="aside"] .callout-title,
+.callout[data-callout="sidenote"] .callout-title {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ====== Definition Callout ====== */
+.callout[data-callout="definition"],
+.callout[data-callout="def"] {
+    --callout-color: 100, 180, 160;
+    --callout-icon: lucide-book-open;
+    border-left: 4px solid rgb(var(--callout-color));
+}
+
+.callout[data-callout="definition"] .callout-title,
+.callout[data-callout="def"] .callout-title {
+    font-style: italic;
+}
+
+/* ====== Pro/Con Callouts ====== */
+.callout[data-callout="pro"],
+.callout[data-callout="pros"] {
+    --callout-color: 80, 160, 96;
+    --callout-icon: lucide-thumbs-up;
+}
+
+.callout[data-callout="con"],
+.callout[data-callout="cons"] {
+    --callout-color: 224, 80, 80;
+    --callout-icon: lucide-thumbs-down;
+}
+
+/* ====== Goal/Target Callout ====== */
+.callout[data-callout="goal"],
+.callout[data-callout="target"] {
+    --callout-color: 240, 180, 80;
+    --callout-icon: lucide-target;
+}
+
+/* ====== Bookmark/Reference Callout ====== */
+.callout[data-callout="bookmark"],
+.callout[data-callout="reference"],
+.callout[data-callout="ref"] {
+    --callout-color: 200, 100, 150;
+    --callout-icon: lucide-bookmark;
+}
+
+/* ====== Question/FAQ Callout ====== */
+.callout[data-callout="faq"],
+.callout[data-callout="question"] {
+    --callout-color: 100, 150, 220;
+    --callout-icon: lucide-help-circle;
+}
+
+/* ====== Answer Callout ====== */
+.callout[data-callout="answer"],
+.callout[data-callout="solution"] {
+    --callout-color: 100, 180, 100;
+    --callout-icon: lucide-check-circle;
+}
+
+/* ====== Recipe/Steps Callout ====== */
+.callout[data-callout="recipe"],
+.callout[data-callout="steps"] {
+    --callout-color: 220, 140, 100;
+    --callout-icon: lucide-chef-hat;
+}
+
+.callout[data-callout="recipe"] ol,
+.callout[data-callout="steps"] ol {
+    counter-reset: step-counter;
+    list-style: none;
+    padding-left: 2.5rem;
+}
+
+.callout[data-callout="recipe"] ol li,
+.callout[data-callout="steps"] ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 0.75rem;
+}
+
+.callout[data-callout="recipe"] ol li::before,
+.callout[data-callout="steps"] ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: -2.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: rgb(220, 140, 100);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+/* ====== Kanban-style Callout ====== */
+.callout[data-callout="kanban"],
+.callout[data-callout="board"] {
+    --callout-color: 100, 140, 200;
+    --callout-icon: lucide-columns;
+}
+
+.callout[data-callout="kanban"] ul,
+.callout[data-callout="board"] ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.callout[data-callout="kanban"] ul li,
+.callout[data-callout="board"] ul li {
+    background: rgba(var(--ctp-base), 0.8);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    flex: 1 1 auto;
+    min-width: 120px;
+}
+
+/* ====== Paraphrase/Citation Callout ====== */
+.callout[data-callout="paraphrase"],
+.callout[data-callout="cite"] {
+    --callout-color: 150, 150, 180;
+    --callout-icon: lucide-quote;
+    font-style: italic;
+    border-left: 3px solid rgb(var(--callout-color));
+}
+
+/* ====== Stats/Metrics Callout ====== */
+.callout[data-callout="stats"],
+.callout[data-callout="metrics"] {
+    --callout-color: 80, 180, 180;
+    --callout-icon: lucide-bar-chart-2;
+}
+
+.callout[data-callout="stats"] strong,
+.callout[data-callout="metrics"] strong {
+    font-size: 1.5em;
+    color: rgb(80, 180, 180);
+}
+
+
+/* ================================================================================
+   SECTION 29: RAINBOW FOLDERS
+   Color-code folders automatically by their position.
+
+   Toggle via Style Settings or add class 'rainbow-folders' to body
+   ================================================================================ */
+
+/* Rainbow folder colors - cycles through 10 colors */
+.rainbow-folders .nav-folder:nth-child(10n+1) > .nav-folder-title .nav-folder-title-content { color: #e06070 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+2) > .nav-folder-title .nav-folder-title-content { color: #e09050 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+3) > .nav-folder-title .nav-folder-title-content { color: #d0b040 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+4) > .nav-folder-title .nav-folder-title-content { color: #70b060 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+5) > .nav-folder-title .nav-folder-title-content { color: #50b0a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+6) > .nav-folder-title .nav-folder-title-content { color: #50a0d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+7) > .nav-folder-title .nav-folder-title-content { color: #7090e0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+8) > .nav-folder-title .nav-folder-title-content { color: #a070d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+9) > .nav-folder-title .nav-folder-title-content { color: #d070a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+10) > .nav-folder-title .nav-folder-title-content { color: #a0a0a0 !important; }
+
+/* Rainbow folder collapse indicators */
+.rainbow-folders .nav-folder:nth-child(10n+1) > .nav-folder-title .nav-folder-collapse-indicator { color: #e06070 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+2) > .nav-folder-title .nav-folder-collapse-indicator { color: #e09050 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+3) > .nav-folder-title .nav-folder-collapse-indicator { color: #d0b040 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+4) > .nav-folder-title .nav-folder-collapse-indicator { color: #70b060 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+5) > .nav-folder-title .nav-folder-collapse-indicator { color: #50b0a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+6) > .nav-folder-title .nav-folder-collapse-indicator { color: #50a0d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+7) > .nav-folder-title .nav-folder-collapse-indicator { color: #7090e0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+8) > .nav-folder-title .nav-folder-collapse-indicator { color: #a070d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+9) > .nav-folder-title .nav-folder-collapse-indicator { color: #d070a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+10) > .nav-folder-title .nav-folder-collapse-indicator { color: #a0a0a0 !important; }
+
+/* Rainbow subfolders - slightly muted */
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+1) > .nav-folder-title .nav-folder-title-content { color: #c07080 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+2) > .nav-folder-title .nav-folder-title-content { color: #c09060 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+3) > .nav-folder-title .nav-folder-title-content { color: #b0a050 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+4) > .nav-folder-title .nav-folder-title-content { color: #60a070 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+5) > .nav-folder-title .nav-folder-title-content { color: #50a090 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+6) > .nav-folder-title .nav-folder-title-content { color: #5090b0 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+7) > .nav-folder-title .nav-folder-title-content { color: #6080c0 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+8) > .nav-folder-title .nav-folder-title-content { color: #9060b0 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+9) > .nav-folder-title .nav-folder-title-content { color: #b06090 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+10) > .nav-folder-title .nav-folder-title-content { color: #909090 !important; }
 
 
 /* ================================================================================
