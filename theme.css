@@ -3196,7 +3196,7 @@ h2,
    SECTION 22: LISTS & CHECKBOXES
    ================================================================================ */
 
-/* Checkbox Styles */
+/* Checkbox Shape Styles */
 .checkbox-circle input[type="checkbox"] {
     border-radius: 50% !important;
 }
@@ -3209,21 +3209,273 @@ h2,
     border-radius: 2px !important;
 }
 
-/* Task Priority Colors */
-.markdown-preview-view li[data-task="!"] > input[type="checkbox"],
-.markdown-preview-view li[data-task="!"] > p > input[type="checkbox"] {
-    border-color: rgb(var(--ctp-red)) !important;
+
+/* ================================================================================
+   ALTERNATE CHECKBOXES
+   Styled task checkboxes for different task states and meanings.
+   Usage: - [x] done, - [-] canceled, - [>] forwarded, etc.
+
+   SUPPORTED CHECKBOXES:
+   - [x] Done (green check)         - [-] Canceled (red line)
+   - [>] Forwarded (blue arrow)     - [<] Scheduled (purple calendar)
+   - [?] Question (blue ?)          - [!] Important (red !)
+   - [*] Star (gold star)           - ["] Quote (cyan quotes)
+   - [l] Location (orange pin)      - [i] Info (blue i)
+   - [b] Bookmark (pink flag)       - [S] Savings (green $)
+   - [p] Pro (green thumb up)       - [c] Con (red thumb down)
+   - [/] In Progress (half)         - [u] Priority Up (red arrow)
+   - [d] Priority Down (blue)       - [w] Win (gold trophy)
+   - [k] Key (yellow key)           - [f] Fire/Urgent (orange flame)
+   - [I] Idea (yellow bulb)
+   ================================================================================ */
+
+/* Base alternate checkbox styling */
+input[data-task]:checked,
+li[data-task] > input[type="checkbox"]:checked,
+li[data-task] > p > input[type="checkbox"]:checked {
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.markdown-preview-view li[data-task="?"] > input[type="checkbox"],
-.markdown-preview-view li[data-task="?"] > p > input[type="checkbox"] {
-    border-color: rgb(var(--ctp-blue)) !important;
+/* ====== [x] Done - Green checkmark ====== */
+input[data-task="x"]:checked,
+li[data-task="x"] > input[type="checkbox"]:checked,
+li[data-task="x"] > p > input[type="checkbox"]:checked,
+input[data-task="X"]:checked,
+li[data-task="X"] > input[type="checkbox"]:checked,
+li[data-task="X"] > p > input[type="checkbox"]:checked {
+    background-color: #58a55c !important;
+    border-color: #58a55c !important;
 }
 
-.markdown-preview-view li[data-task=">"] > input[type="checkbox"],
-.markdown-preview-view li[data-task=">"] > p > input[type="checkbox"] {
-    border-color: rgb(var(--ctp-gold)) !important;
+.markdown-preview-view li[data-task="x"],
+.markdown-preview-view li[data-task="X"] {
+    text-decoration: line-through;
+    color: rgba(var(--ctp-text), 0.5);
 }
+
+/* ====== [-] Canceled - Red with dash ====== */
+input[data-task="-"]:checked,
+li[data-task="-"] > input[type="checkbox"]:checked,
+li[data-task="-"] > p > input[type="checkbox"]:checked {
+    background-color: #e45858 !important;
+    border-color: #e45858 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 13H5v-2h14v2z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+.markdown-preview-view li[data-task="-"] {
+    text-decoration: line-through;
+    color: rgba(var(--ctp-text), 0.4);
+}
+
+/* ====== [>] Forwarded/Deferred - Blue arrow right ====== */
+input[data-task=">"]:checked,
+li[data-task=">"] > input[type="checkbox"]:checked,
+li[data-task=">"] > p > input[type="checkbox"]:checked {
+    background-color: #5090d0 !important;
+    border-color: #5090d0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+.markdown-preview-view li[data-task=">"] {
+    color: rgba(var(--ctp-text), 0.7);
+}
+
+/* ====== [<] Scheduled - Purple calendar ====== */
+input[data-task="<"]:checked,
+li[data-task="<"] > input[type="checkbox"]:checked,
+li[data-task="<"] > p > input[type="checkbox"]:checked {
+    background-color: #a37acc !important;
+    border-color: #a37acc !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [?] Question - Blue question mark ====== */
+input[data-task="?"]:checked,
+li[data-task="?"] > input[type="checkbox"]:checked,
+li[data-task="?"] > p > input[type="checkbox"]:checked {
+    background-color: #5cafe0 !important;
+    border-color: #5cafe0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [!] Important - Red exclamation ====== */
+input[data-task="!"]:checked,
+li[data-task="!"] > input[type="checkbox"]:checked,
+li[data-task="!"] > p > input[type="checkbox"]:checked {
+    background-color: #e05050 !important;
+    border-color: #e05050 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+.markdown-preview-view li[data-task="!"] {
+    color: #e05050;
+    font-weight: 500;
+}
+
+/* ====== [*] Star - Gold star ====== */
+input[data-task="*"]:checked,
+li[data-task="*"] > input[type="checkbox"]:checked,
+li[data-task="*"] > p > input[type="checkbox"]:checked {
+    background-color: #f0c040 !important;
+    border-color: #f0c040 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== ["] Quote - Cyan quote marks ====== */
+input[data-task="\""]:checked,
+li[data-task="\""] > input[type="checkbox"]:checked,
+li[data-task="\""] > p > input[type="checkbox"]:checked {
+    background-color: #50b0b0 !important;
+    border-color: #50b0b0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+.markdown-preview-view li[data-task="\""] {
+    font-style: italic;
+}
+
+/* ====== [l] Location - Orange pin ====== */
+input[data-task="l"]:checked,
+li[data-task="l"] > input[type="checkbox"]:checked,
+li[data-task="l"] > p > input[type="checkbox"]:checked {
+    background-color: #e07830 !important;
+    border-color: #e07830 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [i] Info - Blue info circle ====== */
+input[data-task="i"]:checked,
+li[data-task="i"] > input[type="checkbox"]:checked,
+li[data-task="i"] > p > input[type="checkbox"]:checked {
+    background-color: #5090d0 !important;
+    border-color: #5090d0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [b] Bookmark - Pink bookmark ====== */
+input[data-task="b"]:checked,
+li[data-task="b"] > input[type="checkbox"]:checked,
+li[data-task="b"] > p > input[type="checkbox"]:checked {
+    background-color: #d070a0 !important;
+    border-color: #d070a0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [S] Savings/Money - Green dollar ====== */
+input[data-task="S"]:checked,
+li[data-task="S"] > input[type="checkbox"]:checked,
+li[data-task="S"] > p > input[type="checkbox"]:checked {
+    background-color: #50a060 !important;
+    border-color: #50a060 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [p] Pro/Thumbs Up - Green thumb ====== */
+input[data-task="p"]:checked,
+li[data-task="p"] > input[type="checkbox"]:checked,
+li[data-task="p"] > p > input[type="checkbox"]:checked {
+    background-color: #50a060 !important;
+    border-color: #50a060 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [c] Con/Thumbs Down - Red thumb ====== */
+input[data-task="c"]:checked,
+li[data-task="c"] > input[type="checkbox"]:checked,
+li[data-task="c"] > p > input[type="checkbox"]:checked {
+    background-color: #e05050 !important;
+    border-color: #e05050 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [/] Half Done/In Progress - Orange half fill ====== */
+input[data-task="/"]:checked,
+li[data-task="/"] > input[type="checkbox"]:checked,
+li[data-task="/"] > p > input[type="checkbox"]:checked {
+    background: linear-gradient(90deg, #f0a030 50%, rgba(240, 160, 48, 0.3) 50%) !important;
+    border-color: #f0a030 !important;
+}
+
+/* ====== [u] Up/Priority Up - Red up arrow ====== */
+input[data-task="u"]:checked,
+li[data-task="u"] > input[type="checkbox"]:checked,
+li[data-task="u"] > p > input[type="checkbox"]:checked {
+    background-color: #e05050 !important;
+    border-color: #e05050 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [d] Down/Priority Down - Blue down arrow ====== */
+input[data-task="d"]:checked,
+li[data-task="d"] > input[type="checkbox"]:checked,
+li[data-task="d"] > p > input[type="checkbox"]:checked {
+    background-color: #5090d0 !important;
+    border-color: #5090d0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [w] Win/Reward - Gold trophy ====== */
+input[data-task="w"]:checked,
+li[data-task="w"] > input[type="checkbox"]:checked,
+li[data-task="w"] > p > input[type="checkbox"]:checked {
+    background-color: #f0c040 !important;
+    border-color: #f0c040 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [k] Key - Yellow key ====== */
+input[data-task="k"]:checked,
+li[data-task="k"] > input[type="checkbox"]:checked,
+li[data-task="k"] > p > input[type="checkbox"]:checked {
+    background-color: #d0a030 !important;
+    border-color: #d0a030 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [f] Fire/Urgent - Orange flame ====== */
+input[data-task="f"]:checked,
+li[data-task="f"] > input[type="checkbox"]:checked,
+li[data-task="f"] > p > input[type="checkbox"]:checked {
+    background-color: #f06030 !important;
+    border-color: #f06030 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z'/%3E%3C/svg%3E");
+    background-size: 75%;
+}
+
+.markdown-preview-view li[data-task="f"] {
+    color: #f06030;
+    font-weight: 500;
+}
+
+/* ====== [I] Idea/Lightbulb - Yellow bulb ====== */
+input[data-task="I"]:checked,
+li[data-task="I"] > input[type="checkbox"]:checked,
+li[data-task="I"] > p > input[type="checkbox"]:checked {
+    background-color: #f0c040 !important;
+    border-color: #f0c040 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z'/%3E%3C/svg%3E");
+    background-size: 75%;
+}
+
 
 /* List Bullet Styles */
 .bullets-arrows ul > li::marker {
