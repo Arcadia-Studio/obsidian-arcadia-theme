@@ -33,19 +33,6 @@
    24. Workspace Customization (Tab styles)
    25. Accessibility Features (High contrast, reduce motion, dyslexia mode)
    ================================================================================ */
-   6. Content Elements (Paragraphs, Lists, Blockquotes)
-   7. Code Blocks & Inline Code
-   8. Callouts System
-   9. Tables & Canvas
-   10. Search Interface
-   11. Plugin Compatibility
-   12. Navigation Sidebar & File Explorer
-   13. Folder Tree Icons & Color Coding
-   14. File Type Icons
-   15. Interactive States & Transitions
-   16. Settings Modal & Dialogs
-   17. Mobile Responsiveness
-   ================================================================================ */
 
 
 /* ================================================================================
@@ -186,7 +173,7 @@ settings:
       - label: Granite (Cool Neutral)
         value: ctp-granite
       - label: Stone
-        value: ctp-Stone
+        value: ctp-stone
       - label: Olive (Warm Earthy)
         value: ctp-olive
       - label: Flint (Cool Professional)
@@ -538,24 +525,6 @@ settings:
     type: class-toggle
     default: false
 */
-        value: active-line-off
-      - label: Subtle
-        value: active-line-subtle
-      - label: Moderate
-        value: active-line-moderate
-      - label: Strong
-        value: active-line-strong
-  - id: focus-mode
-    title: Focus Mode
-    description: Dim inactive paragraphs for distraction-free writing
-    type: class-toggle
-    default: false
-  - id: show-line-numbers
-    title: Show Line Numbers
-    description: Display line numbers in editor
-    type: class-toggle
-    default: false
-*/
 
 
 /* ================================================================================
@@ -648,7 +617,7 @@ settings:
 
 
 /* ====== Dark Theme: Stone ====== */
-.theme-dark.ctp-Stone {
+.theme-dark.ctp-stone {
     --ctp-crust: 10, 10, 10;
     --ctp-base: 25, 25, 25;
     --ctp-mantle: 45, 45, 45;
@@ -675,19 +644,19 @@ settings:
 }
 
     /* Folder & file titles in sidebar */
-    .theme-dark.ctp-Stone .nav-folder-title,
-    .theme-dark.ctp-Stone .nav-file-title,
-    .theme-dark.ctp-Stone .workspace-ribbon {
+    .theme-dark.ctp-stone .nav-folder-title,
+    .theme-dark.ctp-stone .nav-file-title,
+    .theme-dark.ctp-stone .workspace-ribbon {
         color: #f3eca8 !important;
     }
 
-        .theme-dark.ctp-Stone .nav-folder-title .nav-folder-title-content {
+        .theme-dark.ctp-stone .nav-folder-title .nav-folder-title-content {
             color: #cac27b !important;
         }
 
     /* Stone theme - reading panel */
-    .theme-dark.ctp-Stone .markdown-preview-view,
-    .theme-dark.ctp-Stone .cm-s-obsidian {
+    .theme-dark.ctp-stone .markdown-preview-view,
+    .theme-dark.ctp-stone .cm-s-obsidian {
         background-color: rgb(var(--ctp-base)) !important;
         color: rgb(var(--ctp-text)) !important;
     }
