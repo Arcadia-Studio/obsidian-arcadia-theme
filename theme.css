@@ -974,48 +974,47 @@ settings:
 }
 
 
-/* ====== Dark Theme: Crimson ====== */
+/* ====== Dark Theme: Crimson (Elegant Wine) ======
+   A rich burgundy/wine aesthetic with velvet depth.
+   Gold and cream accents for elegance and contrast. */
 .theme-dark.ctp-crimson {
-    --ctp-crust: 28, 12, 15;       /* ~#1C0C0F - Deep wine darkness */
-    --ctp-base: 48, 22, 28;         /* ~#30161C - Rich burgundy */
-    --ctp-mantle: 65, 30, 38;       /* ~#411E26 - Deep rose */
-    --ctp-text: 245, 230, 235;      /* ~#F5E6EB - Soft rose white */
-    --ctp-green: 150, 190, 120;
-    --ctp-red: 240, 110, 120;
-    --ctp-maroon: 200, 70, 80;
-    --ctp-apricot: 255, 170, 140;
-    --ctp-gold: 255, 200, 110;
-    --ctp-teal: 120, 170, 160;
-    --ctp-aqua: 160, 220, 230;
-    --ctp-indigo: 160, 110, 190;
-    --ctp-blue: 150, 170, 220;
-    --ctp-lavender: 200, 170, 200;
+    --ctp-crust: 22, 8, 12;        /* ~#16080C - Deep wine cellar */
+    --ctp-base: 38, 15, 22;        /* ~#260F16 - Rich burgundy velvet */
+    --ctp-mantle: 55, 24, 32;      /* ~#371820 - Wine in candlelight */
+    --ctp-text: 250, 240, 242;     /* ~#FAF0F2 - Warm cream white */
+    --ctp-green: 140, 195, 120;    /* Fresh sage */
+    --ctp-red: 255, 130, 130;      /* Bright rose */
+    --ctp-maroon: 220, 90, 100;    /* Deep ruby */
+    --ctp-apricot: 255, 185, 145;  /* Warm apricot */
+    --ctp-gold: 255, 215, 130;     /* Champagne gold */
+    --ctp-teal: 115, 185, 175;     /* Soft teal */
+    --ctp-aqua: 150, 215, 225;     /* Pale aqua */
+    --ctp-indigo: 170, 130, 200;   /* Soft violet */
+    --ctp-blue: 160, 180, 230;     /* Periwinkle */
+    --ctp-lavender: 210, 180, 210; /* Dusty rose */
 
-    /* Lines and borders */
-    --divider-color: rgb(var(--ctp-crust));
-    --divider-color-hover: rgb(var(--ctp-crust));
-    --hr-color: rgb(var(--ctp-crust));
-    --table-border-color: rgb(var(--ctp-crust));
-    --background-modifier-border: rgb(var(--ctp-crust));
+    /* Lines and borders - warm burgundy tint */
+    --divider-color: rgba(180, 100, 120, 0.25);
+    --divider-color-hover: rgba(180, 100, 120, 0.4);
+    --hr-color: rgba(180, 100, 120, 0.3);
+    --table-border-color: rgba(180, 100, 120, 0.25);
+    --background-modifier-border: rgba(180, 100, 120, 0.2);
 
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* Champagne gold accent for elegance */
+    --ctp-accent: 255, 215, 130;
 }
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-crimson.nav-folder-title,
-.theme-dark.ctp-crimson .nav-file-title,
-.theme-dark.ctp-crimson .workspace-ribbon {
-    color: #ffc8d8 !important;
-}
-
+/* Crimson sidebar - warm rose and cream tones */
 .theme-dark.ctp-crimson .nav-folder-title .nav-folder-title-content {
-    color: #f0b0c0 !important;
+    color: #f8e0e5 !important;
 }
 
 .theme-dark.ctp-crimson .nav-file-title .nav-file-title-content {
-    color: #e8d0d8 !important;
+    color: #e0c8d0 !important;
 }
 
 /* Crimson theme - reading panel */
