@@ -32,6 +32,8 @@
    23. Table Enhancements (Striped, borderless, compact, sticky headers)
    24. Workspace Customization (Tab styles)
    25. Accessibility Features (High contrast, reduce motion, dyslexia mode)
+   30-37. Advanced Features (Code Blocks, Graph, Tabs, Tags, Embeds, Canvas)
+   38. Polished Media Embedding (Images, Video, Audio - OneNote-style)
    ================================================================================ */
 
 
@@ -592,6 +594,31 @@ settings:
   - id: embed-borders
     title: Bordered Embeds
     description: Add accent borders to embedded notes
+    type: class-toggle
+    default: false
+  - id: media-polished
+    title: Polished Media Borders
+    description: Add subtle borders and padding to images
+    type: class-toggle
+    default: false
+  - id: media-large-controls
+    title: Large Media Controls
+    description: Bigger audio/video controls for accessibility
+    type: class-toggle
+    default: false
+  - id: media-waveform
+    title: Audio Waveform Style
+    description: Show decorative waveform visualization on audio embeds
+    type: class-toggle
+    default: false
+  - id: media-no-shadow
+    title: No Media Shadows
+    description: Remove shadows from images and videos
+    type: class-toggle
+    default: false
+  - id: media-rounded-lg
+    title: Extra Rounded Media
+    description: Use larger border radius on media elements
     type: class-toggle
     default: false
 */
@@ -4881,6 +4908,593 @@ span.progress-bar {
 
 /* Dyslexia Font */
 @import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css');
+
+
+/* ================================================================================
+   SECTION 38: POLISHED MEDIA EMBEDDING (OneNote-Style)
+
+   Comprehensive styling for images, videos, and audio with:
+   - Rounded corners and shadows
+   - Hover effects with lift animations
+   - Custom video/audio player controls
+   - Gallery layouts
+   - Caption styling
+   ================================================================================ */
+
+/* ====== Base Image Styling ====== */
+.markdown-preview-view img:not(.emoji),
+.markdown-source-view.mod-cm6 img:not(.emoji),
+.cm-content img:not(.emoji) {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
+
+/* Image hover effect - lift and enhanced shadow */
+.markdown-preview-view img:not(.emoji):hover,
+.markdown-source-view.mod-cm6 img:not(.emoji):hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2),
+                0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: zoom-in;
+}
+
+/* Image focus/click state */
+.markdown-preview-view img:not(.emoji):active {
+    transform: translateY(-2px) scale(1.005);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== Image Captions (using alt text or figcaption) ====== */
+.image-embed[alt]:not([alt=""])::after {
+    content: attr(alt);
+    display: block;
+    text-align: center;
+    font-size: 0.85em;
+    color: rgba(var(--ctp-text), 0.7);
+    font-style: italic;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+}
+
+/* Figure and figcaption styling */
+figure {
+    margin: 1.5rem auto;
+    text-align: center;
+}
+
+figure img {
+    margin-bottom: 0.5rem !important;
+}
+
+figcaption {
+    font-size: 0.85em;
+    color: rgba(var(--ctp-text), 0.7);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+/* ====== Polished Image Borders (Toggle) ====== */
+.media-polished .markdown-preview-view img:not(.emoji),
+.media-polished .markdown-source-view.mod-cm6 img:not(.emoji) {
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    padding: 4px;
+    background: rgba(var(--ctp-mantle), 0.5);
+}
+
+/* ====== Video Player Styling ====== */
+.markdown-preview-view video,
+.markdown-source-view.mod-cm6 video,
+.internal-embed video,
+.external-embed video,
+video {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+                0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    display: block;
+    margin: 1.5rem auto;
+    background: rgb(var(--ctp-crust));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Video hover effect */
+.markdown-preview-view video:hover,
+.markdown-source-view.mod-cm6 video:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25),
+                0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Video container wrapper */
+.video-embed,
+.internal-embed.media-embed {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem auto;
+    max-width: 100%;
+}
+
+/* ====== Custom Video Controls Overlay ====== */
+/* Play button overlay */
+.video-embed::before,
+.internal-embed.is-video::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: rgba(var(--ctp-accent), 0.9);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+}
+
+.video-embed:hover::before,
+.internal-embed.is-video:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ====== WebKit Video Player Controls ====== */
+video::-webkit-media-controls-panel {
+    background: linear-gradient(to top,
+        rgba(var(--ctp-crust), 0.95) 0%,
+        rgba(var(--ctp-crust), 0.8) 50%,
+        transparent 100%);
+    border-radius: 0 0 12px 12px;
+}
+
+video::-webkit-media-controls-play-button {
+    background-color: rgba(var(--ctp-accent), 0.8);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+video::-webkit-media-controls-play-button:hover {
+    background-color: rgb(var(--ctp-accent));
+    transform: scale(1.1);
+}
+
+video::-webkit-media-controls-timeline {
+    background: rgba(var(--ctp-text), 0.2);
+    border-radius: 4px;
+    height: 6px;
+}
+
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+    color: rgb(var(--ctp-text));
+    font-family: var(--font-ui);
+    font-size: 12px;
+}
+
+video::-webkit-media-controls-volume-slider {
+    background: rgba(var(--ctp-accent), 0.3);
+    border-radius: 4px;
+}
+
+video::-webkit-media-controls-mute-button {
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+video::-webkit-media-controls-fullscreen-button {
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+/* ====== Audio Player Styling ====== */
+.markdown-preview-view audio,
+.markdown-source-view.mod-cm6 audio,
+.internal-embed audio,
+audio {
+    width: 100%;
+    max-width: 500px;
+    height: 54px;
+    border-radius: 27px;
+    margin: 1rem auto;
+    display: block;
+    background: linear-gradient(135deg,
+        rgba(var(--ctp-mantle), 0.95) 0%,
+        rgba(var(--ctp-crust), 0.95) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Audio hover effect */
+.markdown-preview-view audio:hover,
+.markdown-source-view.mod-cm6 audio:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2),
+                0 3px 6px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+/* Audio focus state for accessibility */
+audio:focus {
+    outline: 2px solid rgb(var(--ctp-accent));
+    outline-offset: 2px;
+}
+
+/* ====== WebKit Audio Player Controls ====== */
+audio::-webkit-media-controls-panel {
+    background: transparent;
+    padding: 0 12px;
+}
+
+audio::-webkit-media-controls-play-button {
+    background-color: rgb(var(--ctp-accent));
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+}
+
+audio::-webkit-media-controls-play-button:hover {
+    background-color: rgb(var(--ctp-accent-hover));
+    transform: scale(1.08);
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    color: rgb(var(--ctp-text));
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+audio::-webkit-media-controls-timeline {
+    background: rgba(var(--ctp-text), 0.15);
+    border-radius: 3px;
+    height: 4px;
+    margin: 0 8px;
+}
+
+audio::-webkit-media-controls-volume-slider-container {
+    background: transparent;
+}
+
+audio::-webkit-media-controls-volume-slider {
+    background: rgba(var(--ctp-accent), 0.3);
+    border-radius: 3px;
+}
+
+audio::-webkit-media-controls-mute-button {
+    background-color: transparent;
+}
+
+/* ====== Large Audio Player (Accessibility Option) ====== */
+.media-large-controls audio {
+    height: 72px;
+    border-radius: 36px;
+    max-width: 600px;
+}
+
+.media-large-controls audio::-webkit-media-controls-play-button {
+    width: 48px;
+    height: 48px;
+}
+
+.media-large-controls audio::-webkit-media-controls-timeline {
+    height: 8px;
+}
+
+.media-large-controls audio::-webkit-media-controls-current-time-display,
+.media-large-controls audio::-webkit-media-controls-time-remaining-display {
+    font-size: 14px;
+}
+
+/* ====== Audio Waveform Visualization Style ====== */
+.audio-embed,
+.internal-embed.is-audio {
+    position: relative;
+    background: linear-gradient(135deg,
+        rgba(var(--ctp-mantle), 0.9) 0%,
+        rgba(var(--ctp-crust), 0.9) 100%);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 1rem auto;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Waveform bars decoration */
+.media-waveform .audio-embed::before,
+.media-waveform .internal-embed.is-audio::before {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    left: 60px;
+    right: 100px;
+    height: 24px;
+    transform: translateY(50%);
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(var(--ctp-accent), 0.3) 0px,
+        rgba(var(--ctp-accent), 0.3) 3px,
+        transparent 3px,
+        transparent 6px
+    );
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24'%3E%3Crect x='0' y='8' width='3' height='8' fill='white'/%3E%3Crect x='6' y='4' width='3' height='16' fill='white'/%3E%3Crect x='12' y='6' width='3' height='12' fill='white'/%3E%3Crect x='18' y='2' width='3' height='20' fill='white'/%3E%3Crect x='24' y='7' width='3' height='10' fill='white'/%3E%3Crect x='30' y='4' width='3' height='16' fill='white'/%3E%3Crect x='36' y='9' width='3' height='6' fill='white'/%3E%3Crect x='42' y='5' width='3' height='14' fill='white'/%3E%3Crect x='48' y='3' width='3' height='18' fill='white'/%3E%3Crect x='54' y='7' width='3' height='10' fill='white'/%3E%3Crect x='60' y='4' width='3' height='16' fill='white'/%3E%3Crect x='66' y='8' width='3' height='8' fill='white'/%3E%3Crect x='72' y='5' width='3' height='14' fill='white'/%3E%3Crect x='78' y='6' width='3' height='12' fill='white'/%3E%3Crect x='84' y='9' width='3' height='6' fill='white'/%3E%3Crect x='90' y='4' width='3' height='16' fill='white'/%3E%3Crect x='96' y='7' width='3' height='10' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24'%3E%3Crect x='0' y='8' width='3' height='8' fill='white'/%3E%3Crect x='6' y='4' width='3' height='16' fill='white'/%3E%3Crect x='12' y='6' width='3' height='12' fill='white'/%3E%3Crect x='18' y='2' width='3' height='20' fill='white'/%3E%3Crect x='24' y='7' width='3' height='10' fill='white'/%3E%3Crect x='30' y='4' width='3' height='16' fill='white'/%3E%3Crect x='36' y='9' width='3' height='6' fill='white'/%3E%3Crect x='42' y='5' width='3' height='14' fill='white'/%3E%3Crect x='48' y='3' width='3' height='18' fill='white'/%3E%3Crect x='54' y='7' width='3' height='10' fill='white'/%3E%3Crect x='60' y='4' width='3' height='16' fill='white'/%3E%3Crect x='66' y='8' width='3' height='8' fill='white'/%3E%3Crect x='72' y='5' width='3' height='14' fill='white'/%3E%3Crect x='78' y='6' width='3' height='12' fill='white'/%3E%3Crect x='84' y='9' width='3' height='6' fill='white'/%3E%3Crect x='90' y='4' width='3' height='16' fill='white'/%3E%3Crect x='96' y='7' width='3' height='10' fill='white'/%3E%3C/svg%3E");
+    mask-repeat: repeat-x;
+    -webkit-mask-repeat: repeat-x;
+    mask-size: 100px 24px;
+    -webkit-mask-size: 100px 24px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* ====== Media Gallery Grid ====== */
+.media-gallery,
+.markdown-preview-view .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 1.5rem 0;
+}
+
+.media-gallery img,
+.image-gallery img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.media-gallery img:hover,
+.image-gallery img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Masonry-style Image Grid ====== */
+.media-masonry {
+    column-count: 3;
+    column-gap: 12px;
+    margin: 1.5rem 0;
+}
+
+.media-masonry img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 12px;
+    break-inside: avoid;
+}
+
+@media (max-width: 768px) {
+    .media-masonry {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .media-masonry {
+        column-count: 1;
+    }
+}
+
+/* ====== PDF Embed Styling ====== */
+.markdown-preview-view .pdf-embed,
+.internal-embed.pdf-embed,
+iframe[src*=".pdf"] {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    margin: 1.5rem auto;
+    overflow: hidden;
+}
+
+/* PDF toolbar styling */
+.pdf-toolbar {
+    background: rgba(var(--ctp-mantle), 0.95);
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
+    padding: 8px 12px;
+}
+
+/* ====== Iframe/External Media Embed ====== */
+.markdown-preview-view iframe,
+.external-embed iframe {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: none;
+    margin: 1.5rem auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* YouTube/Vimeo specific styling */
+.external-embed[src*="youtube"],
+.external-embed[src*="vimeo"],
+iframe[src*="youtube"],
+iframe[src*="vimeo"] {
+    aspect-ratio: 16/9;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* ====== Media Loading States ====== */
+.image-embed.is-loading,
+.internal-embed.is-loading {
+    background: linear-gradient(
+        90deg,
+        rgba(var(--ctp-mantle), 0.5) 0%,
+        rgba(var(--ctp-mantle), 0.8) 50%,
+        rgba(var(--ctp-mantle), 0.5) 100%
+    );
+    background-size: 200% 100%;
+    animation: media-shimmer 1.5s infinite;
+    border-radius: 8px;
+    min-height: 100px;
+}
+
+@keyframes media-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ====== Media Error States ====== */
+.image-embed.mod-error,
+.internal-embed.mod-error {
+    background: rgba(var(--ctp-error), 0.1);
+    border: 1px dashed rgba(var(--ctp-error), 0.5);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: rgb(var(--ctp-error));
+}
+
+/* ====== Inline Images (within text) ====== */
+.markdown-preview-view p img:not(.emoji),
+.cm-line img:not(.emoji):not(:only-child) {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-height: 1.5em;
+}
+
+/* ====== Image Size Presets ====== */
+/* Use with cssclass in frontmatter: img-small, img-medium, img-large */
+.img-small img { max-width: 200px !important; }
+.img-medium img { max-width: 400px !important; }
+.img-large img { max-width: 600px !important; }
+.img-full img { max-width: 100% !important; }
+
+/* ====== Float Images ====== */
+.img-float-left img {
+    float: left;
+    margin: 0 1.5rem 1rem 0 !important;
+    max-width: 40%;
+}
+
+.img-float-right img {
+    float: right;
+    margin: 0 0 1rem 1.5rem !important;
+    max-width: 40%;
+}
+
+/* Clear floats */
+.img-float-left::after,
+.img-float-right::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ====== Media Rounded Corners Variants ====== */
+.media-rounded-sm img,
+.media-rounded-sm video,
+.media-rounded-sm audio { border-radius: 4px !important; }
+
+.media-rounded-md img,
+.media-rounded-md video,
+.media-rounded-md audio { border-radius: 8px !important; }
+
+.media-rounded-lg img,
+.media-rounded-lg video,
+.media-rounded-lg audio { border-radius: 16px !important; }
+
+.media-rounded-full img { border-radius: 50% !important; }
+
+/* ====== Media No Shadow Option ====== */
+.media-no-shadow img,
+.media-no-shadow video,
+.media-no-shadow audio {
+    box-shadow: none !important;
+}
+
+/* ====== Media Border Options ====== */
+.media-border img,
+.media-border video {
+    border: 2px solid rgba(var(--ctp-accent), 0.3) !important;
+}
+
+.media-border-accent img,
+.media-border-accent video {
+    border: 3px solid rgb(var(--ctp-accent)) !important;
+}
+
+/* ====== Lightbox Effect (click to expand) ====== */
+.media-lightbox img {
+    cursor: zoom-in;
+}
+
+.media-lightbox img:focus,
+.media-lightbox img.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 9999;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    cursor: zoom-out;
+}
+
+/* Lightbox backdrop */
+.media-lightbox img:focus::before,
+.media-lightbox img.expanded::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: -1;
+}
+
+/* ====== Print Styles for Media ====== */
+@media print {
+    img, video, audio {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        break-inside: avoid;
+    }
+
+    video, audio, iframe {
+        display: none !important;
+    }
+}
+
+/* ====== Reduced Motion Support ====== */
+@media (prefers-reduced-motion: reduce) {
+    img, video, audio,
+    .image-embed, .video-embed, .audio-embed {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    img:hover, video:hover, audio:hover {
+        transform: none !important;
+    }
+}
 
 
 /* ================================================================================
