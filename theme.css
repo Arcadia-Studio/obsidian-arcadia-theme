@@ -1,39 +1,40 @@
 /* ================================================================================
    ARCADIA THEME FOR OBSIDIAN
-   
-   A sophisticated dark theme framework with multiple color schemes,
-   hierarchical folder organization, and comprehensive typography controls.
-   
+
+   A comprehensive Obsidian theme with 23 color schemes, polished media handling,
+   OneNote-style features, and extensive customization through Style Settings.
+
    Author: Peter J. Carter
    Website: https://theologyinfocus.org
-   Version: 1.1.0 (Garamond, Caslon, Charcoal, Dyslexia Mode)
-   Last Updated: 2026-01-31
+   Version: 2.0.0
+   Last Updated: 2026-02-01
    Minimum Obsidian Version: 0.16.0
-   
-   DESIGN PHILOSOPHY:
-   - RGB triplet system for consistent rgba() usage across light/dark modes
-   - Hierarchical folder coloring (10-color top-level cycle + depth-based nesting)
-   - Extensive Style Settings integration for user customization
-   - Professional typography with multiple font options
-   - WCAG AA compliant contrast ratios in all color schemes
-   
+
+   FEATURES:
+   - 11 Dark themes + 12 Light themes (including NY Times & Wikipedia)
+   - 50+ file type icons with custom colors
+   - 21 alternate checkbox types with icons
+   - OneNote-style media embedding (images, video, audio)
+   - Paper styles (lined, grid, dot, Cornell, legal pad)
+   - Sticky notes callouts (8 colors)
+   - Cards view, rainbow folders, tag colors
+   - Code syntax themes (Dracula, Nord, GitHub)
+   - Full Style Settings integration (60+ options)
+   - WCAG AA compliant contrast ratios
+
    TABLE OF CONTENTS:
    1. CSS Reset & Core Variables
    2. Base Element Styles
-   3. Obsidian Theme Settings (8 categories with 50+ options)
-   4. Dark Theme Color Schemes (10 variants)
-   4.5. Light Theme Color Schemes (10 variants - WCAG AA compliant)
-   5-17. Core Theme Elements (Typography, Content, Code, etc.)
-   18. Typography Controls (Font size, line height, reading width)
-   19. Editor Enhancements (Active line, focus mode, line numbers)
-   20. Expanded Font Options (10 content fonts, 6 code fonts)
-   21. Links & Tags (Link styles, tag styles, highlight colors)
-   22. Lists & Checkboxes (Styles, priorities, indentation guides)
-   23. Table Enhancements (Striped, borderless, compact, sticky headers)
-   24. Workspace Customization (Tab styles)
-   25. Accessibility Features (High contrast, reduce motion, dyslexia mode)
-   30-37. Advanced Features (Code Blocks, Graph, Tabs, Tags, Embeds, Canvas)
-   38. Polished Media Embedding (Images, Video, Audio - OneNote-style)
+   3. Style Settings (10 categories, 60+ options)
+   4. Dark Theme Color Schemes (11 variants)
+   5. Light Theme Color Schemes (12 variants)
+   6-17. Core Theme Elements
+   18-20. Navigation, File Icons, Checkboxes
+   21-29. Typography, Editor, Accessibility
+   30-37. Advanced Features (Code, Graph, Tabs, Tags, Canvas)
+   38. Polished Media Embedding
+   39. Paper Styles
+   40. Sticky Notes Callouts
    ================================================================================ */
 
 
@@ -52,6 +53,26 @@
    while allowing per-theme opacity adjustments.
    ================================================================================ */
 @charset "UTF-8";
+
+/* ================================================================================
+   FONT IMPORTS (must be at top of CSS file for proper loading)
+   ================================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css');
+
 
 :root,
 .theme-light,
@@ -72,6 +93,17 @@
     --ctp-success: 152, 195, 121;  /* Success states, confirmations */
     --ctp-warning: 229, 192, 123;  /* Warnings, cautions */
     --ctp-error: 231, 130, 132;    /* Errors, critical alerts */
+
+    /* Text Color */
+    --ctp-text: 230, 230, 230;     /* Primary text color */
+
+    /* Surface Colors - For layered UI elements */
+    --ctp-surface0: 45, 45, 50;    /* Lowest elevation surface */
+    --ctp-surface1: 55, 55, 60;    /* Medium elevation surface */
+    --ctp-surface2: 65, 65, 70;    /* Higher elevation surface */
+
+    /* Additional UI Colors */
+    --ctp-orchid: 180, 130, 200;   /* Accent variant for special elements */
 
     /* ====== Typography System ======
        Font stacks with system fallbacks for reliability */
@@ -623,6 +655,64 @@ settings:
     default: false
 */
 
+/* @settings
+name: Arcadia Paper & Notes
+id: arcadia-paper
+settings:
+  - id: paper-styles-heading
+    title: Paper Styles
+    description: Add notebook backgrounds via cssclasses (e.g., paper-lined)
+    type: heading
+    level: 3
+    collapsed: true
+  - id: paper-lined
+    title: Lined Paper
+    description: College ruled lines with red margin
+    type: class-toggle
+    default: false
+  - id: paper-grid
+    title: Grid Paper
+    description: Square grid pattern
+    type: class-toggle
+    default: false
+  - id: paper-dot
+    title: Dot Grid Paper
+    description: Dot grid for bullet journaling
+    type: class-toggle
+    default: false
+  - id: paper-cornell
+    title: Cornell Notes Layout
+    description: Cornell note-taking format with sections
+    type: class-toggle
+    default: false
+  - id: sticky-notes-heading
+    title: Sticky Notes Options
+    description: Customize sticky note callout appearance
+    type: heading
+    level: 3
+    collapsed: true
+  - id: sticky-pin
+    title: Pushpin Style
+    description: Use pushpin instead of tape on sticky notes
+    type: class-toggle
+    default: false
+  - id: sticky-fold
+    title: Folded Corner
+    description: Add folded corner effect to sticky notes
+    type: class-toggle
+    default: false
+  - id: sticky-flat
+    title: Flat Sticky Notes
+    description: Remove rotation from sticky notes
+    type: class-toggle
+    default: false
+  - id: sticky-handwriting
+    title: Handwriting Font
+    description: Use handwriting-style font in sticky notes
+    type: class-toggle
+    default: false
+*/
+
 
 /* ================================================================================
    SECTION 4: DARK THEME COLOR SCHEMES
@@ -794,7 +884,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-olive.nav-folder-title,
+.theme-dark.ctp-olive .nav-folder-title,
 .theme-dark.ctp-olive .nav-file-title,
 .theme-dark.ctp-olive .workspace-ribbon {
     color: #f3eca8 !important;
@@ -812,7 +902,9 @@ settings:
 }
 
 
-/* ====== Dark Theme: Flint ====== */
+/* ====== Dark Theme: Flint (Cool Professional) ======
+   A sophisticated palette with subtle blue-gray undertones.
+   Perfect for focused work sessions with minimal eye strain. */
 .theme-dark.ctp-flint {
     --ctp-crust: 29, 33, 37;      /* ~#1D2125 - Darkest layer, faintly bluish gray */
     --ctp-base: 43, 48, 52;        /* ~#2B3034 - Main background */
@@ -842,7 +934,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-flint.nav-folder-title,
+.theme-dark.ctp-flint .nav-folder-title,
 .theme-dark.ctp-flint .nav-file-title,
 .theme-dark.ctp-flint .workspace-ribbon {
     color: #c8c8c8 !important;
@@ -911,7 +1003,9 @@ settings:
 }
 
 
-/* ====== Dark Theme: Ember ====== */
+/* ====== Dark Theme: Ember (Warm Cozy) ======
+   A warm, inviting palette inspired by glowing embers and firelight.
+   Rich burnt umber tones create a comfortable reading environment. */
 .theme-dark.ctp-ember {
     --ctp-crust: 25, 15, 12;       /* ~#190F0C - Deep charcoal with warm undertone */
     --ctp-base: 42, 28, 24;         /* ~#2A1C18 - Rich burnt umber */
@@ -941,7 +1035,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-ember.nav-folder-title,
+.theme-dark.ctp-ember .nav-folder-title,
 .theme-dark.ctp-ember .nav-file-title,
 .theme-dark.ctp-ember .workspace-ribbon {
     color: #ffccaa !important;
@@ -993,7 +1087,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-twilight.nav-folder-title,
+.theme-dark.ctp-twilight .nav-folder-title,
 .theme-dark.ctp-twilight .nav-file-title,
 .theme-dark.ctp-twilight .workspace-ribbon {
     color: #dcd0ff !important;
@@ -1045,7 +1139,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-forest.nav-folder-title,
+.theme-dark.ctp-forest .nav-folder-title,
 .theme-dark.ctp-forest .nav-file-title,
 .theme-dark.ctp-forest .workspace-ribbon {
     color: #c8f0c0 !important;
@@ -1148,7 +1242,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-slate.nav-folder-title,
+.theme-dark.ctp-slate .nav-folder-title,
 .theme-dark.ctp-slate .nav-file-title,
 .theme-dark.ctp-slate .workspace-ribbon {
     color: #d0d8e8 !important;
@@ -1170,7 +1264,9 @@ settings:
 }
 
 
-/* ====== Dark Theme: Amber ====== */
+/* ====== Dark Theme: Amber (Golden Warmth) ======
+   A nostalgic palette reminiscent of candlelight and autumn leaves.
+   Honey and amber tones create an inviting, warm atmosphere. */
 .theme-dark.ctp-amber {
     --ctp-crust: 25, 20, 10;       /* ~#19140A - Deep golden brown */
     --ctp-base: 45, 38, 20;         /* ~#2D2614 - Rich amber darkness */
@@ -1200,7 +1296,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-amber.nav-folder-title,
+.theme-dark.ctp-amber .nav-folder-title,
 .theme-dark.ctp-amber .nav-file-title,
 .theme-dark.ctp-amber .workspace-ribbon {
     color: #ffd898 !important;
