@@ -559,6 +559,41 @@ settings:
     description: Turn consecutive images into column layouts
     type: class-toggle
     default: false
+  - id: code-line-numbers
+    title: Code Line Numbers
+    description: Show line numbers in code blocks
+    type: class-toggle
+    default: false
+  - id: syntax-dracula
+    title: Dracula Syntax Theme
+    description: Dark purple syntax highlighting for code blocks
+    type: class-toggle
+    default: false
+  - id: syntax-nord
+    title: Nord Syntax Theme
+    description: Arctic blue syntax highlighting for code blocks
+    type: class-toggle
+    default: false
+  - id: syntax-github
+    title: GitHub Syntax Theme
+    description: GitHub-style syntax highlighting for code blocks
+    type: class-toggle
+    default: false
+  - id: graph-animated
+    title: Animated Graph Connections
+    description: Add subtle pulsing animation to graph view connections
+    type: class-toggle
+    default: false
+  - id: stacked-tabs
+    title: Stacked Tabs (Andy Mode)
+    description: Enable Andy Matuschak-style sliding panes
+    type: class-toggle
+    default: false
+  - id: embed-borders
+    title: Bordered Embeds
+    description: Add accent borders to embedded notes
+    type: class-toggle
+    default: false
 */
 
 
@@ -4130,6 +4165,692 @@ img[alt*="img-banner"] {
 .rainbow-folders .nav-folder .nav-folder:nth-child(10n+8) > .nav-folder-title .nav-folder-title-content { color: #9060b0 !important; }
 .rainbow-folders .nav-folder .nav-folder:nth-child(10n+9) > .nav-folder-title .nav-folder-title-content { color: #b06090 !important; }
 .rainbow-folders .nav-folder .nav-folder:nth-child(10n+10) > .nav-folder-title .nav-folder-title-content { color: #909090 !important; }
+
+
+/* ================================================================================
+   SECTION 30: CODE BLOCK ENHANCEMENTS
+   Language labels, line numbers, copy button styling, syntax themes
+   ================================================================================ */
+
+/* ====== Language Label Badge ====== */
+.markdown-preview-view pre[class*="language-"]::before,
+.cm-s-obsidian .HyperMD-codeblock-begin::after {
+    content: attr(class);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 8px;
+    font-size: 0.7em;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(var(--ctp-accent), 0.2);
+    color: rgb(var(--ctp-accent));
+    border-radius: 0 6px 0 6px;
+    font-weight: 500;
+}
+
+/* Specific language labels */
+.markdown-preview-view pre.language-javascript::before { content: "JS"; background: rgba(247, 223, 30, 0.2); color: #f7df1e; }
+.markdown-preview-view pre.language-typescript::before { content: "TS"; background: rgba(49, 120, 198, 0.2); color: #3178c6; }
+.markdown-preview-view pre.language-python::before { content: "Python"; background: rgba(55, 118, 171, 0.2); color: #3776ab; }
+.markdown-preview-view pre.language-html::before { content: "HTML"; background: rgba(228, 77, 38, 0.2); color: #e44d26; }
+.markdown-preview-view pre.language-css::before { content: "CSS"; background: rgba(38, 77, 228, 0.2); color: #264de4; }
+.markdown-preview-view pre.language-json::before { content: "JSON"; background: rgba(245, 166, 35, 0.2); color: #f5a623; }
+.markdown-preview-view pre.language-bash::before,
+.markdown-preview-view pre.language-shell::before { content: "Shell"; background: rgba(78, 170, 37, 0.2); color: #4eaa25; }
+.markdown-preview-view pre.language-sql::before { content: "SQL"; background: rgba(0, 117, 143, 0.2); color: #00758f; }
+.markdown-preview-view pre.language-java::before { content: "Java"; background: rgba(237, 139, 0, 0.2); color: #ed8b00; }
+.markdown-preview-view pre.language-cpp::before,
+.markdown-preview-view pre.language-c::before { content: "C++"; background: rgba(0, 89, 156, 0.2); color: #00599c; }
+.markdown-preview-view pre.language-rust::before { content: "Rust"; background: rgba(222, 165, 132, 0.2); color: #dea584; }
+.markdown-preview-view pre.language-go::before { content: "Go"; background: rgba(0, 173, 216, 0.2); color: #00add8; }
+.markdown-preview-view pre.language-ruby::before { content: "Ruby"; background: rgba(204, 52, 45, 0.2); color: #cc342d; }
+.markdown-preview-view pre.language-php::before { content: "PHP"; background: rgba(119, 123, 180, 0.2); color: #777bb4; }
+.markdown-preview-view pre.language-yaml::before { content: "YAML"; background: rgba(203, 23, 30, 0.2); color: #cb171e; }
+.markdown-preview-view pre.language-markdown::before,
+.markdown-preview-view pre.language-md::before { content: "MD"; background: rgba(80, 142, 243, 0.2); color: #508ef3; }
+
+/* Code block container styling */
+.markdown-preview-view pre {
+    position: relative;
+    padding-top: 2rem !important;
+}
+
+/* ====== Line Numbers Toggle ====== */
+.code-line-numbers .markdown-preview-view pre code {
+    counter-reset: line;
+    padding-left: 3.5rem;
+}
+
+.code-line-numbers .markdown-preview-view pre code > span::before {
+    counter-increment: line;
+    content: counter(line);
+    position: absolute;
+    left: 0;
+    width: 2.5rem;
+    text-align: right;
+    padding-right: 0.75rem;
+    color: rgba(var(--ctp-text), 0.3);
+    font-size: 0.85em;
+    border-right: 1px solid rgba(var(--ctp-accent), 0.1);
+    margin-right: 1rem;
+}
+
+/* ====== Copy Button Styling ====== */
+.markdown-preview-view pre .copy-code-button,
+.markdown-source-view .copy-code-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 4px 8px;
+    font-size: 0.75em;
+    background: rgba(var(--ctp-mantle), 0.8);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 4px;
+    color: rgb(var(--ctp-text));
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.markdown-preview-view pre:hover .copy-code-button,
+.markdown-source-view pre:hover .copy-code-button {
+    opacity: 1;
+}
+
+.markdown-preview-view pre .copy-code-button:hover {
+    background: rgba(var(--ctp-accent), 0.2);
+}
+
+/* ====== Syntax Theme: Dracula ====== */
+.syntax-dracula .token.comment,
+.syntax-dracula .token.prolog,
+.syntax-dracula .token.doctype { color: #6272a4; }
+.syntax-dracula .token.punctuation { color: #f8f8f2; }
+.syntax-dracula .token.property,
+.syntax-dracula .token.tag,
+.syntax-dracula .token.constant,
+.syntax-dracula .token.symbol { color: #ff79c6; }
+.syntax-dracula .token.boolean,
+.syntax-dracula .token.number { color: #bd93f9; }
+.syntax-dracula .token.selector,
+.syntax-dracula .token.string,
+.syntax-dracula .token.char { color: #f1fa8c; }
+.syntax-dracula .token.builtin { color: #50fa7b; }
+.syntax-dracula .token.operator,
+.syntax-dracula .token.entity,
+.syntax-dracula .token.url { color: #ff79c6; }
+.syntax-dracula .token.atrule,
+.syntax-dracula .token.keyword { color: #ff79c6; }
+.syntax-dracula .token.function,
+.syntax-dracula .token.class-name { color: #50fa7b; }
+.syntax-dracula .token.regex,
+.syntax-dracula .token.important,
+.syntax-dracula .token.variable { color: #ffb86c; }
+
+/* ====== Syntax Theme: Nord ====== */
+.syntax-nord .token.comment,
+.syntax-nord .token.prolog { color: #616e88; }
+.syntax-nord .token.punctuation { color: #d8dee9; }
+.syntax-nord .token.property,
+.syntax-nord .token.tag { color: #81a1c1; }
+.syntax-nord .token.boolean,
+.syntax-nord .token.number { color: #b48ead; }
+.syntax-nord .token.string,
+.syntax-nord .token.char { color: #a3be8c; }
+.syntax-nord .token.builtin { color: #88c0d0; }
+.syntax-nord .token.keyword { color: #81a1c1; }
+.syntax-nord .token.function { color: #88c0d0; }
+.syntax-nord .token.variable { color: #d8dee9; }
+
+/* ====== Syntax Theme: GitHub ====== */
+.syntax-github .token.comment,
+.syntax-github .token.prolog { color: #6a737d; }
+.syntax-github .token.punctuation { color: #24292e; }
+.syntax-github .token.property,
+.syntax-github .token.tag { color: #22863a; }
+.syntax-github .token.boolean,
+.syntax-github .token.number { color: #005cc5; }
+.syntax-github .token.string { color: #032f62; }
+.syntax-github .token.keyword { color: #d73a49; }
+.syntax-github .token.function { color: #6f42c1; }
+
+
+/* ================================================================================
+   SECTION 31: GRAPH VIEW STYLING
+   Custom colors, animations, and better readability
+   ================================================================================ */
+
+/* Graph container */
+.graph-view.color-fill-tag {
+    color: rgb(var(--ctp-accent));
+}
+
+/* Node styling */
+.graph-view .graph-view-container .links line {
+    stroke: rgba(var(--ctp-accent), 0.3) !important;
+    stroke-width: 1px;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.graph-view .graph-view-container .links line:hover {
+    stroke: rgba(var(--ctp-accent), 0.8) !important;
+    stroke-width: 2px;
+}
+
+/* Node colors by type */
+.graph-view .graph-view-container .nodes circle {
+    fill: rgb(var(--ctp-accent)) !important;
+    stroke: rgba(var(--ctp-base), 0.8);
+    stroke-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.graph-view .graph-view-container .nodes circle:hover {
+    fill: rgb(var(--ctp-text)) !important;
+    stroke: rgb(var(--ctp-accent));
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 8px rgba(var(--ctp-accent), 0.5));
+}
+
+/* Unresolved links */
+.graph-view .graph-view-container .nodes circle.is-unresolved {
+    fill: rgba(var(--ctp-text), 0.3) !important;
+    stroke-dasharray: 4 2;
+}
+
+/* Tag nodes */
+.graph-view .graph-view-container .nodes circle.is-tag {
+    fill: #f0c040 !important;
+}
+
+/* Attachment nodes */
+.graph-view .graph-view-container .nodes circle.is-attachment {
+    fill: #70b060 !important;
+}
+
+/* Focused node */
+.graph-view .graph-view-container .nodes circle.is-focused {
+    fill: rgb(var(--ctp-accent)) !important;
+    stroke: rgb(var(--ctp-text));
+    stroke-width: 4px;
+    filter: drop-shadow(0 0 12px rgba(var(--ctp-accent), 0.8));
+}
+
+/* Node labels */
+.graph-view .graph-view-container text {
+    fill: rgb(var(--ctp-text)) !important;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* Animated connections */
+.graph-animated .graph-view .graph-view-container .links line {
+    animation: pulse-line 3s ease-in-out infinite;
+}
+
+@keyframes pulse-line {
+    0%, 100% { stroke-opacity: 0.3; }
+    50% { stroke-opacity: 0.6; }
+}
+
+/* Graph controls styling */
+.graph-controls {
+    background: rgba(var(--ctp-mantle), 0.9) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+
+/* ================================================================================
+   SECTION 32: STACKED/SLIDING TABS
+   Andy Matuschak-style sliding panes
+   ================================================================================ */
+
+/* Enable stacked tabs mode */
+.stacked-tabs .workspace-split.mod-root > .workspace-leaf {
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+    border-left: 1px solid rgba(var(--ctp-crust), 0.5);
+}
+
+.stacked-tabs .workspace-split.mod-root {
+    overflow-x: auto;
+}
+
+.stacked-tabs .workspace-split.mod-root > .workspace-leaf:not(:first-child) {
+    margin-left: -40px;
+    position: relative;
+}
+
+.stacked-tabs .workspace-leaf-content {
+    background: rgb(var(--ctp-base));
+}
+
+/* Rotated headers for stacked tabs */
+.stacked-tabs .workspace-leaf .view-header {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(var(--ctp-mantle), 0.95);
+    border-right: 1px solid rgba(var(--ctp-crust), 0.5);
+    padding: 1rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.stacked-tabs .workspace-leaf .view-header-title {
+    transform: rotate(180deg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: calc(100vh - 100px);
+}
+
+.stacked-tabs .workspace-leaf .view-content {
+    margin-left: 40px;
+}
+
+/* Hover effect to expand */
+.stacked-tabs .workspace-leaf:hover {
+    margin-left: 0 !important;
+    z-index: 10;
+}
+
+.stacked-tabs .workspace-leaf:hover + .workspace-leaf {
+    margin-left: 0 !important;
+}
+
+
+/* ================================================================================
+   SECTION 33: TAG PILLS WITH COLORS
+   Auto-color tags based on common names
+   ================================================================================ */
+
+/* Base tag pill styling */
+.tag, .cm-hashtag {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Priority/Status Tags */
+a.tag[href*="important"], .cm-hashtag-end:has(+ [class*="important"]) { background: rgba(224, 80, 80, 0.2) !important; color: #e05050 !important; }
+a.tag[href*="urgent"], a.tag[href*="critical"] { background: rgba(240, 96, 48, 0.2) !important; color: #f06030 !important; }
+a.tag[href*="todo"], a.tag[href*="task"] { background: rgba(80, 144, 208, 0.2) !important; color: #5090d0 !important; }
+a.tag[href*="done"], a.tag[href*="complete"] { background: rgba(88, 165, 92, 0.2) !important; color: #58a55c !important; }
+a.tag[href*="inprogress"], a.tag[href*="wip"] { background: rgba(240, 160, 48, 0.2) !important; color: #f0a030 !important; }
+a.tag[href*="blocked"], a.tag[href*="waiting"] { background: rgba(180, 80, 80, 0.2) !important; color: #b45050 !important; }
+
+/* Category Tags */
+a.tag[href*="project"] { background: rgba(100, 140, 200, 0.2) !important; color: #648cc8 !important; }
+a.tag[href*="meeting"], a.tag[href*="event"] { background: rgba(160, 120, 200, 0.2) !important; color: #a078c8 !important; }
+a.tag[href*="idea"], a.tag[href*="concept"] { background: rgba(240, 192, 64, 0.2) !important; color: #f0c040 !important; }
+a.tag[href*="research"], a.tag[href*="study"] { background: rgba(80, 176, 160, 0.2) !important; color: #50b0a0 !important; }
+a.tag[href*="reference"], a.tag[href*="resource"] { background: rgba(200, 100, 150, 0.2) !important; color: #c86496 !important; }
+a.tag[href*="personal"] { background: rgba(200, 150, 100, 0.2) !important; color: #c89664 !important; }
+a.tag[href*="work"], a.tag[href*="business"] { background: rgba(100, 120, 180, 0.2) !important; color: #6478b4 !important; }
+
+/* Date/Time Tags */
+a.tag[href*="daily"], a.tag[href*="today"] { background: rgba(80, 160, 200, 0.2) !important; color: #50a0c8 !important; }
+a.tag[href*="weekly"] { background: rgba(120, 160, 120, 0.2) !important; color: #78a078 !important; }
+a.tag[href*="monthly"] { background: rgba(160, 140, 180, 0.2) !important; color: #a08cb4 !important; }
+
+/* People/Place Tags */
+a.tag[href*="person"], a.tag[href*="people"] { background: rgba(150, 120, 180, 0.2) !important; color: #9678b4 !important; }
+a.tag[href*="place"], a.tag[href*="location"] { background: rgba(224, 120, 48, 0.2) !important; color: #e07830 !important; }
+
+/* Content Type Tags */
+a.tag[href*="book"], a.tag[href*="reading"] { background: rgba(140, 100, 80, 0.2) !important; color: #8c6450 !important; }
+a.tag[href*="video"], a.tag[href*="watch"] { background: rgba(220, 80, 80, 0.2) !important; color: #dc5050 !important; }
+a.tag[href*="article"], a.tag[href*="blog"] { background: rgba(80, 142, 243, 0.2) !important; color: #508ef3 !important; }
+a.tag[href*="podcast"], a.tag[href*="audio"] { background: rgba(255, 160, 0, 0.2) !important; color: #ffa000 !important; }
+
+/* Hover effect for all tags */
+a.tag:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+
+/* ================================================================================
+   SECTION 34: PROPERTIES/FRONTMATTER STYLING
+   Better YAML display with colored keys
+   ================================================================================ */
+
+/* Properties container */
+.metadata-container,
+.frontmatter-container {
+    background: rgba(var(--ctp-mantle), 0.4) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.15);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Properties header */
+.metadata-container .metadata-properties-heading,
+.frontmatter-container-header {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(var(--ctp-text), 0.5);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
+}
+
+/* Property rows */
+.metadata-property {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(var(--ctp-crust), 0.3);
+}
+
+.metadata-property:last-child {
+    border-bottom: none;
+}
+
+/* Property keys with colors */
+.metadata-property-key,
+.frontmatter-key {
+    font-weight: 600;
+    min-width: 120px;
+    color: rgb(var(--ctp-accent));
+}
+
+/* Specific property colors */
+.metadata-property[data-property-key="tags"] .metadata-property-key { color: #f0c040; }
+.metadata-property[data-property-key="date"] .metadata-property-key,
+.metadata-property[data-property-key="created"] .metadata-property-key { color: #50a0d0; }
+.metadata-property[data-property-key="modified"] .metadata-property-key,
+.metadata-property[data-property-key="updated"] .metadata-property-key { color: #70b060; }
+.metadata-property[data-property-key="author"] .metadata-property-key { color: #a078c8; }
+.metadata-property[data-property-key="status"] .metadata-property-key { color: #e09050; }
+.metadata-property[data-property-key="type"] .metadata-property-key { color: #d070a0; }
+.metadata-property[data-property-key="aliases"] .metadata-property-key { color: #50b0a0; }
+
+/* Property values */
+.metadata-property-value {
+    color: rgb(var(--ctp-text));
+    flex: 1;
+}
+
+/* Links in properties */
+.metadata-property-value a {
+    color: rgb(var(--ctp-accent));
+}
+
+/* Tags in properties */
+.metadata-property-value .tag {
+    font-size: 0.85em;
+    margin-right: 0.25rem;
+}
+
+
+/* ================================================================================
+   SECTION 35: EMBED STYLING
+   Styled embedded notes with clear borders and titles
+   ================================================================================ */
+
+/* Embedded note container */
+.markdown-embed,
+.internal-embed {
+    background: rgba(var(--ctp-mantle), 0.3) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-left: 3px solid rgb(var(--ctp-accent));
+    border-radius: 0 8px 8px 0;
+    padding: 1rem;
+    margin: 1rem 0;
+    position: relative;
+}
+
+/* Embed title/link */
+.markdown-embed-title,
+.embed-title {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: rgb(var(--ctp-accent));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.markdown-embed-title::before {
+    content: "📎";
+    font-size: 1em;
+}
+
+/* Embed content */
+.markdown-embed-content {
+    font-size: 0.95em;
+    color: rgba(var(--ctp-text), 0.9);
+}
+
+/* Nested embeds */
+.markdown-embed .markdown-embed {
+    background: rgba(var(--ctp-base), 0.5) !important;
+    border-left-color: rgba(var(--ctp-accent), 0.5);
+    margin: 0.75rem 0;
+}
+
+/* Hover effect */
+.markdown-embed:hover {
+    border-color: rgba(var(--ctp-accent), 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Image embeds */
+.internal-embed.image-embed {
+    border: none;
+    background: transparent !important;
+    padding: 0;
+}
+
+/* Embed link icon */
+.markdown-embed-link {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+
+.markdown-embed:hover .markdown-embed-link {
+    opacity: 1;
+}
+
+
+/* ================================================================================
+   SECTION 36: PROGRESS BARS
+   Visual progress indicators using Dataview or custom syntax
+   Syntax: `[progress:: 75]` or cssclass: progress-75
+   ================================================================================ */
+
+/* Dataview progress bars */
+.dataview span[data-value^="progress"]::after,
+span.progress-bar {
+    content: "";
+    display: inline-block;
+    width: 100px;
+    height: 8px;
+    background: rgba(var(--ctp-crust), 0.5);
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Progress fill - using CSS variables */
+.progress-10::after, [data-value="progress-10"]::after { background: linear-gradient(90deg, #e05050 10%, transparent 10%); }
+.progress-20::after, [data-value="progress-20"]::after { background: linear-gradient(90deg, #e07030 20%, transparent 20%); }
+.progress-30::after, [data-value="progress-30"]::after { background: linear-gradient(90deg, #e09030 30%, transparent 30%); }
+.progress-40::after, [data-value="progress-40"]::after { background: linear-gradient(90deg, #d0a030 40%, transparent 40%); }
+.progress-50::after, [data-value="progress-50"]::after { background: linear-gradient(90deg, #c0b030 50%, transparent 50%); }
+.progress-60::after, [data-value="progress-60"]::after { background: linear-gradient(90deg, #90b040 60%, transparent 60%); }
+.progress-70::after, [data-value="progress-70"]::after { background: linear-gradient(90deg, #70b050 70%, transparent 70%); }
+.progress-80::after, [data-value="progress-80"]::after { background: linear-gradient(90deg, #60b060 80%, transparent 80%); }
+.progress-90::after, [data-value="progress-90"]::after { background: linear-gradient(90deg, #50b070 90%, transparent 90%); }
+.progress-100::after, [data-value="progress-100"]::after { background: linear-gradient(90deg, #50a080 100%, transparent 100%); }
+
+/* Progress with labels */
+.progress-labeled::before {
+    content: attr(data-progress) "%";
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    color: rgb(var(--ctp-text));
+}
+
+/* Animated progress */
+.progress-animated::after {
+    animation: progress-shine 2s ease-in-out infinite;
+}
+
+@keyframes progress-shine {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+
+/* Task progress in lists */
+.contains-task-list {
+    --task-total: 0;
+    --task-done: 0;
+}
+
+/* Callout-based progress */
+.callout[data-callout="progress"] {
+    --callout-color: 80, 160, 120;
+    --callout-icon: lucide-bar-chart;
+}
+
+.callout[data-callout="progress"] .callout-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+/* ================================================================================
+   SECTION 37: CANVAS ENHANCEMENTS
+   Card colors, connection styles, group styling
+   ================================================================================ */
+
+/* Canvas background */
+.canvas-wrapper {
+    background: rgb(var(--ctp-crust)) !important;
+}
+
+/* Canvas cards */
+.canvas-node {
+    background: rgb(var(--ctp-base)) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.canvas-node:hover {
+    border-color: rgba(var(--ctp-accent), 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.canvas-node.is-focused {
+    border-color: rgb(var(--ctp-accent));
+    box-shadow: 0 0 0 2px rgba(var(--ctp-accent), 0.3);
+}
+
+/* Canvas node content */
+.canvas-node-content {
+    padding: 1rem;
+}
+
+/* Canvas node label */
+.canvas-node-label {
+    font-weight: 600;
+    color: rgb(var(--ctp-text));
+    padding: 0.5rem;
+    background: rgba(var(--ctp-mantle), 0.5);
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
+}
+
+/* Canvas connections */
+.canvas-edge {
+    stroke: rgba(var(--ctp-accent), 0.5) !important;
+    stroke-width: 2px;
+}
+
+.canvas-edge:hover {
+    stroke: rgb(var(--ctp-accent)) !important;
+    stroke-width: 3px;
+}
+
+/* Canvas edge arrows */
+.canvas-edge-end {
+    fill: rgba(var(--ctp-accent), 0.5) !important;
+}
+
+/* Canvas groups */
+.canvas-node-group {
+    background: rgba(var(--ctp-accent), 0.05) !important;
+    border: 2px dashed rgba(var(--ctp-accent), 0.3);
+    border-radius: 12px;
+}
+
+.canvas-node-group .canvas-node-label {
+    background: rgba(var(--ctp-accent), 0.1);
+    color: rgb(var(--ctp-accent));
+}
+
+/* Canvas color presets */
+.canvas-node[data-node-color="1"] { border-left: 4px solid #e05050; }
+.canvas-node[data-node-color="2"] { border-left: 4px solid #e09050; }
+.canvas-node[data-node-color="3"] { border-left: 4px solid #f0c040; }
+.canvas-node[data-node-color="4"] { border-left: 4px solid #70b060; }
+.canvas-node[data-node-color="5"] { border-left: 4px solid #50b0a0; }
+.canvas-node[data-node-color="6"] { border-left: 4px solid #5090d0; }
+
+/* Canvas minimap */
+.canvas-minimap {
+    background: rgba(var(--ctp-mantle), 0.9);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+}
+
+/* Canvas controls */
+.canvas-controls {
+    background: rgba(var(--ctp-mantle), 0.9);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.canvas-controls button {
+    background: transparent;
+    border: none;
+    color: rgb(var(--ctp-text));
+    padding: 6px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.canvas-controls button:hover {
+    background: rgba(var(--ctp-accent), 0.2);
+}
 
 
 /* ================================================================================
