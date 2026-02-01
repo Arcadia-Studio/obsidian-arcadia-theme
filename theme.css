@@ -5498,5 +5498,600 @@ iframe[src*="vimeo"] {
 
 
 /* ================================================================================
+   SECTION 39: PAPER STYLES (OneNote-Style)
+
+   Lined, grid, and dotted paper backgrounds for a notebook feel.
+   Apply via cssclasses in frontmatter:
+   - paper-lined: College ruled lines
+   - paper-grid: Square grid paper
+   - paper-dot: Dot grid (bullet journal style)
+   - paper-graph: Engineering graph paper
+   - paper-legal: Legal pad yellow lined
+   - paper-cornell: Cornell note-taking format
+   ================================================================================ */
+
+/* ====== Base Paper Style ====== */
+.paper-lined .markdown-preview-view,
+.paper-grid .markdown-preview-view,
+.paper-dot .markdown-preview-view,
+.paper-graph .markdown-preview-view,
+.paper-legal .markdown-preview-view,
+.paper-cornell .markdown-preview-view,
+.paper-lined .cm-content,
+.paper-grid .cm-content,
+.paper-dot .cm-content,
+.paper-graph .cm-content,
+.paper-legal .cm-content,
+.paper-cornell .cm-content {
+    background-attachment: local;
+    background-repeat: repeat;
+}
+
+/* ====== College Ruled Lines ====== */
+.paper-lined .markdown-preview-view,
+.paper-lined .cm-content {
+    background-image:
+        linear-gradient(transparent 0px, transparent 27px, rgba(var(--ctp-accent), 0.3) 27px, rgba(var(--ctp-accent), 0.3) 28px),
+        linear-gradient(90deg, transparent 0px, transparent 60px, rgba(200, 80, 80, 0.4) 60px, rgba(200, 80, 80, 0.4) 62px, transparent 62px);
+    background-size: 100% 28px, 100% 100%;
+    padding-left: 70px !important;
+    line-height: 28px !important;
+}
+
+/* Lined paper - subtle version */
+.paper-lined-subtle .markdown-preview-view,
+.paper-lined-subtle .cm-content {
+    background-image:
+        linear-gradient(transparent 0px, transparent 27px, rgba(var(--ctp-text), 0.08) 27px, rgba(var(--ctp-text), 0.08) 28px);
+    background-size: 100% 28px;
+    line-height: 28px !important;
+}
+
+/* ====== Square Grid Paper ====== */
+.paper-grid .markdown-preview-view,
+.paper-grid .cm-content {
+    background-image:
+        linear-gradient(rgba(var(--ctp-accent), 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Grid paper - small squares */
+.paper-grid-sm .markdown-preview-view,
+.paper-grid-sm .cm-content {
+    background-image:
+        linear-gradient(rgba(var(--ctp-accent), 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.12) 1px, transparent 1px);
+    background-size: 12px 12px;
+}
+
+/* Grid paper - large squares */
+.paper-grid-lg .markdown-preview-view,
+.paper-grid-lg .cm-content {
+    background-image:
+        linear-gradient(rgba(var(--ctp-accent), 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.18) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+/* ====== Dot Grid Paper (Bullet Journal) ====== */
+.paper-dot .markdown-preview-view,
+.paper-dot .cm-content {
+    background-image: radial-gradient(circle, rgba(var(--ctp-text), 0.25) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Dot grid - wider spacing */
+.paper-dot-wide .markdown-preview-view,
+.paper-dot-wide .cm-content {
+    background-image: radial-gradient(circle, rgba(var(--ctp-text), 0.25) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+}
+
+/* ====== Engineering Graph Paper ====== */
+.paper-graph .markdown-preview-view,
+.paper-graph .cm-content {
+    background-image:
+        /* Major grid lines */
+        linear-gradient(rgba(var(--ctp-accent), 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.25) 1px, transparent 1px),
+        /* Minor grid lines */
+        linear-gradient(rgba(var(--ctp-accent), 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.08) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+/* ====== Legal Pad (Yellow Lined) ====== */
+.paper-legal .markdown-preview-view,
+.paper-legal .cm-content {
+    background-color: #fffde7 !important;
+    background-image:
+        linear-gradient(transparent 0px, transparent 27px, #c8e0f0 27px, #c8e0f0 28px),
+        linear-gradient(90deg, transparent 0px, transparent 50px, #f0a0a0 50px, #f0a0a0 52px, transparent 52px);
+    background-size: 100% 28px, 100% 100%;
+    padding-left: 60px !important;
+    line-height: 28px !important;
+}
+
+/* Legal pad text color adjustment for readability */
+.paper-legal .markdown-preview-view,
+.paper-legal .cm-content,
+.paper-legal .markdown-preview-view p,
+.paper-legal .cm-line {
+    color: #1a1a1a !important;
+}
+
+/* ====== Cornell Notes Format ====== */
+.paper-cornell .markdown-preview-view,
+.paper-cornell .cm-content {
+    background-image:
+        /* Horizontal line at top for title */
+        linear-gradient(transparent 0px, transparent 59px, rgba(var(--ctp-accent), 0.4) 59px, rgba(var(--ctp-accent), 0.4) 61px, transparent 61px),
+        /* Vertical line for cue column */
+        linear-gradient(90deg, transparent 0px, transparent 180px, rgba(var(--ctp-accent), 0.4) 180px, rgba(var(--ctp-accent), 0.4) 182px, transparent 182px),
+        /* Bottom summary area line */
+        linear-gradient(transparent calc(100% - 120px), rgba(var(--ctp-accent), 0.4) calc(100% - 120px), rgba(var(--ctp-accent), 0.4) calc(100% - 118px), transparent calc(100% - 118px)),
+        /* Subtle ruled lines */
+        linear-gradient(transparent 0px, transparent 27px, rgba(var(--ctp-text), 0.06) 27px, rgba(var(--ctp-text), 0.06) 28px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 28px;
+    padding-left: 190px !important;
+    padding-top: 70px !important;
+    padding-bottom: 130px !important;
+}
+
+/* Cornell labels */
+.paper-cornell .markdown-preview-view::before {
+    content: "Notes";
+    position: absolute;
+    top: 20px;
+    left: 200px;
+    font-size: 0.75em;
+    color: rgba(var(--ctp-text), 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ====== Isometric Grid ====== */
+.paper-iso .markdown-preview-view,
+.paper-iso .cm-content {
+    background-image:
+        linear-gradient(30deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(150deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(30deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(150deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(60deg, rgba(var(--ctp-accent), 0.08) 25%, transparent 25.5%, transparent 75%, rgba(var(--ctp-accent), 0.08) 75%, rgba(var(--ctp-accent), 0.08)),
+        linear-gradient(60deg, rgba(var(--ctp-accent), 0.08) 25%, transparent 25.5%, transparent 75%, rgba(var(--ctp-accent), 0.08) 75%, rgba(var(--ctp-accent), 0.08));
+    background-size: 40px 70px;
+    background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+}
+
+/* ====== Music Staff Paper ====== */
+.paper-music .markdown-preview-view,
+.paper-music .cm-content {
+    background-image:
+        repeating-linear-gradient(
+            transparent 0px,
+            transparent 10px,
+            rgba(var(--ctp-text), 0.2) 10px,
+            rgba(var(--ctp-text), 0.2) 11px,
+            transparent 11px,
+            transparent 21px,
+            rgba(var(--ctp-text), 0.2) 21px,
+            rgba(var(--ctp-text), 0.2) 22px,
+            transparent 22px,
+            transparent 32px,
+            rgba(var(--ctp-text), 0.2) 32px,
+            rgba(var(--ctp-text), 0.2) 33px,
+            transparent 33px,
+            transparent 43px,
+            rgba(var(--ctp-text), 0.2) 43px,
+            rgba(var(--ctp-text), 0.2) 44px,
+            transparent 44px,
+            transparent 54px,
+            rgba(var(--ctp-text), 0.2) 54px,
+            rgba(var(--ctp-text), 0.2) 55px,
+            transparent 55px,
+            transparent 100px
+        );
+    background-size: 100% 100px;
+}
+
+/* ====== Page Tint Colors (OneNote-style) ====== */
+.paper-cream .markdown-preview-view,
+.paper-cream .cm-content { background-color: rgba(255, 253, 240, 0.5) !important; }
+
+.paper-blue .markdown-preview-view,
+.paper-blue .cm-content { background-color: rgba(240, 248, 255, 0.5) !important; }
+
+.paper-green .markdown-preview-view,
+.paper-green .cm-content { background-color: rgba(240, 255, 244, 0.5) !important; }
+
+.paper-pink .markdown-preview-view,
+.paper-pink .cm-content { background-color: rgba(255, 245, 250, 0.5) !important; }
+
+.paper-yellow .markdown-preview-view,
+.paper-yellow .cm-content { background-color: rgba(255, 255, 240, 0.5) !important; }
+
+.paper-lavender .markdown-preview-view,
+.paper-lavender .cm-content { background-color: rgba(248, 245, 255, 0.5) !important; }
+
+/* Dark mode page tints */
+.theme-dark .paper-cream .markdown-preview-view,
+.theme-dark .paper-cream .cm-content { background-color: rgba(45, 42, 35, 0.5) !important; }
+
+.theme-dark .paper-blue .markdown-preview-view,
+.theme-dark .paper-blue .cm-content { background-color: rgba(35, 42, 50, 0.5) !important; }
+
+.theme-dark .paper-green .markdown-preview-view,
+.theme-dark .paper-green .cm-content { background-color: rgba(35, 45, 38, 0.5) !important; }
+
+.theme-dark .paper-pink .markdown-preview-view,
+.theme-dark .paper-pink .cm-content { background-color: rgba(48, 38, 42, 0.5) !important; }
+
+.theme-dark .paper-yellow .markdown-preview-view,
+.theme-dark .paper-yellow .cm-content { background-color: rgba(48, 46, 35, 0.5) !important; }
+
+.theme-dark .paper-lavender .markdown-preview-view,
+.theme-dark .paper-lavender .cm-content { background-color: rgba(42, 38, 50, 0.5) !important; }
+
+
+/* ================================================================================
+   SECTION 40: STICKY NOTES CALLOUTS (OneNote-Style)
+
+   Colorful Post-it style callouts with 7 colors.
+   Usage: > [!sticky-yellow] or > [!note-yellow], etc.
+   Colors: yellow, pink, blue, green, purple, orange, gray
+   ================================================================================ */
+
+/* ====== Base Sticky Note Style ====== */
+.callout[data-callout^="sticky"],
+.callout[data-callout^="note-"] {
+    --callout-padding: 16px;
+    padding: 0;
+    border: none;
+    border-radius: 2px 2px 4px 4px;
+    box-shadow:
+        2px 2px 8px rgba(0, 0, 0, 0.15),
+        0 0 1px rgba(0, 0, 0, 0.1);
+    transform: rotate(-1deg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 1.5rem 0;
+    max-width: 350px;
+    position: relative;
+}
+
+/* Hover effect */
+.callout[data-callout^="sticky"]:hover,
+.callout[data-callout^="note-"]:hover {
+    transform: rotate(0deg) translateY(-2px);
+    box-shadow:
+        4px 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky note tape/pin effect at top */
+.callout[data-callout^="sticky"]::before,
+.callout[data-callout^="note-"]::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove default callout icon */
+.callout[data-callout^="sticky"] .callout-icon,
+.callout[data-callout^="note-"] .callout-icon {
+    display: none;
+}
+
+/* Title styling */
+.callout[data-callout^="sticky"] .callout-title,
+.callout[data-callout^="note-"] .callout-title {
+    padding: 12px 16px 8px 16px;
+    font-weight: 600;
+    font-size: 0.95em;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+/* Content styling */
+.callout[data-callout^="sticky"] .callout-content,
+.callout[data-callout^="note-"] .callout-content {
+    padding: 12px 16px 16px 16px;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* Handwriting-style font option */
+.sticky-handwriting .callout[data-callout^="sticky"] .callout-content,
+.sticky-handwriting .callout[data-callout^="note-"] .callout-content {
+    font-family: 'Caveat', 'Comic Sans MS', cursive;
+    font-size: 1.1em;
+}
+
+/* ====== Yellow Sticky (Default Post-it) ====== */
+.callout[data-callout="sticky-yellow"],
+.callout[data-callout="sticky"],
+.callout[data-callout="note-yellow"],
+.callout[data-callout="postit"] {
+    background: linear-gradient(135deg, #fff9b1 0%, #fff176 100%);
+}
+
+.callout[data-callout="sticky-yellow"] .callout-title,
+.callout[data-callout="sticky"] .callout-title,
+.callout[data-callout="note-yellow"] .callout-title,
+.callout[data-callout="postit"] .callout-title {
+    color: #5d4e00;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-yellow"] .callout-content,
+.callout[data-callout="sticky"] .callout-content,
+.callout[data-callout="note-yellow"] .callout-content,
+.callout[data-callout="postit"] .callout-content {
+    color: #3d3200;
+}
+
+/* ====== Pink Sticky ====== */
+.callout[data-callout="sticky-pink"],
+.callout[data-callout="note-pink"] {
+    background: linear-gradient(135deg, #ffcdd2 0%, #f8bbd9 100%);
+}
+
+.callout[data-callout="sticky-pink"] .callout-title,
+.callout[data-callout="note-pink"] .callout-title {
+    color: #6d1b3a;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-pink"] .callout-content,
+.callout[data-callout="note-pink"] .callout-content {
+    color: #4a1228;
+}
+
+/* ====== Blue Sticky ====== */
+.callout[data-callout="sticky-blue"],
+.callout[data-callout="note-blue"] {
+    background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+}
+
+.callout[data-callout="sticky-blue"] .callout-title,
+.callout[data-callout="note-blue"] .callout-title {
+    color: #0d3c61;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-blue"] .callout-content,
+.callout[data-callout="note-blue"] .callout-content {
+    color: #0a2a42;
+}
+
+/* ====== Green Sticky ====== */
+.callout[data-callout="sticky-green"],
+.callout[data-callout="note-green"] {
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+}
+
+.callout[data-callout="sticky-green"] .callout-title,
+.callout[data-callout="note-green"] .callout-title {
+    color: #1b5e20;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-green"] .callout-content,
+.callout[data-callout="note-green"] .callout-content {
+    color: #133a14;
+}
+
+/* ====== Purple Sticky ====== */
+.callout[data-callout="sticky-purple"],
+.callout[data-callout="note-purple"] {
+    background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+}
+
+.callout[data-callout="sticky-purple"] .callout-title,
+.callout[data-callout="note-purple"] .callout-title {
+    color: #4a148c;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-purple"] .callout-content,
+.callout[data-callout="note-purple"] .callout-content {
+    color: #320b5e;
+}
+
+/* ====== Orange Sticky ====== */
+.callout[data-callout="sticky-orange"],
+.callout[data-callout="note-orange"] {
+    background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+}
+
+.callout[data-callout="sticky-orange"] .callout-title,
+.callout[data-callout="note-orange"] .callout-title {
+    color: #7a3d00;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-orange"] .callout-content,
+.callout[data-callout="note-orange"] .callout-content {
+    color: #522900;
+}
+
+/* ====== Gray Sticky ====== */
+.callout[data-callout="sticky-gray"],
+.callout[data-callout="sticky-grey"],
+.callout[data-callout="note-gray"],
+.callout[data-callout="note-grey"] {
+    background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+}
+
+.callout[data-callout="sticky-gray"] .callout-title,
+.callout[data-callout="sticky-grey"] .callout-title,
+.callout[data-callout="note-gray"] .callout-title,
+.callout[data-callout="note-grey"] .callout-title {
+    color: #333;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-gray"] .callout-content,
+.callout[data-callout="sticky-grey"] .callout-content,
+.callout[data-callout="note-gray"] .callout-content,
+.callout[data-callout="note-grey"] .callout-content {
+    color: #1a1a1a;
+}
+
+/* ====== Teal Sticky ====== */
+.callout[data-callout="sticky-teal"],
+.callout[data-callout="note-teal"] {
+    background: linear-gradient(135deg, #b2dfdb 0%, #80cbc4 100%);
+}
+
+.callout[data-callout="sticky-teal"] .callout-title,
+.callout[data-callout="note-teal"] .callout-title {
+    color: #004d40;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-teal"] .callout-content,
+.callout[data-callout="note-teal"] .callout-content {
+    color: #00332b;
+}
+
+/* ====== Sticky Note Variations ====== */
+
+/* Tilted right */
+.callout[data-callout$="-right"] {
+    transform: rotate(1.5deg) !important;
+}
+
+.callout[data-callout$="-right"]:hover {
+    transform: rotate(0deg) translateY(-2px) !important;
+}
+
+/* Tilted left */
+.callout[data-callout$="-left"] {
+    transform: rotate(-2deg) !important;
+}
+
+.callout[data-callout$="-left"]:hover {
+    transform: rotate(0deg) translateY(-2px) !important;
+}
+
+/* Full width sticky */
+.callout[data-callout$="-wide"] {
+    max-width: 100%;
+}
+
+/* Stacked sticky notes effect */
+.sticky-stack .callout[data-callout^="sticky"],
+.sticky-stack .callout[data-callout^="note-"] {
+    margin-bottom: -20px;
+}
+
+.sticky-stack .callout[data-callout^="sticky"]:nth-child(odd),
+.sticky-stack .callout[data-callout^="note-"]:nth-child(odd) {
+    transform: rotate(-1deg);
+    margin-left: 10px;
+}
+
+.sticky-stack .callout[data-callout^="sticky"]:nth-child(even),
+.sticky-stack .callout[data-callout^="note-"]:nth-child(even) {
+    transform: rotate(1.5deg);
+    margin-left: -10px;
+}
+
+/* ====== Pin Style (instead of tape) ====== */
+.sticky-pin .callout[data-callout^="sticky"]::before,
+.sticky-pin .callout[data-callout^="note-"]::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #c0392b);
+    border-radius: 50%;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Folded Corner Effect ====== */
+.sticky-fold .callout[data-callout^="sticky"]::after,
+.sticky-fold .callout[data-callout^="note-"]::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 25px 25px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+}
+
+/* ====== Inline Sticky Notes (smaller) ====== */
+.callout[data-callout$="-sm"],
+.callout[data-callout$="-small"] {
+    max-width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.5rem;
+}
+
+.callout[data-callout$="-sm"] .callout-title,
+.callout[data-callout$="-small"] .callout-title {
+    padding: 8px 12px 6px 12px;
+    font-size: 0.85em;
+}
+
+.callout[data-callout$="-sm"] .callout-content,
+.callout[data-callout$="-small"] .callout-content {
+    padding: 8px 12px 12px 12px;
+    font-size: 0.8em;
+}
+
+/* ====== No Transform (flat stickies) ====== */
+.sticky-flat .callout[data-callout^="sticky"],
+.sticky-flat .callout[data-callout^="note-"] {
+    transform: none !important;
+}
+
+.sticky-flat .callout[data-callout^="sticky"]:hover,
+.sticky-flat .callout[data-callout^="note-"]:hover {
+    transform: translateY(-2px) !important;
+}
+
+/* ====== Dark Mode Adjustments ====== */
+.theme-dark .callout[data-callout^="sticky"]::before,
+.theme-dark .callout[data-callout^="note-"]::before {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Slightly reduce brightness in dark mode for easier reading */
+.theme-dark .callout[data-callout^="sticky"],
+.theme-dark .callout[data-callout^="note-"] {
+    filter: brightness(0.9);
+}
+
+/* ====== Print Styles ====== */
+@media print {
+    .callout[data-callout^="sticky"],
+    .callout[data-callout^="note-"] {
+        transform: none !important;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        max-width: 100% !important;
+    }
+}
+
+
+/* ================================================================================
    END OF ARCADIA THEME
    ================================================================================ */
