@@ -1,50 +1,40 @@
 /* ================================================================================
    ARCADIA THEME FOR OBSIDIAN
-   
-   A sophisticated dark theme framework with multiple color schemes,
-   hierarchical folder organization, and comprehensive typography controls.
-   
+
+   A comprehensive Obsidian theme with 23 color schemes, polished media handling,
+   OneNote-style features, and extensive customization through Style Settings.
+
    Author: Peter J. Carter
    Website: https://theologyinfocus.org
-   Version: 1.1.0 (Garamond, Caslon, Charcoal, Dyslexia Mode)
-   Last Updated: 2026-01-31
+   Version: 2.0.0
+   Last Updated: 2026-02-01
    Minimum Obsidian Version: 0.16.0
-   
-   DESIGN PHILOSOPHY:
-   - RGB triplet system for consistent rgba() usage across light/dark modes
-   - Hierarchical folder coloring (10-color top-level cycle + depth-based nesting)
-   - Extensive Style Settings integration for user customization
-   - Professional typography with multiple font options
-   - WCAG AA compliant contrast ratios in all color schemes
-   
+
+   FEATURES:
+   - 11 Dark themes + 12 Light themes (including NY Times & Wikipedia)
+   - 50+ file type icons with custom colors
+   - 21 alternate checkbox types with icons
+   - OneNote-style media embedding (images, video, audio)
+   - Paper styles (lined, grid, dot, Cornell, legal pad)
+   - Sticky notes callouts (8 colors)
+   - Cards view, rainbow folders, tag colors
+   - Code syntax themes (Dracula, Nord, GitHub)
+   - Full Style Settings integration (60+ options)
+   - WCAG AA compliant contrast ratios
+
    TABLE OF CONTENTS:
    1. CSS Reset & Core Variables
    2. Base Element Styles
-   3. Obsidian Theme Settings (8 categories with 50+ options)
-   4. Dark Theme Color Schemes (10 variants)
-   4.5. Light Theme Color Schemes (10 variants - WCAG AA compliant)
-   5-17. Core Theme Elements (Typography, Content, Code, etc.)
-   18. Typography Controls (Font size, line height, reading width)
-   19. Editor Enhancements (Active line, focus mode, line numbers)
-   20. Expanded Font Options (10 content fonts, 6 code fonts)
-   21. Links & Tags (Link styles, tag styles, highlight colors)
-   22. Lists & Checkboxes (Styles, priorities, indentation guides)
-   23. Table Enhancements (Striped, borderless, compact, sticky headers)
-   24. Workspace Customization (Tab styles)
-   25. Accessibility Features (High contrast, reduce motion, dyslexia mode)
-   ================================================================================ */
-   6. Content Elements (Paragraphs, Lists, Blockquotes)
-   7. Code Blocks & Inline Code
-   8. Callouts System
-   9. Tables & Canvas
-   10. Search Interface
-   11. Plugin Compatibility
-   12. Navigation Sidebar & File Explorer
-   13. Folder Tree Icons & Color Coding
-   14. File Type Icons
-   15. Interactive States & Transitions
-   16. Settings Modal & Dialogs
-   17. Mobile Responsiveness
+   3. Style Settings (10 categories, 60+ options)
+   4. Dark Theme Color Schemes (11 variants)
+   5. Light Theme Color Schemes (12 variants)
+   6-17. Core Theme Elements
+   18-20. Navigation, File Icons, Checkboxes
+   21-29. Typography, Editor, Accessibility
+   30-37. Advanced Features (Code, Graph, Tabs, Tags, Canvas)
+   38. Polished Media Embedding
+   39. Paper Styles
+   40. Sticky Notes Callouts
    ================================================================================ */
 
 
@@ -63,6 +53,26 @@
    while allowing per-theme opacity adjustments.
    ================================================================================ */
 @charset "UTF-8";
+
+/* ================================================================================
+   FONT IMPORTS (must be at top of CSS file for proper loading)
+   ================================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css');
+
 
 :root,
 .theme-light,
@@ -83,6 +93,17 @@
     --ctp-success: 152, 195, 121;  /* Success states, confirmations */
     --ctp-warning: 229, 192, 123;  /* Warnings, cautions */
     --ctp-error: 231, 130, 132;    /* Errors, critical alerts */
+
+    /* Text Color */
+    --ctp-text: 230, 230, 230;     /* Primary text color */
+
+    /* Surface Colors - For layered UI elements */
+    --ctp-surface0: 45, 45, 50;    /* Lowest elevation surface */
+    --ctp-surface1: 55, 55, 60;    /* Medium elevation surface */
+    --ctp-surface2: 65, 65, 70;    /* Higher elevation surface */
+
+    /* Additional UI Colors */
+    --ctp-orchid: 180, 130, 200;   /* Accent variant for special elements */
 
     /* ====== Typography System ======
        Font stacks with system fallbacks for reliability */
@@ -185,8 +206,8 @@ settings:
     options:
       - label: Granite (Cool Neutral)
         value: ctp-granite
-      - label: Stone
-        value: ctp-Stone
+      - label: Stone (Cool Slate)
+        value: ctp-stone
       - label: Olive (Warm Earthy)
         value: ctp-olive
       - label: Flint (Cool Professional)
@@ -232,6 +253,10 @@ settings:
         value: ctp-silver
       - label: Cream (Golden White)
         value: ctp-cream
+      - label: NY Times (Classic Newspaper)
+        value: ctp-nytimes
+      - label: Wikipedia (Encyclopedia)
+        value: ctp-wikipedia
 */
 
 /* @settings
@@ -537,22 +562,153 @@ settings:
     description: Minimize animations and transitions
     type: class-toggle
     default: false
-*/
-        value: active-line-off
-      - label: Subtle
-        value: active-line-subtle
-      - label: Moderate
-        value: active-line-moderate
-      - label: Strong
-        value: active-line-strong
-  - id: focus-mode
-    title: Focus Mode
-    description: Dim inactive paragraphs for distraction-free writing
+  - id: dyslexia-friendly
+    title: Dyslexia-Friendly Mode
+    description: Use OpenDyslexic font with improved spacing
     type: class-toggle
     default: false
-  - id: show-line-numbers
-    title: Show Line Numbers
-    description: Display line numbers in editor
+*/
+
+/* @settings
+name: Arcadia Advanced Features
+id: arcadia-advanced
+settings:
+  - id: rainbow-folders
+    title: Rainbow Folders
+    description: Color-code folders automatically by position
+    type: class-toggle
+    default: false
+  - id: cards
+    title: Cards View (Dataview)
+    description: Transform Dataview tables into card layouts
+    type: class-toggle
+    default: false
+  - id: cards-cover
+    title: Cards Cover Images
+    description: Make images fill the card space (requires Cards View)
+    type: class-toggle
+    default: false
+  - id: img-grid
+    title: Image Grid
+    description: Turn consecutive images into column layouts
+    type: class-toggle
+    default: false
+  - id: code-line-numbers
+    title: Code Line Numbers
+    description: Show line numbers in code blocks
+    type: class-toggle
+    default: false
+  - id: syntax-dracula
+    title: Dracula Syntax Theme
+    description: Dark purple syntax highlighting for code blocks
+    type: class-toggle
+    default: false
+  - id: syntax-nord
+    title: Nord Syntax Theme
+    description: Arctic blue syntax highlighting for code blocks
+    type: class-toggle
+    default: false
+  - id: syntax-github
+    title: GitHub Syntax Theme
+    description: GitHub-style syntax highlighting for code blocks
+    type: class-toggle
+    default: false
+  - id: graph-animated
+    title: Animated Graph Connections
+    description: Add subtle pulsing animation to graph view connections
+    type: class-toggle
+    default: false
+  - id: stacked-tabs
+    title: Stacked Tabs (Andy Mode)
+    description: Enable Andy Matuschak-style sliding panes
+    type: class-toggle
+    default: false
+  - id: embed-borders
+    title: Bordered Embeds
+    description: Add accent borders to embedded notes
+    type: class-toggle
+    default: false
+  - id: media-polished
+    title: Polished Media Borders
+    description: Add subtle borders and padding to images
+    type: class-toggle
+    default: false
+  - id: media-large-controls
+    title: Large Media Controls
+    description: Bigger audio/video controls for accessibility
+    type: class-toggle
+    default: false
+  - id: media-waveform
+    title: Audio Waveform Style
+    description: Show decorative waveform visualization on audio embeds
+    type: class-toggle
+    default: false
+  - id: media-no-shadow
+    title: No Media Shadows
+    description: Remove shadows from images and videos
+    type: class-toggle
+    default: false
+  - id: media-rounded-lg
+    title: Extra Rounded Media
+    description: Use larger border radius on media elements
+    type: class-toggle
+    default: false
+*/
+
+/* @settings
+name: Arcadia Paper & Notes
+id: arcadia-paper
+settings:
+  - id: paper-styles-heading
+    title: Paper Styles
+    description: Add notebook backgrounds via cssclasses (e.g., paper-lined)
+    type: heading
+    level: 3
+    collapsed: true
+  - id: paper-lined
+    title: Lined Paper
+    description: College ruled lines with red margin
+    type: class-toggle
+    default: false
+  - id: paper-grid
+    title: Grid Paper
+    description: Square grid pattern
+    type: class-toggle
+    default: false
+  - id: paper-dot
+    title: Dot Grid Paper
+    description: Dot grid for bullet journaling
+    type: class-toggle
+    default: false
+  - id: paper-cornell
+    title: Cornell Notes Layout
+    description: Cornell note-taking format with sections
+    type: class-toggle
+    default: false
+  - id: sticky-notes-heading
+    title: Sticky Notes Options
+    description: Customize sticky note callout appearance
+    type: heading
+    level: 3
+    collapsed: true
+  - id: sticky-pin
+    title: Pushpin Style
+    description: Use pushpin instead of tape on sticky notes
+    type: class-toggle
+    default: false
+  - id: sticky-fold
+    title: Folded Corner
+    description: Add folded corner effect to sticky notes
+    type: class-toggle
+    default: false
+  - id: sticky-flat
+    title: Flat Sticky Notes
+    description: Remove rotation from sticky notes
+    type: class-toggle
+    default: false
+  - id: sticky-handwriting
+    title: Handwriting Font
+    description: Use handwriting-style font in sticky notes
     type: class-toggle
     default: false
 */
@@ -647,50 +803,55 @@ settings:
 }
 
 
-/* ====== Dark Theme: Stone ====== */
-.theme-dark.ctp-Stone {
-    --ctp-crust: 10, 10, 10;
-    --ctp-base: 25, 25, 25;
-    --ctp-mantle: 45, 45, 45;
-    --ctp-text: 255, 255, 255;
-    --ctp-green: 100, 144, 100;
-    --ctp-red: 188, 80, 89;
-    --ctp-maroon: 160, 70, 80;
-    --ctp-apricot: 225, 185, 130;
-    --ctp-gold: 255, 215, 95;
-    --ctp-teal: 80, 146, 155;
-    --ctp-aqua: 127, 219, 255;
-    --ctp-indigo: 75, 0, 130;
-    --ctp-blue: 80, 120, 180;
-    --ctp-lavender: 140, 150, 180;
-    /* Lines and borders */
-    --divider-color: rgb(var(--ctp-crust));
-    --divider-color-hover: rgb(var(--ctp-crust));
-    --hr-color: rgb(var(--ctp-crust));
-    --table-border-color: rgb(var(--ctp-crust));
-    --background-modifier-border: rgb(var(--ctp-crust));
+/* ====== Dark Theme: Stone (Cool Slate) ======
+   A cool blue-gray stone aesthetic, like polished slate or river rock.
+   Distinct from Granite with its blue undertones. */
+.theme-dark.ctp-stone {
+    --ctp-crust: 18, 22, 26;       /* ~#12161A - Deep slate shadow */
+    --ctp-base: 35, 40, 48;        /* ~#232830 - Cool blue-gray stone */
+    --ctp-mantle: 48, 54, 62;      /* ~#30363E - Lighter slate */
+    --ctp-text: 220, 225, 232;     /* ~#DCE1E8 - Soft silver-white */
+    --ctp-green: 130, 180, 140;    /* Sage green */
+    --ctp-red: 200, 100, 110;      /* Soft coral */
+    --ctp-maroon: 175, 90, 100;    /* Dusty rose */
+    --ctp-apricot: 220, 180, 140;  /* Warm sand */
+    --ctp-gold: 230, 200, 120;     /* Muted gold */
+    --ctp-teal: 100, 165, 175;     /* Cool teal */
+    --ctp-aqua: 140, 200, 220;     /* Soft aqua */
+    --ctp-indigo: 120, 110, 180;   /* Soft indigo */
+    --ctp-blue: 110, 150, 200;     /* Steel blue */
+    --ctp-lavender: 160, 165, 195; /* Cool lavender */
+
+    /* Lines and borders - subtle blue-gray */
+    --divider-color: rgba(100, 115, 130, 0.3);
+    --divider-color-hover: rgba(100, 115, 130, 0.5);
+    --hr-color: rgba(100, 115, 130, 0.4);
+    --table-border-color: rgba(100, 115, 130, 0.3);
+    --background-modifier-border: rgba(100, 115, 130, 0.25);
+
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* Steel blue accent for this theme */
+    --ctp-accent: 110, 150, 200;
 }
 
-    /* Folder & file titles in sidebar */
-    .theme-dark.ctp-Stone .nav-folder-title,
-    .theme-dark.ctp-Stone .nav-file-title,
-    .theme-dark.ctp-Stone .workspace-ribbon {
-        color: #f3eca8 !important;
-    }
+/* Stone sidebar - cool silver tones */
+.theme-dark.ctp-stone .nav-folder-title .nav-folder-title-content {
+    color: #c8d0dc !important;
+}
 
-        .theme-dark.ctp-Stone .nav-folder-title .nav-folder-title-content {
-            color: #cac27b !important;
-        }
+.theme-dark.ctp-stone .nav-file-title .nav-file-title-content {
+    color: #a8b4c4 !important;
+}
 
-    /* Stone theme - reading panel */
-    .theme-dark.ctp-Stone .markdown-preview-view,
-    .theme-dark.ctp-Stone .cm-s-obsidian {
-        background-color: rgb(var(--ctp-base)) !important;
-        color: rgb(var(--ctp-text)) !important;
-    }
+/* Stone theme - reading panel */
+.theme-dark.ctp-stone .markdown-preview-view,
+.theme-dark.ctp-stone .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
 
 
 /* ====== Dark Theme: Olive ====== */
@@ -723,7 +884,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-olive.nav-folder-title,
+.theme-dark.ctp-olive .nav-folder-title,
 .theme-dark.ctp-olive .nav-file-title,
 .theme-dark.ctp-olive .workspace-ribbon {
     color: #f3eca8 !important;
@@ -741,7 +902,9 @@ settings:
 }
 
 
-/* ====== Dark Theme: Flint ====== */
+/* ====== Dark Theme: Flint (Cool Professional) ======
+   A sophisticated palette with subtle blue-gray undertones.
+   Perfect for focused work sessions with minimal eye strain. */
 .theme-dark.ctp-flint {
     --ctp-crust: 29, 33, 37;      /* ~#1D2125 - Darkest layer, faintly bluish gray */
     --ctp-base: 43, 48, 52;        /* ~#2B3034 - Main background */
@@ -771,7 +934,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-flint.nav-folder-title,
+.theme-dark.ctp-flint .nav-folder-title,
 .theme-dark.ctp-flint .nav-file-title,
 .theme-dark.ctp-flint .workspace-ribbon {
     color: #c8c8c8 !important;
@@ -789,44 +952,47 @@ settings:
 }
 
 
-/* ====== Dark Theme: Navy ====== */
+/* ====== Dark Theme: Navy (Deep Ocean) ======
+   A rich, deep navy inspired by midnight ocean waters.
+   Warm gold and coral accents complement the cool depths. */
 .theme-dark.ctp-navy {
-    --ctp-crust: 11, 31, 45;       /* ~#0B1F2D - Very dark navy */
-    --ctp-base: 18, 38, 57;         /* ~#122639 - Main background */
-    --ctp-mantle: 27, 52, 80;       /* ~#1B3450 - Lighter for alt backgrounds */
-    --ctp-text: 202, 210, 223;      /* ~#CAD2DF - Off-white with faint cool tint */
-    --ctp-green: 100, 144, 100;
-    --ctp-red: 188, 80, 89;
-    --ctp-maroon: 160, 70, 80;
-    --ctp-apricot: 225, 185, 130;
-    --ctp-gold: 255, 215, 95;
-    --ctp-teal: 80, 146, 155;
-    --ctp-aqua: 127, 219, 255;
-    --ctp-indigo: 75, 0, 130;
-    --ctp-blue: 80, 120, 180;
-    --ctp-lavender: 140, 150, 180;
+    --ctp-crust: 8, 18, 32;        /* ~#081220 - Midnight depths */
+    --ctp-base: 15, 28, 48;        /* ~#0F1C30 - Deep ocean navy */
+    --ctp-mantle: 22, 40, 65;      /* ~#162841 - Twilight waters */
+    --ctp-text: 230, 235, 245;     /* ~#E6EBF5 - Crisp moonlight white */
+    --ctp-green: 95, 180, 130;     /* Sea foam green */
+    --ctp-red: 235, 120, 110;      /* Coral reef */
+    --ctp-maroon: 200, 95, 105;    /* Deep coral */
+    --ctp-apricot: 255, 195, 140;  /* Sunset peach */
+    --ctp-gold: 255, 210, 100;     /* Bright nautical gold */
+    --ctp-teal: 85, 175, 185;      /* Tropical teal */
+    --ctp-aqua: 120, 210, 255;     /* Caribbean blue */
+    --ctp-indigo: 100, 95, 190;    /* Deep indigo */
+    --ctp-blue: 100, 160, 230;     /* Bright sky blue */
+    --ctp-lavender: 165, 170, 210; /* Twilight lavender */
 
-    /* Lines and borders */
-    --divider-color: rgb(var(--ctp-crust));
-    --divider-color-hover: rgb(var(--ctp-crust));
-    --hr-color: rgb(var(--ctp-crust));
-    --table-border-color: rgb(var(--ctp-crust));
-    --background-modifier-border: rgb(var(--ctp-crust));
+    /* Lines and borders - subtle navy tint */
+    --divider-color: rgba(80, 120, 180, 0.25);
+    --divider-color-hover: rgba(80, 120, 180, 0.4);
+    --hr-color: rgba(80, 120, 180, 0.3);
+    --table-border-color: rgba(80, 120, 180, 0.25);
+    --background-modifier-border: rgba(80, 120, 180, 0.2);
 
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* Gold accent for nautical feel */
+    --ctp-accent: 255, 210, 100;
 }
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-navy.nav-folder-title,
-.theme-dark.ctp-navy .nav-file-title,
-.theme-dark.ctp-navy .workspace-ribbon {
-    color: #c8d2f0 !important;
-}
-
+/* Navy sidebar - bright and clear like moonlight on water */
 .theme-dark.ctp-navy .nav-folder-title .nav-folder-title-content {
-    color: #d8d8d8 !important;
+    color: #e0e8f5 !important;
+}
+
+.theme-dark.ctp-navy .nav-file-title .nav-file-title-content {
+    color: #b0c4e8 !important;
 }
 
 /* Navy theme - reading panel */
@@ -837,7 +1003,9 @@ settings:
 }
 
 
-/* ====== Dark Theme: Ember ====== */
+/* ====== Dark Theme: Ember (Warm Cozy) ======
+   A warm, inviting palette inspired by glowing embers and firelight.
+   Rich burnt umber tones create a comfortable reading environment. */
 .theme-dark.ctp-ember {
     --ctp-crust: 25, 15, 12;       /* ~#190F0C - Deep charcoal with warm undertone */
     --ctp-base: 42, 28, 24;         /* ~#2A1C18 - Rich burnt umber */
@@ -867,7 +1035,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-ember.nav-folder-title,
+.theme-dark.ctp-ember .nav-folder-title,
 .theme-dark.ctp-ember .nav-file-title,
 .theme-dark.ctp-ember .workspace-ribbon {
     color: #ffccaa !important;
@@ -919,7 +1087,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-twilight.nav-folder-title,
+.theme-dark.ctp-twilight .nav-folder-title,
 .theme-dark.ctp-twilight .nav-file-title,
 .theme-dark.ctp-twilight .workspace-ribbon {
     color: #dcd0ff !important;
@@ -971,7 +1139,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-forest.nav-folder-title,
+.theme-dark.ctp-forest .nav-folder-title,
 .theme-dark.ctp-forest .nav-file-title,
 .theme-dark.ctp-forest .workspace-ribbon {
     color: #c8f0c0 !important;
@@ -993,48 +1161,47 @@ settings:
 }
 
 
-/* ====== Dark Theme: Crimson ====== */
+/* ====== Dark Theme: Crimson (Elegant Wine) ======
+   A rich burgundy/wine aesthetic with velvet depth.
+   Gold and cream accents for elegance and contrast. */
 .theme-dark.ctp-crimson {
-    --ctp-crust: 28, 12, 15;       /* ~#1C0C0F - Deep wine darkness */
-    --ctp-base: 48, 22, 28;         /* ~#30161C - Rich burgundy */
-    --ctp-mantle: 65, 30, 38;       /* ~#411E26 - Deep rose */
-    --ctp-text: 245, 230, 235;      /* ~#F5E6EB - Soft rose white */
-    --ctp-green: 150, 190, 120;
-    --ctp-red: 240, 110, 120;
-    --ctp-maroon: 200, 70, 80;
-    --ctp-apricot: 255, 170, 140;
-    --ctp-gold: 255, 200, 110;
-    --ctp-teal: 120, 170, 160;
-    --ctp-aqua: 160, 220, 230;
-    --ctp-indigo: 160, 110, 190;
-    --ctp-blue: 150, 170, 220;
-    --ctp-lavender: 200, 170, 200;
+    --ctp-crust: 22, 8, 12;        /* ~#16080C - Deep wine cellar */
+    --ctp-base: 38, 15, 22;        /* ~#260F16 - Rich burgundy velvet */
+    --ctp-mantle: 55, 24, 32;      /* ~#371820 - Wine in candlelight */
+    --ctp-text: 250, 240, 242;     /* ~#FAF0F2 - Warm cream white */
+    --ctp-green: 140, 195, 120;    /* Fresh sage */
+    --ctp-red: 255, 130, 130;      /* Bright rose */
+    --ctp-maroon: 220, 90, 100;    /* Deep ruby */
+    --ctp-apricot: 255, 185, 145;  /* Warm apricot */
+    --ctp-gold: 255, 215, 130;     /* Champagne gold */
+    --ctp-teal: 115, 185, 175;     /* Soft teal */
+    --ctp-aqua: 150, 215, 225;     /* Pale aqua */
+    --ctp-indigo: 170, 130, 200;   /* Soft violet */
+    --ctp-blue: 160, 180, 230;     /* Periwinkle */
+    --ctp-lavender: 210, 180, 210; /* Dusty rose */
 
-    /* Lines and borders */
-    --divider-color: rgb(var(--ctp-crust));
-    --divider-color-hover: rgb(var(--ctp-crust));
-    --hr-color: rgb(var(--ctp-crust));
-    --table-border-color: rgb(var(--ctp-crust));
-    --background-modifier-border: rgb(var(--ctp-crust));
+    /* Lines and borders - warm burgundy tint */
+    --divider-color: rgba(180, 100, 120, 0.25);
+    --divider-color-hover: rgba(180, 100, 120, 0.4);
+    --hr-color: rgba(180, 100, 120, 0.3);
+    --table-border-color: rgba(180, 100, 120, 0.25);
+    --background-modifier-border: rgba(180, 100, 120, 0.2);
 
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* Champagne gold accent for elegance */
+    --ctp-accent: 255, 215, 130;
 }
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-crimson.nav-folder-title,
-.theme-dark.ctp-crimson .nav-file-title,
-.theme-dark.ctp-crimson .workspace-ribbon {
-    color: #ffc8d8 !important;
-}
-
+/* Crimson sidebar - warm rose and cream tones */
 .theme-dark.ctp-crimson .nav-folder-title .nav-folder-title-content {
-    color: #f0b0c0 !important;
+    color: #f8e0e5 !important;
 }
 
 .theme-dark.ctp-crimson .nav-file-title .nav-file-title-content {
-    color: #e8d0d8 !important;
+    color: #e0c8d0 !important;
 }
 
 /* Crimson theme - reading panel */
@@ -1075,7 +1242,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-slate.nav-folder-title,
+.theme-dark.ctp-slate .nav-folder-title,
 .theme-dark.ctp-slate .nav-file-title,
 .theme-dark.ctp-slate .workspace-ribbon {
     color: #d0d8e8 !important;
@@ -1097,7 +1264,9 @@ settings:
 }
 
 
-/* ====== Dark Theme: Amber ====== */
+/* ====== Dark Theme: Amber (Golden Warmth) ======
+   A nostalgic palette reminiscent of candlelight and autumn leaves.
+   Honey and amber tones create an inviting, warm atmosphere. */
 .theme-dark.ctp-amber {
     --ctp-crust: 25, 20, 10;       /* ~#19140A - Deep golden brown */
     --ctp-base: 45, 38, 20;         /* ~#2D2614 - Rich amber darkness */
@@ -1127,7 +1296,7 @@ settings:
 }
 
 /* Folder & file titles in sidebar */
-.theme-dark.ctp-amber.nav-folder-title,
+.theme-dark.ctp-amber .nav-folder-title,
 .theme-dark.ctp-amber .nav-file-title,
 .theme-dark.ctp-amber .workspace-ribbon {
     color: #ffd898 !important;
@@ -1421,6 +1590,149 @@ settings:
 
 .theme-light.ctp-cream .nav-file-title .nav-file-title-content {
     color: #5a5548 !important;
+}
+
+
+/* ====== Light Theme: NY Times (Classic Newspaper) ======
+   Inspired by The New York Times print edition.
+   Warm newsprint background with classic serif typography.
+   Contrast ratio: 14.5:1 (WCAG AAA compliant)
+   Best for: Long-form reading, journalism, classic aesthetic */
+.theme-light.ctp-nytimes {
+    --ctp-crust: 247, 245, 240;      /* Light newsprint for panels */
+    --ctp-base: 252, 250, 245;       /* Warm newsprint white */
+    --ctp-mantle: 250, 248, 242;     /* Subtle cream for cards */
+    --ctp-text: 18, 18, 18;          /* NYT uses near-black (#121212) */
+
+    /* Warm gray borders matching newsprint aesthetic */
+    --divider-color: rgba(18, 18, 18, 0.12);
+    --divider-color-hover: rgba(18, 18, 18, 0.20);
+    --hr-color: rgba(18, 18, 18, 0.15);
+    --table-border-color: rgba(18, 18, 18, 0.12);
+    --background-modifier-border: rgba(18, 18, 18, 0.10);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* NYT-style accent - muted blue for links */
+    --ctp-accent: 86, 123, 149;
+}
+
+/* NY Times sidebar - classic newspaper feel */
+.theme-light.ctp-nytimes .nav-folder-title .nav-folder-title-content {
+    color: #121212 !important;
+    font-weight: 500;
+}
+
+.theme-light.ctp-nytimes .nav-file-title .nav-file-title-content {
+    color: #333333 !important;
+}
+
+/* NY Times typography overrides - Georgia for that classic newspaper look */
+.theme-light.ctp-nytimes .markdown-preview-view,
+.theme-light.ctp-nytimes .cm-line {
+    font-family: Georgia, 'Times New Roman', 'Libre Caslon Text', serif !important;
+}
+
+.theme-light.ctp-nytimes h1,
+.theme-light.ctp-nytimes h2,
+.theme-light.ctp-nytimes h3,
+.theme-light.ctp-nytimes .markdown-rendered h1,
+.theme-light.ctp-nytimes .markdown-rendered h2,
+.theme-light.ctp-nytimes .markdown-rendered h3 {
+    font-family: Georgia, 'Cheltenham', 'Times New Roman', serif !important;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* NYT-style blockquotes */
+.theme-light.ctp-nytimes blockquote,
+.theme-light.ctp-nytimes .cm-quote {
+    border-left: 3px solid #121212;
+    font-style: italic;
+}
+
+
+/* ====== Light Theme: Wikipedia (Encyclopedia) ======
+   Inspired by Wikipedia's clean, functional design.
+   Pure white background with system sans-serif typography.
+   Contrast ratio: 15.2:1 (WCAG AAA compliant)
+   Best for: Research, reference material, functional reading */
+.theme-light.ctp-wikipedia {
+    --ctp-crust: 248, 249, 250;      /* Wikipedia's #f8f9fa */
+    --ctp-base: 255, 255, 255;       /* Pure white like Wikipedia */
+    --ctp-mantle: 234, 236, 240;     /* Wikipedia's light gray #eaecf0 */
+    --ctp-text: 32, 33, 34;          /* Wikipedia's text color #202122 */
+
+    /* Wikipedia-style borders - subtle gray */
+    --divider-color: rgba(162, 169, 177, 0.4);
+    --divider-color-hover: rgba(162, 169, 177, 0.6);
+    --hr-color: rgba(162, 169, 177, 0.5);
+    --table-border-color: rgba(162, 169, 177, 0.5);
+    --background-modifier-border: rgba(162, 169, 177, 0.3);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    /* Wikipedia blue for links */
+    --ctp-accent: 51, 102, 204;
+}
+
+/* Wikipedia sidebar - clean and functional */
+.theme-light.ctp-wikipedia .nav-folder-title .nav-folder-title-content {
+    color: #202122 !important;
+}
+
+.theme-light.ctp-wikipedia .nav-file-title .nav-file-title-content {
+    color: #54595d !important;
+}
+
+/* Wikipedia typography overrides - system sans-serif */
+.theme-light.ctp-wikipedia .markdown-preview-view,
+.theme-light.ctp-wikipedia .cm-line {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Liberation Sans', sans-serif !important;
+}
+
+.theme-light.ctp-wikipedia h1,
+.theme-light.ctp-wikipedia h2,
+.theme-light.ctp-wikipedia h3,
+.theme-light.ctp-wikipedia .markdown-rendered h1,
+.theme-light.ctp-wikipedia .markdown-rendered h2,
+.theme-light.ctp-wikipedia .markdown-rendered h3 {
+    font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif !important;
+    font-weight: 400;
+    border-bottom: 1px solid #a2a9b1;
+    padding-bottom: 0.25em;
+}
+
+/* Wikipedia-style links - blue with underline on hover */
+.theme-light.ctp-wikipedia a.internal-link,
+.theme-light.ctp-wikipedia a.external-link {
+    color: #3366cc !important;
+    text-decoration: none;
+}
+
+.theme-light.ctp-wikipedia a.internal-link:hover,
+.theme-light.ctp-wikipedia a.external-link:hover {
+    text-decoration: underline;
+}
+
+/* Wikipedia-style tables */
+.theme-light.ctp-wikipedia table {
+    border-collapse: collapse;
+    background: #f8f9fa;
+}
+
+.theme-light.ctp-wikipedia table th {
+    background: #eaecf0;
+    border: 1px solid #a2a9b1;
+    padding: 0.4em 0.6em;
+    text-align: left;
+}
+
+.theme-light.ctp-wikipedia table td {
+    border: 1px solid #a2a9b1;
+    padding: 0.4em 0.6em;
 }
 
 
@@ -2413,8 +2725,268 @@ h2,
 
 /* ====== PDF files ====== */
 .nav-file-title[data-path$=".pdf"] .nav-file-title-content::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M6 2h9l5 5v14c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2V4c0-1.104.896-2 2-2zm3 9h2v2H9v-2zm-1 4h4v2H8v-2zm6-4h2v2h-2v-2zm-6-4h4v2H8V7zm6 0h2v2h-2V7z'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm2-8h2v1h1v-1h1v4h-1v-2h-2v2H8v-4zm6 0h2c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1h-2v-4zm1 3h1v-2h-1v2z'/%3E%3C/svg%3E");
     background-color: #D32F2F;
+    width: 14px;
+    height: 14px;
+}
+
+
+/* ================================================================================
+   SECTION 14.5: EXTENDED FILE TYPE ICONS
+   Recognizable icons for all major file formats
+   ================================================================================ */
+
+/* ====== Microsoft Word ====== */
+.nav-file-title[data-path$=".doc"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".docx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 9l-2 6-2-6H7l3 8h2l3-8h-2zm1-4V3.5L18.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #2B579A;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Microsoft Excel ====== */
+.nav-file-title[data-path$=".xls"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".xlsx"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".csv"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-3 16H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V8h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm-1-5V3.5L18.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #217346;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Microsoft PowerPoint ====== */
+.nav-file-title[data-path$=".ppt"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".pptx"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".pps"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ppsx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-4 15H8v-5h2c1.1 0 2 .9 2 2s-.9 2-2 2zm0-3v1h.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H10zm4-5V3.5L18.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #D24726;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== PowerPoint Theme files ====== */
+.nav-file-title[data-path$=".thmx"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".potx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E");
+    background-color: #D24726;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Plain Text files ====== */
+.nav-file-title[data-path$=".txt"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 14H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L17.5 8H13z'/%3E%3C/svg%3E");
+    background-color: #757575;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== RTF files ====== */
+.nav-file-title[data-path$=".rtf"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm0 18H6V4h7v5h5v11zm-2-8H8v-1h4v1zm0 2H8v-1h4v1zm0 2H8v-1h4v1z'/%3E%3C/svg%3E");
+    background-color: #5C6BC0;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Adobe Photoshop ====== */
+.nav-file-title[data-path$=".psd"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9.5 15H8v-4h1.5c.83 0 1.5.67 1.5 1.5v1c0 .83-.67 1.5-1.5 1.5zm4.5 0h-1.5c-.55 0-1-.45-1-1v-2c0-.55.45-1 1-1H14v1h-1.5v2H14v1z'/%3E%3C/svg%3E");
+    background-color: #31A8FF;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Adobe Illustrator ====== */
+.nav-file-title[data-path$=".ai"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 15H8l-.5-1.5h-2L5 15H4l2-6h1l2 6zm5 0h-1v-4h1v4zm0-5h-1V9h1v1z'/%3E%3C/svg%3E");
+    background-color: #FF9A00;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Additional Image formats ====== */
+.nav-file-title[data-path$=".bmp"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tif"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tiff"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".webp"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ico"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".raw"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E");
+    background-color: #FFD700;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== SVG Vector files ====== */
+.nav-file-title[data-path$=".svg"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z'/%3E%3C/svg%3E");
+    background-color: #FFB13B;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== Archive files ====== */
+.nav-file-title[data-path$=".zip"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".rar"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".7z"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tar"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".gz"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10h-2v2h-2v-2H8v-2h2v-2h2v2h2v2z'/%3E%3C/svg%3E");
+    background-color: #FFC107;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== HTML files ====== */
+.nav-file-title[data-path$=".html"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".htm"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 17.56l4.07-1.13.55-6.1H9.38L9.2 8.3h7.6l.2-1.99H7l.56 6.01h6.89l-.23 2.58-2.22.6-2.22-.6-.14-1.66h-2l.29 3.19L12 17.56M4.07 3h15.86L18.5 19.2 12 21l-6.5-1.8L4.07 3z'/%3E%3C/svg%3E");
+    background-color: #E44D26;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== CSS files ====== */
+.nav-file-title[data-path$=".css"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".scss"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".sass"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".less"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.192 3.143h15.615l-1.42 16.034-6.404 1.812-6.369-1.813L4.192 3.143zM16.9 6.424l-9.8-.002.158 1.76 7.292.002-.189 2.148H9.134l.175 1.968h4.628l-.273 2.86-1.685.467-1.671-.467-.107-1.21H8.2l.208 2.388 3.582.996 3.596-.996.461-5.166.094-.986.291-3.262z'/%3E%3C/svg%3E");
+    background-color: #264DE4;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== JavaScript files ====== */
+.nav-file-title[data-path$=".js"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".mjs"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".cjs"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h18v18H3V3zm4.73 15.04c.4.85 1.19 1.55 2.54 1.55 1.5 0 2.53-.8 2.53-2.55v-5.78h-1.7V17c0 .86-.35 1.08-.9 1.08-.58 0-.82-.4-1.09-.87l-1.38.83zm5.98-.18c.5.98 1.51 1.73 3.09 1.73 1.6 0 2.8-.83 2.8-2.36 0-1.41-.81-2.04-2.25-2.66l-.42-.18c-.73-.31-1.04-.52-1.04-1.02 0-.41.31-.73.81-.73.48 0 .8.21 1.09.73l1.31-.87c-.55-.96-1.33-1.33-2.4-1.33-1.51 0-2.48.96-2.48 2.23 0 1.38.81 2.03 2.03 2.55l.42.18c.78.34 1.24.55 1.24 1.13 0 .48-.45.83-1.15.83-.83 0-1.31-.43-1.67-1.03l-1.38.8z'/%3E%3C/svg%3E");
+    background-color: #F7DF1E;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== TypeScript files ====== */
+.nav-file-title[data-path$=".ts"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".tsx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h18v18H3V3zm10.71 13.44V18c.39.18.83.32 1.31.38.49.06.99.1 1.5.1.49 0 .95-.05 1.38-.14.43-.1.8-.25 1.1-.47.31-.21.55-.49.72-.83.17-.34.26-.76.26-1.24 0-.35-.05-.66-.15-.92-.1-.26-.25-.5-.44-.7-.19-.21-.42-.39-.69-.55-.27-.16-.57-.31-.9-.45-.24-.1-.45-.2-.64-.3-.18-.1-.34-.2-.46-.32-.13-.11-.22-.24-.29-.38-.07-.14-.1-.3-.1-.48 0-.16.03-.31.1-.44.06-.13.15-.24.27-.33.12-.09.26-.16.43-.21.17-.05.36-.07.57-.07.15 0 .3.01.47.03.17.02.34.05.5.1.17.05.33.11.49.18.16.08.3.17.44.27v-1.5c-.28-.1-.58-.18-.9-.23-.32-.05-.68-.07-1.06-.07-.49 0-.94.05-1.35.16-.41.11-.77.27-1.07.49-.3.22-.54.49-.71.82-.17.33-.26.72-.26 1.17 0 .58.15 1.07.45 1.47.3.4.76.74 1.38 1.02.26.11.5.22.73.33.23.11.42.22.59.35.17.12.3.26.39.42.1.15.14.33.14.54 0 .16-.03.3-.08.44-.05.13-.13.25-.24.34-.11.09-.25.17-.42.22-.17.05-.38.08-.62.08-.38 0-.76-.07-1.14-.21-.38-.14-.73-.35-1.06-.63zm-4.18-4.72H7v7h1.53v-5.47h2v-1.53z'/%3E%3C/svg%3E");
+    background-color: #3178C6;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== JSON files ====== */
+.nav-file-title[data-path$=".json"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h2v2H5v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5h2v2H5c-1.07-.27-2-.9-2-2v-4a2 2 0 0 0-2-2H0v-2h1a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2m14 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2m-7 12a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m8 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1z'/%3E%3C/svg%3E");
+    background-color: #F5A623;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== XML/YAML/Config files ====== */
+.nav-file-title[data-path$=".xml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".yaml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".yml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".toml"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ini"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".conf"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.89 3l9.93 9.93c.39.39.39 1.02 0 1.41l-7.07 7.07c-.39.39-1.02.39-1.41 0l-9.93-9.93c-.2-.2-.29-.46-.29-.71V4c0-.55.45-1 1-1h6.77c.27 0 .53.1.71.29l.29.71zM5.5 7A1.5 1.5 0 0 0 7 8.5 1.5 1.5 0 0 0 8.5 7 1.5 1.5 0 0 0 7 5.5 1.5 1.5 0 0 0 5.5 7z'/%3E%3C/svg%3E");
+    background-color: #9C27B0;
+    width: 13px;
+    height: 13px;
+}
+
+/* ====== Python files ====== */
+.nav-file-title[data-path$=".py"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".pyw"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19.14 7.5A2.86 2.86 0 0 1 22 10.36v3.78A2.86 2.86 0 0 1 19.14 17H12c0 .39.32.96.71.96H17v1.68a2.86 2.86 0 0 1-2.86 2.86H9.86A2.86 2.86 0 0 1 7 19.64v-3.75a2.85 2.85 0 0 1 2.86-2.85h5.25a2.85 2.85 0 0 0 2.85-2.86V7.5h1.18m-4.28 11.79c-.4 0-.72.3-.72.72 0 .4.32.71.72.71a.71.71 0 0 0 .71-.71c0-.42-.31-.72-.71-.72M11.14 1.5a2.86 2.86 0 0 0-2.86 2.86v3.78a2.86 2.86 0 0 0 2.86 2.86H12c0-.39-.32-.96-.71-.96H7v-1.68A2.86 2.86 0 0 1 9.86 5.5h4.28A2.86 2.86 0 0 1 17 8.36v3.75a2.85 2.85 0 0 1-2.86 2.85H8.89a2.85 2.85 0 0 0-2.85 2.86v2.68h1.1v-2.68a2.86 2.86 0 0 1 2.86-2.86h5.14A2.86 2.86 0 0 0 18 12.11V8.36A2.86 2.86 0 0 0 15.14 5.5h-4m-1.04 2.21c.4 0 .72-.3.72-.71a.71.71 0 0 0-.72-.71.71.71 0 0 0-.71.71c0 .41.31.71.71.71z'/%3E%3C/svg%3E");
+    background-color: #3776AB;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Java files ====== */
+.nav-file-title[data-path$=".java"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".jar"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.889 4.832 0 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.189-7.627M9.734 23.924c4.322.277 10.959-.154 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639'/%3E%3C/svg%3E");
+    background-color: #ED8B00;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Ebook files ====== */
+.nav-file-title[data-path$=".epub"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".mobi"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".azw"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".azw3"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'/%3E%3C/svg%3E");
+    background-color: #4CAF50;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Font files ====== */
+.nav-file-title[data-path$=".ttf"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".otf"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".woff"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".woff2"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.93 13.5h4.14L12 7.98 9.93 13.5zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z'/%3E%3C/svg%3E");
+    background-color: #607D8B;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Executable/Binary files ====== */
+.nav-file-title[data-path$=".exe"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".msi"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".dmg"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".app"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-1-6h-3V8h-2v5H8l4 4 4-4z'/%3E%3C/svg%3E");
+    background-color: #795548;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Shell/Script files ====== */
+.nav-file-title[data-path$=".sh"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".bash"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".zsh"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".bat"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".cmd"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".ps1"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 19V7H4v12h16m0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16m-7 14v-2h5v2h-5m-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59l4-4z'/%3E%3C/svg%3E");
+    background-color: #4EAA25;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== SQL/Database files ====== */
+.nav-file-title[data-path$=".sql"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".db"] .nav-file-title-content::before,
+.nav-file-title[data-path$=".sqlite"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.5 6 2s-2.13 2-6 2-6-1.5-6-2 2.13-2 6-2zM6 17v-2.42c1.23.78 3.36 1.32 6 1.32s4.77-.54 6-1.32V17c0 .5-2.13 2-6 2s-6-1.5-6-2zm0-5v-2.42c1.23.78 3.36 1.32 6 1.32s4.77-.54 6-1.32V12c0 .5-2.13 2-6 2s-6-1.5-6-2z'/%3E%3C/svg%3E");
+    background-color: #00758F;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Log files ====== */
+.nav-file-title[data-path$=".log"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 9h-2v2H9v-2H7v-2h2V7h2v2h2v2zm-3 7H6v-2h4v2zm6 0h-4v-2h4v2zm0-4H6v-2h10v2zm1-5V3.5L17.5 8H14z'/%3E%3C/svg%3E");
+    background-color: #9E9E9E;
+    width: 14px;
+    height: 14px;
+}
+
+/* ====== Markdown variations ====== */
+.nav-file-title[data-path$=".mdx"] .nav-file-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.56 18H3.44C2.65 18 2 17.37 2 16.59V7.41C2 6.63 2.65 6 3.44 6h17.12c.79 0 1.44.63 1.44 1.41v9.18c0 .78-.65 1.41-1.44 1.41zM6.81 15.19v-3.66l1.92 2.35 1.92-2.35v3.66h1.93V8.81h-1.93l-1.92 2.35-1.92-2.35H4.89v6.38h1.92zM19.69 12h-1.92V8.81h-1.92V12h-1.93l2.89 3.28L19.69 12z'/%3E%3C/svg%3E");
+    background-color: #F9AC00;
     width: 14px;
     height: 14px;
 }
@@ -2813,7 +3385,7 @@ h2,
    SECTION 22: LISTS & CHECKBOXES
    ================================================================================ */
 
-/* Checkbox Styles */
+/* Checkbox Shape Styles */
 .checkbox-circle input[type="checkbox"] {
     border-radius: 50% !important;
 }
@@ -2826,21 +3398,273 @@ h2,
     border-radius: 2px !important;
 }
 
-/* Task Priority Colors */
-.markdown-preview-view li[data-task="!"] > input[type="checkbox"],
-.markdown-preview-view li[data-task="!"] > p > input[type="checkbox"] {
-    border-color: rgb(var(--ctp-red)) !important;
+
+/* ================================================================================
+   ALTERNATE CHECKBOXES
+   Styled task checkboxes for different task states and meanings.
+   Usage: - [x] done, - [-] canceled, - [>] forwarded, etc.
+
+   SUPPORTED CHECKBOXES:
+   - [x] Done (green check)         - [-] Canceled (red line)
+   - [>] Forwarded (blue arrow)     - [<] Scheduled (purple calendar)
+   - [?] Question (blue ?)          - [!] Important (red !)
+   - [*] Star (gold star)           - ["] Quote (cyan quotes)
+   - [l] Location (orange pin)      - [i] Info (blue i)
+   - [b] Bookmark (pink flag)       - [S] Savings (green $)
+   - [p] Pro (green thumb up)       - [c] Con (red thumb down)
+   - [/] In Progress (half)         - [u] Priority Up (red arrow)
+   - [d] Priority Down (blue)       - [w] Win (gold trophy)
+   - [k] Key (yellow key)           - [f] Fire/Urgent (orange flame)
+   - [I] Idea (yellow bulb)
+   ================================================================================ */
+
+/* Base alternate checkbox styling */
+input[data-task]:checked,
+li[data-task] > input[type="checkbox"]:checked,
+li[data-task] > p > input[type="checkbox"]:checked {
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.markdown-preview-view li[data-task="?"] > input[type="checkbox"],
-.markdown-preview-view li[data-task="?"] > p > input[type="checkbox"] {
-    border-color: rgb(var(--ctp-blue)) !important;
+/* ====== [x] Done - Green checkmark ====== */
+input[data-task="x"]:checked,
+li[data-task="x"] > input[type="checkbox"]:checked,
+li[data-task="x"] > p > input[type="checkbox"]:checked,
+input[data-task="X"]:checked,
+li[data-task="X"] > input[type="checkbox"]:checked,
+li[data-task="X"] > p > input[type="checkbox"]:checked {
+    background-color: #58a55c !important;
+    border-color: #58a55c !important;
 }
 
-.markdown-preview-view li[data-task=">"] > input[type="checkbox"],
-.markdown-preview-view li[data-task=">"] > p > input[type="checkbox"] {
-    border-color: rgb(var(--ctp-gold)) !important;
+.markdown-preview-view li[data-task="x"],
+.markdown-preview-view li[data-task="X"] {
+    text-decoration: line-through;
+    color: rgba(var(--ctp-text), 0.5);
 }
+
+/* ====== [-] Canceled - Red with dash ====== */
+input[data-task="-"]:checked,
+li[data-task="-"] > input[type="checkbox"]:checked,
+li[data-task="-"] > p > input[type="checkbox"]:checked {
+    background-color: #e45858 !important;
+    border-color: #e45858 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 13H5v-2h14v2z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+.markdown-preview-view li[data-task="-"] {
+    text-decoration: line-through;
+    color: rgba(var(--ctp-text), 0.4);
+}
+
+/* ====== [>] Forwarded/Deferred - Blue arrow right ====== */
+input[data-task=">"]:checked,
+li[data-task=">"] > input[type="checkbox"]:checked,
+li[data-task=">"] > p > input[type="checkbox"]:checked {
+    background-color: #5090d0 !important;
+    border-color: #5090d0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+.markdown-preview-view li[data-task=">"] {
+    color: rgba(var(--ctp-text), 0.7);
+}
+
+/* ====== [<] Scheduled - Purple calendar ====== */
+input[data-task="<"]:checked,
+li[data-task="<"] > input[type="checkbox"]:checked,
+li[data-task="<"] > p > input[type="checkbox"]:checked {
+    background-color: #a37acc !important;
+    border-color: #a37acc !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [?] Question - Blue question mark ====== */
+input[data-task="?"]:checked,
+li[data-task="?"] > input[type="checkbox"]:checked,
+li[data-task="?"] > p > input[type="checkbox"]:checked {
+    background-color: #5cafe0 !important;
+    border-color: #5cafe0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [!] Important - Red exclamation ====== */
+input[data-task="!"]:checked,
+li[data-task="!"] > input[type="checkbox"]:checked,
+li[data-task="!"] > p > input[type="checkbox"]:checked {
+    background-color: #e05050 !important;
+    border-color: #e05050 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+.markdown-preview-view li[data-task="!"] {
+    color: #e05050;
+    font-weight: 500;
+}
+
+/* ====== [*] Star - Gold star ====== */
+input[data-task="*"]:checked,
+li[data-task="*"] > input[type="checkbox"]:checked,
+li[data-task="*"] > p > input[type="checkbox"]:checked {
+    background-color: #f0c040 !important;
+    border-color: #f0c040 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== ["] Quote - Cyan quote marks ====== */
+input[data-task="\""]:checked,
+li[data-task="\""] > input[type="checkbox"]:checked,
+li[data-task="\""] > p > input[type="checkbox"]:checked {
+    background-color: #50b0b0 !important;
+    border-color: #50b0b0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+.markdown-preview-view li[data-task="\""] {
+    font-style: italic;
+}
+
+/* ====== [l] Location - Orange pin ====== */
+input[data-task="l"]:checked,
+li[data-task="l"] > input[type="checkbox"]:checked,
+li[data-task="l"] > p > input[type="checkbox"]:checked {
+    background-color: #e07830 !important;
+    border-color: #e07830 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [i] Info - Blue info circle ====== */
+input[data-task="i"]:checked,
+li[data-task="i"] > input[type="checkbox"]:checked,
+li[data-task="i"] > p > input[type="checkbox"]:checked {
+    background-color: #5090d0 !important;
+    border-color: #5090d0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [b] Bookmark - Pink bookmark ====== */
+input[data-task="b"]:checked,
+li[data-task="b"] > input[type="checkbox"]:checked,
+li[data-task="b"] > p > input[type="checkbox"]:checked {
+    background-color: #d070a0 !important;
+    border-color: #d070a0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [S] Savings/Money - Green dollar ====== */
+input[data-task="S"]:checked,
+li[data-task="S"] > input[type="checkbox"]:checked,
+li[data-task="S"] > p > input[type="checkbox"]:checked {
+    background-color: #50a060 !important;
+    border-color: #50a060 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E");
+    background-size: 80%;
+}
+
+/* ====== [p] Pro/Thumbs Up - Green thumb ====== */
+input[data-task="p"]:checked,
+li[data-task="p"] > input[type="checkbox"]:checked,
+li[data-task="p"] > p > input[type="checkbox"]:checked {
+    background-color: #50a060 !important;
+    border-color: #50a060 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [c] Con/Thumbs Down - Red thumb ====== */
+input[data-task="c"]:checked,
+li[data-task="c"] > input[type="checkbox"]:checked,
+li[data-task="c"] > p > input[type="checkbox"]:checked {
+    background-color: #e05050 !important;
+    border-color: #e05050 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [/] Half Done/In Progress - Orange half fill ====== */
+input[data-task="/"]:checked,
+li[data-task="/"] > input[type="checkbox"]:checked,
+li[data-task="/"] > p > input[type="checkbox"]:checked {
+    background: linear-gradient(90deg, #f0a030 50%, rgba(240, 160, 48, 0.3) 50%) !important;
+    border-color: #f0a030 !important;
+}
+
+/* ====== [u] Up/Priority Up - Red up arrow ====== */
+input[data-task="u"]:checked,
+li[data-task="u"] > input[type="checkbox"]:checked,
+li[data-task="u"] > p > input[type="checkbox"]:checked {
+    background-color: #e05050 !important;
+    border-color: #e05050 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [d] Down/Priority Down - Blue down arrow ====== */
+input[data-task="d"]:checked,
+li[data-task="d"] > input[type="checkbox"]:checked,
+li[data-task="d"] > p > input[type="checkbox"]:checked {
+    background-color: #5090d0 !important;
+    border-color: #5090d0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [w] Win/Reward - Gold trophy ====== */
+input[data-task="w"]:checked,
+li[data-task="w"] > input[type="checkbox"]:checked,
+li[data-task="w"] > p > input[type="checkbox"]:checked {
+    background-color: #f0c040 !important;
+    border-color: #f0c040 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [k] Key - Yellow key ====== */
+input[data-task="k"]:checked,
+li[data-task="k"] > input[type="checkbox"]:checked,
+li[data-task="k"] > p > input[type="checkbox"]:checked {
+    background-color: #d0a030 !important;
+    border-color: #d0a030 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E");
+    background-size: 70%;
+}
+
+/* ====== [f] Fire/Urgent - Orange flame ====== */
+input[data-task="f"]:checked,
+li[data-task="f"] > input[type="checkbox"]:checked,
+li[data-task="f"] > p > input[type="checkbox"]:checked {
+    background-color: #f06030 !important;
+    border-color: #f06030 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z'/%3E%3C/svg%3E");
+    background-size: 75%;
+}
+
+.markdown-preview-view li[data-task="f"] {
+    color: #f06030;
+    font-weight: 500;
+}
+
+/* ====== [I] Idea/Lightbulb - Yellow bulb ====== */
+input[data-task="I"]:checked,
+li[data-task="I"] > input[type="checkbox"]:checked,
+li[data-task="I"] > p > input[type="checkbox"]:checked {
+    background-color: #f0c040 !important;
+    border-color: #f0c040 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z'/%3E%3C/svg%3E");
+    background-size: 75%;
+}
+
 
 /* List Bullet Styles */
 .bullets-arrows ul > li::marker {
@@ -3004,6 +3828,1155 @@ h2,
 
 
 /* ================================================================================
+   SECTION 26: CARDS VIEW FOR DATAVIEW
+   Transform Dataview tables into beautiful card layouts.
+
+   Usage: Add cssclass: cards to note frontmatter, or use inline class
+   Options:
+   - cards          : Enable card layout
+   - cards-cover    : Images fill the card
+   - cards-cols-1 through cards-cols-8 : Set number of columns
+   - cards-align-bottom : Align content to bottom
+   ================================================================================ */
+
+/* Base cards layout */
+.cards .dataview.table-view-table,
+.cards .markdown-preview-view table:not(.dataview) {
+    display: grid;
+    gap: 1rem;
+    border: none;
+    background: transparent;
+}
+
+.cards .dataview.table-view-table {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* Hide table header in card view */
+.cards .dataview.table-view-table thead,
+.cards .markdown-preview-view table:not(.dataview) thead {
+    display: none;
+}
+
+/* Card styling */
+.cards .dataview.table-view-table tbody tr,
+.cards .markdown-preview-view table:not(.dataview) tbody tr {
+    display: flex;
+    flex-direction: column;
+    background: rgba(var(--ctp-mantle), 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(var(--ctp-accent), 0.1);
+    transition: all 0.2s ease;
+}
+
+.cards .dataview.table-view-table tbody tr:hover,
+.cards .markdown-preview-view table:not(.dataview) tbody tr:hover {
+    border-color: rgba(var(--ctp-accent), 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Card cells */
+.cards .dataview.table-view-table tbody td,
+.cards .markdown-preview-view table:not(.dataview) tbody td {
+    display: block;
+    padding: 0.25rem 0;
+    border: none;
+    background: transparent;
+}
+
+.cards .dataview.table-view-table tbody td:first-child,
+.cards .markdown-preview-view table:not(.dataview) tbody td:first-child {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--ctp-text));
+}
+
+/* Cards with cover images */
+.cards-cover .dataview.table-view-table tbody td img,
+.cards-cover .markdown-preview-view table tbody td img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+}
+
+/* Column count options */
+.cards-cols-1 .dataview.table-view-table { grid-template-columns: 1fr; }
+.cards-cols-2 .dataview.table-view-table { grid-template-columns: repeat(2, 1fr); }
+.cards-cols-3 .dataview.table-view-table { grid-template-columns: repeat(3, 1fr); }
+.cards-cols-4 .dataview.table-view-table { grid-template-columns: repeat(4, 1fr); }
+.cards-cols-5 .dataview.table-view-table { grid-template-columns: repeat(5, 1fr); }
+.cards-cols-6 .dataview.table-view-table { grid-template-columns: repeat(6, 1fr); }
+
+/* Align content to bottom */
+.cards-align-bottom .dataview.table-view-table tbody tr {
+    justify-content: flex-end;
+}
+
+/* Responsive cards */
+@media (max-width: 768px) {
+    .cards .dataview.table-view-table,
+    .cards-cols-2 .dataview.table-view-table,
+    .cards-cols-3 .dataview.table-view-table,
+    .cards-cols-4 .dataview.table-view-table {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cards-cols-4 .dataview.table-view-table,
+    .cards-cols-5 .dataview.table-view-table,
+    .cards-cols-6 .dataview.table-view-table {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* ================================================================================
+   SECTION 27: IMAGE GRID & WIDTH CONTROLS
+   Control image layouts and sizes with CSS classes.
+
+   Usage: Add class to image or use cssclass in frontmatter
+   Width: img-100, img-75, img-50, img-33, img-25
+   Shape: img-circle, img-rounded
+   Layout: img-grid (consecutive images become columns)
+   Filter: img-invert (for dark mode diagrams)
+   ================================================================================ */
+
+/* Image width controls */
+.img-100 img, img[alt*="img-100"] { width: 100% !important; }
+.img-75 img, img[alt*="img-75"] { width: 75% !important; }
+.img-50 img, img[alt*="img-50"] { width: 50% !important; }
+.img-33 img, img[alt*="img-33"] { width: 33% !important; }
+.img-25 img, img[alt*="img-25"] { width: 25% !important; }
+
+/* Centered images */
+.img-center img, img[alt*="img-center"] {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Image shapes */
+.img-circle img, img[alt*="img-circle"] {
+    border-radius: 50% !important;
+}
+
+.img-rounded img, img[alt*="img-rounded"] {
+    border-radius: 12px !important;
+}
+
+/* Image with shadow */
+.img-shadow img, img[alt*="img-shadow"] {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Image with border */
+.img-border img, img[alt*="img-border"] {
+    border: 2px solid rgba(var(--ctp-accent), 0.3) !important;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+/* Invert for dark mode (diagrams, logos) */
+.theme-dark .img-invert img,
+.theme-dark img[alt*="img-invert"] {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Image grid - consecutive images become columns */
+.img-grid .markdown-preview-view p:has(img),
+.img-grid .cm-line:has(img) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.img-grid .markdown-preview-view p img,
+.img-grid .cm-line img {
+    flex: 1 1 200px;
+    max-width: calc(50% - 0.5rem);
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Banner image - full width at top */
+.img-banner img:first-of-type,
+img[alt*="img-banner"] {
+    width: 100% !important;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 0;
+    margin: -20px -20px 20px -20px;
+}
+
+/* Float images */
+.img-float-left img, img[alt*="img-float-left"] {
+    float: left;
+    margin: 0 1rem 1rem 0;
+    max-width: 40%;
+}
+
+.img-float-right img, img[alt*="img-float-right"] {
+    float: right;
+    margin: 0 0 1rem 1rem;
+    max-width: 40%;
+}
+
+/* Clear floats */
+.img-clear, .img-grid {
+    clear: both;
+}
+
+
+/* ================================================================================
+   SECTION 28: CUSTOM CALLOUTS
+   Extended callout styles beyond the defaults.
+
+   Includes: timeline, profile, aside, kanban-style, and more
+   ================================================================================ */
+
+/* ====== Timeline Callout ====== */
+.callout[data-callout="timeline"] {
+    --callout-color: 100, 150, 200;
+    --callout-icon: lucide-git-commit;
+    border-left: 3px solid rgb(var(--callout-color));
+    position: relative;
+    padding-left: 2rem;
+}
+
+.callout[data-callout="timeline"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, rgb(var(--callout-color)), transparent);
+}
+
+.callout[data-callout="timeline"] .callout-title {
+    font-weight: 700;
+    color: rgb(100, 150, 200);
+}
+
+/* ====== Profile/Person Callout ====== */
+.callout[data-callout="profile"],
+.callout[data-callout="person"] {
+    --callout-color: 150, 120, 180;
+    --callout-icon: lucide-user;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.callout[data-callout="profile"] img,
+.callout[data-callout="person"] img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* ====== Aside/Margin Note ====== */
+.callout[data-callout="aside"],
+.callout[data-callout="sidenote"] {
+    --callout-color: 140, 140, 140;
+    --callout-icon: lucide-message-square;
+    font-size: 0.9em;
+    border-left: 2px solid rgba(var(--callout-color), 0.5);
+    background: rgba(var(--ctp-mantle), 0.3);
+    padding: 0.75rem 1rem;
+}
+
+.callout[data-callout="aside"] .callout-title,
+.callout[data-callout="sidenote"] .callout-title {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ====== Definition Callout ====== */
+.callout[data-callout="definition"],
+.callout[data-callout="def"] {
+    --callout-color: 100, 180, 160;
+    --callout-icon: lucide-book-open;
+    border-left: 4px solid rgb(var(--callout-color));
+}
+
+.callout[data-callout="definition"] .callout-title,
+.callout[data-callout="def"] .callout-title {
+    font-style: italic;
+}
+
+/* ====== Pro/Con Callouts ====== */
+.callout[data-callout="pro"],
+.callout[data-callout="pros"] {
+    --callout-color: 80, 160, 96;
+    --callout-icon: lucide-thumbs-up;
+}
+
+.callout[data-callout="con"],
+.callout[data-callout="cons"] {
+    --callout-color: 224, 80, 80;
+    --callout-icon: lucide-thumbs-down;
+}
+
+/* ====== Goal/Target Callout ====== */
+.callout[data-callout="goal"],
+.callout[data-callout="target"] {
+    --callout-color: 240, 180, 80;
+    --callout-icon: lucide-target;
+}
+
+/* ====== Bookmark/Reference Callout ====== */
+.callout[data-callout="bookmark"],
+.callout[data-callout="reference"],
+.callout[data-callout="ref"] {
+    --callout-color: 200, 100, 150;
+    --callout-icon: lucide-bookmark;
+}
+
+/* ====== Question/FAQ Callout ====== */
+.callout[data-callout="faq"],
+.callout[data-callout="question"] {
+    --callout-color: 100, 150, 220;
+    --callout-icon: lucide-help-circle;
+}
+
+/* ====== Answer Callout ====== */
+.callout[data-callout="answer"],
+.callout[data-callout="solution"] {
+    --callout-color: 100, 180, 100;
+    --callout-icon: lucide-check-circle;
+}
+
+/* ====== Recipe/Steps Callout ====== */
+.callout[data-callout="recipe"],
+.callout[data-callout="steps"] {
+    --callout-color: 220, 140, 100;
+    --callout-icon: lucide-chef-hat;
+}
+
+.callout[data-callout="recipe"] ol,
+.callout[data-callout="steps"] ol {
+    counter-reset: step-counter;
+    list-style: none;
+    padding-left: 2.5rem;
+}
+
+.callout[data-callout="recipe"] ol li,
+.callout[data-callout="steps"] ol li {
+    counter-increment: step-counter;
+    position: relative;
+    margin-bottom: 0.75rem;
+}
+
+.callout[data-callout="recipe"] ol li::before,
+.callout[data-callout="steps"] ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: -2.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: rgb(220, 140, 100);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+/* ====== Kanban-style Callout ====== */
+.callout[data-callout="kanban"],
+.callout[data-callout="board"] {
+    --callout-color: 100, 140, 200;
+    --callout-icon: lucide-columns;
+}
+
+.callout[data-callout="kanban"] ul,
+.callout[data-callout="board"] ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.callout[data-callout="kanban"] ul li,
+.callout[data-callout="board"] ul li {
+    background: rgba(var(--ctp-base), 0.8);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    flex: 1 1 auto;
+    min-width: 120px;
+}
+
+/* ====== Paraphrase/Citation Callout ====== */
+.callout[data-callout="paraphrase"],
+.callout[data-callout="cite"] {
+    --callout-color: 150, 150, 180;
+    --callout-icon: lucide-quote;
+    font-style: italic;
+    border-left: 3px solid rgb(var(--callout-color));
+}
+
+/* ====== Stats/Metrics Callout ====== */
+.callout[data-callout="stats"],
+.callout[data-callout="metrics"] {
+    --callout-color: 80, 180, 180;
+    --callout-icon: lucide-bar-chart-2;
+}
+
+.callout[data-callout="stats"] strong,
+.callout[data-callout="metrics"] strong {
+    font-size: 1.5em;
+    color: rgb(80, 180, 180);
+}
+
+
+/* ================================================================================
+   SECTION 29: RAINBOW FOLDERS
+   Color-code folders automatically by their position.
+
+   Toggle via Style Settings or add class 'rainbow-folders' to body
+   ================================================================================ */
+
+/* Rainbow folder colors - cycles through 10 colors */
+.rainbow-folders .nav-folder:nth-child(10n+1) > .nav-folder-title .nav-folder-title-content { color: #e06070 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+2) > .nav-folder-title .nav-folder-title-content { color: #e09050 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+3) > .nav-folder-title .nav-folder-title-content { color: #d0b040 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+4) > .nav-folder-title .nav-folder-title-content { color: #70b060 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+5) > .nav-folder-title .nav-folder-title-content { color: #50b0a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+6) > .nav-folder-title .nav-folder-title-content { color: #50a0d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+7) > .nav-folder-title .nav-folder-title-content { color: #7090e0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+8) > .nav-folder-title .nav-folder-title-content { color: #a070d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+9) > .nav-folder-title .nav-folder-title-content { color: #d070a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+10) > .nav-folder-title .nav-folder-title-content { color: #a0a0a0 !important; }
+
+/* Rainbow folder collapse indicators */
+.rainbow-folders .nav-folder:nth-child(10n+1) > .nav-folder-title .nav-folder-collapse-indicator { color: #e06070 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+2) > .nav-folder-title .nav-folder-collapse-indicator { color: #e09050 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+3) > .nav-folder-title .nav-folder-collapse-indicator { color: #d0b040 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+4) > .nav-folder-title .nav-folder-collapse-indicator { color: #70b060 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+5) > .nav-folder-title .nav-folder-collapse-indicator { color: #50b0a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+6) > .nav-folder-title .nav-folder-collapse-indicator { color: #50a0d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+7) > .nav-folder-title .nav-folder-collapse-indicator { color: #7090e0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+8) > .nav-folder-title .nav-folder-collapse-indicator { color: #a070d0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+9) > .nav-folder-title .nav-folder-collapse-indicator { color: #d070a0 !important; }
+.rainbow-folders .nav-folder:nth-child(10n+10) > .nav-folder-title .nav-folder-collapse-indicator { color: #a0a0a0 !important; }
+
+/* Rainbow subfolders - slightly muted */
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+1) > .nav-folder-title .nav-folder-title-content { color: #c07080 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+2) > .nav-folder-title .nav-folder-title-content { color: #c09060 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+3) > .nav-folder-title .nav-folder-title-content { color: #b0a050 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+4) > .nav-folder-title .nav-folder-title-content { color: #60a070 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+5) > .nav-folder-title .nav-folder-title-content { color: #50a090 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+6) > .nav-folder-title .nav-folder-title-content { color: #5090b0 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+7) > .nav-folder-title .nav-folder-title-content { color: #6080c0 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+8) > .nav-folder-title .nav-folder-title-content { color: #9060b0 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+9) > .nav-folder-title .nav-folder-title-content { color: #b06090 !important; }
+.rainbow-folders .nav-folder .nav-folder:nth-child(10n+10) > .nav-folder-title .nav-folder-title-content { color: #909090 !important; }
+
+
+/* ================================================================================
+   SECTION 30: CODE BLOCK ENHANCEMENTS
+   Language labels, line numbers, copy button styling, syntax themes
+   ================================================================================ */
+
+/* ====== Language Label Badge ====== */
+.markdown-preview-view pre[class*="language-"]::before,
+.cm-s-obsidian .HyperMD-codeblock-begin::after {
+    content: attr(class);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 8px;
+    font-size: 0.7em;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(var(--ctp-accent), 0.2);
+    color: rgb(var(--ctp-accent));
+    border-radius: 0 6px 0 6px;
+    font-weight: 500;
+}
+
+/* Specific language labels */
+.markdown-preview-view pre.language-javascript::before { content: "JS"; background: rgba(247, 223, 30, 0.2); color: #f7df1e; }
+.markdown-preview-view pre.language-typescript::before { content: "TS"; background: rgba(49, 120, 198, 0.2); color: #3178c6; }
+.markdown-preview-view pre.language-python::before { content: "Python"; background: rgba(55, 118, 171, 0.2); color: #3776ab; }
+.markdown-preview-view pre.language-html::before { content: "HTML"; background: rgba(228, 77, 38, 0.2); color: #e44d26; }
+.markdown-preview-view pre.language-css::before { content: "CSS"; background: rgba(38, 77, 228, 0.2); color: #264de4; }
+.markdown-preview-view pre.language-json::before { content: "JSON"; background: rgba(245, 166, 35, 0.2); color: #f5a623; }
+.markdown-preview-view pre.language-bash::before,
+.markdown-preview-view pre.language-shell::before { content: "Shell"; background: rgba(78, 170, 37, 0.2); color: #4eaa25; }
+.markdown-preview-view pre.language-sql::before { content: "SQL"; background: rgba(0, 117, 143, 0.2); color: #00758f; }
+.markdown-preview-view pre.language-java::before { content: "Java"; background: rgba(237, 139, 0, 0.2); color: #ed8b00; }
+.markdown-preview-view pre.language-cpp::before,
+.markdown-preview-view pre.language-c::before { content: "C++"; background: rgba(0, 89, 156, 0.2); color: #00599c; }
+.markdown-preview-view pre.language-rust::before { content: "Rust"; background: rgba(222, 165, 132, 0.2); color: #dea584; }
+.markdown-preview-view pre.language-go::before { content: "Go"; background: rgba(0, 173, 216, 0.2); color: #00add8; }
+.markdown-preview-view pre.language-ruby::before { content: "Ruby"; background: rgba(204, 52, 45, 0.2); color: #cc342d; }
+.markdown-preview-view pre.language-php::before { content: "PHP"; background: rgba(119, 123, 180, 0.2); color: #777bb4; }
+.markdown-preview-view pre.language-yaml::before { content: "YAML"; background: rgba(203, 23, 30, 0.2); color: #cb171e; }
+.markdown-preview-view pre.language-markdown::before,
+.markdown-preview-view pre.language-md::before { content: "MD"; background: rgba(80, 142, 243, 0.2); color: #508ef3; }
+
+/* Code block container styling */
+.markdown-preview-view pre {
+    position: relative;
+    padding-top: 2rem !important;
+}
+
+/* ====== Line Numbers Toggle ====== */
+.code-line-numbers .markdown-preview-view pre code {
+    counter-reset: line;
+    padding-left: 3.5rem;
+}
+
+.code-line-numbers .markdown-preview-view pre code > span::before {
+    counter-increment: line;
+    content: counter(line);
+    position: absolute;
+    left: 0;
+    width: 2.5rem;
+    text-align: right;
+    padding-right: 0.75rem;
+    color: rgba(var(--ctp-text), 0.3);
+    font-size: 0.85em;
+    border-right: 1px solid rgba(var(--ctp-accent), 0.1);
+    margin-right: 1rem;
+}
+
+/* ====== Copy Button Styling ====== */
+.markdown-preview-view pre .copy-code-button,
+.markdown-source-view .copy-code-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 4px 8px;
+    font-size: 0.75em;
+    background: rgba(var(--ctp-mantle), 0.8);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 4px;
+    color: rgb(var(--ctp-text));
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.markdown-preview-view pre:hover .copy-code-button,
+.markdown-source-view pre:hover .copy-code-button {
+    opacity: 1;
+}
+
+.markdown-preview-view pre .copy-code-button:hover {
+    background: rgba(var(--ctp-accent), 0.2);
+}
+
+/* ====== Syntax Theme: Dracula ====== */
+.syntax-dracula .token.comment,
+.syntax-dracula .token.prolog,
+.syntax-dracula .token.doctype { color: #6272a4; }
+.syntax-dracula .token.punctuation { color: #f8f8f2; }
+.syntax-dracula .token.property,
+.syntax-dracula .token.tag,
+.syntax-dracula .token.constant,
+.syntax-dracula .token.symbol { color: #ff79c6; }
+.syntax-dracula .token.boolean,
+.syntax-dracula .token.number { color: #bd93f9; }
+.syntax-dracula .token.selector,
+.syntax-dracula .token.string,
+.syntax-dracula .token.char { color: #f1fa8c; }
+.syntax-dracula .token.builtin { color: #50fa7b; }
+.syntax-dracula .token.operator,
+.syntax-dracula .token.entity,
+.syntax-dracula .token.url { color: #ff79c6; }
+.syntax-dracula .token.atrule,
+.syntax-dracula .token.keyword { color: #ff79c6; }
+.syntax-dracula .token.function,
+.syntax-dracula .token.class-name { color: #50fa7b; }
+.syntax-dracula .token.regex,
+.syntax-dracula .token.important,
+.syntax-dracula .token.variable { color: #ffb86c; }
+
+/* ====== Syntax Theme: Nord ====== */
+.syntax-nord .token.comment,
+.syntax-nord .token.prolog { color: #616e88; }
+.syntax-nord .token.punctuation { color: #d8dee9; }
+.syntax-nord .token.property,
+.syntax-nord .token.tag { color: #81a1c1; }
+.syntax-nord .token.boolean,
+.syntax-nord .token.number { color: #b48ead; }
+.syntax-nord .token.string,
+.syntax-nord .token.char { color: #a3be8c; }
+.syntax-nord .token.builtin { color: #88c0d0; }
+.syntax-nord .token.keyword { color: #81a1c1; }
+.syntax-nord .token.function { color: #88c0d0; }
+.syntax-nord .token.variable { color: #d8dee9; }
+
+/* ====== Syntax Theme: GitHub ====== */
+.syntax-github .token.comment,
+.syntax-github .token.prolog { color: #6a737d; }
+.syntax-github .token.punctuation { color: #24292e; }
+.syntax-github .token.property,
+.syntax-github .token.tag { color: #22863a; }
+.syntax-github .token.boolean,
+.syntax-github .token.number { color: #005cc5; }
+.syntax-github .token.string { color: #032f62; }
+.syntax-github .token.keyword { color: #d73a49; }
+.syntax-github .token.function { color: #6f42c1; }
+
+
+/* ================================================================================
+   SECTION 31: GRAPH VIEW STYLING
+   Custom colors, animations, and better readability
+   ================================================================================ */
+
+/* Graph container */
+.graph-view.color-fill-tag {
+    color: rgb(var(--ctp-accent));
+}
+
+/* Node styling */
+.graph-view .graph-view-container .links line {
+    stroke: rgba(var(--ctp-accent), 0.3) !important;
+    stroke-width: 1px;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.graph-view .graph-view-container .links line:hover {
+    stroke: rgba(var(--ctp-accent), 0.8) !important;
+    stroke-width: 2px;
+}
+
+/* Node colors by type */
+.graph-view .graph-view-container .nodes circle {
+    fill: rgb(var(--ctp-accent)) !important;
+    stroke: rgba(var(--ctp-base), 0.8);
+    stroke-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.graph-view .graph-view-container .nodes circle:hover {
+    fill: rgb(var(--ctp-text)) !important;
+    stroke: rgb(var(--ctp-accent));
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 8px rgba(var(--ctp-accent), 0.5));
+}
+
+/* Unresolved links */
+.graph-view .graph-view-container .nodes circle.is-unresolved {
+    fill: rgba(var(--ctp-text), 0.3) !important;
+    stroke-dasharray: 4 2;
+}
+
+/* Tag nodes */
+.graph-view .graph-view-container .nodes circle.is-tag {
+    fill: #f0c040 !important;
+}
+
+/* Attachment nodes */
+.graph-view .graph-view-container .nodes circle.is-attachment {
+    fill: #70b060 !important;
+}
+
+/* Focused node */
+.graph-view .graph-view-container .nodes circle.is-focused {
+    fill: rgb(var(--ctp-accent)) !important;
+    stroke: rgb(var(--ctp-text));
+    stroke-width: 4px;
+    filter: drop-shadow(0 0 12px rgba(var(--ctp-accent), 0.8));
+}
+
+/* Node labels */
+.graph-view .graph-view-container text {
+    fill: rgb(var(--ctp-text)) !important;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* Animated connections */
+.graph-animated .graph-view .graph-view-container .links line {
+    animation: pulse-line 3s ease-in-out infinite;
+}
+
+@keyframes pulse-line {
+    0%, 100% { stroke-opacity: 0.3; }
+    50% { stroke-opacity: 0.6; }
+}
+
+/* Graph controls styling */
+.graph-controls {
+    background: rgba(var(--ctp-mantle), 0.9) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+
+/* ================================================================================
+   SECTION 32: STACKED/SLIDING TABS
+   Andy Matuschak-style sliding panes
+   ================================================================================ */
+
+/* Enable stacked tabs mode */
+.stacked-tabs .workspace-split.mod-root > .workspace-leaf {
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+    border-left: 1px solid rgba(var(--ctp-crust), 0.5);
+}
+
+.stacked-tabs .workspace-split.mod-root {
+    overflow-x: auto;
+}
+
+.stacked-tabs .workspace-split.mod-root > .workspace-leaf:not(:first-child) {
+    margin-left: -40px;
+    position: relative;
+}
+
+.stacked-tabs .workspace-leaf-content {
+    background: rgb(var(--ctp-base));
+}
+
+/* Rotated headers for stacked tabs */
+.stacked-tabs .workspace-leaf .view-header {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(var(--ctp-mantle), 0.95);
+    border-right: 1px solid rgba(var(--ctp-crust), 0.5);
+    padding: 1rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.stacked-tabs .workspace-leaf .view-header-title {
+    transform: rotate(180deg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: calc(100vh - 100px);
+}
+
+.stacked-tabs .workspace-leaf .view-content {
+    margin-left: 40px;
+}
+
+/* Hover effect to expand */
+.stacked-tabs .workspace-leaf:hover {
+    margin-left: 0 !important;
+    z-index: 10;
+}
+
+.stacked-tabs .workspace-leaf:hover + .workspace-leaf {
+    margin-left: 0 !important;
+}
+
+
+/* ================================================================================
+   SECTION 33: TAG PILLS WITH COLORS
+   Auto-color tags based on common names
+   ================================================================================ */
+
+/* Base tag pill styling */
+.tag, .cm-hashtag {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Priority/Status Tags */
+a.tag[href*="important"], .cm-hashtag-end:has(+ [class*="important"]) { background: rgba(224, 80, 80, 0.2) !important; color: #e05050 !important; }
+a.tag[href*="urgent"], a.tag[href*="critical"] { background: rgba(240, 96, 48, 0.2) !important; color: #f06030 !important; }
+a.tag[href*="todo"], a.tag[href*="task"] { background: rgba(80, 144, 208, 0.2) !important; color: #5090d0 !important; }
+a.tag[href*="done"], a.tag[href*="complete"] { background: rgba(88, 165, 92, 0.2) !important; color: #58a55c !important; }
+a.tag[href*="inprogress"], a.tag[href*="wip"] { background: rgba(240, 160, 48, 0.2) !important; color: #f0a030 !important; }
+a.tag[href*="blocked"], a.tag[href*="waiting"] { background: rgba(180, 80, 80, 0.2) !important; color: #b45050 !important; }
+
+/* Category Tags */
+a.tag[href*="project"] { background: rgba(100, 140, 200, 0.2) !important; color: #648cc8 !important; }
+a.tag[href*="meeting"], a.tag[href*="event"] { background: rgba(160, 120, 200, 0.2) !important; color: #a078c8 !important; }
+a.tag[href*="idea"], a.tag[href*="concept"] { background: rgba(240, 192, 64, 0.2) !important; color: #f0c040 !important; }
+a.tag[href*="research"], a.tag[href*="study"] { background: rgba(80, 176, 160, 0.2) !important; color: #50b0a0 !important; }
+a.tag[href*="reference"], a.tag[href*="resource"] { background: rgba(200, 100, 150, 0.2) !important; color: #c86496 !important; }
+a.tag[href*="personal"] { background: rgba(200, 150, 100, 0.2) !important; color: #c89664 !important; }
+a.tag[href*="work"], a.tag[href*="business"] { background: rgba(100, 120, 180, 0.2) !important; color: #6478b4 !important; }
+
+/* Date/Time Tags */
+a.tag[href*="daily"], a.tag[href*="today"] { background: rgba(80, 160, 200, 0.2) !important; color: #50a0c8 !important; }
+a.tag[href*="weekly"] { background: rgba(120, 160, 120, 0.2) !important; color: #78a078 !important; }
+a.tag[href*="monthly"] { background: rgba(160, 140, 180, 0.2) !important; color: #a08cb4 !important; }
+
+/* People/Place Tags */
+a.tag[href*="person"], a.tag[href*="people"] { background: rgba(150, 120, 180, 0.2) !important; color: #9678b4 !important; }
+a.tag[href*="place"], a.tag[href*="location"] { background: rgba(224, 120, 48, 0.2) !important; color: #e07830 !important; }
+
+/* Content Type Tags */
+a.tag[href*="book"], a.tag[href*="reading"] { background: rgba(140, 100, 80, 0.2) !important; color: #8c6450 !important; }
+a.tag[href*="video"], a.tag[href*="watch"] { background: rgba(220, 80, 80, 0.2) !important; color: #dc5050 !important; }
+a.tag[href*="article"], a.tag[href*="blog"] { background: rgba(80, 142, 243, 0.2) !important; color: #508ef3 !important; }
+a.tag[href*="podcast"], a.tag[href*="audio"] { background: rgba(255, 160, 0, 0.2) !important; color: #ffa000 !important; }
+
+/* Hover effect for all tags */
+a.tag:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+
+/* ================================================================================
+   SECTION 34: PROPERTIES/FRONTMATTER STYLING
+   Better YAML display with colored keys
+   ================================================================================ */
+
+/* Properties container */
+.metadata-container,
+.frontmatter-container {
+    background: rgba(var(--ctp-mantle), 0.4) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.15);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Properties header */
+.metadata-container .metadata-properties-heading,
+.frontmatter-container-header {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(var(--ctp-text), 0.5);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
+}
+
+/* Property rows */
+.metadata-property {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(var(--ctp-crust), 0.3);
+}
+
+.metadata-property:last-child {
+    border-bottom: none;
+}
+
+/* Property keys with colors */
+.metadata-property-key,
+.frontmatter-key {
+    font-weight: 600;
+    min-width: 120px;
+    color: rgb(var(--ctp-accent));
+}
+
+/* Specific property colors */
+.metadata-property[data-property-key="tags"] .metadata-property-key { color: #f0c040; }
+.metadata-property[data-property-key="date"] .metadata-property-key,
+.metadata-property[data-property-key="created"] .metadata-property-key { color: #50a0d0; }
+.metadata-property[data-property-key="modified"] .metadata-property-key,
+.metadata-property[data-property-key="updated"] .metadata-property-key { color: #70b060; }
+.metadata-property[data-property-key="author"] .metadata-property-key { color: #a078c8; }
+.metadata-property[data-property-key="status"] .metadata-property-key { color: #e09050; }
+.metadata-property[data-property-key="type"] .metadata-property-key { color: #d070a0; }
+.metadata-property[data-property-key="aliases"] .metadata-property-key { color: #50b0a0; }
+
+/* Property values */
+.metadata-property-value {
+    color: rgb(var(--ctp-text));
+    flex: 1;
+}
+
+/* Links in properties */
+.metadata-property-value a {
+    color: rgb(var(--ctp-accent));
+}
+
+/* Tags in properties */
+.metadata-property-value .tag {
+    font-size: 0.85em;
+    margin-right: 0.25rem;
+}
+
+
+/* ================================================================================
+   SECTION 35: EMBED STYLING
+   Styled embedded notes with clear borders and titles
+   ================================================================================ */
+
+/* Embedded note container */
+.markdown-embed,
+.internal-embed {
+    background: rgba(var(--ctp-mantle), 0.3) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-left: 3px solid rgb(var(--ctp-accent));
+    border-radius: 0 8px 8px 0;
+    padding: 1rem;
+    margin: 1rem 0;
+    position: relative;
+}
+
+/* Embed title/link */
+.markdown-embed-title,
+.embed-title {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: rgb(var(--ctp-accent));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.markdown-embed-title::before {
+    content: "📎";
+    font-size: 1em;
+}
+
+/* Embed content */
+.markdown-embed-content {
+    font-size: 0.95em;
+    color: rgba(var(--ctp-text), 0.9);
+}
+
+/* Nested embeds */
+.markdown-embed .markdown-embed {
+    background: rgba(var(--ctp-base), 0.5) !important;
+    border-left-color: rgba(var(--ctp-accent), 0.5);
+    margin: 0.75rem 0;
+}
+
+/* Hover effect */
+.markdown-embed:hover {
+    border-color: rgba(var(--ctp-accent), 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Image embeds */
+.internal-embed.image-embed {
+    border: none;
+    background: transparent !important;
+    padding: 0;
+}
+
+/* Embed link icon */
+.markdown-embed-link {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+
+.markdown-embed:hover .markdown-embed-link {
+    opacity: 1;
+}
+
+
+/* ================================================================================
+   SECTION 36: PROGRESS BARS
+   Visual progress indicators using Dataview or custom syntax
+   Syntax: `[progress:: 75]` or cssclass: progress-75
+   ================================================================================ */
+
+/* Dataview progress bars */
+.dataview span[data-value^="progress"]::after,
+span.progress-bar {
+    content: "";
+    display: inline-block;
+    width: 100px;
+    height: 8px;
+    background: rgba(var(--ctp-crust), 0.5);
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Progress fill - using CSS variables */
+.progress-10::after, [data-value="progress-10"]::after { background: linear-gradient(90deg, #e05050 10%, transparent 10%); }
+.progress-20::after, [data-value="progress-20"]::after { background: linear-gradient(90deg, #e07030 20%, transparent 20%); }
+.progress-30::after, [data-value="progress-30"]::after { background: linear-gradient(90deg, #e09030 30%, transparent 30%); }
+.progress-40::after, [data-value="progress-40"]::after { background: linear-gradient(90deg, #d0a030 40%, transparent 40%); }
+.progress-50::after, [data-value="progress-50"]::after { background: linear-gradient(90deg, #c0b030 50%, transparent 50%); }
+.progress-60::after, [data-value="progress-60"]::after { background: linear-gradient(90deg, #90b040 60%, transparent 60%); }
+.progress-70::after, [data-value="progress-70"]::after { background: linear-gradient(90deg, #70b050 70%, transparent 70%); }
+.progress-80::after, [data-value="progress-80"]::after { background: linear-gradient(90deg, #60b060 80%, transparent 80%); }
+.progress-90::after, [data-value="progress-90"]::after { background: linear-gradient(90deg, #50b070 90%, transparent 90%); }
+.progress-100::after, [data-value="progress-100"]::after { background: linear-gradient(90deg, #50a080 100%, transparent 100%); }
+
+/* Progress with labels */
+.progress-labeled::before {
+    content: attr(data-progress) "%";
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    color: rgb(var(--ctp-text));
+}
+
+/* Animated progress */
+.progress-animated::after {
+    animation: progress-shine 2s ease-in-out infinite;
+}
+
+@keyframes progress-shine {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+
+/* Task progress in lists */
+.contains-task-list {
+    --task-total: 0;
+    --task-done: 0;
+}
+
+/* Callout-based progress */
+.callout[data-callout="progress"] {
+    --callout-color: 80, 160, 120;
+    --callout-icon: lucide-bar-chart;
+}
+
+.callout[data-callout="progress"] .callout-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+/* ================================================================================
+   SECTION 37: CANVAS ENHANCEMENTS
+   Card colors, connection styles, group styling
+   ================================================================================ */
+
+/* Canvas background */
+.canvas-wrapper {
+    background: rgb(var(--ctp-crust)) !important;
+}
+
+/* Canvas cards */
+.canvas-node {
+    background: rgb(var(--ctp-base)) !important;
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.canvas-node:hover {
+    border-color: rgba(var(--ctp-accent), 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.canvas-node.is-focused {
+    border-color: rgb(var(--ctp-accent));
+    box-shadow: 0 0 0 2px rgba(var(--ctp-accent), 0.3);
+}
+
+/* Canvas node content */
+.canvas-node-content {
+    padding: 1rem;
+}
+
+/* Canvas node label */
+.canvas-node-label {
+    font-weight: 600;
+    color: rgb(var(--ctp-text));
+    padding: 0.5rem;
+    background: rgba(var(--ctp-mantle), 0.5);
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
+}
+
+/* Canvas connections */
+.canvas-edge {
+    stroke: rgba(var(--ctp-accent), 0.5) !important;
+    stroke-width: 2px;
+}
+
+.canvas-edge:hover {
+    stroke: rgb(var(--ctp-accent)) !important;
+    stroke-width: 3px;
+}
+
+/* Canvas edge arrows */
+.canvas-edge-end {
+    fill: rgba(var(--ctp-accent), 0.5) !important;
+}
+
+/* Canvas groups */
+.canvas-node-group {
+    background: rgba(var(--ctp-accent), 0.05) !important;
+    border: 2px dashed rgba(var(--ctp-accent), 0.3);
+    border-radius: 12px;
+}
+
+.canvas-node-group .canvas-node-label {
+    background: rgba(var(--ctp-accent), 0.1);
+    color: rgb(var(--ctp-accent));
+}
+
+/* Canvas color presets */
+.canvas-node[data-node-color="1"] { border-left: 4px solid #e05050; }
+.canvas-node[data-node-color="2"] { border-left: 4px solid #e09050; }
+.canvas-node[data-node-color="3"] { border-left: 4px solid #f0c040; }
+.canvas-node[data-node-color="4"] { border-left: 4px solid #70b060; }
+.canvas-node[data-node-color="5"] { border-left: 4px solid #50b0a0; }
+.canvas-node[data-node-color="6"] { border-left: 4px solid #5090d0; }
+
+/* Canvas minimap */
+.canvas-minimap {
+    background: rgba(var(--ctp-mantle), 0.9);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+}
+
+/* Canvas controls */
+.canvas-controls {
+    background: rgba(var(--ctp-mantle), 0.9);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.canvas-controls button {
+    background: transparent;
+    border: none;
+    color: rgb(var(--ctp-text));
+    padding: 6px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.canvas-controls button:hover {
+    background: rgba(var(--ctp-accent), 0.2);
+}
+
+
+/* ================================================================================
    FONT IMPORTS
    ================================================================================ */
 
@@ -3031,6 +5004,1188 @@ h2,
 
 /* Dyslexia Font */
 @import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css');
+
+
+/* ================================================================================
+   SECTION 38: POLISHED MEDIA EMBEDDING (OneNote-Style)
+
+   Comprehensive styling for images, videos, and audio with:
+   - Rounded corners and shadows
+   - Hover effects with lift animations
+   - Custom video/audio player controls
+   - Gallery layouts
+   - Caption styling
+   ================================================================================ */
+
+/* ====== Base Image Styling ====== */
+.markdown-preview-view img:not(.emoji),
+.markdown-source-view.mod-cm6 img:not(.emoji),
+.cm-content img:not(.emoji) {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
+
+/* Image hover effect - lift and enhanced shadow */
+.markdown-preview-view img:not(.emoji):hover,
+.markdown-source-view.mod-cm6 img:not(.emoji):hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2),
+                0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: zoom-in;
+}
+
+/* Image focus/click state */
+.markdown-preview-view img:not(.emoji):active {
+    transform: translateY(-2px) scale(1.005);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== Image Captions (using alt text or figcaption) ====== */
+.image-embed[alt]:not([alt=""])::after {
+    content: attr(alt);
+    display: block;
+    text-align: center;
+    font-size: 0.85em;
+    color: rgba(var(--ctp-text), 0.7);
+    font-style: italic;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+}
+
+/* Figure and figcaption styling */
+figure {
+    margin: 1.5rem auto;
+    text-align: center;
+}
+
+figure img {
+    margin-bottom: 0.5rem !important;
+}
+
+figcaption {
+    font-size: 0.85em;
+    color: rgba(var(--ctp-text), 0.7);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+/* ====== Polished Image Borders (Toggle) ====== */
+.media-polished .markdown-preview-view img:not(.emoji),
+.media-polished .markdown-source-view.mod-cm6 img:not(.emoji) {
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    padding: 4px;
+    background: rgba(var(--ctp-mantle), 0.5);
+}
+
+/* ====== Video Player Styling ====== */
+.markdown-preview-view video,
+.markdown-source-view.mod-cm6 video,
+.internal-embed video,
+.external-embed video,
+video {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+                0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    display: block;
+    margin: 1.5rem auto;
+    background: rgb(var(--ctp-crust));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Video hover effect */
+.markdown-preview-view video:hover,
+.markdown-source-view.mod-cm6 video:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25),
+                0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Video container wrapper */
+.video-embed,
+.internal-embed.media-embed {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem auto;
+    max-width: 100%;
+}
+
+/* ====== Custom Video Controls Overlay ====== */
+/* Play button overlay */
+.video-embed::before,
+.internal-embed.is-video::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: rgba(var(--ctp-accent), 0.9);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+}
+
+.video-embed:hover::before,
+.internal-embed.is-video:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ====== WebKit Video Player Controls ====== */
+video::-webkit-media-controls-panel {
+    background: linear-gradient(to top,
+        rgba(var(--ctp-crust), 0.95) 0%,
+        rgba(var(--ctp-crust), 0.8) 50%,
+        transparent 100%);
+    border-radius: 0 0 12px 12px;
+}
+
+video::-webkit-media-controls-play-button {
+    background-color: rgba(var(--ctp-accent), 0.8);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+video::-webkit-media-controls-play-button:hover {
+    background-color: rgb(var(--ctp-accent));
+    transform: scale(1.1);
+}
+
+video::-webkit-media-controls-timeline {
+    background: rgba(var(--ctp-text), 0.2);
+    border-radius: 4px;
+    height: 6px;
+}
+
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+    color: rgb(var(--ctp-text));
+    font-family: var(--font-ui);
+    font-size: 12px;
+}
+
+video::-webkit-media-controls-volume-slider {
+    background: rgba(var(--ctp-accent), 0.3);
+    border-radius: 4px;
+}
+
+video::-webkit-media-controls-mute-button {
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+video::-webkit-media-controls-fullscreen-button {
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+/* ====== Audio Player Styling ====== */
+.markdown-preview-view audio,
+.markdown-source-view.mod-cm6 audio,
+.internal-embed audio,
+audio {
+    width: 100%;
+    max-width: 500px;
+    height: 54px;
+    border-radius: 27px;
+    margin: 1rem auto;
+    display: block;
+    background: linear-gradient(135deg,
+        rgba(var(--ctp-mantle), 0.95) 0%,
+        rgba(var(--ctp-crust), 0.95) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Audio hover effect */
+.markdown-preview-view audio:hover,
+.markdown-source-view.mod-cm6 audio:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2),
+                0 3px 6px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+/* Audio focus state for accessibility */
+audio:focus {
+    outline: 2px solid rgb(var(--ctp-accent));
+    outline-offset: 2px;
+}
+
+/* ====== WebKit Audio Player Controls ====== */
+audio::-webkit-media-controls-panel {
+    background: transparent;
+    padding: 0 12px;
+}
+
+audio::-webkit-media-controls-play-button {
+    background-color: rgb(var(--ctp-accent));
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+}
+
+audio::-webkit-media-controls-play-button:hover {
+    background-color: rgb(var(--ctp-accent-hover));
+    transform: scale(1.08);
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    color: rgb(var(--ctp-text));
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+audio::-webkit-media-controls-timeline {
+    background: rgba(var(--ctp-text), 0.15);
+    border-radius: 3px;
+    height: 4px;
+    margin: 0 8px;
+}
+
+audio::-webkit-media-controls-volume-slider-container {
+    background: transparent;
+}
+
+audio::-webkit-media-controls-volume-slider {
+    background: rgba(var(--ctp-accent), 0.3);
+    border-radius: 3px;
+}
+
+audio::-webkit-media-controls-mute-button {
+    background-color: transparent;
+}
+
+/* ====== Large Audio Player (Accessibility Option) ====== */
+.media-large-controls audio {
+    height: 72px;
+    border-radius: 36px;
+    max-width: 600px;
+}
+
+.media-large-controls audio::-webkit-media-controls-play-button {
+    width: 48px;
+    height: 48px;
+}
+
+.media-large-controls audio::-webkit-media-controls-timeline {
+    height: 8px;
+}
+
+.media-large-controls audio::-webkit-media-controls-current-time-display,
+.media-large-controls audio::-webkit-media-controls-time-remaining-display {
+    font-size: 14px;
+}
+
+/* ====== Audio Waveform Visualization Style ====== */
+.audio-embed,
+.internal-embed.is-audio {
+    position: relative;
+    background: linear-gradient(135deg,
+        rgba(var(--ctp-mantle), 0.9) 0%,
+        rgba(var(--ctp-crust), 0.9) 100%);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 1rem auto;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Waveform bars decoration */
+.media-waveform .audio-embed::before,
+.media-waveform .internal-embed.is-audio::before {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    left: 60px;
+    right: 100px;
+    height: 24px;
+    transform: translateY(50%);
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(var(--ctp-accent), 0.3) 0px,
+        rgba(var(--ctp-accent), 0.3) 3px,
+        transparent 3px,
+        transparent 6px
+    );
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24'%3E%3Crect x='0' y='8' width='3' height='8' fill='white'/%3E%3Crect x='6' y='4' width='3' height='16' fill='white'/%3E%3Crect x='12' y='6' width='3' height='12' fill='white'/%3E%3Crect x='18' y='2' width='3' height='20' fill='white'/%3E%3Crect x='24' y='7' width='3' height='10' fill='white'/%3E%3Crect x='30' y='4' width='3' height='16' fill='white'/%3E%3Crect x='36' y='9' width='3' height='6' fill='white'/%3E%3Crect x='42' y='5' width='3' height='14' fill='white'/%3E%3Crect x='48' y='3' width='3' height='18' fill='white'/%3E%3Crect x='54' y='7' width='3' height='10' fill='white'/%3E%3Crect x='60' y='4' width='3' height='16' fill='white'/%3E%3Crect x='66' y='8' width='3' height='8' fill='white'/%3E%3Crect x='72' y='5' width='3' height='14' fill='white'/%3E%3Crect x='78' y='6' width='3' height='12' fill='white'/%3E%3Crect x='84' y='9' width='3' height='6' fill='white'/%3E%3Crect x='90' y='4' width='3' height='16' fill='white'/%3E%3Crect x='96' y='7' width='3' height='10' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24'%3E%3Crect x='0' y='8' width='3' height='8' fill='white'/%3E%3Crect x='6' y='4' width='3' height='16' fill='white'/%3E%3Crect x='12' y='6' width='3' height='12' fill='white'/%3E%3Crect x='18' y='2' width='3' height='20' fill='white'/%3E%3Crect x='24' y='7' width='3' height='10' fill='white'/%3E%3Crect x='30' y='4' width='3' height='16' fill='white'/%3E%3Crect x='36' y='9' width='3' height='6' fill='white'/%3E%3Crect x='42' y='5' width='3' height='14' fill='white'/%3E%3Crect x='48' y='3' width='3' height='18' fill='white'/%3E%3Crect x='54' y='7' width='3' height='10' fill='white'/%3E%3Crect x='60' y='4' width='3' height='16' fill='white'/%3E%3Crect x='66' y='8' width='3' height='8' fill='white'/%3E%3Crect x='72' y='5' width='3' height='14' fill='white'/%3E%3Crect x='78' y='6' width='3' height='12' fill='white'/%3E%3Crect x='84' y='9' width='3' height='6' fill='white'/%3E%3Crect x='90' y='4' width='3' height='16' fill='white'/%3E%3Crect x='96' y='7' width='3' height='10' fill='white'/%3E%3C/svg%3E");
+    mask-repeat: repeat-x;
+    -webkit-mask-repeat: repeat-x;
+    mask-size: 100px 24px;
+    -webkit-mask-size: 100px 24px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* ====== Media Gallery Grid ====== */
+.media-gallery,
+.markdown-preview-view .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 1.5rem 0;
+}
+
+.media-gallery img,
+.image-gallery img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.media-gallery img:hover,
+.image-gallery img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Masonry-style Image Grid ====== */
+.media-masonry {
+    column-count: 3;
+    column-gap: 12px;
+    margin: 1.5rem 0;
+}
+
+.media-masonry img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 12px;
+    break-inside: avoid;
+}
+
+@media (max-width: 768px) {
+    .media-masonry {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .media-masonry {
+        column-count: 1;
+    }
+}
+
+/* ====== PDF Embed Styling ====== */
+.markdown-preview-view .pdf-embed,
+.internal-embed.pdf-embed,
+iframe[src*=".pdf"] {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(var(--ctp-accent), 0.2);
+    margin: 1.5rem auto;
+    overflow: hidden;
+}
+
+/* PDF toolbar styling */
+.pdf-toolbar {
+    background: rgba(var(--ctp-mantle), 0.95);
+    border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
+    padding: 8px 12px;
+}
+
+/* ====== Iframe/External Media Embed ====== */
+.markdown-preview-view iframe,
+.external-embed iframe {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: none;
+    margin: 1.5rem auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* YouTube/Vimeo specific styling */
+.external-embed[src*="youtube"],
+.external-embed[src*="vimeo"],
+iframe[src*="youtube"],
+iframe[src*="vimeo"] {
+    aspect-ratio: 16/9;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* ====== Media Loading States ====== */
+.image-embed.is-loading,
+.internal-embed.is-loading {
+    background: linear-gradient(
+        90deg,
+        rgba(var(--ctp-mantle), 0.5) 0%,
+        rgba(var(--ctp-mantle), 0.8) 50%,
+        rgba(var(--ctp-mantle), 0.5) 100%
+    );
+    background-size: 200% 100%;
+    animation: media-shimmer 1.5s infinite;
+    border-radius: 8px;
+    min-height: 100px;
+}
+
+@keyframes media-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ====== Media Error States ====== */
+.image-embed.mod-error,
+.internal-embed.mod-error {
+    background: rgba(var(--ctp-error), 0.1);
+    border: 1px dashed rgba(var(--ctp-error), 0.5);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: rgb(var(--ctp-error));
+}
+
+/* ====== Inline Images (within text) ====== */
+.markdown-preview-view p img:not(.emoji),
+.cm-line img:not(.emoji):not(:only-child) {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-height: 1.5em;
+}
+
+/* ====== Image Size Presets ====== */
+/* Use with cssclass in frontmatter: img-small, img-medium, img-large */
+.img-small img { max-width: 200px !important; }
+.img-medium img { max-width: 400px !important; }
+.img-large img { max-width: 600px !important; }
+.img-full img { max-width: 100% !important; }
+
+/* ====== Float Images ====== */
+.img-float-left img {
+    float: left;
+    margin: 0 1.5rem 1rem 0 !important;
+    max-width: 40%;
+}
+
+.img-float-right img {
+    float: right;
+    margin: 0 0 1rem 1.5rem !important;
+    max-width: 40%;
+}
+
+/* Clear floats */
+.img-float-left::after,
+.img-float-right::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ====== Media Rounded Corners Variants ====== */
+.media-rounded-sm img,
+.media-rounded-sm video,
+.media-rounded-sm audio { border-radius: 4px !important; }
+
+.media-rounded-md img,
+.media-rounded-md video,
+.media-rounded-md audio { border-radius: 8px !important; }
+
+.media-rounded-lg img,
+.media-rounded-lg video,
+.media-rounded-lg audio { border-radius: 16px !important; }
+
+.media-rounded-full img { border-radius: 50% !important; }
+
+/* ====== Media No Shadow Option ====== */
+.media-no-shadow img,
+.media-no-shadow video,
+.media-no-shadow audio {
+    box-shadow: none !important;
+}
+
+/* ====== Media Border Options ====== */
+.media-border img,
+.media-border video {
+    border: 2px solid rgba(var(--ctp-accent), 0.3) !important;
+}
+
+.media-border-accent img,
+.media-border-accent video {
+    border: 3px solid rgb(var(--ctp-accent)) !important;
+}
+
+/* ====== Lightbox Effect (click to expand) ====== */
+.media-lightbox img {
+    cursor: zoom-in;
+}
+
+.media-lightbox img:focus,
+.media-lightbox img.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 9999;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    cursor: zoom-out;
+}
+
+/* Lightbox backdrop */
+.media-lightbox img:focus::before,
+.media-lightbox img.expanded::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: -1;
+}
+
+/* ====== Print Styles for Media ====== */
+@media print {
+    img, video, audio {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        break-inside: avoid;
+    }
+
+    video, audio, iframe {
+        display: none !important;
+    }
+}
+
+/* ====== Reduced Motion Support ====== */
+@media (prefers-reduced-motion: reduce) {
+    img, video, audio,
+    .image-embed, .video-embed, .audio-embed {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    img:hover, video:hover, audio:hover {
+        transform: none !important;
+    }
+}
+
+
+/* ================================================================================
+   SECTION 39: PAPER STYLES (OneNote-Style)
+
+   Lined, grid, and dotted paper backgrounds for a notebook feel.
+   Apply via cssclasses in frontmatter:
+   - paper-lined: College ruled lines
+   - paper-grid: Square grid paper
+   - paper-dot: Dot grid (bullet journal style)
+   - paper-graph: Engineering graph paper
+   - paper-legal: Legal pad yellow lined
+   - paper-cornell: Cornell note-taking format
+   ================================================================================ */
+
+/* ====== Base Paper Style ====== */
+.paper-lined .markdown-preview-view,
+.paper-grid .markdown-preview-view,
+.paper-dot .markdown-preview-view,
+.paper-graph .markdown-preview-view,
+.paper-legal .markdown-preview-view,
+.paper-cornell .markdown-preview-view,
+.paper-lined .cm-content,
+.paper-grid .cm-content,
+.paper-dot .cm-content,
+.paper-graph .cm-content,
+.paper-legal .cm-content,
+.paper-cornell .cm-content {
+    background-attachment: local;
+    background-repeat: repeat;
+}
+
+/* ====== College Ruled Lines ====== */
+.paper-lined .markdown-preview-view,
+.paper-lined .cm-content {
+    background-image:
+        linear-gradient(transparent 0px, transparent 27px, rgba(var(--ctp-accent), 0.3) 27px, rgba(var(--ctp-accent), 0.3) 28px),
+        linear-gradient(90deg, transparent 0px, transparent 60px, rgba(200, 80, 80, 0.4) 60px, rgba(200, 80, 80, 0.4) 62px, transparent 62px);
+    background-size: 100% 28px, 100% 100%;
+    padding-left: 70px !important;
+    line-height: 28px !important;
+}
+
+/* Lined paper - subtle version */
+.paper-lined-subtle .markdown-preview-view,
+.paper-lined-subtle .cm-content {
+    background-image:
+        linear-gradient(transparent 0px, transparent 27px, rgba(var(--ctp-text), 0.08) 27px, rgba(var(--ctp-text), 0.08) 28px);
+    background-size: 100% 28px;
+    line-height: 28px !important;
+}
+
+/* ====== Square Grid Paper ====== */
+.paper-grid .markdown-preview-view,
+.paper-grid .cm-content {
+    background-image:
+        linear-gradient(rgba(var(--ctp-accent), 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Grid paper - small squares */
+.paper-grid-sm .markdown-preview-view,
+.paper-grid-sm .cm-content {
+    background-image:
+        linear-gradient(rgba(var(--ctp-accent), 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.12) 1px, transparent 1px);
+    background-size: 12px 12px;
+}
+
+/* Grid paper - large squares */
+.paper-grid-lg .markdown-preview-view,
+.paper-grid-lg .cm-content {
+    background-image:
+        linear-gradient(rgba(var(--ctp-accent), 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.18) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+/* ====== Dot Grid Paper (Bullet Journal) ====== */
+.paper-dot .markdown-preview-view,
+.paper-dot .cm-content {
+    background-image: radial-gradient(circle, rgba(var(--ctp-text), 0.25) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Dot grid - wider spacing */
+.paper-dot-wide .markdown-preview-view,
+.paper-dot-wide .cm-content {
+    background-image: radial-gradient(circle, rgba(var(--ctp-text), 0.25) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+}
+
+/* ====== Engineering Graph Paper ====== */
+.paper-graph .markdown-preview-view,
+.paper-graph .cm-content {
+    background-image:
+        /* Major grid lines */
+        linear-gradient(rgba(var(--ctp-accent), 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.25) 1px, transparent 1px),
+        /* Minor grid lines */
+        linear-gradient(rgba(var(--ctp-accent), 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--ctp-accent), 0.08) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+/* ====== Legal Pad (Yellow Lined) ====== */
+.paper-legal .markdown-preview-view,
+.paper-legal .cm-content {
+    background-color: #fffde7 !important;
+    background-image:
+        linear-gradient(transparent 0px, transparent 27px, #c8e0f0 27px, #c8e0f0 28px),
+        linear-gradient(90deg, transparent 0px, transparent 50px, #f0a0a0 50px, #f0a0a0 52px, transparent 52px);
+    background-size: 100% 28px, 100% 100%;
+    padding-left: 60px !important;
+    line-height: 28px !important;
+}
+
+/* Legal pad text color adjustment for readability */
+.paper-legal .markdown-preview-view,
+.paper-legal .cm-content,
+.paper-legal .markdown-preview-view p,
+.paper-legal .cm-line {
+    color: #1a1a1a !important;
+}
+
+/* ====== Cornell Notes Format ====== */
+.paper-cornell .markdown-preview-view,
+.paper-cornell .cm-content {
+    background-image:
+        /* Horizontal line at top for title */
+        linear-gradient(transparent 0px, transparent 59px, rgba(var(--ctp-accent), 0.4) 59px, rgba(var(--ctp-accent), 0.4) 61px, transparent 61px),
+        /* Vertical line for cue column */
+        linear-gradient(90deg, transparent 0px, transparent 180px, rgba(var(--ctp-accent), 0.4) 180px, rgba(var(--ctp-accent), 0.4) 182px, transparent 182px),
+        /* Bottom summary area line */
+        linear-gradient(transparent calc(100% - 120px), rgba(var(--ctp-accent), 0.4) calc(100% - 120px), rgba(var(--ctp-accent), 0.4) calc(100% - 118px), transparent calc(100% - 118px)),
+        /* Subtle ruled lines */
+        linear-gradient(transparent 0px, transparent 27px, rgba(var(--ctp-text), 0.06) 27px, rgba(var(--ctp-text), 0.06) 28px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 28px;
+    padding-left: 190px !important;
+    padding-top: 70px !important;
+    padding-bottom: 130px !important;
+}
+
+/* Cornell labels */
+.paper-cornell .markdown-preview-view::before {
+    content: "Notes";
+    position: absolute;
+    top: 20px;
+    left: 200px;
+    font-size: 0.75em;
+    color: rgba(var(--ctp-text), 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ====== Isometric Grid ====== */
+.paper-iso .markdown-preview-view,
+.paper-iso .cm-content {
+    background-image:
+        linear-gradient(30deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(150deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(30deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(150deg, rgba(var(--ctp-accent), 0.1) 12%, transparent 12.5%, transparent 87%, rgba(var(--ctp-accent), 0.1) 87.5%, rgba(var(--ctp-accent), 0.1)),
+        linear-gradient(60deg, rgba(var(--ctp-accent), 0.08) 25%, transparent 25.5%, transparent 75%, rgba(var(--ctp-accent), 0.08) 75%, rgba(var(--ctp-accent), 0.08)),
+        linear-gradient(60deg, rgba(var(--ctp-accent), 0.08) 25%, transparent 25.5%, transparent 75%, rgba(var(--ctp-accent), 0.08) 75%, rgba(var(--ctp-accent), 0.08));
+    background-size: 40px 70px;
+    background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+}
+
+/* ====== Music Staff Paper ====== */
+.paper-music .markdown-preview-view,
+.paper-music .cm-content {
+    background-image:
+        repeating-linear-gradient(
+            transparent 0px,
+            transparent 10px,
+            rgba(var(--ctp-text), 0.2) 10px,
+            rgba(var(--ctp-text), 0.2) 11px,
+            transparent 11px,
+            transparent 21px,
+            rgba(var(--ctp-text), 0.2) 21px,
+            rgba(var(--ctp-text), 0.2) 22px,
+            transparent 22px,
+            transparent 32px,
+            rgba(var(--ctp-text), 0.2) 32px,
+            rgba(var(--ctp-text), 0.2) 33px,
+            transparent 33px,
+            transparent 43px,
+            rgba(var(--ctp-text), 0.2) 43px,
+            rgba(var(--ctp-text), 0.2) 44px,
+            transparent 44px,
+            transparent 54px,
+            rgba(var(--ctp-text), 0.2) 54px,
+            rgba(var(--ctp-text), 0.2) 55px,
+            transparent 55px,
+            transparent 100px
+        );
+    background-size: 100% 100px;
+}
+
+/* ====== Page Tint Colors (OneNote-style) ====== */
+.paper-cream .markdown-preview-view,
+.paper-cream .cm-content { background-color: rgba(255, 253, 240, 0.5) !important; }
+
+.paper-blue .markdown-preview-view,
+.paper-blue .cm-content { background-color: rgba(240, 248, 255, 0.5) !important; }
+
+.paper-green .markdown-preview-view,
+.paper-green .cm-content { background-color: rgba(240, 255, 244, 0.5) !important; }
+
+.paper-pink .markdown-preview-view,
+.paper-pink .cm-content { background-color: rgba(255, 245, 250, 0.5) !important; }
+
+.paper-yellow .markdown-preview-view,
+.paper-yellow .cm-content { background-color: rgba(255, 255, 240, 0.5) !important; }
+
+.paper-lavender .markdown-preview-view,
+.paper-lavender .cm-content { background-color: rgba(248, 245, 255, 0.5) !important; }
+
+/* Dark mode page tints */
+.theme-dark .paper-cream .markdown-preview-view,
+.theme-dark .paper-cream .cm-content { background-color: rgba(45, 42, 35, 0.5) !important; }
+
+.theme-dark .paper-blue .markdown-preview-view,
+.theme-dark .paper-blue .cm-content { background-color: rgba(35, 42, 50, 0.5) !important; }
+
+.theme-dark .paper-green .markdown-preview-view,
+.theme-dark .paper-green .cm-content { background-color: rgba(35, 45, 38, 0.5) !important; }
+
+.theme-dark .paper-pink .markdown-preview-view,
+.theme-dark .paper-pink .cm-content { background-color: rgba(48, 38, 42, 0.5) !important; }
+
+.theme-dark .paper-yellow .markdown-preview-view,
+.theme-dark .paper-yellow .cm-content { background-color: rgba(48, 46, 35, 0.5) !important; }
+
+.theme-dark .paper-lavender .markdown-preview-view,
+.theme-dark .paper-lavender .cm-content { background-color: rgba(42, 38, 50, 0.5) !important; }
+
+
+/* ================================================================================
+   SECTION 40: STICKY NOTES CALLOUTS (OneNote-Style)
+
+   Colorful Post-it style callouts with 7 colors.
+   Usage: > [!sticky-yellow] or > [!note-yellow], etc.
+   Colors: yellow, pink, blue, green, purple, orange, gray
+   ================================================================================ */
+
+/* ====== Base Sticky Note Style ====== */
+.callout[data-callout^="sticky"],
+.callout[data-callout^="note-"] {
+    --callout-padding: 16px;
+    padding: 0;
+    border: none;
+    border-radius: 2px 2px 4px 4px;
+    box-shadow:
+        2px 2px 8px rgba(0, 0, 0, 0.15),
+        0 0 1px rgba(0, 0, 0, 0.1);
+    transform: rotate(-1deg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 1.5rem 0;
+    max-width: 350px;
+    position: relative;
+}
+
+/* Hover effect */
+.callout[data-callout^="sticky"]:hover,
+.callout[data-callout^="note-"]:hover {
+    transform: rotate(0deg) translateY(-2px);
+    box-shadow:
+        4px 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky note tape/pin effect at top */
+.callout[data-callout^="sticky"]::before,
+.callout[data-callout^="note-"]::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove default callout icon */
+.callout[data-callout^="sticky"] .callout-icon,
+.callout[data-callout^="note-"] .callout-icon {
+    display: none;
+}
+
+/* Title styling */
+.callout[data-callout^="sticky"] .callout-title,
+.callout[data-callout^="note-"] .callout-title {
+    padding: 12px 16px 8px 16px;
+    font-weight: 600;
+    font-size: 0.95em;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+/* Content styling */
+.callout[data-callout^="sticky"] .callout-content,
+.callout[data-callout^="note-"] .callout-content {
+    padding: 12px 16px 16px 16px;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* Handwriting-style font option */
+.sticky-handwriting .callout[data-callout^="sticky"] .callout-content,
+.sticky-handwriting .callout[data-callout^="note-"] .callout-content {
+    font-family: 'Caveat', 'Comic Sans MS', cursive;
+    font-size: 1.1em;
+}
+
+/* ====== Yellow Sticky (Default Post-it) ====== */
+.callout[data-callout="sticky-yellow"],
+.callout[data-callout="sticky"],
+.callout[data-callout="note-yellow"],
+.callout[data-callout="postit"] {
+    background: linear-gradient(135deg, #fff9b1 0%, #fff176 100%);
+}
+
+.callout[data-callout="sticky-yellow"] .callout-title,
+.callout[data-callout="sticky"] .callout-title,
+.callout[data-callout="note-yellow"] .callout-title,
+.callout[data-callout="postit"] .callout-title {
+    color: #5d4e00;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-yellow"] .callout-content,
+.callout[data-callout="sticky"] .callout-content,
+.callout[data-callout="note-yellow"] .callout-content,
+.callout[data-callout="postit"] .callout-content {
+    color: #3d3200;
+}
+
+/* ====== Pink Sticky ====== */
+.callout[data-callout="sticky-pink"],
+.callout[data-callout="note-pink"] {
+    background: linear-gradient(135deg, #ffcdd2 0%, #f8bbd9 100%);
+}
+
+.callout[data-callout="sticky-pink"] .callout-title,
+.callout[data-callout="note-pink"] .callout-title {
+    color: #6d1b3a;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-pink"] .callout-content,
+.callout[data-callout="note-pink"] .callout-content {
+    color: #4a1228;
+}
+
+/* ====== Blue Sticky ====== */
+.callout[data-callout="sticky-blue"],
+.callout[data-callout="note-blue"] {
+    background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+}
+
+.callout[data-callout="sticky-blue"] .callout-title,
+.callout[data-callout="note-blue"] .callout-title {
+    color: #0d3c61;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-blue"] .callout-content,
+.callout[data-callout="note-blue"] .callout-content {
+    color: #0a2a42;
+}
+
+/* ====== Green Sticky ====== */
+.callout[data-callout="sticky-green"],
+.callout[data-callout="note-green"] {
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+}
+
+.callout[data-callout="sticky-green"] .callout-title,
+.callout[data-callout="note-green"] .callout-title {
+    color: #1b5e20;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-green"] .callout-content,
+.callout[data-callout="note-green"] .callout-content {
+    color: #133a14;
+}
+
+/* ====== Purple Sticky ====== */
+.callout[data-callout="sticky-purple"],
+.callout[data-callout="note-purple"] {
+    background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+}
+
+.callout[data-callout="sticky-purple"] .callout-title,
+.callout[data-callout="note-purple"] .callout-title {
+    color: #4a148c;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-purple"] .callout-content,
+.callout[data-callout="note-purple"] .callout-content {
+    color: #320b5e;
+}
+
+/* ====== Orange Sticky ====== */
+.callout[data-callout="sticky-orange"],
+.callout[data-callout="note-orange"] {
+    background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+}
+
+.callout[data-callout="sticky-orange"] .callout-title,
+.callout[data-callout="note-orange"] .callout-title {
+    color: #7a3d00;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-orange"] .callout-content,
+.callout[data-callout="note-orange"] .callout-content {
+    color: #522900;
+}
+
+/* ====== Gray Sticky ====== */
+.callout[data-callout="sticky-gray"],
+.callout[data-callout="sticky-grey"],
+.callout[data-callout="note-gray"],
+.callout[data-callout="note-grey"] {
+    background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+}
+
+.callout[data-callout="sticky-gray"] .callout-title,
+.callout[data-callout="sticky-grey"] .callout-title,
+.callout[data-callout="note-gray"] .callout-title,
+.callout[data-callout="note-grey"] .callout-title {
+    color: #333;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-gray"] .callout-content,
+.callout[data-callout="sticky-grey"] .callout-content,
+.callout[data-callout="note-gray"] .callout-content,
+.callout[data-callout="note-grey"] .callout-content {
+    color: #1a1a1a;
+}
+
+/* ====== Teal Sticky ====== */
+.callout[data-callout="sticky-teal"],
+.callout[data-callout="note-teal"] {
+    background: linear-gradient(135deg, #b2dfdb 0%, #80cbc4 100%);
+}
+
+.callout[data-callout="sticky-teal"] .callout-title,
+.callout[data-callout="note-teal"] .callout-title {
+    color: #004d40;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.callout[data-callout="sticky-teal"] .callout-content,
+.callout[data-callout="note-teal"] .callout-content {
+    color: #00332b;
+}
+
+/* ====== Sticky Note Variations ====== */
+
+/* Tilted right */
+.callout[data-callout$="-right"] {
+    transform: rotate(1.5deg) !important;
+}
+
+.callout[data-callout$="-right"]:hover {
+    transform: rotate(0deg) translateY(-2px) !important;
+}
+
+/* Tilted left */
+.callout[data-callout$="-left"] {
+    transform: rotate(-2deg) !important;
+}
+
+.callout[data-callout$="-left"]:hover {
+    transform: rotate(0deg) translateY(-2px) !important;
+}
+
+/* Full width sticky */
+.callout[data-callout$="-wide"] {
+    max-width: 100%;
+}
+
+/* Stacked sticky notes effect */
+.sticky-stack .callout[data-callout^="sticky"],
+.sticky-stack .callout[data-callout^="note-"] {
+    margin-bottom: -20px;
+}
+
+.sticky-stack .callout[data-callout^="sticky"]:nth-child(odd),
+.sticky-stack .callout[data-callout^="note-"]:nth-child(odd) {
+    transform: rotate(-1deg);
+    margin-left: 10px;
+}
+
+.sticky-stack .callout[data-callout^="sticky"]:nth-child(even),
+.sticky-stack .callout[data-callout^="note-"]:nth-child(even) {
+    transform: rotate(1.5deg);
+    margin-left: -10px;
+}
+
+/* ====== Pin Style (instead of tape) ====== */
+.sticky-pin .callout[data-callout^="sticky"]::before,
+.sticky-pin .callout[data-callout^="note-"]::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #c0392b);
+    border-radius: 50%;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Folded Corner Effect ====== */
+.sticky-fold .callout[data-callout^="sticky"]::after,
+.sticky-fold .callout[data-callout^="note-"]::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 25px 25px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+}
+
+/* ====== Inline Sticky Notes (smaller) ====== */
+.callout[data-callout$="-sm"],
+.callout[data-callout$="-small"] {
+    max-width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.5rem;
+}
+
+.callout[data-callout$="-sm"] .callout-title,
+.callout[data-callout$="-small"] .callout-title {
+    padding: 8px 12px 6px 12px;
+    font-size: 0.85em;
+}
+
+.callout[data-callout$="-sm"] .callout-content,
+.callout[data-callout$="-small"] .callout-content {
+    padding: 8px 12px 12px 12px;
+    font-size: 0.8em;
+}
+
+/* ====== No Transform (flat stickies) ====== */
+.sticky-flat .callout[data-callout^="sticky"],
+.sticky-flat .callout[data-callout^="note-"] {
+    transform: none !important;
+}
+
+.sticky-flat .callout[data-callout^="sticky"]:hover,
+.sticky-flat .callout[data-callout^="note-"]:hover {
+    transform: translateY(-2px) !important;
+}
+
+/* ====== Dark Mode Adjustments ====== */
+.theme-dark .callout[data-callout^="sticky"]::before,
+.theme-dark .callout[data-callout^="note-"]::before {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Slightly reduce brightness in dark mode for easier reading */
+.theme-dark .callout[data-callout^="sticky"],
+.theme-dark .callout[data-callout^="note-"] {
+    filter: brightness(0.9);
+}
+
+/* ====== Print Styles ====== */
+@media print {
+    .callout[data-callout^="sticky"],
+    .callout[data-callout^="note-"] {
+        transform: none !important;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        max-width: 100% !important;
+    }
+}
 
 
 /* ================================================================================
