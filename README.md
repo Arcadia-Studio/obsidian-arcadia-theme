@@ -6,6 +6,10 @@ A comprehensive, professional Obsidian theme with **23 color schemes**, OneNote-
 
 ---
 
+> **Enjoying Arcadia?** [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow?style=flat-square&logo=buy-me-a-coffee)](https://buymeacoffee.com/drcarterd)
+
+---
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -388,6 +392,10 @@ Add `-sm` or `-small` suffix for compact stickies:
 
 ---
 
+> **Like what you see?** Help support continued development: [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow?style=flat-square&logo=buy-me-a-coffee)](https://buymeacoffee.com/drcarterd)
+
+---
+
 ### Paper Styles
 
 Transform your editor into realistic paper backgrounds.
@@ -671,7 +679,7 @@ Your support helps maintain and improve this theme.
 
 ## License
 
-MIT License — Free to use, modify, and distribute.
+**CC BY-NC 4.0** — Free to use and modify for personal/non-commercial purposes. Attribution required. For commercial use, contact the author.
 
 ---
 
