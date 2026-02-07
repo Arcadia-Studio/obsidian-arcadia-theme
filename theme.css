@@ -1944,12 +1944,12 @@ settings:
     color: #5a6268;
 }
 
-/* ====== Crownwell Dark UI Elements (matching website header) ====== */
+/* ====== Crownwell Dark UI Elements (TRUE BLACK with WHITE text) ====== */
 
-/* Title bar - dark charcoal like Crownwell Press header */
+/* Title bar - TRUE BLACK */
 .theme-light.ctp-crownwell .titlebar,
 .theme-light.ctp-crownwell .titlebar-inner {
-    background: #2D3436 !important;
+    background: #1a1a1a !important;
     color: #FFFFFF !important;
 }
 
@@ -1957,60 +1957,60 @@ settings:
     color: #FFFFFF !important;
 }
 
-/* Tab header container - dark */
+/* Tab header container - TRUE BLACK */
 .theme-light.ctp-crownwell .workspace-tab-header-container {
-    background: #2D3436 !important;
-    border-bottom: 1px solid #1a1d1e !important;
+    background: #1a1a1a !important;
+    border-bottom: 1px solid #000000 !important;
 }
 
-/* Individual tabs - dark with white text */
+/* Individual tabs - BLACK with BRIGHT WHITE text */
 .theme-light.ctp-crownwell .workspace-tab-header {
-    background: #2D3436 !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    background: #1a1a1a !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header .workspace-tab-header-inner-title {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: #FFFFFF !important;
 }
 
-/* Active tab - gold highlight */
+/* Active tab - GOLD highlight on black */
 .theme-light.ctp-crownwell .workspace-tab-header.is-active {
-    background: #3D4449 !important;
-    border-bottom: 2px solid #C9A227 !important;
+    background: #2a2a2a !important;
+    border-bottom: 3px solid #C9A227 !important;
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header.is-active .workspace-tab-header-inner-title {
     color: #C9A227 !important;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-/* Tab close button */
+/* Tab close button - WHITE */
 .theme-light.ctp-crownwell .workspace-tab-header-inner-close-button {
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header-inner-close-button:hover {
-    color: #FFFFFF !important;
+    color: #C9A227 !important;
 }
 
 /* Tab hover state */
 .theme-light.ctp-crownwell .workspace-tab-header:hover {
-    background: #3D4449 !important;
+    background: #2a2a2a !important;
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header:hover .workspace-tab-header-inner-title {
     color: #FFFFFF !important;
 }
 
-/* Left ribbon (icon sidebar) - dark */
+/* Left ribbon (icon sidebar) - TRUE BLACK */
 .theme-light.ctp-crownwell .workspace-ribbon {
-    background: #2D3436 !important;
-    border-right: 1px solid #1a1d1e !important;
+    background: #1a1a1a !important;
+    border-right: 1px solid #000000 !important;
 }
 
 .theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-tab,
 .theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-action {
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-tab:hover,
@@ -2019,68 +2019,69 @@ settings:
 }
 
 .theme-light.ctp-crownwell .workspace-ribbon .clickable-icon {
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .workspace-ribbon .clickable-icon:hover {
     color: #C9A227 !important;
-    background: rgba(201, 162, 39, 0.1) !important;
+    background: rgba(201, 162, 39, 0.2) !important;
 }
 
-/* Status bar (bottom) - dark */
+/* Status bar (bottom) - TRUE BLACK */
 .theme-light.ctp-crownwell .status-bar {
-    background: #2D3436 !important;
-    border-top: 1px solid #1a1d1e !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    background: #1a1a1a !important;
+    border-top: 1px solid #000000 !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .status-bar-item {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .status-bar-item:hover {
     color: #C9A227 !important;
 }
 
-/* Sidebar header (above file explorer) - slightly darker cream */
+/* Sidebar tab headers - also BLACK to match */
 .theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header-container,
 .theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header-container {
-    background: #E8E3DB !important;
-    border-bottom: 1px solid rgba(61, 68, 73, 0.15) !important;
+    background: #1a1a1a !important;
+    border-bottom: 1px solid #000000 !important;
 }
 
 .theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header,
 .theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header {
     background: transparent !important;
-    color: #3D4449 !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header.is-active,
 .theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header.is-active {
-    background: rgba(201, 162, 39, 0.15) !important;
-    border-bottom: 2px solid #C9A227 !important;
+    background: #2a2a2a !important;
+    border-bottom: 3px solid #C9A227 !important;
+    color: #C9A227 !important;
 }
 
-/* View actions toolbar - dark background */
+/* View header toolbar - WHITE background for contrast */
 .theme-light.ctp-crownwell .view-header {
     background: #FFFFFF !important;
-    border-bottom: 1px solid rgba(61, 68, 73, 0.1) !important;
+    border-bottom: 1px solid #e0e0e0 !important;
 }
 
 .theme-light.ctp-crownwell .view-header-title {
-    color: #2D3436 !important;
+    color: #1a1a1a !important;
 }
 
-/* Toolbar buttons in view header */
+/* Toolbar buttons */
 .theme-light.ctp-crownwell .view-action {
-    color: #5a6268 !important;
+    color: #3D4449 !important;
 }
 
 .theme-light.ctp-crownwell .view-action:hover {
     color: #C9A227 !important;
 }
 
-/* File explorer - cream background */
+/* File explorer - CREAM background */
 .theme-light.ctp-crownwell .nav-files-container {
     background: #F5F0E8 !important;
 }
@@ -2088,37 +2089,57 @@ settings:
 /* Vault title in sidebar */
 .theme-light.ctp-crownwell .nav-folder.mod-root > .nav-folder-title {
     background: #E8E3DB !important;
-    color: #2D3436 !important;
+    color: #1a1a1a !important;
     font-weight: 600;
 }
 
-/* Window frame buttons (minimize, maximize, close) */
+/* Window frame buttons - WHITE */
 .theme-light.ctp-crownwell .titlebar-button {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .titlebar-button:hover {
-    color: #FFFFFF !important;
+    color: #C9A227 !important;
     background: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* New tab button */
+/* New tab button - WHITE */
 .theme-light.ctp-crownwell .workspace-tab-header-new-tab {
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header-new-tab:hover {
     color: #C9A227 !important;
 }
 
-/* Tab container inner */
+/* Tab container inner - BLACK */
 .theme-light.ctp-crownwell .workspace-tab-header-container-inner {
-    background: #2D3436 !important;
+    background: #1a1a1a !important;
 }
 
 /* Scrollbar in dark areas */
 .theme-light.ctp-crownwell .workspace-ribbon::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Sidebar split background - BLACK */
+.theme-light.ctp-crownwell .workspace-split.mod-left-split,
+.theme-light.ctp-crownwell .workspace-split.mod-right-split {
+    background: #F5F0E8 !important;
+}
+
+/* Tab header inner icon */
+.theme-light.ctp-crownwell .workspace-tab-header-inner-icon {
+    color: #FFFFFF !important;
+}
+
+/* Breadcrumbs path */
+.theme-light.ctp-crownwell .view-header-breadcrumb {
+    color: #666666 !important;
+}
+
+.theme-light.ctp-crownwell .view-header-breadcrumb:hover {
+    color: #C9A227 !important;
 }
 
 
