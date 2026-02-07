@@ -1944,44 +1944,59 @@ settings:
     color: #5a6268;
 }
 
-/* ====== Crownwell Dark UI Elements (TRUE BLACK with WHITE text) ====== */
+/* ====== Crownwell Dark UI Elements (PURE BLACK #000000 with WHITE text) ====== */
 
-/* Title bar - TRUE BLACK */
+/* Title bar - PURE BLACK */
 .theme-light.ctp-crownwell .titlebar,
-.theme-light.ctp-crownwell .titlebar-inner {
-    background: #1a1a1a !important;
+.theme-light.ctp-crownwell .titlebar-inner,
+.theme-light.ctp-crownwell .mod-top-left-space,
+.theme-light.ctp-crownwell .mod-top-right-space {
+    background: #000000 !important;
+    background-color: #000000 !important;
     color: #FFFFFF !important;
 }
 
-.theme-light.ctp-crownwell .titlebar-text {
+.theme-light.ctp-crownwell .titlebar-text,
+.theme-light.ctp-crownwell .titlebar-inner-text {
     color: #FFFFFF !important;
 }
 
-/* Tab header container - TRUE BLACK */
-.theme-light.ctp-crownwell .workspace-tab-header-container {
-    background: #1a1a1a !important;
-    border-bottom: 1px solid #000000 !important;
+/* Tab header container - PURE BLACK */
+.theme-light.ctp-crownwell .workspace-tab-header-container,
+.theme-light.ctp-crownwell .workspace-tab-header-container-inner {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    border-bottom: 1px solid #C9A227 !important;
 }
 
-/* Individual tabs - BLACK with BRIGHT WHITE text */
+/* Individual tabs - PURE BLACK with WHITE text and GOLD outline */
 .theme-light.ctp-crownwell .workspace-tab-header {
-    background: #1a1a1a !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
     color: #FFFFFF !important;
+    border: 1px solid #C9A227 !important;
+    border-radius: 4px 4px 0 0 !important;
+    margin: 2px 2px 0 2px !important;
 }
 
+.theme-light.ctp-crownwell .workspace-tab-header .workspace-tab-header-inner,
 .theme-light.ctp-crownwell .workspace-tab-header .workspace-tab-header-inner-title {
     color: #FFFFFF !important;
+    font-weight: 500 !important;
 }
 
-/* Active tab - GOLD highlight on black */
+/* Active tab - GOLD border highlight on black */
 .theme-light.ctp-crownwell .workspace-tab-header.is-active {
-    background: #2a2a2a !important;
-    border-bottom: 3px solid #C9A227 !important;
+    background: #111111 !important;
+    background-color: #111111 !important;
+    border: 2px solid #C9A227 !important;
+    border-bottom: none !important;
 }
 
+.theme-light.ctp-crownwell .workspace-tab-header.is-active .workspace-tab-header-inner,
 .theme-light.ctp-crownwell .workspace-tab-header.is-active .workspace-tab-header-inner-title {
     color: #C9A227 !important;
-    font-weight: 600;
+    font-weight: 600 !important;
 }
 
 /* Tab close button - WHITE */
@@ -1995,17 +2010,21 @@ settings:
 
 /* Tab hover state */
 .theme-light.ctp-crownwell .workspace-tab-header:hover {
-    background: #2a2a2a !important;
+    background: #111111 !important;
+    background-color: #111111 !important;
 }
 
+.theme-light.ctp-crownwell .workspace-tab-header:hover .workspace-tab-header-inner,
 .theme-light.ctp-crownwell .workspace-tab-header:hover .workspace-tab-header-inner-title {
     color: #FFFFFF !important;
 }
 
-/* Left ribbon (icon sidebar) - TRUE BLACK */
-.theme-light.ctp-crownwell .workspace-ribbon {
-    background: #1a1a1a !important;
-    border-right: 1px solid #000000 !important;
+/* Left ribbon (icon sidebar) - PURE BLACK */
+.theme-light.ctp-crownwell .workspace-ribbon,
+.theme-light.ctp-crownwell .workspace-ribbon.mod-left {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    border-right: 1px solid #C9A227 !important;
 }
 
 .theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-tab,
@@ -2024,13 +2043,14 @@ settings:
 
 .theme-light.ctp-crownwell .workspace-ribbon .clickable-icon:hover {
     color: #C9A227 !important;
-    background: rgba(201, 162, 39, 0.2) !important;
+    background: rgba(201, 162, 39, 0.3) !important;
 }
 
-/* Status bar (bottom) - TRUE BLACK */
+/* Status bar (bottom) - PURE BLACK */
 .theme-light.ctp-crownwell .status-bar {
-    background: #1a1a1a !important;
-    border-top: 1px solid #000000 !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    border-top: 1px solid #C9A227 !important;
     color: #FFFFFF !important;
 }
 
@@ -2042,23 +2062,36 @@ settings:
     color: #C9A227 !important;
 }
 
-/* Sidebar tab headers - also BLACK to match */
+/* Sidebar tab headers - also PURE BLACK to match */
 .theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header-container,
 .theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header-container {
-    background: #1a1a1a !important;
-    border-bottom: 1px solid #000000 !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    border-bottom: 1px solid #C9A227 !important;
 }
 
 .theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header,
 .theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header {
     background: transparent !important;
     color: #FFFFFF !important;
+    border: 1px solid #C9A227 !important;
+    border-radius: 4px 4px 0 0 !important;
+    margin: 2px !important;
+}
+
+.theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header .workspace-tab-header-inner,
+.theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header .workspace-tab-header-inner {
+    color: #FFFFFF !important;
 }
 
 .theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header.is-active,
 .theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header.is-active {
-    background: #2a2a2a !important;
-    border-bottom: 3px solid #C9A227 !important;
+    background: #111111 !important;
+    border: 2px solid #C9A227 !important;
+}
+
+.theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner,
+.theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner {
     color: #C9A227 !important;
 }
 
@@ -2112,9 +2145,10 @@ settings:
     color: #C9A227 !important;
 }
 
-/* Tab container inner - BLACK */
+/* Tab container inner - PURE BLACK */
 .theme-light.ctp-crownwell .workspace-tab-header-container-inner {
-    background: #1a1a1a !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
 }
 
 /* Scrollbar in dark areas */
