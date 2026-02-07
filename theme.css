@@ -2209,6 +2209,55 @@ settings:
     background-color: #000000 !important;
 }
 
+/* ====== TOP TAB BAR - Additional selectors ====== */
+
+/* Main workspace tabs container */
+.theme-light.ctp-crownwell .workspace-tabs,
+.theme-light.ctp-crownwell .mod-root .workspace-tabs {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Tab container wrapper */
+.theme-light.ctp-crownwell .workspace-tab-container,
+.theme-light.ctp-crownwell .mod-root .workspace-tab-container {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Stacked tabs mode */
+.theme-light.ctp-crownwell .workspace-tabs.mod-stacked,
+.theme-light.ctp-crownwell .workspace-tabs.mod-stacked .workspace-tab-container {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Tab header area wrapper */
+.theme-light.ctp-crownwell .workspace-tab-header-tab-list {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Any remaining workspace backgrounds */
+.theme-light.ctp-crownwell .workspace > .workspace-tabs,
+.theme-light.ctp-crownwell .workspace-split > .workspace-tabs {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Horizontal tab layout */
+.theme-light.ctp-crownwell .workspace-tabs:not(.mod-stacked) .workspace-tab-header-container {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Ensure all tab-related wrappers are black */
+.theme-light.ctp-crownwell .workspace-tabs .workspace-tab-header-container,
+.theme-light.ctp-crownwell .workspace-tabs .workspace-tab-header-container-inner {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
 
 /* ================================================================================
    SECTION 5: TYPOGRAPHY & HEADING SYSTEM
