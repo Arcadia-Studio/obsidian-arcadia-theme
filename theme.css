@@ -1944,6 +1944,183 @@ settings:
     color: #5a6268;
 }
 
+/* ====== Crownwell Dark UI Elements (matching website header) ====== */
+
+/* Title bar - dark charcoal like Crownwell Press header */
+.theme-light.ctp-crownwell .titlebar,
+.theme-light.ctp-crownwell .titlebar-inner {
+    background: #2D3436 !important;
+    color: #FFFFFF !important;
+}
+
+.theme-light.ctp-crownwell .titlebar-text {
+    color: #FFFFFF !important;
+}
+
+/* Tab header container - dark */
+.theme-light.ctp-crownwell .workspace-tab-header-container {
+    background: #2D3436 !important;
+    border-bottom: 1px solid #1a1d1e !important;
+}
+
+/* Individual tabs - dark with white text */
+.theme-light.ctp-crownwell .workspace-tab-header {
+    background: #2D3436 !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.theme-light.ctp-crownwell .workspace-tab-header .workspace-tab-header-inner-title {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Active tab - gold highlight */
+.theme-light.ctp-crownwell .workspace-tab-header.is-active {
+    background: #3D4449 !important;
+    border-bottom: 2px solid #C9A227 !important;
+}
+
+.theme-light.ctp-crownwell .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+    color: #C9A227 !important;
+    font-weight: 500;
+}
+
+/* Tab close button */
+.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button:hover {
+    color: #FFFFFF !important;
+}
+
+/* Tab hover state */
+.theme-light.ctp-crownwell .workspace-tab-header:hover {
+    background: #3D4449 !important;
+}
+
+.theme-light.ctp-crownwell .workspace-tab-header:hover .workspace-tab-header-inner-title {
+    color: #FFFFFF !important;
+}
+
+/* Left ribbon (icon sidebar) - dark */
+.theme-light.ctp-crownwell .workspace-ribbon {
+    background: #2D3436 !important;
+    border-right: 1px solid #1a1d1e !important;
+}
+
+.theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-tab,
+.theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-action {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-tab:hover,
+.theme-light.ctp-crownwell .workspace-ribbon .side-dock-ribbon-action:hover {
+    color: #C9A227 !important;
+}
+
+.theme-light.ctp-crownwell .workspace-ribbon .clickable-icon {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.theme-light.ctp-crownwell .workspace-ribbon .clickable-icon:hover {
+    color: #C9A227 !important;
+    background: rgba(201, 162, 39, 0.1) !important;
+}
+
+/* Status bar (bottom) - dark */
+.theme-light.ctp-crownwell .status-bar {
+    background: #2D3436 !important;
+    border-top: 1px solid #1a1d1e !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.theme-light.ctp-crownwell .status-bar-item {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.theme-light.ctp-crownwell .status-bar-item:hover {
+    color: #C9A227 !important;
+}
+
+/* Sidebar header (above file explorer) - slightly darker cream */
+.theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header-container,
+.theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header-container {
+    background: #E8E3DB !important;
+    border-bottom: 1px solid rgba(61, 68, 73, 0.15) !important;
+}
+
+.theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header,
+.theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header {
+    background: transparent !important;
+    color: #3D4449 !important;
+}
+
+.theme-light.ctp-crownwell .workspace-split.mod-left-split .workspace-tab-header.is-active,
+.theme-light.ctp-crownwell .workspace-split.mod-right-split .workspace-tab-header.is-active {
+    background: rgba(201, 162, 39, 0.15) !important;
+    border-bottom: 2px solid #C9A227 !important;
+}
+
+/* View actions toolbar - dark background */
+.theme-light.ctp-crownwell .view-header {
+    background: #FFFFFF !important;
+    border-bottom: 1px solid rgba(61, 68, 73, 0.1) !important;
+}
+
+.theme-light.ctp-crownwell .view-header-title {
+    color: #2D3436 !important;
+}
+
+/* Toolbar buttons in view header */
+.theme-light.ctp-crownwell .view-action {
+    color: #5a6268 !important;
+}
+
+.theme-light.ctp-crownwell .view-action:hover {
+    color: #C9A227 !important;
+}
+
+/* File explorer - cream background */
+.theme-light.ctp-crownwell .nav-files-container {
+    background: #F5F0E8 !important;
+}
+
+/* Vault title in sidebar */
+.theme-light.ctp-crownwell .nav-folder.mod-root > .nav-folder-title {
+    background: #E8E3DB !important;
+    color: #2D3436 !important;
+    font-weight: 600;
+}
+
+/* Window frame buttons (minimize, maximize, close) */
+.theme-light.ctp-crownwell .titlebar-button {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.theme-light.ctp-crownwell .titlebar-button:hover {
+    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* New tab button */
+.theme-light.ctp-crownwell .workspace-tab-header-new-tab {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.theme-light.ctp-crownwell .workspace-tab-header-new-tab:hover {
+    color: #C9A227 !important;
+}
+
+/* Tab container inner */
+.theme-light.ctp-crownwell .workspace-tab-header-container-inner {
+    background: #2D3436 !important;
+}
+
+/* Scrollbar in dark areas */
+.theme-light.ctp-crownwell .workspace-ribbon::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
 
 /* ================================================================================
    SECTION 5: TYPOGRAPHY & HEADING SYSTEM
