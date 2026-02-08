@@ -2222,6 +2222,20 @@ settings:
     --header-height: 40px;
 }
 
+/* FORCE BLACK for all workspace-tabs areas in Crownwell */
+.theme-light.ctp-crownwell .workspace-tabs,
+.theme-light.ctp-crownwell .workspace-tabs *,
+.theme-light.ctp-crownwell .workspace-tab-header-container,
+.theme-light.ctp-crownwell .workspace-tab-header-container *,
+.theme-light.ctp-crownwell .mod-root .workspace-tabs,
+.theme-light.ctp-crownwell .mod-root .workspace-tabs * {
+    --ctp-mantle: 0, 0, 0 !important;
+    --ctp-crust: 0, 0, 0 !important;
+    --ctp-base: 0, 0, 0 !important;
+    --background-secondary: #000000 !important;
+    --background-secondary-alt: #000000 !important;
+}
+
 /* Override stacked tabs view-header for Crownwell */
 .theme-light.ctp-crownwell.stacked-tabs .workspace-leaf .view-header,
 .theme-light.ctp-crownwell .stacked-tabs .workspace-leaf .view-header {
