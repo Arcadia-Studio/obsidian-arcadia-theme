@@ -2211,6 +2211,17 @@ settings:
 
 /* ====== TOP TAB BAR - Additional selectors ====== */
 
+/* CSS Variable overrides for Crownwell */
+.theme-light.ctp-crownwell {
+    --tab-container-background: #000000 !important;
+    --titlebar-background: #000000 !important;
+    --titlebar-background-focused: #000000 !important;
+    --tab-background-active: #000000 !important;
+    --tab-text-color: #C9A227 !important;
+    --tab-text-color-active: #D4AF37 !important;
+    --header-height: 40px;
+}
+
 /* Main workspace tabs container */
 .theme-light.ctp-crownwell .workspace-tabs,
 .theme-light.ctp-crownwell .mod-root .workspace-tabs {
@@ -2254,6 +2265,57 @@ settings:
 /* Ensure all tab-related wrappers are black */
 .theme-light.ctp-crownwell .workspace-tabs .workspace-tab-header-container,
 .theme-light.ctp-crownwell .workspace-tabs .workspace-tab-header-container-inner {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* ====== AGGRESSIVE TOP BAR SELECTORS ====== */
+
+/* Target EVERY possible tab/header element */
+.theme-light.ctp-crownwell [class*="workspace-tab"],
+.theme-light.ctp-crownwell [class*="tab-header"],
+.theme-light.ctp-crownwell [class*="tab-container"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Workspace tab header with all variations */
+.theme-light.ctp-crownwell .workspace-tab-header,
+.theme-light.ctp-crownwell .workspace-tab-header-inner,
+.theme-light.ctp-crownwell .workspace-tab-header-container,
+.theme-light.ctp-crownwell .workspace-tab-header-container-inner,
+.theme-light.ctp-crownwell .workspace-tab-header-spacer,
+.theme-light.ctp-crownwell .workspace-tab-header-tab-list {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Tab text - GOLD */
+.theme-light.ctp-crownwell .workspace-tab-header-inner,
+.theme-light.ctp-crownwell .workspace-tab-header-inner-title,
+.theme-light.ctp-crownwell .workspace-tab-header-inner-icon,
+.theme-light.ctp-crownwell [class*="tab-header"] * {
+    color: #C9A227 !important;
+}
+
+/* Back/forward navigation in tab area */
+.theme-light.ctp-crownwell .workspace-tab-header-inner .clickable-icon,
+.theme-light.ctp-crownwell .workspace-tab-header .clickable-icon {
+    color: #C9A227 !important;
+}
+
+/* View header icon container (the bar with back arrow) */
+.theme-light.ctp-crownwell .view-header-icon,
+.theme-light.ctp-crownwell .view-header-title-container,
+.theme-light.ctp-crownwell .view-header-title-parent {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #C9A227 !important;
+}
+
+/* Make sure the entire top area is covered */
+.theme-light.ctp-crownwell .mod-root > .workspace-tab-header-container,
+.theme-light.ctp-crownwell .workspace-split.mod-root > .workspace-tabs > .workspace-tab-header-container {
     background: #000000 !important;
     background-color: #000000 !important;
 }
