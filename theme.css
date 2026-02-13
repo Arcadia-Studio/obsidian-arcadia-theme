@@ -1980,12 +1980,23 @@ settings:
     border: 1px solid #FFFFFF !important;
     border-radius: 4px 4px 0 0 !important;
     margin: 2px 2px 0 2px !important;
+    --text-normal: #C9A227 !important;
+    --text-muted: #C9A227 !important;
+    --text-faint: #C9A227 !important;
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header .workspace-tab-header-inner,
 .theme-light.ctp-crownwell .workspace-tab-header .workspace-tab-header-inner-title {
     color: #C9A227 !important;
     font-weight: 500 !important;
+    --text-normal: #C9A227 !important;
+}
+
+/* FORCE ALL TEXT IN TAB AREA TO BE GOLD */
+.theme-light.ctp-crownwell .workspace-tab-header *,
+.theme-light.ctp-crownwell .workspace-tab-header-container *,
+.theme-light.ctp-crownwell .workspace-tabs * {
+    color: #C9A227 !important;
 }
 
 /* Active tab - brighter GOLD with thicker WHITE border */
@@ -1997,18 +2008,23 @@ settings:
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header.is-active .workspace-tab-header-inner,
-.theme-light.ctp-crownwell .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+.theme-light.ctp-crownwell .workspace-tab-header.is-active .workspace-tab-header-inner-title,
+.theme-light.ctp-crownwell .workspace-tab-header.is-active * {
     color: #D4AF37 !important;
     font-weight: 600 !important;
 }
 
 /* Tab close button - GOLD */
-.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button {
+.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button,
+.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button svg {
     color: #C9A227 !important;
+    stroke: #C9A227 !important;
 }
 
-.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button:hover {
+.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button:hover,
+.theme-light.ctp-crownwell .workspace-tab-header-inner-close-button:hover svg {
     color: #FFFFFF !important;
+    stroke: #FFFFFF !important;
 }
 
 /* Tab hover state */
@@ -2019,7 +2035,8 @@ settings:
 }
 
 .theme-light.ctp-crownwell .workspace-tab-header:hover .workspace-tab-header-inner,
-.theme-light.ctp-crownwell .workspace-tab-header:hover .workspace-tab-header-inner-title {
+.theme-light.ctp-crownwell .workspace-tab-header:hover .workspace-tab-header-inner-title,
+.theme-light.ctp-crownwell .workspace-tab-header:hover * {
     color: #D4AF37 !important;
 }
 
