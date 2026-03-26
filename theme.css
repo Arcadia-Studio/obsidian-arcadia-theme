@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ================================================================================
    ARCADIA THEME FOR OBSIDIAN
 
@@ -6,8 +7,8 @@
 
    Author: Peter J. Carter
    Website: https://theologyinfocus.org
-   Version: 2.0.0
-   Last Updated: 2026-02-01
+   Version: 2.1.0
+   Last Updated: 2026-03-26
    Minimum Obsidian Version: 0.16.0
 
    FEATURES:
@@ -23,18 +24,52 @@
    - WCAG AA compliant contrast ratios
 
    TABLE OF CONTENTS:
-   1. CSS Reset & Core Variables
-   2. Base Element Styles
-   3. Style Settings (10 categories, 60+ options)
-   4. Dark Theme Color Schemes (11 variants)
-   5. Light Theme Color Schemes (12 variants)
-   6-17. Core Theme Elements
-   18-20. Navigation, File Icons, Checkboxes
-   21-29. Typography, Editor, Accessibility
-   30-37. Advanced Features (Code, Graph, Tabs, Tags, Canvas)
-   38. Polished Media Embedding
-   39. Paper Styles
-   40. Sticky Notes Callouts
+   1.  CSS Reset & Core Variables
+   2.  Base Element Styles
+   3.  Style Settings (10 categories, 60+ options)
+   4.  Dark Theme Color Schemes (11 variants)
+   5.  Light Theme Color Schemes (12 variants)
+   6.  Typography & Heading System
+   7.  Content Elements
+   8.  Code Blocks & Inline Code
+   9.  Callouts System
+   10. Tables & Canvas
+   11. Search Interface
+   12. Plugin Compatibility
+   13. Live Preview Enhancements
+   14. Dialogs & Modals
+   15. Interactive States & Buttons
+   16. Accent Color Variations
+   17. Animations
+   18. Icon Theming System
+   19. Navigation Sidebar & File Explorer
+   20. Folder Tree Icons & Color Coding
+   21. File Type Icons
+   22. Extended File Type Icons
+   23. Mobile Responsiveness
+   24. Typography Controls
+   25. Editor Enhancements
+   26. Expanded Font Options
+   27. Links & Tags
+   28. Lists & Checkboxes
+   29. Table Enhancements
+   30. Workspace Customization
+   31. Accessibility Features
+   32. Cards View for Dataview
+   33. Image Grid & Width Controls
+   34. Custom Callouts
+   35. Rainbow Folders
+   36. Code Block Enhancements
+   37. Graph View Styling
+   38. Stacked/Sliding Tabs
+   39. Tag Pills with Colors
+   40. Properties/Frontmatter Styling
+   41. Embed Styling
+   42. Progress Bars
+   43. Canvas Enhancements
+   44. Polished Media Embedding (OneNote-Style)
+   45. Paper Styles (OneNote-Style)
+   46. Sticky Notes Callouts (OneNote-Style)
    ================================================================================ */
 
 
@@ -52,7 +87,6 @@
    This approach ensures consistent color application across light and dark modes
    while allowing per-theme opacity adjustments.
    ================================================================================ */
-@charset "UTF-8";
 
 /* ================================================================================
    FONT IMPORTS (must be at top of CSS file for proper loading)
@@ -1321,7 +1355,7 @@ settings:
 
 
 /* ================================================================================
-   SECTION 4.5: LIGHT MODE COLOR SCHEMES (10 VARIANTS)
+   SECTION 5: LIGHT MODE COLOR SCHEMES (12 VARIANTS)
    ================================================================================ */
 
 /* ====== Light Theme: Marble (DEFAULT - Clean White) ======
@@ -2371,7 +2405,7 @@ settings:
 
 
 /* ================================================================================
-   SECTION 5: TYPOGRAPHY & HEADING SYSTEM
+   SECTION 6: TYPOGRAPHY & HEADING SYSTEM
    ================================================================================ */
 
 /* ====== H1 Styling: Centered with underline ====== */
@@ -2436,7 +2470,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 6: CONTENT ELEMENTS
+   SECTION 7: CONTENT ELEMENTS
    ================================================================================ */
 
 /* ====== Paragraphs & Text ====== */
@@ -2488,7 +2522,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 7: CODE BLOCKS & INLINE CODE
+   SECTION 8: CODE BLOCKS & INLINE CODE
    ================================================================================ */
 
 /* ====== Code blocks ====== */
@@ -2511,7 +2545,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 8: CALLOUTS SYSTEM
+   SECTION 9: CALLOUTS SYSTEM
    ================================================================================ */
 
 .callout {
@@ -2596,7 +2630,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 9: TABLES & CANVAS
+   SECTION 10: TABLES & CANVAS
    ================================================================================ */
 
 /* ====== Tables ====== */
@@ -2642,7 +2676,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 10: SEARCH INTERFACE
+   SECTION 11: SEARCH INTERFACE
    ================================================================================ */
 
 .search-input-container {
@@ -2671,7 +2705,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 11: PLUGIN COMPATIBILITY
+   SECTION 12: PLUGIN COMPATIBILITY
    ================================================================================ */
 
 /* ====== Dataview plugin ====== */
@@ -2695,7 +2729,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 12: LIVE PREVIEW ENHANCEMENTS
+   SECTION 13: LIVE PREVIEW ENHANCEMENTS
    ================================================================================ */
 
 .cm-activeLine {
@@ -2708,7 +2742,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 13: DIALOGS & MODALS
+   SECTION 14: DIALOGS & MODALS
    ================================================================================ */
 
 /* ====== Prompt dialogs (Quick Switcher, Command Palette) ====== */
@@ -2779,7 +2813,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 14: INTERACTIVE STATES & BUTTONS
+   SECTION 15: INTERACTIVE STATES & BUTTONS
    ================================================================================ */
 
 /* ====== Clickable icons & workspace tabs ====== */
@@ -2887,7 +2921,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 15: ACCENT COLOR VARIATIONS
+   SECTION 16: ACCENT COLOR VARIATIONS
    ================================================================================ */
 
 .ctp-theme-indigo {
@@ -2912,7 +2946,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 16: ANIMATIONS
+   SECTION 17: ANIMATIONS
    ================================================================================ */
 
 @keyframes ctp-fade-in {
@@ -2935,7 +2969,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 17: ICON THEMING SYSTEM
+   SECTION 18: ICON THEMING SYSTEM
    ================================================================================ */
 
 .ctp-icon-set-filled svg {
@@ -2950,7 +2984,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 18: NAVIGATION SIDEBAR & FILE EXPLORER
+   SECTION 19: NAVIGATION SIDEBAR & FILE EXPLORER
    ================================================================================ */
 
 /* ====== Sidebar architecture ====== */
@@ -3030,7 +3064,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 19: FOLDER TREE ICONS & COLOR CODING
+   SECTION 20: FOLDER TREE ICONS & COLOR CODING
    ================================================================================ */
 
 /* ====== Color variables for 10-color cycle (top-level folders) ====== */
@@ -3303,7 +3337,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 20: FILE TYPE ICONS
+   SECTION 21: FILE TYPE ICONS
    ================================================================================ */
 
 /* ====== General file icon base ====== */
@@ -3367,7 +3401,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 14.5: EXTENDED FILE TYPE ICONS
+   SECTION 22: EXTENDED FILE TYPE ICONS
    Recognizable icons for all major file formats
    ================================================================================ */
 
@@ -3627,7 +3661,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 21: MOBILE RESPONSIVENESS
+   SECTION 23: MOBILE RESPONSIVENESS
    ================================================================================ */
 
 @media (max-width: 768px) {
@@ -3651,7 +3685,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 18: TYPOGRAPHY CONTROLS
+   SECTION 24: TYPOGRAPHY CONTROLS
    ================================================================================ */
 
 /* Font Size Scaling */
@@ -3801,7 +3835,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 19: EDITOR ENHANCEMENTS
+   SECTION 25: EDITOR ENHANCEMENTS
    ================================================================================ */
 
 /* Active Line Highlighting */
@@ -3849,7 +3883,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 20: EXPANDED FONT OPTIONS
+   SECTION 26: EXPANDED FONT OPTIONS
    ================================================================================ */
 
 /* Additional Content Fonts */
@@ -3932,7 +3966,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 21: LINKS & TAGS
+   SECTION 27: LINKS & TAGS
    ================================================================================ */
 
 /* Link Styles */
@@ -4016,7 +4050,7 @@ h2,
 
 
 /* ================================================================================
-   SECTION 22: LISTS & CHECKBOXES
+   SECTION 28: LISTS & CHECKBOXES
    ================================================================================ */
 
 /* Checkbox Shape Styles */
@@ -4330,7 +4364,7 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
 
 
 /* ================================================================================
-   SECTION 23: TABLE ENHANCEMENTS
+   SECTION 29: TABLE ENHANCEMENTS
    ================================================================================ */
 
 /* Striped Tables */
@@ -4369,7 +4403,7 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
 
 
 /* ================================================================================
-   SECTION 24: WORKSPACE CUSTOMIZATION
+   SECTION 30: WORKSPACE CUSTOMIZATION
    ================================================================================ */
 
 /* Tab Styles */
@@ -4394,7 +4428,7 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
 
 
 /* ================================================================================
-   SECTION 25: ACCESSIBILITY FEATURES
+   SECTION 31: ACCESSIBILITY FEATURES
    ================================================================================ */
 
 /* High Contrast Mode */
@@ -4462,7 +4496,7 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
 
 
 /* ================================================================================
-   SECTION 26: CARDS VIEW FOR DATAVIEW
+   SECTION 32: CARDS VIEW FOR DATAVIEW
    Transform Dataview tables into beautiful card layouts.
 
    Usage: Add cssclass: cards to note frontmatter, or use inline class
@@ -4571,7 +4605,7 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
 
 
 /* ================================================================================
-   SECTION 27: IMAGE GRID & WIDTH CONTROLS
+   SECTION 33: IMAGE GRID & WIDTH CONTROLS
    Control image layouts and sizes with CSS classes.
 
    Usage: Add class to image or use cssclass in frontmatter
@@ -4670,7 +4704,7 @@ img[alt*="img-banner"] {
 
 
 /* ================================================================================
-   SECTION 28: CUSTOM CALLOUTS
+   SECTION 34: CUSTOM CALLOUTS
    Extended callout styles beyond the defaults.
 
    Includes: timeline, profile, aside, kanban-style, and more
@@ -4881,7 +4915,7 @@ img[alt*="img-banner"] {
 
 
 /* ================================================================================
-   SECTION 29: RAINBOW FOLDERS
+   SECTION 35: RAINBOW FOLDERS
    Color-code folders automatically by their position.
 
    Toggle via Style Settings or add class 'rainbow-folders' to body
@@ -4925,7 +4959,7 @@ img[alt*="img-banner"] {
 
 
 /* ================================================================================
-   SECTION 30: CODE BLOCK ENHANCEMENTS
+   SECTION 36: CODE BLOCK ENHANCEMENTS
    Language labels, line numbers, copy button styling, syntax themes
    ================================================================================ */
 
@@ -5075,7 +5109,7 @@ img[alt*="img-banner"] {
 
 
 /* ================================================================================
-   SECTION 31: GRAPH VIEW STYLING
+   SECTION 37: GRAPH VIEW STYLING
    Custom colors, animations, and better readability
    ================================================================================ */
 
@@ -5162,7 +5196,7 @@ img[alt*="img-banner"] {
 
 
 /* ================================================================================
-   SECTION 32: STACKED/SLIDING TABS
+   SECTION 38: STACKED/SLIDING TABS
    Andy Matuschak-style sliding panes
    ================================================================================ */
 
@@ -5226,7 +5260,7 @@ img[alt*="img-banner"] {
 
 
 /* ================================================================================
-   SECTION 33: TAG PILLS WITH COLORS
+   SECTION 39: TAG PILLS WITH COLORS
    Auto-color tags based on common names
    ================================================================================ */
 
@@ -5279,7 +5313,7 @@ a.tag:hover {
 
 
 /* ================================================================================
-   SECTION 34: PROPERTIES/FRONTMATTER STYLING
+   SECTION 40: PROPERTIES/FRONTMATTER STYLING
    Better YAML display with colored keys
    ================================================================================ */
 
@@ -5355,7 +5389,7 @@ a.tag:hover {
 
 
 /* ================================================================================
-   SECTION 35: EMBED STYLING
+   SECTION 41: EMBED STYLING
    Styled embedded notes with clear borders and titles
    ================================================================================ */
 
@@ -5433,7 +5467,7 @@ a.tag:hover {
 
 
 /* ================================================================================
-   SECTION 36: PROGRESS BARS
+   SECTION 42: PROGRESS BARS
    Visual progress indicators using Dataview or custom syntax
    Syntax: `[progress:: 75]` or cssclass: progress-75
    ================================================================================ */
@@ -5503,7 +5537,7 @@ span.progress-bar {
 
 
 /* ================================================================================
-   SECTION 37: CANVAS ENHANCEMENTS
+   SECTION 43: CANVAS ENHANCEMENTS
    Card colors, connection styles, group styling
    ================================================================================ */
 
@@ -5641,7 +5675,7 @@ span.progress-bar {
 
 
 /* ================================================================================
-   SECTION 38: POLISHED MEDIA EMBEDDING (OneNote-Style)
+   SECTION 44: POLISHED MEDIA EMBEDDING (OneNote-Style)
 
    Comprehensive styling for images, videos, and audio with:
    - Rounded corners and shadows
@@ -6228,7 +6262,7 @@ iframe[src*="vimeo"] {
 
 
 /* ================================================================================
-   SECTION 39: PAPER STYLES (OneNote-Style)
+   SECTION 45: PAPER STYLES (OneNote-Style)
 
    Lined, grid, and dotted paper backgrounds for a notebook feel.
    Apply via cssclasses in frontmatter:
@@ -6466,7 +6500,7 @@ iframe[src*="vimeo"] {
 
 
 /* ================================================================================
-   SECTION 40: STICKY NOTES CALLOUTS (OneNote-Style)
+   SECTION 46: STICKY NOTES CALLOUTS (OneNote-Style)
 
    Colorful Post-it style callouts with 7 colors.
    Usage: > [!sticky-yellow] or > [!note-yellow], etc.
