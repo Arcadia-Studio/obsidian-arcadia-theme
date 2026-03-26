@@ -2,7 +2,7 @@
 /* ================================================================================
    ARCADIA THEME FOR OBSIDIAN
 
-   A comprehensive Obsidian theme with 23 color schemes, polished media handling,
+   A comprehensive Obsidian theme with 34 color schemes, polished media handling,
    OneNote-style features, and extensive customization through Style Settings.
 
    Author: Peter J. Carter
@@ -12,7 +12,7 @@
    Minimum Obsidian Version: 0.16.0
 
    FEATURES:
-   - 11 Dark themes + 12 Light themes (including NY Times & Wikipedia)
+   - 16 Dark themes + 18 Light themes (including NY Times, Wikipedia & Genealogy collection)
    - 50+ file type icons with custom colors
    - 21 alternate checkbox types with icons
    - OneNote-style media embedding (images, video, audio)
@@ -27,8 +27,8 @@
    1.  CSS Reset & Core Variables
    2.  Base Element Styles
    3.  Style Settings (10 categories, 60+ options)
-   4.  Dark Theme Color Schemes (11 variants)
-   5.  Light Theme Color Schemes (12 variants)
+   4.  Dark Theme Color Schemes (16 variants)
+   5.  Light Theme Color Schemes (18 variants)
    6.  Typography & Heading System
    7.  Content Elements
    8.  Code Blocks & Inline Code
@@ -260,6 +260,16 @@ settings:
         value: ctp-slate
       - label: Amber (Golden Warmth)
         value: ctp-amber
+      - label: Parchment (Aged Document)
+        value: ctp-parchment
+      - label: Heritage (Leather & Gold)
+        value: ctp-heritage
+      - label: Sepia (Vintage Photograph)
+        value: ctp-sepia
+      - label: Registry (Parish Records)
+        value: ctp-registry
+      - label: Rootwood (Earth & Forest)
+        value: ctp-rootwood
   - id: arcadia-light-scheme
     title: Light Theme Flavor
     description: Select your preferred light mode color scheme
@@ -293,6 +303,16 @@ settings:
         value: ctp-wikipedia
       - label: Crownwell (Classic Publishing)
         value: ctp-crownwell
+      - label: Parchment (Aged Document)
+        value: ctp-parchment
+      - label: Heritage (Leather & Gold)
+        value: ctp-heritage
+      - label: Sepia (Vintage Photograph)
+        value: ctp-sepia
+      - label: Registry (Parish Records)
+        value: ctp-registry
+      - label: Rootwood (Earth & Forest)
+        value: ctp-rootwood
 */
 
 /* @settings
@@ -1354,8 +1374,238 @@ settings:
 }
 
 
+/* ====== Dark Theme: Parchment (Aged Document) ======
+   Warm sepia tones evoking aged documents, census records, and family bibles.
+   Designed for genealogical research and archival work. */
+.theme-dark.ctp-parchment {
+    --ctp-crust: 22, 18, 12;       /* Deep aged brown */
+    --ctp-base: 42, 36, 26;        /* Dark parchment */
+    --ctp-mantle: 55, 48, 35;      /* Warm umber */
+    --ctp-text: 240, 230, 210;     /* Aged cream white */
+    --ctp-green: 130, 155, 95;     /* Faded olive ink */
+    --ctp-red: 175, 85, 70;        /* Iron gall red */
+    --ctp-maroon: 145, 65, 55;     /* Dried ink maroon */
+    --ctp-apricot: 210, 175, 120;  /* Aged paper gold */
+    --ctp-gold: 220, 190, 100;     /* Antique gold */
+    --ctp-teal: 95, 145, 130;      /* Weathered copper */
+    --ctp-aqua: 130, 185, 170;     /* Verdigris */
+    --ctp-indigo: 100, 85, 130;    /* Faded violet ink */
+    --ctp-blue: 95, 125, 160;      /* Washed blue ink */
+    --ctp-lavender: 145, 140, 165; /* Dusty lavender */
+
+    --divider-color: rgba(160, 140, 100, 0.25);
+    --divider-color-hover: rgba(160, 140, 100, 0.4);
+    --hr-color: rgba(160, 140, 100, 0.3);
+    --table-border-color: rgba(160, 140, 100, 0.25);
+    --background-modifier-border: rgba(160, 140, 100, 0.2);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 210, 175, 120;
+}
+
+.theme-dark.ctp-parchment .nav-folder-title .nav-folder-title-content {
+    color: #d8c8a8 !important;
+}
+
+.theme-dark.ctp-parchment .nav-file-title .nav-file-title-content {
+    color: #c0b090 !important;
+}
+
+.theme-dark.ctp-parchment .markdown-preview-view,
+.theme-dark.ctp-parchment .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Heritage (Leather & Gold) ======
+   Deep burgundy and antique gold on rich dark tones.
+   Evokes leather-bound family record books and heritage documents. */
+.theme-dark.ctp-heritage {
+    --ctp-crust: 20, 12, 14;       /* Deep mahogany shadow */
+    --ctp-base: 38, 22, 26;        /* Dark burgundy leather */
+    --ctp-mantle: 52, 32, 36;      /* Warm oxblood */
+    --ctp-text: 240, 232, 220;     /* Warm ivory */
+    --ctp-green: 120, 155, 100;    /* Muted sage */
+    --ctp-red: 195, 90, 80;        /* Rich crimson */
+    --ctp-maroon: 165, 70, 65;     /* Deep wine */
+    --ctp-apricot: 225, 180, 120;  /* Antique gold */
+    --ctp-gold: 210, 180, 80;      /* Burnished gold */
+    --ctp-teal: 90, 140, 135;      /* Aged copper */
+    --ctp-aqua: 120, 175, 170;     /* Patina blue */
+    --ctp-indigo: 110, 85, 140;    /* Royal purple */
+    --ctp-blue: 100, 130, 175;     /* Heraldic blue */
+    --ctp-lavender: 150, 140, 175; /* Faded tapestry */
+
+    --divider-color: rgba(180, 140, 100, 0.25);
+    --divider-color-hover: rgba(180, 140, 100, 0.4);
+    --hr-color: rgba(180, 140, 100, 0.3);
+    --table-border-color: rgba(180, 140, 100, 0.25);
+    --background-modifier-border: rgba(180, 140, 100, 0.2);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 210, 180, 80;
+}
+
+.theme-dark.ctp-heritage .nav-folder-title .nav-folder-title-content {
+    color: #e0c8a8 !important;
+}
+
+.theme-dark.ctp-heritage .nav-file-title .nav-file-title-content {
+    color: #c8b090 !important;
+}
+
+.theme-dark.ctp-heritage .markdown-preview-view,
+.theme-dark.ctp-heritage .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Sepia (Vintage Photograph) ======
+   Full sepia-toned scheme like an old tintype photograph.
+   Rich chocolate browns with warm amber highlights. */
+.theme-dark.ctp-sepia {
+    --ctp-crust: 18, 14, 10;       /* Deep coffee */
+    --ctp-base: 40, 32, 22;        /* Dark sepia */
+    --ctp-mantle: 52, 42, 30;      /* Warm chocolate */
+    --ctp-text: 235, 220, 195;     /* Warm cream */
+    --ctp-green: 140, 160, 100;    /* Faded olive */
+    --ctp-red: 185, 95, 75;        /* Brick red */
+    --ctp-maroon: 155, 75, 60;     /* Terra cotta */
+    --ctp-apricot: 215, 180, 130;  /* Amber glow */
+    --ctp-gold: 225, 195, 105;     /* Old gold */
+    --ctp-teal: 105, 150, 135;     /* Oxidized copper */
+    --ctp-aqua: 135, 185, 165;     /* Vintage teal */
+    --ctp-indigo: 105, 90, 135;    /* Faded plum */
+    --ctp-blue: 100, 135, 165;     /* Washed denim */
+    --ctp-lavender: 150, 145, 170; /* Dusty mauve */
+
+    --divider-color: rgba(150, 130, 100, 0.25);
+    --divider-color-hover: rgba(150, 130, 100, 0.4);
+    --hr-color: rgba(150, 130, 100, 0.3);
+    --table-border-color: rgba(150, 130, 100, 0.25);
+    --background-modifier-border: rgba(150, 130, 100, 0.2);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 215, 180, 130;
+}
+
+.theme-dark.ctp-sepia .nav-folder-title .nav-folder-title-content {
+    color: #d4c0a0 !important;
+}
+
+.theme-dark.ctp-sepia .nav-file-title .nav-file-title-content {
+    color: #bca888 !important;
+}
+
+.theme-dark.ctp-sepia .markdown-preview-view,
+.theme-dark.ctp-sepia .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Registry (Parish Records) ======
+   Iron gall ink blue on dark aged paper.
+   Inspired by civil records, parish registers, and court documents. */
+.theme-dark.ctp-registry {
+    --ctp-crust: 14, 16, 22;       /* Deep ink shadow */
+    --ctp-base: 28, 32, 42;        /* Dark document blue */
+    --ctp-mantle: 38, 44, 55;      /* Blotting paper */
+    --ctp-text: 225, 228, 235;     /* Crisp paper white */
+    --ctp-green: 115, 160, 115;    /* Ledger green */
+    --ctp-red: 180, 90, 85;        /* Red ink */
+    --ctp-maroon: 150, 70, 70;     /* Stamp pad */
+    --ctp-apricot: 200, 170, 120;  /* Wax seal gold */
+    --ctp-gold: 210, 185, 95;      /* Brass fitting */
+    --ctp-teal: 85, 145, 150;      /* Ink wash teal */
+    --ctp-aqua: 120, 180, 195;     /* Blued steel */
+    --ctp-indigo: 95, 85, 155;     /* Royal ink */
+    --ctp-blue: 90, 130, 185;      /* Iron gall blue */
+    --ctp-lavender: 140, 140, 185; /* Dusted indigo */
+
+    --divider-color: rgba(100, 120, 160, 0.25);
+    --divider-color-hover: rgba(100, 120, 160, 0.4);
+    --hr-color: rgba(100, 120, 160, 0.3);
+    --table-border-color: rgba(100, 120, 160, 0.25);
+    --background-modifier-border: rgba(100, 120, 160, 0.2);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 90, 130, 185;
+}
+
+.theme-dark.ctp-registry .nav-folder-title .nav-folder-title-content {
+    color: #c0c8d8 !important;
+}
+
+.theme-dark.ctp-registry .nav-file-title .nav-file-title-content {
+    color: #a0a8c0 !important;
+}
+
+.theme-dark.ctp-registry .markdown-preview-view,
+.theme-dark.ctp-registry .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
+/* ====== Dark Theme: Rootwood (Earth & Forest) ======
+   Walnut browns, forest greens, and copper tones.
+   The natural metaphor of family trees and deep roots. */
+.theme-dark.ctp-rootwood {
+    --ctp-crust: 16, 14, 10;       /* Dark soil */
+    --ctp-base: 32, 28, 22;        /* Walnut heartwood */
+    --ctp-mantle: 44, 40, 32;      /* Bark brown */
+    --ctp-text: 230, 225, 210;     /* Birch white */
+    --ctp-green: 100, 155, 90;     /* Living leaf */
+    --ctp-red: 175, 85, 65;        /* Autumn maple */
+    --ctp-maroon: 145, 65, 50;     /* Dried berry */
+    --ctp-apricot: 205, 170, 110;  /* Honey amber */
+    --ctp-gold: 195, 175, 85;      /* Autumn gold */
+    --ctp-teal: 80, 140, 120;      /* River stone */
+    --ctp-aqua: 110, 175, 155;     /* Spring creek */
+    --ctp-indigo: 95, 80, 125;     /* Elderberry */
+    --ctp-blue: 85, 120, 155;      /* Twilight sky */
+    --ctp-lavender: 135, 130, 155; /* Wild thistle */
+
+    --divider-color: rgba(130, 120, 90, 0.25);
+    --divider-color-hover: rgba(130, 120, 90, 0.4);
+    --hr-color: rgba(130, 120, 90, 0.3);
+    --table-border-color: rgba(130, 120, 90, 0.25);
+    --background-modifier-border: rgba(130, 120, 90, 0.2);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 100, 155, 90;
+}
+
+.theme-dark.ctp-rootwood .nav-folder-title .nav-folder-title-content {
+    color: #c8c0a0 !important;
+}
+
+.theme-dark.ctp-rootwood .nav-file-title .nav-file-title-content {
+    color: #b0a888 !important;
+}
+
+.theme-dark.ctp-rootwood .markdown-preview-view,
+.theme-dark.ctp-rootwood .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
+
+
 /* ================================================================================
-   SECTION 5: LIGHT MODE COLOR SCHEMES (12 VARIANTS)
+   SECTION 5: LIGHT MODE COLOR SCHEMES (18 VARIANTS)
    ================================================================================ */
 
 /* ====== Light Theme: Marble (DEFAULT - Clean White) ======
@@ -2401,6 +2651,156 @@ settings:
 .theme-light.ctp-crownwell .workspace-split.mod-root > .workspace-tabs > .workspace-tab-header-container {
     background: #000000 !important;
     background-color: #000000 !important;
+}
+
+
+/* ====== Light Theme: Parchment (Aged Document) ======
+   Warm cream and ivory tones evoking aged paper and old documents.
+   Designed for genealogical research and archival reading. */
+.theme-light.ctp-parchment {
+    --ctp-crust: 240, 232, 218;      /* Aged paper edge */
+    --ctp-base: 252, 248, 240;       /* Old parchment white */
+    --ctp-mantle: 246, 240, 228;     /* Foxed page */
+    --ctp-text: 48, 38, 28;          /* Dark walnut ink */
+
+    --divider-color: rgba(120, 100, 70, 0.18);
+    --divider-color-hover: rgba(120, 100, 70, 0.28);
+    --hr-color: rgba(120, 100, 70, 0.2);
+    --table-border-color: rgba(120, 100, 70, 0.2);
+    --background-modifier-border: rgba(120, 100, 70, 0.14);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 160, 120, 50;
+}
+
+.theme-light.ctp-parchment .nav-folder-title .nav-folder-title-content {
+    color: #4a3a28 !important;
+}
+
+.theme-light.ctp-parchment .nav-file-title .nav-file-title-content {
+    color: #6a5a45 !important;
+}
+
+
+/* ====== Light Theme: Heritage (Leather & Gold) ======
+   Warm ivory with burgundy and gold accents.
+   The feeling of opening a leather-bound family bible. */
+.theme-light.ctp-heritage {
+    --ctp-crust: 242, 234, 228;      /* Antique linen */
+    --ctp-base: 253, 250, 246;       /* Ivory page */
+    --ctp-mantle: 248, 242, 236;     /* Vellum */
+    --ctp-text: 52, 28, 32;          /* Dark burgundy ink */
+
+    --divider-color: rgba(120, 60, 50, 0.15);
+    --divider-color-hover: rgba(120, 60, 50, 0.25);
+    --hr-color: rgba(180, 140, 60, 0.4);
+    --table-border-color: rgba(120, 60, 50, 0.18);
+    --background-modifier-border: rgba(120, 60, 50, 0.12);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 140, 50, 40;
+}
+
+.theme-light.ctp-heritage .nav-folder-title .nav-folder-title-content {
+    color: #4a2228 !important;
+}
+
+.theme-light.ctp-heritage .nav-file-title .nav-file-title-content {
+    color: #6a4248 !important;
+}
+
+
+/* ====== Light Theme: Sepia (Vintage Photograph) ======
+   Full warm sepia tones like viewing an old tintype.
+   Every surface has a gentle amber warmth. */
+.theme-light.ctp-sepia {
+    --ctp-crust: 238, 230, 215;      /* Faded photograph edge */
+    --ctp-base: 250, 245, 235;       /* Vintage paper */
+    --ctp-mantle: 244, 238, 225;     /* Sepia wash */
+    --ctp-text: 55, 42, 28;          /* Dark umber */
+
+    --divider-color: rgba(110, 90, 60, 0.18);
+    --divider-color-hover: rgba(110, 90, 60, 0.28);
+    --hr-color: rgba(110, 90, 60, 0.22);
+    --table-border-color: rgba(110, 90, 60, 0.2);
+    --background-modifier-border: rgba(110, 90, 60, 0.14);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 160, 125, 60;
+}
+
+.theme-light.ctp-sepia .nav-folder-title .nav-folder-title-content {
+    color: #4a3820 !important;
+}
+
+.theme-light.ctp-sepia .nav-file-title .nav-file-title-content {
+    color: #6a5838 !important;
+}
+
+
+/* ====== Light Theme: Registry (Parish Records) ======
+   Aged paper with blue-gray ink tones.
+   The look of reading through a parish register or court ledger. */
+.theme-light.ctp-registry {
+    --ctp-crust: 238, 240, 245;      /* Filing cabinet gray */
+    --ctp-base: 250, 251, 254;       /* Ledger paper */
+    --ctp-mantle: 244, 246, 250;     /* Record page */
+    --ctp-text: 28, 35, 52;          /* Iron gall ink */
+
+    --divider-color: rgba(60, 80, 120, 0.15);
+    --divider-color-hover: rgba(60, 80, 120, 0.25);
+    --hr-color: rgba(60, 80, 120, 0.18);
+    --table-border-color: rgba(60, 80, 120, 0.18);
+    --background-modifier-border: rgba(60, 80, 120, 0.12);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 60, 90, 150;
+}
+
+.theme-light.ctp-registry .nav-folder-title .nav-folder-title-content {
+    color: #2a3550 !important;
+}
+
+.theme-light.ctp-registry .nav-file-title .nav-file-title-content {
+    color: #4a5570 !important;
+}
+
+
+/* ====== Light Theme: Rootwood (Earth & Forest) ======
+   Warm whites with earthy green and brown accents.
+   Natural tones reflecting family trees and deep roots. */
+.theme-light.ctp-rootwood {
+    --ctp-crust: 238, 236, 228;      /* Dried leaf */
+    --ctp-base: 251, 250, 245;       /* Birch bark white */
+    --ctp-mantle: 245, 243, 236;     /* Heartwood cream */
+    --ctp-text: 36, 32, 24;          /* Dark walnut */
+
+    --divider-color: rgba(80, 90, 50, 0.15);
+    --divider-color-hover: rgba(80, 90, 50, 0.25);
+    --hr-color: rgba(80, 90, 50, 0.18);
+    --table-border-color: rgba(80, 90, 50, 0.18);
+    --background-modifier-border: rgba(80, 90, 50, 0.12);
+
+    --background-secondary: rgb(var(--ctp-crust));
+    --background-secondary-alt: rgb(var(--ctp-mantle));
+
+    --ctp-accent: 80, 120, 60;
+}
+
+.theme-light.ctp-rootwood .nav-folder-title .nav-folder-title-content {
+    color: #2a3518 !important;
+}
+
+.theme-light.ctp-rootwood .nav-file-title .nav-file-title-content {
+    color: #4a5535 !important;
 }
 
 
