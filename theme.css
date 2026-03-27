@@ -74,16 +74,47 @@
 
 
 /* ================================================================================
+   !IMPORTANT DECLARATION PHILOSOPHY
+
+   This theme uses !important in ~360 declarations. As a CSS-only theme that must
+   override Obsidian's built-in styles, !important is unavoidable in most cases.
+
+   Categories:
+   - Navigation sidebar colors: Override Obsidian's nav styling (7 uses)
+   - Theme-specific typography: Override Obsidian's font-family (50+ uses)
+   - Crownwell dark UI: Force black/gold on Obsidian's workspace (68 uses)
+   - Rainbow folders: Override generic nav colors when enabled (61 uses)
+   - Color scheme overrides: Theme identity requires guaranteed colors (100+ uses)
+   - Feature utilities: Style Settings class toggles (50+ uses)
+
+   Paper tint backgrounds do NOT use !important (cssclass specificity suffices).
+   ================================================================================ */
+
+/* ================================================================================
+   PERFORMANCE NOTES
+
+   File size: ~250KB (6,900+ lines). Cannot be minified because Style Settings
+   requires /* @settings */ comment blocks in the CSS to function. Minifying or
+   stripping comments would break all 55+ Style Settings options.
+
+   Font loading: 2 HTTP requests (1 combined Google Fonts, 1 OpenDyslexic CDN).
+   All 16 font families load on every page. See font import section for details.
+
+   Color schemes: 34 total (16 dark + 18 light). Each defines ~20 CSS variables.
+   Variables cascade naturally; no runtime switching cost beyond class application.
+   ================================================================================ */
+
+/* ================================================================================
    SECTION 1: CSS RESET & CORE VARIABLES
-   
+
    Foundation layer using RGB triplets for flexible color manipulation.
    RGB values are defined as comma-separated triplets (e.g., "24, 24, 24")
    so they can be used with both rgb() and rgba() functions.
-   
+
    Example usage:
    - Solid color: rgb(var(--ctp-base))
    - With opacity: rgba(var(--ctp-base), 0.5)
-   
+
    This approach ensures consistent color application across light and dark modes
    while allowing per-theme opacity adjustments.
    ================================================================================ */
@@ -93,17 +124,22 @@
    All Google Fonts combined into a single request for performance.
    Previous: 15+ separate @import calls (15+ HTTP requests, render-blocking)
    Current: 1 combined Google Fonts request + 1 OpenDyslexic (2 HTTP requests)
+
+   PERFORMANCE CEILING: All 16 font families load on every page regardless of
+   which font the user selects. CSS-only themes cannot conditionally load fonts
+   because @import does not support class-based conditions. Conditional loading
+   would require JavaScript (a plugin, not a theme). This is a known limitation,
+   not a bug. The combined Google Fonts URL uses display=swap to prevent FOIT.
    ================================================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Literata:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Roboto:ital,wght@0,400;0,500;1,400&family=Source+Code+Pro:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Vollkorn:ital,wght@0,400;0,600;1,400&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css');
-
 
 :root,
 .theme-light,
 .theme-dark {
     /* ====== Color System ======
        Base palette using RGB triplets for maximum flexibility */
-    
+
     /* Base Colors - Background hierarchy */
     --ctp-base: 24, 24, 24;      /* Primary background */
     --ctp-mantle: 18, 18, 18;    /* Secondary background (darker) */
@@ -131,26 +167,26 @@
 
     /* ====== Typography System ======
        Font stacks with system fallbacks for reliability */
-    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-text: 'Vollkorn', serif;
-    --font-code: 'JetBrains Mono', monospace;
+    --arcadia-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    --arcadia-font-text: 'Vollkorn', serif;
+    --arcadia-font-code: 'JetBrains Mono', monospace;
 
     /* ====== Spacing System ======
        8px base grid for consistent vertical rhythm */
-    --space-xxs: 0.25rem;  /* 4px - Tight spacing */
-    --space-xs: 0.5rem;    /* 8px - Small gaps */
-    --space-sm: 0.75rem;   /* 12px - Moderate spacing */
-    --space-md: 1rem;      /* 16px - Standard spacing */
-    --space-lg: 1.5rem;    /* 24px - Large gaps */
-    --space-xl: 2rem;      /* 32px - Section spacing */
+    --arcadia-space-xxs: 0.25rem;  /* 4px - Tight spacing */
+    --arcadia-space-xs: 0.5rem;    /* 8px - Small gaps */
+    --arcadia-space-sm: 0.75rem;   /* 12px - Moderate spacing */
+    --arcadia-space-md: 1rem;      /* 16px - Standard spacing */
+    --arcadia-space-lg: 1.5rem;    /* 24px - Large gaps */
+    --arcadia-space-xl: 2rem;      /* 32px - Section spacing */
 
     /* ====== Transitions ======
        Standardized easing for consistent motion design */
-    --transition-base: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-hover-bg: background-color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
-    --transition-hover-color: color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
-    --transition-hover-color-fast: color 0.2s cubic-bezier(0.44, 0.21, 0, 1);
-    --transition-hover-box-shadow: box-shadow 0.3s cubic-bezier(0.44, 0.21, 0, 1);
+    --arcadia-transition-base: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --arcadia-transition-hover-bg: background-color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
+    --arcadia-transition-hover-color: color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
+    --arcadia-transition-hover-color-fast: color 0.2s cubic-bezier(0.44, 0.21, 0, 1);
+    --arcadia-transition-hover-box-shadow: box-shadow 0.3s cubic-bezier(0.44, 0.21, 0, 1);
     --transition-text-decoration-color: text-decoration-color 0.3s cubic-bezier(0.44, 0.21, 0, 1);
 
     /* ====== Animation System ======
@@ -164,7 +200,7 @@
    SECTION 2: BASE ELEMENT STYLES
    ================================================================================ */
 body {
-    font-family: var(--font-ui);
+    font-family: var(--arcadia-font-ui);
     line-height: 1.6;
     color: rgb(var(--ctp-text));
     background-color: rgb(var(--ctp-base));
@@ -174,12 +210,12 @@ body {
 .ctp-container {
     max-width: min(90vw, 1200px);
     margin: 0 auto;
-    padding: var(--space-md);
+    padding: var(--arcadia-space-md);
 }
 
 .ctp-section {
-    margin: var(--space-lg) 0;
-    padding: var(--space-md);
+    margin: var(--arcadia-space-lg) 0;
+    padding: var(--arcadia-space-md);
     background-color: rgb(var(--ctp-mantle));
     border-radius: 8px;
 }
@@ -325,7 +361,7 @@ settings:
   - id: font-family
     title: Font Family
     type: variable-select
-    default: var(--font-ui)
+    default: var(--arcadia-font-ui)
     options:
       - label: System UI
         value: system-ui
@@ -414,6 +450,14 @@ settings:
         value: font-text-roboto
       - label: Open Sans (Friendly Sans)
         value: font-text-opensans
+      - label: EB Garamond (Historic Serif)
+        value: font-text-ebgaramond
+      - label: Libre Caslon Text (Book Serif)
+        value: font-text-librecaslon
+      - label: Cormorant Garamond (Display Serif)
+        value: font-text-cormorant
+      - label: Source Serif 4 (Reading Serif)
+        value: font-text-sourceserif
   - id: font-code-choice
     title: Code Font
     description: Font for code blocks
@@ -792,62 +836,63 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 255, 255, 255;
+    --arcadia-nav-file-color: 218, 218, 218;
+    --arcadia-nav-active-color: 255, 215, 95;
+
+    /* Warm gold accent for default dark theme */
+    --ctp-accent: 200, 170, 80;
 }
 
-/* Force folder titles to gray in light mode only */
-.theme-light .nav-folder-title .nav-folder-title-content {
-    color: #444 !important;
-}
 
-/* Default color for folders & files (white) */
-.theme-dark.ctp-granite .nav-folder-title .nav-folder-title-content,
-.theme-dark.ctp-granite .nav-file-title {
-    color: #fff !important;
-}
+/* ====== Generic Nav Sidebar Color Rules ======
+   Colors are defined per-scheme via --arcadia-nav-* variables.
+   This replaces ~135 per-scheme hardcoded nav rules. */
 
-/* Folders in teal on hover and active */
-.theme-dark.ctp-granite .tree-item-self.is-clickable:hover .nav-folder-title .nav-folder-title-content,
-.theme-dark.ctp-granite .nav-folder-title.is-active .nav-folder-title-content {
-    color: #40E0D0 !important;
-}
-
-/* Files in yellow when active (clicked) */
-.theme-dark.ctp-granite .nav-file-title.is-active .nav-file-title-content {
-    color: #FFD75F !important;
-}
-
-/* Make file titles more readable */
+/* File title formatting */
 .nav-file-title .nav-file-title-content {
     font-weight: normal !important;
     opacity: 0.9;
 }
 
-/* Light mode - darker gray for file titles */
-.theme-light .nav-file-title .nav-file-title-content {
-    color: #333333 !important;
+/* Folder colors */
+.nav-folder-title .nav-folder-title-content {
+    color: rgb(var(--arcadia-nav-folder-color)) !important;
 }
 
-/* Dark mode - softer gray */
-.theme-dark .nav-file-title .nav-file-title-content {
-    color: #bbbbbb !important;
+/* File colors */
+.nav-file-title .nav-file-title-content {
+    color: rgb(var(--arcadia-nav-file-color)) !important;
 }
 
-/* Granite & Flint - soft silver */
-.theme-dark.ctp-granite .nav-file-title .nav-file-title-content,
-.theme-dark.ctp-flint .nav-file-title .nav-file-title-content {
-    color: #dadada !important;
+/* Active file highlight */
+.nav-file-title.is-active .nav-file-title-content {
+    color: rgb(var(--arcadia-nav-active-color)) !important;
 }
 
-/* Olive theme - richer gold */
-.theme-dark.ctp-olive .nav-file-title .nav-file-title-content {
-    color: #e0d09a !important;
+/* Folder hover and active highlight */
+.tree-item-self.is-clickable:hover .nav-folder-title .nav-folder-title-content,
+.nav-folder-title.is-active .nav-folder-title-content {
+    color: rgb(var(--arcadia-nav-active-color)) !important;
 }
 
-/* Navy theme - cooler blue-gray */
-.theme-dark.ctp-navy .nav-file-title .nav-file-title-content {
-    color: #b4c5e0 !important;
+/* NY Times folder weight override */
+.theme-light.ctp-nytimes .nav-folder-title .nav-folder-title-content {
+    font-weight: 500;
 }
 
+/* Crownwell folder weight override */
+.theme-light.ctp-crownwell .nav-folder-title .nav-folder-title-content {
+    font-weight: 500;
+}
+
+/* Generic reading panel rule - uses per-scheme --ctp-base and --ctp-text */
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-s-obsidian {
+    background-color: rgb(var(--ctp-base)) !important;
+    color: rgb(var(--ctp-text)) !important;
+}
 
 /* ====== Dark Theme: Stone (Cool Slate) ======
    A cool blue-gray stone aesthetic, like polished slate or river rock.
@@ -878,25 +923,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 200, 208, 220;
+    --arcadia-nav-file-color: 168, 180, 196;
+    --arcadia-nav-active-color: 230, 200, 120;
 
     /* Steel blue accent for this theme */
     --ctp-accent: 110, 150, 200;
-}
-
-/* Stone sidebar - cool silver tones */
-.theme-dark.ctp-stone .nav-folder-title .nav-folder-title-content {
-    color: #c8d0dc !important;
-}
-
-.theme-dark.ctp-stone .nav-file-title .nav-file-title-content {
-    color: #a8b4c4 !important;
-}
-
-/* Stone theme - reading panel */
-.theme-dark.ctp-stone .markdown-preview-view,
-.theme-dark.ctp-stone .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -927,24 +960,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 202, 194, 123;
+    --arcadia-nav-file-color: 224, 208, 154;
+    --arcadia-nav-active-color: 255, 215, 95;
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-olive .nav-folder-title,
-.theme-dark.ctp-olive .nav-file-title,
-.theme-dark.ctp-olive .workspace-ribbon {
-    color: #f3eca8 !important;
-}
-
-.theme-dark.ctp-olive .nav-folder-title .nav-folder-title-content {
-    color: #cac27b !important;
-}
-
-/* Olive theme - reading panel */
-.theme-dark.ctp-olive .markdown-preview-view,
-.theme-dark.ctp-olive .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
+    /* Earthy olive-gold accent */
+    --ctp-accent: 160, 180, 80;
 }
 
 
@@ -977,24 +999,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 178, 178, 178;
+    --arcadia-nav-file-color: 218, 218, 218;
+    --arcadia-nav-active-color: 255, 215, 95;
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-flint .nav-folder-title,
-.theme-dark.ctp-flint .nav-file-title,
-.theme-dark.ctp-flint .workspace-ribbon {
-    color: #c8c8c8 !important;
-}
-
-.theme-dark.ctp-flint .nav-folder-title .nav-folder-title-content {
-    color: #b2b2b2 !important;
-}
-
-/* Flint theme - reading panel */
-.theme-dark.ctp-flint .markdown-preview-view,
-.theme-dark.ctp-flint .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
+    /* Cool steel blue accent */
+    --ctp-accent: 110, 150, 190;
 }
 
 
@@ -1027,25 +1038,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 224, 232, 245;
+    --arcadia-nav-file-color: 176, 196, 232;
+    --arcadia-nav-active-color: 255, 210, 100;
 
     /* Gold accent for nautical feel */
     --ctp-accent: 255, 210, 100;
-}
-
-/* Navy sidebar - bright and clear like moonlight on water */
-.theme-dark.ctp-navy .nav-folder-title .nav-folder-title-content {
-    color: #e0e8f5 !important;
-}
-
-.theme-dark.ctp-navy .nav-file-title .nav-file-title-content {
-    color: #b0c4e8 !important;
-}
-
-/* Navy theme - reading panel */
-.theme-dark.ctp-navy .markdown-preview-view,
-.theme-dark.ctp-navy .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -1078,28 +1077,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 245, 176, 136;
+    --arcadia-nav-file-color: 232, 208, 192;
+    --arcadia-nav-active-color: 255, 190, 80;
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-ember .nav-folder-title,
-.theme-dark.ctp-ember .nav-file-title,
-.theme-dark.ctp-ember .workspace-ribbon {
-    color: #ffccaa !important;
-}
-
-.theme-dark.ctp-ember .nav-folder-title .nav-folder-title-content {
-    color: #f5b088 !important;
-}
-
-.theme-dark.ctp-ember .nav-file-title .nav-file-title-content {
-    color: #e8d0c0 !important;
-}
-
-/* Ember theme - reading panel */
-.theme-dark.ctp-ember .markdown-preview-view,
-.theme-dark.ctp-ember .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
+    /* Warm ember-orange accent */
+    --ctp-accent: 240, 160, 80;
 }
 
 
@@ -1130,28 +1114,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 200, 184, 232;
+    --arcadia-nav-file-color: 216, 208, 232;
+    --arcadia-nav-active-color: 255, 210, 120;
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-twilight .nav-folder-title,
-.theme-dark.ctp-twilight .nav-file-title,
-.theme-dark.ctp-twilight .workspace-ribbon {
-    color: #dcd0ff !important;
-}
-
-.theme-dark.ctp-twilight .nav-folder-title .nav-folder-title-content {
-    color: #c8b8e8 !important;
-}
-
-.theme-dark.ctp-twilight .nav-file-title .nav-file-title-content {
-    color: #d8d0e8 !important;
-}
-
-/* Twilight theme - reading panel */
-.theme-dark.ctp-twilight .markdown-preview-view,
-.theme-dark.ctp-twilight .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
+    /* Soft violet accent for twilight palette */
+    --ctp-accent: 160, 140, 220;
 }
 
 
@@ -1182,28 +1151,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 168, 216, 152;
+    --arcadia-nav-file-color: 208, 232, 200;
+    --arcadia-nav-active-color: 240, 210, 100;
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-forest .nav-folder-title,
-.theme-dark.ctp-forest .nav-file-title,
-.theme-dark.ctp-forest .workspace-ribbon {
-    color: #c8f0c0 !important;
-}
-
-.theme-dark.ctp-forest .nav-folder-title .nav-folder-title-content {
-    color: #a8d898 !important;
-}
-
-.theme-dark.ctp-forest .nav-file-title .nav-file-title-content {
-    color: #d0e8c8 !important;
-}
-
-/* Forest theme - reading panel */
-.theme-dark.ctp-forest .markdown-preview-view,
-.theme-dark.ctp-forest .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
+    /* Forest green accent */
+    --ctp-accent: 100, 180, 120;
 }
 
 
@@ -1236,25 +1190,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 248, 224, 229;
+    --arcadia-nav-file-color: 224, 200, 208;
+    --arcadia-nav-active-color: 255, 215, 130;
 
     /* Champagne gold accent for elegance */
     --ctp-accent: 255, 215, 130;
-}
-
-/* Crimson sidebar - warm rose and cream tones */
-.theme-dark.ctp-crimson .nav-folder-title .nav-folder-title-content {
-    color: #f8e0e5 !important;
-}
-
-.theme-dark.ctp-crimson .nav-file-title .nav-file-title-content {
-    color: #e0c8d0 !important;
-}
-
-/* Crimson theme - reading panel */
-.theme-dark.ctp-crimson .markdown-preview-view,
-.theme-dark.ctp-crimson .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -1285,28 +1227,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 184, 200, 216;
+    --arcadia-nav-file-color: 200, 208, 224;
+    --arcadia-nav-active-color: 240, 200, 100;
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-slate .nav-folder-title,
-.theme-dark.ctp-slate .nav-file-title,
-.theme-dark.ctp-slate .workspace-ribbon {
-    color: #d0d8e8 !important;
-}
-
-.theme-dark.ctp-slate .nav-folder-title .nav-folder-title-content {
-    color: #b8c8d8 !important;
-}
-
-.theme-dark.ctp-slate .nav-file-title .nav-file-title-content {
-    color: #c8d0e0 !important;
-}
-
-/* Slate theme - reading panel */
-.theme-dark.ctp-slate .markdown-preview-view,
-.theme-dark.ctp-slate .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
+    /* Slate blue accent */
+    --ctp-accent: 130, 160, 200;
 }
 
 
@@ -1339,28 +1266,13 @@ settings:
     /* Panel backgrounds */
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 232, 192, 120;
+    --arcadia-nav-file-color: 240, 216, 176;
+    --arcadia-nav-active-color: 255, 200, 90;
 
-/* Folder & file titles in sidebar */
-.theme-dark.ctp-amber .nav-folder-title,
-.theme-dark.ctp-amber .nav-file-title,
-.theme-dark.ctp-amber .workspace-ribbon {
-    color: #ffd898 !important;
-}
-
-.theme-dark.ctp-amber .nav-folder-title .nav-folder-title-content {
-    color: #e8c078 !important;
-}
-
-.theme-dark.ctp-amber .nav-file-title .nav-file-title-content {
-    color: #f0d8b0 !important;
-}
-
-/* Amber theme - reading panel */
-.theme-dark.ctp-amber .markdown-preview-view,
-.theme-dark.ctp-amber .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
+    /* Warm amber-gold accent */
+    --ctp-accent: 220, 175, 70;
 }
 
 
@@ -1391,22 +1303,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 216, 200, 168;
+    --arcadia-nav-file-color: 192, 176, 144;
+    --arcadia-nav-active-color: 220, 190, 100;
 
     --ctp-accent: 210, 175, 120;
-}
-
-.theme-dark.ctp-parchment .nav-folder-title .nav-folder-title-content {
-    color: #d8c8a8 !important;
-}
-
-.theme-dark.ctp-parchment .nav-file-title .nav-file-title-content {
-    color: #c0b090 !important;
-}
-
-.theme-dark.ctp-parchment .markdown-preview-view,
-.theme-dark.ctp-parchment .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -1437,22 +1339,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 224, 200, 168;
+    --arcadia-nav-file-color: 200, 176, 144;
+    --arcadia-nav-active-color: 210, 180, 80;
 
     --ctp-accent: 210, 180, 80;
-}
-
-.theme-dark.ctp-heritage .nav-folder-title .nav-folder-title-content {
-    color: #e0c8a8 !important;
-}
-
-.theme-dark.ctp-heritage .nav-file-title .nav-file-title-content {
-    color: #c8b090 !important;
-}
-
-.theme-dark.ctp-heritage .markdown-preview-view,
-.theme-dark.ctp-heritage .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -1483,22 +1375,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 212, 192, 160;
+    --arcadia-nav-file-color: 188, 168, 136;
+    --arcadia-nav-active-color: 225, 195, 105;
 
     --ctp-accent: 215, 180, 130;
-}
-
-.theme-dark.ctp-sepia .nav-folder-title .nav-folder-title-content {
-    color: #d4c0a0 !important;
-}
-
-.theme-dark.ctp-sepia .nav-file-title .nav-file-title-content {
-    color: #bca888 !important;
-}
-
-.theme-dark.ctp-sepia .markdown-preview-view,
-.theme-dark.ctp-sepia .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -1529,22 +1411,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 192, 200, 216;
+    --arcadia-nav-file-color: 160, 168, 192;
+    --arcadia-nav-active-color: 210, 185, 95;
 
     --ctp-accent: 90, 130, 185;
-}
-
-.theme-dark.ctp-registry .nav-folder-title .nav-folder-title-content {
-    color: #c0c8d8 !important;
-}
-
-.theme-dark.ctp-registry .nav-file-title .nav-file-title-content {
-    color: #a0a8c0 !important;
-}
-
-.theme-dark.ctp-registry .markdown-preview-view,
-.theme-dark.ctp-registry .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -1575,22 +1447,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 200, 192, 160;
+    --arcadia-nav-file-color: 176, 168, 136;
+    --arcadia-nav-active-color: 195, 175, 85;
 
     --ctp-accent: 100, 155, 90;
-}
-
-.theme-dark.ctp-rootwood .nav-folder-title .nav-folder-title-content {
-    color: #c8c0a0 !important;
-}
-
-.theme-dark.ctp-rootwood .nav-file-title .nav-file-title-content {
-    color: #b0a888 !important;
-}
-
-.theme-dark.ctp-rootwood .markdown-preview-view,
-.theme-dark.ctp-rootwood .cm-s-obsidian {
-    background-color: rgb(var(--ctp-base)) !important;
-    color: rgb(var(--ctp-text)) !important;
 }
 
 
@@ -1618,15 +1480,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 42, 42, 46;
+    --arcadia-nav-file-color: 74, 74, 79;
+    --arcadia-nav-active-color: 65, 105, 180;
 
-/* Sidebar text colors for Marble - higher contrast than before */
-.theme-light.ctp-marble .nav-folder-title .nav-folder-title-content {
-    color: #2a2a2e !important;  /* Darker for better readability */
-}
-
-.theme-light.ctp-marble .nav-file-title .nav-file-title-content {
-    color: #4a4a4f !important;  /* Improved contrast from previous #666 */
+    /* Classic blue accent for default light theme */
+    --ctp-accent: 65, 105, 180;
 }
 
 
@@ -1649,15 +1509,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 42, 74, 42;
+    --arcadia-nav-file-color: 61, 90, 61;
+    --arcadia-nav-active-color: 50, 100, 50;
 
-/* Sidebar colors for Sage - earth-toned for harmony */
-.theme-light.ctp-sage .nav-folder-title .nav-folder-title-content {
-    color: #2a4a2a !important;  /* Dark forest green */
-}
-
-.theme-light.ctp-sage .nav-file-title .nav-file-title-content {
-    color: #3d5a3d !important;  /* Medium green-gray */
+    /* Sage green accent */
+    --ctp-accent: 60, 120, 60;
 }
 
 
@@ -1676,14 +1534,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 58, 74, 90;
+    --arcadia-nav-file-color: 85, 101, 117;
+    --arcadia-nav-active-color: 60, 100, 160;
 
-.theme-light.ctp-pearl .nav-folder-title .nav-folder-title-content {
-    color: #3a4a5a !important;
-}
-
-.theme-light.ctp-pearl .nav-file-title .nav-file-title-content {
-    color: #556575 !important;
+    /* Cool ivory blue accent */
+    --ctp-accent: 60, 100, 160;
 }
 
 
@@ -1702,14 +1559,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 42, 74, 106;
+    --arcadia-nav-file-color: 74, 90, 122;
+    --arcadia-nav-active-color: 30, 80, 150;
 
-.theme-light.ctp-cloud .nav-folder-title .nav-folder-title-content {
-    color: #2a4a6a !important;
-}
-
-.theme-light.ctp-cloud .nav-file-title .nav-file-title-content {
-    color: #4a5a7a !important;
+    /* Soft blue accent */
+    --ctp-accent: 50, 100, 170;
 }
 
 
@@ -1728,14 +1584,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 90, 64, 53;
+    --arcadia-nav-file-color: 106, 85, 80;
+    --arcadia-nav-active-color: 140, 80, 40;
 
-.theme-light.ctp-dawn .nav-folder-title .nav-folder-title-content {
-    color: #5a4035 !important;
-}
-
-.theme-light.ctp-dawn .nav-file-title .nav-file-title-content {
-    color: #6a5550 !important;
+    /* Warm terracotta accent */
+    --ctp-accent: 170, 95, 45;
 }
 
 
@@ -1754,14 +1609,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 74, 58, 90;
+    --arcadia-nav-file-color: 90, 74, 106;
+    --arcadia-nav-active-color: 90, 60, 120;
 
-.theme-light.ctp-lavender .nav-folder-title .nav-folder-title-content {
-    color: #4a3a5a !important;
-}
-
-.theme-light.ctp-lavender .nav-file-title .nav-file-title-content {
-    color: #5a4a6a !important;
+    /* Lavender purple accent */
+    --ctp-accent: 100, 70, 150;
 }
 
 
@@ -1780,14 +1634,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 42, 74, 58;
+    --arcadia-nav-file-color: 74, 90, 80;
+    --arcadia-nav-active-color: 30, 100, 70;
 
-.theme-light.ctp-mint .nav-folder-title .nav-folder-title-content {
-    color: #2a4a3a !important;
-}
-
-.theme-light.ctp-mint .nav-file-title .nav-file-title-content {
-    color: #4a5a50 !important;
+    /* Fresh mint green accent */
+    --ctp-accent: 40, 130, 90;
 }
 
 
@@ -1806,14 +1659,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 90, 53, 69;
+    --arcadia-nav-file-color: 106, 74, 88;
+    --arcadia-nav-active-color: 140, 40, 60;
 
-.theme-light.ctp-rose .nav-folder-title .nav-folder-title-content {
-    color: #5a3545 !important;
-}
-
-.theme-light.ctp-rose .nav-file-title .nav-file-title-content {
-    color: #6a4a58 !important;
+    /* Soft rose accent */
+    --ctp-accent: 160, 60, 80;
 }
 
 
@@ -1832,14 +1684,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 58, 64, 69;
+    --arcadia-nav-file-color: 85, 90, 96;
+    --arcadia-nav-active-color: 60, 90, 140;
 
-.theme-light.ctp-silver .nav-folder-title .nav-folder-title-content {
-    color: #3a4045 !important;
-}
-
-.theme-light.ctp-silver .nav-file-title .nav-file-title-content {
-    color: #555a60 !important;
+    /* Cool steel accent */
+    --ctp-accent: 70, 100, 155;
 }
 
 
@@ -1858,14 +1709,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
-}
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 74, 66, 53;
+    --arcadia-nav-file-color: 90, 85, 72;
+    --arcadia-nav-active-color: 120, 90, 40;
 
-.theme-light.ctp-cream .nav-folder-title .nav-folder-title-content {
-    color: #4a4235 !important;
-}
-
-.theme-light.ctp-cream .nav-file-title .nav-file-title-content {
-    color: #5a5548 !important;
+    /* Warm golden accent */
+    --ctp-accent: 150, 115, 40;
 }
 
 
@@ -1889,19 +1739,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 18, 18, 18;
+    --arcadia-nav-file-color: 51, 51, 51;
+    --arcadia-nav-active-color: 86, 123, 149;
 
     /* NYT-style accent - muted blue for links */
     --ctp-accent: 86, 123, 149;
-}
-
-/* NY Times sidebar - classic newspaper feel */
-.theme-light.ctp-nytimes .nav-folder-title .nav-folder-title-content {
-    color: #121212 !important;
-    font-weight: 500;
-}
-
-.theme-light.ctp-nytimes .nav-file-title .nav-file-title-content {
-    color: #333333 !important;
 }
 
 /* NY Times typography overrides - Georgia for that classic newspaper look */
@@ -1949,18 +1793,13 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 32, 33, 34;
+    --arcadia-nav-file-color: 84, 89, 93;
+    --arcadia-nav-active-color: 51, 102, 204;
 
     /* Wikipedia blue for links */
     --ctp-accent: 51, 102, 204;
-}
-
-/* Wikipedia sidebar - clean and functional */
-.theme-light.ctp-wikipedia .nav-folder-title .nav-folder-title-content {
-    color: #202122 !important;
-}
-
-.theme-light.ctp-wikipedia .nav-file-title .nav-file-title-content {
-    color: #54595d !important;
 }
 
 /* Wikipedia typography overrides - system sans-serif */
@@ -2032,25 +1871,14 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 61, 68, 73;
+    --arcadia-nav-file-color: 90, 98, 104;
+    --arcadia-nav-active-color: 201, 162, 39;
 
     /* Crownwell gold for links and accents */
     --ctp-accent: 201, 162, 39;      /* Antique gold #C9A227 */
     --ctp-accent-hover: 184, 134, 11; /* Darker gold #B8860B */
-}
-
-/* Crownwell sidebar - elegant and warm */
-.theme-light.ctp-crownwell .nav-folder-title,
-.theme-light.ctp-crownwell .workspace-ribbon {
-    color: #3D4449 !important;
-}
-
-.theme-light.ctp-crownwell .nav-folder-title .nav-folder-title-content {
-    color: #3D4449 !important;
-    font-weight: 500;
-}
-
-.theme-light.ctp-crownwell .nav-file-title .nav-file-title-content {
-    color: #5a6268 !important;
 }
 
 /* Crownwell typography - elegant Cormorant Garamond */
@@ -2660,16 +2488,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 74, 58, 40;
+    --arcadia-nav-file-color: 106, 90, 69;
+    --arcadia-nav-active-color: 160, 120, 50;
 
     --ctp-accent: 160, 120, 50;
-}
-
-.theme-light.ctp-parchment .nav-folder-title .nav-folder-title-content {
-    color: #4a3a28 !important;
-}
-
-.theme-light.ctp-parchment .nav-file-title .nav-file-title-content {
-    color: #6a5a45 !important;
 }
 
 
@@ -2690,16 +2514,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 74, 34, 40;
+    --arcadia-nav-file-color: 106, 66, 72;
+    --arcadia-nav-active-color: 140, 50, 40;
 
     --ctp-accent: 140, 50, 40;
-}
-
-.theme-light.ctp-heritage .nav-folder-title .nav-folder-title-content {
-    color: #4a2228 !important;
-}
-
-.theme-light.ctp-heritage .nav-file-title .nav-file-title-content {
-    color: #6a4248 !important;
 }
 
 
@@ -2720,16 +2540,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 74, 56, 32;
+    --arcadia-nav-file-color: 106, 88, 56;
+    --arcadia-nav-active-color: 160, 125, 60;
 
     --ctp-accent: 160, 125, 60;
-}
-
-.theme-light.ctp-sepia .nav-folder-title .nav-folder-title-content {
-    color: #4a3820 !important;
-}
-
-.theme-light.ctp-sepia .nav-file-title .nav-file-title-content {
-    color: #6a5838 !important;
 }
 
 
@@ -2750,16 +2566,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 42, 53, 80;
+    --arcadia-nav-file-color: 74, 85, 112;
+    --arcadia-nav-active-color: 60, 90, 150;
 
     --ctp-accent: 60, 90, 150;
-}
-
-.theme-light.ctp-registry .nav-folder-title .nav-folder-title-content {
-    color: #2a3550 !important;
-}
-
-.theme-light.ctp-registry .nav-file-title .nav-file-title-content {
-    color: #4a5570 !important;
 }
 
 
@@ -2780,16 +2592,12 @@ settings:
 
     --background-secondary: rgb(var(--ctp-crust));
     --background-secondary-alt: rgb(var(--ctp-mantle));
+    /* Navigation sidebar colors */
+    --arcadia-nav-folder-color: 42, 53, 24;
+    --arcadia-nav-file-color: 74, 85, 53;
+    --arcadia-nav-active-color: 80, 120, 60;
 
     --ctp-accent: 80, 120, 60;
-}
-
-.theme-light.ctp-rootwood .nav-folder-title .nav-folder-title-content {
-    color: #2a3518 !important;
-}
-
-.theme-light.ctp-rootwood .nav-file-title .nav-file-title-content {
-    color: #4a5535 !important;
 }
 
 
@@ -2815,7 +2623,7 @@ h1,
     font-weight: 400;
     letter-spacing: 0.05em;
     font-variant: small-caps;
-    font-family: var(--font-text) !important;
+    font-family: var(--arcadia-font-text) !important;
     margin: 1em 0;
     position: relative;
     color: inherit !important;
@@ -2864,7 +2672,7 @@ h2,
 
 /* ====== Paragraphs & Text ====== */
 .cm-line {
-    font-family: var(--font-text);
+    font-family: var(--arcadia-font-text);
     line-height: 1.7;
     margin: 0.75em 0;
 }
@@ -2895,7 +2703,7 @@ h2,
 .cm-blockquote {
     border-left: 3px solid rgba(var(--ctp-accent), 0.4);
     color: rgba(var(--ctp-text), 0.8);
-    padding-left: var(--space-md);
+    padding-left: var(--arcadia-space-md);
     margin: 1em 0;
 }
 
@@ -2905,7 +2713,7 @@ h2,
 
 /* ====== Lists ====== */
 .cm-list {
-    padding-left: var(--space-lg);
+    padding-left: var(--arcadia-space-lg);
     margin: 0.75em 0;
 }
 
@@ -2919,7 +2727,7 @@ h2,
     background: rgba(var(--ctp-mantle), 0.8);
     border: 1px solid rgba(var(--ctp-accent), 0.1);
     border-radius: 6px;
-    padding: var(--space-md);
+    padding: var(--arcadia-space-md);
     margin: 1.25em 0;
 }
 
@@ -2929,7 +2737,7 @@ h2,
     color: rgb(var(--ctp-accent));
     padding: 0.2em 0.4em;
     border-radius: 4px;
-    font-family: var(--font-code);
+    font-family: var(--arcadia-font-code);
 }
 
 
@@ -2938,7 +2746,7 @@ h2,
    ================================================================================ */
 
 .callout {
-    --callout-padding: var(--space-md);
+    --callout-padding: var(--arcadia-space-md);
     --callout-icon: lucide-pencil;
     border-left: 4px solid rgba(var(--ctp-accent), 0.6);
     background: rgba(var(--ctp-mantle), 0.6);
@@ -2951,7 +2759,7 @@ h2,
 .callout-title {
     font-weight: 600;
     color: rgb(var(--ctp-accent));
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--arcadia-space-xs);
 }
 
 /* Custom icons for callout types */
@@ -3034,7 +2842,7 @@ h2,
 }
 
 .cm-table-cell {
-    padding: var(--space-xs) var(--space-sm);
+    padding: var(--arcadia-space-xs) var(--arcadia-space-sm);
     border: 1px solid rgba(var(--ctp-accent), 0.1);
 }
 
@@ -3051,11 +2859,11 @@ h2,
     border: 1px solid rgba(var(--ctp-accent), 0.2);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    padding: var(--space-md);
+    padding: var(--arcadia-space-md);
 }
 
 .canvas-node-label {
-    font-family: var(--font-ui);
+    font-family: var(--arcadia-font-ui);
     color: rgb(var(--ctp-text));
 }
 
@@ -3070,10 +2878,10 @@ h2,
 
 .search-input-container {
     max-width: 600px;
-    margin: var(--space-md) auto;
+    margin: var(--arcadia-space-md) auto;
     border: 1px solid rgba(var(--ctp-accent), 0.2);
     border-radius: 8px;
-    transition: var(--transition-base);
+    transition: var(--arcadia-transition-base);
 }
 
 .search-input-container:focus-within {
@@ -3088,8 +2896,8 @@ h2,
 
 .search-result-file-match {
     border-left: 3px solid rgba(var(--ctp-accent), 0.3);
-    padding-left: var(--space-sm);
-    margin: var(--space-xs) 0;
+    padding-left: var(--arcadia-space-sm);
+    margin: var(--arcadia-space-xs) 0;
 }
 
 
@@ -3100,20 +2908,20 @@ h2,
 /* ====== Dataview plugin ====== */
 .dataview.table {
     border: 1px solid rgba(var(--ctp-accent), 0.1);
-    margin: var(--space-md) 0;
+    margin: var(--arcadia-space-md) 0;
 }
 
 /* ====== Tasks plugin ====== */
 .task-list-item-checkbox {
     border: 1px solid rgba(var(--ctp-accent), 0.3);
-    margin-right: var(--space-xs);
+    margin-right: var(--arcadia-space-xs);
 }
 
 /* ====== Kanban plugin ====== */
 .kanban__lane {
     background: rgba(var(--ctp-mantle), 0.5);
     border: 1px solid rgba(var(--ctp-accent), 0.1);
-    padding: var(--space-md);
+    padding: var(--arcadia-space-md);
 }
 
 
@@ -3181,16 +2989,16 @@ h2,
 
 .modal-setting-header {
     border-bottom: 1px solid rgba(var(--ctp-accent), 0.1);
-    padding-bottom: var(--space-sm);
+    padding-bottom: var(--arcadia-space-sm);
 }
 
 .setting-item {
-    padding: var(--space-sm) 0;
+    padding: var(--arcadia-space-sm) 0;
 }
 
 /* ====== Tabbed interfaces ====== */
 .vertical-tab-nav-item {
-    padding: var(--space-xs) var(--space-sm);
+    padding: var(--arcadia-space-xs) var(--arcadia-space-sm);
     margin: 2px 0;
     border-radius: 4px;
 }
@@ -3210,7 +3018,7 @@ h2,
 .mod-left-split .workspace-tab-header,
 .mod-right-split .workspace-tab-header {
     margin: 0 2px;
-    transition: var(--transition-hover-bg), var(--transition-hover-color);
+    transition: var(--arcadia-transition-hover-bg), var(--arcadia-transition-hover-color);
 }
 
 .clickable-icon:hover,
@@ -3238,7 +3046,7 @@ h2,
 .mod-right-split .workspace-tab-header.is-active {
     box-shadow: inset 0 0 4px rgb(var(--ctp-crust)), inset 0 0 6px rgb(var(--ctp-base));
     outline: 1px solid rgb(var(--ctp-surface1));
-    transition: var(--transition-hover-bg), var(--transition-hover-color);
+    transition: var(--arcadia-transition-hover-bg), var(--arcadia-transition-hover-color);
 }
 
 .clickable-icon.is-active svg,
@@ -3273,7 +3081,7 @@ h2,
     background-color: rgb(var(--ctp-red));
     box-shadow: 0 0 2px 1px rgb(var(--ctp-surface1));
     color: rgb(var(--ctp-base));
-    transition: var(--transition-hover-bg), var(--transition-hover-color);
+    transition: var(--arcadia-transition-hover-bg), var(--arcadia-transition-hover-color);
 }
 
 .workspace-tab-header-inner-close-button:hover {
@@ -3293,7 +3101,7 @@ h2,
 /* ====== Titlebar buttons (Windows & Linux) ====== */
 .mod-linux .titlebar-button,
 .mod-windows .titlebar-button {
-    transition: var(--transition-hover-bg), var(--transition-hover-color);
+    transition: var(--arcadia-transition-hover-bg), var(--arcadia-transition-hover-color);
 }
 
 .mod-linux .titlebar-button:hover,
@@ -3378,8 +3186,8 @@ h2,
 
 /* ====== Sidebar architecture ====== */
 .workspace-split.mod-root>.workspace-leaf:first-child {
-    --nav-width: 280px;
-    width: var(--nav-width);
+    --arcadia-nav-width: 280px;
+    width: var(--arcadia-nav-width);
     min-width: unset;
     border-right: 1px solid rgba(var(--ctp-accent), 0.1);
     overflow-x: hidden;
@@ -3387,8 +3195,8 @@ h2,
 
 /* ====== File tree structure ====== */
 .nav-folder-children {
-    padding-left: var(--space-xs);
-    transition: var(--transition-base);
+    padding-left: var(--arcadia-space-xs);
+    transition: var(--arcadia-transition-base);
 }
 
 /* ====== Folder styling ====== */
@@ -3423,7 +3231,7 @@ h2,
 /* ====== Collapse/expand controls ====== */
 .nav-folder-collapse-indicator {
     margin-left: auto;
-    padding-left: var(--space-sm);
+    padding-left: var(--arcadia-space-sm);
     display: none;  /* Hidden in favor of custom book icons */
 }
 
@@ -4055,7 +3863,7 @@ h2,
 
 @media (max-width: 768px) {
     .workspace-split.mod-root>.workspace-leaf:first-child {
-        --nav-width: 240px;
+        --arcadia-nav-width: 240px;
         z-index: 100;
         position: relative;
         box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
@@ -4064,11 +3872,11 @@ h2,
     .markdown-source-view,
     .markdown-preview-view {
         --line-width: 100%;
-        --content-padding: var(--space-sm);
+        --content-padding: var(--arcadia-space-sm);
     }
 
     .search-input-container {
-        margin: var(--space-sm);
+        margin: var(--arcadia-space-sm);
     }
 }
 
@@ -4144,19 +3952,19 @@ h2,
 
 /* Content Font Choices */
 .font-text-vollkorn {
-    --font-text: 'Vollkorn', serif;
+    --arcadia-font-text: 'Vollkorn', serif;
 }
 
 .font-text-georgia {
-    --font-text: Georgia, 'Times New Roman', serif;
+    --arcadia-font-text: Georgia, 'Times New Roman', serif;
 }
 
 .font-text-merriweather {
-    --font-text: 'Merriweather', Georgia, serif;
+    --arcadia-font-text: 'Merriweather', Georgia, serif;
 }
 
 .font-text-system {
-    --font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --arcadia-font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Ensure font changes apply immediately */
@@ -4182,19 +3990,19 @@ h2,
 
 /* Code Font Choices */
 .font-code-jetbrains {
-    --font-code: 'JetBrains Mono', monospace;
+    --arcadia-font-code: 'JetBrains Mono', monospace;
 }
 
 .font-code-fira {
-    --font-code: 'Fira Code', 'Courier New', monospace;
+    --arcadia-font-code: 'Fira Code', 'Courier New', monospace;
 }
 
 .font-code-source {
-    --font-code: 'Source Code Pro', 'Courier New', monospace;
+    --arcadia-font-code: 'Source Code Pro', 'Courier New', monospace;
 }
 
 .font-code-mono {
-    --font-code: Consolas, 'Courier New', monospace;
+    --arcadia-font-code: Consolas, 'Courier New', monospace;
 }
 
 /* Ensure code font changes apply immediately */
@@ -4277,27 +4085,27 @@ h2,
 
 /* Additional Content Fonts */
 .font-text-crimson {
-    --font-text: 'Crimson Pro', Georgia, serif;
+    --arcadia-font-text: 'Crimson Pro', Georgia, serif;
 }
 
 .font-text-lora {
-    --font-text: 'Lora', Georgia, serif;
+    --arcadia-font-text: 'Lora', Georgia, serif;
 }
 
 .font-text-literata {
-    --font-text: 'Literata', Georgia, serif;
+    --arcadia-font-text: 'Literata', Georgia, serif;
 }
 
 .font-text-inter {
-    --font-text: 'Inter', -apple-system, sans-serif;
+    --arcadia-font-text: 'Inter', -apple-system, sans-serif;
 }
 
 .font-text-roboto {
-    --font-text: 'Roboto', -apple-system, sans-serif;
+    --arcadia-font-text: 'Roboto', -apple-system, sans-serif;
 }
 
 .font-text-opensans {
-    --font-text: 'Open Sans', -apple-system, sans-serif;
+    --arcadia-font-text: 'Open Sans', -apple-system, sans-serif;
 }
 
 /* Apply new content fonts */
@@ -4331,13 +4139,33 @@ h2,
     font-family: 'Open Sans', -apple-system, sans-serif;
 }
 
+.font-text-ebgaramond .cm-line,
+.font-text-ebgaramond .markdown-preview-view {
+    font-family: 'EB Garamond', Georgia, serif;
+}
+
+.font-text-librecaslon .cm-line,
+.font-text-librecaslon .markdown-preview-view {
+    font-family: 'Libre Caslon Text', Georgia, serif;
+}
+
+.font-text-cormorant .cm-line,
+.font-text-cormorant .markdown-preview-view {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-text-sourceserif .cm-line,
+.font-text-sourceserif .markdown-preview-view {
+    font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+}
+
 /* Additional Code Fonts */
 .font-code-cascadia {
-    --font-code: 'Cascadia Code', Consolas, monospace;
+    --arcadia-font-code: 'Cascadia Code', Consolas, monospace;
 }
 
 .font-code-ibmplex {
-    --font-code: 'IBM Plex Mono', Consolas, monospace;
+    --arcadia-font-code: 'IBM Plex Mono', Consolas, monospace;
 }
 
 /* Apply new code fonts */
@@ -4722,7 +4550,6 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
     background-size: 75%;
 }
 
-
 /* List Bullet Styles */
 .bullets-arrows ul > li::marker {
     content: "→ ";
@@ -4880,7 +4707,7 @@ li[data-task="I"] > p > input[type="checkbox"]:checked {
 }
 
 .dyslexia-friendly {
-    --font-text: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+    --arcadia-font-text: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
 }
 
 
@@ -5361,7 +5188,7 @@ img[alt*="img-banner"] {
     right: 0;
     padding: 2px 8px;
     font-size: 0.7em;
-    font-family: var(--font-ui);
+    font-family: var(--arcadia-font-ui);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     background: rgba(var(--ctp-accent), 0.2);
@@ -6203,7 +6030,7 @@ video::-webkit-media-controls-timeline {
 video::-webkit-media-controls-current-time-display,
 video::-webkit-media-controls-time-remaining-display {
     color: rgb(var(--ctp-text));
-    font-family: var(--font-ui);
+    font-family: var(--arcadia-font-ui);
     font-size: 12px;
 }
 
@@ -6280,7 +6107,7 @@ audio::-webkit-media-controls-play-button:hover {
 audio::-webkit-media-controls-current-time-display,
 audio::-webkit-media-controls-time-remaining-display {
     color: rgb(var(--ctp-text));
-    font-family: var(--font-ui);
+    font-family: var(--arcadia-font-ui);
     font-size: 11px;
     font-weight: 500;
 }
@@ -6821,41 +6648,41 @@ iframe[src*="vimeo"] {
 
 /* ====== Page Tint Colors (OneNote-style) ====== */
 .paper-cream .markdown-preview-view,
-.paper-cream .cm-content { background-color: rgba(255, 253, 240, 0.5) !important; }
+.paper-cream .cm-content { background-color: rgba(255, 253, 240, 0.5); }
 
 .paper-blue .markdown-preview-view,
-.paper-blue .cm-content { background-color: rgba(240, 248, 255, 0.5) !important; }
+.paper-blue .cm-content { background-color: rgba(240, 248, 255, 0.5); }
 
 .paper-green .markdown-preview-view,
-.paper-green .cm-content { background-color: rgba(240, 255, 244, 0.5) !important; }
+.paper-green .cm-content { background-color: rgba(240, 255, 244, 0.5); }
 
 .paper-pink .markdown-preview-view,
-.paper-pink .cm-content { background-color: rgba(255, 245, 250, 0.5) !important; }
+.paper-pink .cm-content { background-color: rgba(255, 245, 250, 0.5); }
 
 .paper-yellow .markdown-preview-view,
-.paper-yellow .cm-content { background-color: rgba(255, 255, 240, 0.5) !important; }
+.paper-yellow .cm-content { background-color: rgba(255, 255, 240, 0.5); }
 
 .paper-lavender .markdown-preview-view,
-.paper-lavender .cm-content { background-color: rgba(248, 245, 255, 0.5) !important; }
+.paper-lavender .cm-content { background-color: rgba(248, 245, 255, 0.5); }
 
 /* Dark mode page tints */
 .theme-dark .paper-cream .markdown-preview-view,
-.theme-dark .paper-cream .cm-content { background-color: rgba(45, 42, 35, 0.5) !important; }
+.theme-dark .paper-cream .cm-content { background-color: rgba(45, 42, 35, 0.5); }
 
 .theme-dark .paper-blue .markdown-preview-view,
-.theme-dark .paper-blue .cm-content { background-color: rgba(35, 42, 50, 0.5) !important; }
+.theme-dark .paper-blue .cm-content { background-color: rgba(35, 42, 50, 0.5); }
 
 .theme-dark .paper-green .markdown-preview-view,
-.theme-dark .paper-green .cm-content { background-color: rgba(35, 45, 38, 0.5) !important; }
+.theme-dark .paper-green .cm-content { background-color: rgba(35, 45, 38, 0.5); }
 
 .theme-dark .paper-pink .markdown-preview-view,
-.theme-dark .paper-pink .cm-content { background-color: rgba(48, 38, 42, 0.5) !important; }
+.theme-dark .paper-pink .cm-content { background-color: rgba(48, 38, 42, 0.5); }
 
 .theme-dark .paper-yellow .markdown-preview-view,
-.theme-dark .paper-yellow .cm-content { background-color: rgba(48, 46, 35, 0.5) !important; }
+.theme-dark .paper-yellow .cm-content { background-color: rgba(48, 46, 35, 0.5); }
 
 .theme-dark .paper-lavender .markdown-preview-view,
-.theme-dark .paper-lavender .cm-content { background-color: rgba(42, 38, 50, 0.5) !important; }
+.theme-dark .paper-lavender .cm-content { background-color: rgba(42, 38, 50, 0.5); }
 
 
 /* ================================================================================
