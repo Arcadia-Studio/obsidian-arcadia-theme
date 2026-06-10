@@ -1,3 +1,11 @@
+---
+file-role: arcadia
+status: draft
+notebook: The Study
+created: 2026-05-28
+updated: 2026-06-10
+---
+
 # Arcadia Theme - Obsidian Community Submission
 
 ## Short Description (for theme browser)
@@ -9,7 +17,7 @@ A comprehensive theme with 34 color schemes (16 dark + 18 light), OneNote-style 
 {
   "name": "Arcadia",
   "author": "Peter J. Carter",
-  "repo": "PeterCarterSr/Obsidian-Theme",
+  "repo": "Arcadia-Studio/obsidian-arcadia-theme",
   "screenshot": "screenshots/hero-dark.png",
   "modes": ["dark", "light"]
 }

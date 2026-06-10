@@ -1,10 +1,18 @@
+---
+file-role: arcadia
+status: draft
+notebook: The Study
+created: 2026-05-28
+updated: 2026-05-28
+---
+
 # Contributing to Arcadia Theme
 
 Thank you for your interest in contributing to the Arcadia Theme for Obsidian.
 
 ## Reporting Bugs
 
-1. Check existing [issues](https://github.com/PeterCarterSr/Obsidian-Theme/issues) to avoid duplicates
+1. Check existing [issues](https://github.com/Arcadia-Studio/obsidian-arcadia-theme/issues) to avoid duplicates
 2. Use the **Bug Report** issue template
 3. Include: Obsidian version, OS, steps to reproduce, expected vs actual behavior
 4. Screenshots are helpful, especially for visual bugs

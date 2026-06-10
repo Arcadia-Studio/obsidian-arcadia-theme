@@ -1,3 +1,11 @@
+---
+file-role: handoff
+status: draft
+notebook: The Study
+created: 2026-05-28
+updated: 2026-06-10
+---
+
 # Arcadia Theme Community Submission Handoff
 
 ## Status
@@ -14,11 +22,11 @@
 
 Before opening a new PR, verify all of the following:
 
-- [ ] Theme repo is public at https://github.com/PeterCarterSr/Obsidian-Theme
-- [ ] `theme.css` is pushed and current (version 2.1.0)
-- [ ] `manifest.json` is pushed and current (version 2.1.0)
+- [ ] Theme repo is public at https://github.com/Arcadia-Studio/obsidian-arcadia-theme
+- [ ] `theme.css` is pushed and current (version 2.1.1)
+- [ ] `manifest.json` is pushed and current (version 2.1.1)
 - [ ] `README.md` is pushed and current
-- [ ] `LICENSE` file exists (CC BY-NC 4.0)
+- [ ] `LICENSE` file exists (MIT)
 - [ ] Hero screenshot exists at `screenshots/hero-dark.png` (16:9, min 512x288px)
 - [ ] License compatibility with community store is confirmed
 
@@ -44,7 +52,7 @@ gh repo sync PeterCarterSr/obsidian-releases --source obsidianmd/obsidian-releas
    {
      "name": "Arcadia",
      "author": "Peter J. Carter",
-     "repo": "PeterCarterSr/Obsidian-Theme",
+     "repo": "Arcadia-Studio/obsidian-arcadia-theme",
      "screenshot": "screenshots/hero-dark.png",
      "modes": ["dark", "light"]
    }
@@ -62,7 +70,7 @@ Use the exact PR body below. The validator does strict matching against the offi
 ## Repo URL
 
 <!--- Paste a link to your repo here for easy access -->
-Link to my theme: https://github.com/PeterCarterSr/Obsidian-Theme
+Link to my theme: https://github.com/Arcadia-Studio/obsidian-arcadia-theme
 
 
 ## Theme checklist
@@ -92,10 +100,10 @@ After submitting, the bot validates automatically within minutes. Watch for:
 - **GitHub user:** PeterCarterSr
 - **Fork repo:** PeterCarterSr/obsidian-releases
 - **Target repo:** obsidianmd/obsidian-releases (master)
-- **Theme repo:** PeterCarterSr/Obsidian-Theme (public, "Obsidian" branch)
+- **Theme repo:** Arcadia-Studio/obsidian-arcadia-theme (public, `main` branch)
 - **Old PR branch:** patch-2 (stale, do not reuse)
 - **gh CLI location:** `/c/Program Files/GitHub CLI/gh` (add to PATH with `export PATH="$PATH:/c/Program Files/GitHub CLI"`)
 
 ## Open Questions
 
-- **License compatibility:** CC BY-NC 4.0 vs. community store requirements. Most themes use MIT. Needs verification before submission.
+- **License compatibility:** Resolved. The repo ships an MIT LICENSE, the most common license among community themes and compatible with the community store.
